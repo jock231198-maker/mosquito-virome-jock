@@ -1,0 +1,12 @@
+STAR \
+--outSAMattributes All \
+--outSAMtype BAM SortedByCoordinate \
+--quantMode GeneCounts \
+--runThreadN 8 \
+--outReadsUnmapped Fastx \
+--outMultimapperOrder Random \
+--outWigType wiggle \
+--genomeDir STARresults/StarIndexAae \
+--readFilesIn JKViromedata/M1_M11/M1_S1_R1.fastq JKViromedata/M1_M11/M1_S1_R2.fastq \
+--outFileNamePrefix STARresults/STARalign \
+--sjdbGTFfile Aae_refgenome/genomic.gtf
