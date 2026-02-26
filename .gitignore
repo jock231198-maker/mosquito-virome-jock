@@ -1,0 +1,5 @@
+*.zip
+*.fastq
+*.fastq.gz
+*.fna
+*.gtf
