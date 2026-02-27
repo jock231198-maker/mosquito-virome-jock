@@ -1,0 +1,9 @@
+conda enviroments----in each env is install the program of the env_name
+# conda environments
+base                 *   /opt/anaconda3
+Fast_QC                  /opt/anaconda3/envs/Fast_QC
+Multi_QC                 /opt/anaconda3/envs/Multi_QC
+mapping                  /opt/anaconda3/envs/mapping
+py3.13                   /opt/anaconda3/envs/py3.13
+star_env                 /opt/anaconda3/envs/star_env
+trimmomatic_env          /opt/anaconda3/envs/trimmomatic_env

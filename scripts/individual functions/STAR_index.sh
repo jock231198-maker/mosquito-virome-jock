@@ -10,13 +10,10 @@ conda activate star_env
 STAR \
   --runThreadN 8 \
   --runMode genomeGenerate \
-  --genomeDir /Users/JK/Desktop/STARgenomeIndexAae \
-  --genomeFastaFiles /Users/JK/Desktop/Aae_refgenome/GCF_002204515.2_AaegL5.0_genomic.fna \
-  --sjdbGTFfile /Users/JK/Desktop/Aae_refgenome/genomic.gtf \
-  --sjdbGTFtagExonParentTranscript transcript_id \
-  --sjdbOverhang 109 \
-  --genomeSAindexNbases 14
-}
+  --genomeDir /Users/JK/Desktop/STARresults/Star_Index \
+  --genomeFastaFiles /Users/JK/Desktop/AaaGenRef/GCF_002204515.2_AaegL5.0_genomic.fna \
+  --sjdbGTFfile /Users/JK/Desktop/AaaGenRef/GCF_002204515.2_AaegL5.0_genomic.gtf 
+
 conda deactivate
 
 
