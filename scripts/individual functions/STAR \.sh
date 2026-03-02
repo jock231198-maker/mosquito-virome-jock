@@ -7,4 +7,7 @@ STAR \
 --outWigType wiggle \
 --genomeDir /Users/JK/Desktop/STARresults/Star_Index \
 --readFilesIn /Users/JK/Desktop/JKViromedata/M2/M2_S2_L001_R1_001.fastq \
---outFileNamePrefix /Users/JK/Desktop/STARresults/Star_Map/M1_reads 
+--outFileNamePrefix /Users/JK/Desktop/STARresults/Star_Map/M1_reads \
+--outFilterScoreMinOverLread 0.3 \
+--outFilterMatchNminOverLread 0.3 \
+--outFilterMultimapNmax 10 \

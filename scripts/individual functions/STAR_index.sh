@@ -2,17 +2,19 @@
 chmod 644 /Users/JK/Desktop/Aae_refgenome/genomic.gtf #gtf con permisos
 
 STAR \
-{
 mkdir -p /Users/JK/Desktop/STARgenomeIndexAae 
 chmod 755 /Users/JK/Desktop/STARgenomeIndexAae
 #crea un directorio de salida con permismos
 conda activate star_env
 STAR \
-  --runThreadN 8 \
+  --runThreadN 16 \
   --runMode genomeGenerate \
   --genomeDir /Users/JK/Desktop/STARresults/Star_Index \
   --genomeFastaFiles /Users/JK/Desktop/AaaGenRef/GCF_002204515.2_AaegL5.0_genomic.fna \
-  --sjdbGTFfile /Users/JK/Desktop/AaaGenRef/GCF_002204515.2_AaegL5.0_genomic.gtf 
+  --sjdbGTFfile /Users/JK/Desktop/AaaGenRef/GCF_002204515.2_AaegL5.0_genomic.gtf \
+  --sjdbOverhang 99 \
+
+
 
 conda deactivate
 
