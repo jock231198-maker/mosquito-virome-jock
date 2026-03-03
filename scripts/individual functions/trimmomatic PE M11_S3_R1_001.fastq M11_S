@@ -1,0 +1,1 @@
+trimmomatic PE M11_S3_R1_001.fastq M11_S3_R2_001.fastq M11_S3_R1_001.paired.fastq M11_S3_R1_001.unpaired.fastq M11_S3_R2_001.paired.fastq M11_S3_R2_001.unpaired.fastq ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:25 MINLEN:35
