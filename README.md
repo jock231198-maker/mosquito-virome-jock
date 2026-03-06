@@ -90,3 +90,5 @@ This is a standard **Metatranscriptomics** or **Viral Discovery** pipeline. The 
 By the end of Step 8, you will have two lists of hits (nucleotide and protein) that you can analyze to identify which contigs are likely viral and what they are similar to.
  A diagram of a timeline
 <img width="912" height="1536" alt="PIPELINE - visual selection" src="https://github.com/user-attachments/assets/6817c7e0-ac3e-4af2-94ce-fea772319c14" />
+
+
