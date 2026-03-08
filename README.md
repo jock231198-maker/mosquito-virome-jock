@@ -20,17 +20,15 @@ This is a standard **Metatranscriptomics** or **Viral Discovery** pipeline. The 
 #### Step 1: Input Data
 - **File:** `1- Archivo Fastq.`
 - **Action:** You start with your raw sequencing data. This is typically a FASTQ file (or paired files: `sample_R1.fastq` and `sample_R2.fastq`).
-- **Prompt:** "I have a paired-end FASTQ file named [sample_name]_R1.fastq.gz and [sample_name]_R2.fastq.gz. I want to run a viral discovery pipeline."
 ---
 #### Step 2: Initial Quality Control (QC)
 - **Tools:** `fastqc` / `multiqc`
 - **Action:** Run FastQC on the raw FASTQ files to get a report on base quality, GC content, adapter contamination, and duplicate levels. Then run MultiQC to aggregate all reports into one single HTML overview.
-- **Prompt:** "Run FastQC on my raw FASTQ files. Then, run MultiQC on the FastQC results to generate a summary report."
 ---
 #### Step 3: Trimming
-- **Tools:** `trim_galore` (or `trimmomatic`)
+- **Tools:** `trimmomatic` (or `trim_galore`)
 - **Action:** Based on the QC report, trim low-quality bases (quality scores) and remove adapter sequences. This ensures that downstream assemblies are accurate.
-- **Prompt:** "Run Trim Galore on my raw FASTQ files to trim low-quality bases and remove adapters. Use default parameters for now."
+- **Prompt:** "Run Trimmomatic on my raw FASTQ files to trim low-quality bases and remove adapters. Use default parameters for now."
 ---
 #### Step 4: Quality Control (Again)
 - **Tools:** `fastqc` / `multiqc`
