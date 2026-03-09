@@ -33,15 +33,13 @@ This is a standard **Metatranscriptomics** or **Viral Discovery** pipeline. The 
 #### Step 4: Quality Control (Again)
 - **Tools:** `fastqc` / `multiqc`
 - **Action:** It is essential to re-run FastQC/MultiQC on the *trimmed* data to verify that the trimming was successful and that the data is now clean.
-- **Prompt:** "Run FastQC and then MultiQC on the trimmed FASTQ files generated in Step 3."
 ---
 #### Step 5: Host Depletion (Remove Mosquito Reads)
 - **Goal:** Remove reads that belong to the host organism (*Aedes* mosquitoes) to enrich for viral or other microbial sequences.
 
     - **5.1: Obtain Host References**
         - **Action:** Search NCBI for all *Aedes* genomes (drafts and complete).
-        - **Prompt for AI:** "Help me construct an NCBI E-utilities command (esearch/efetch) to download all nucleotide sequences for the genus 'Aedes' (taxid:7157), including complete genomes and scaffolds. Save them to `aedes_all_genomes.fasta`."
-
+        -
     - **5.2: Build a "Super-reference" and Index**
         - **Action:** Concatenate all downloaded *Aedes* sequences into a single FASTA file. Then, build a STAR index for this file. STAR requires a genome directory and a FASTA file.
         - **Prompt:** "I have a file `aedes_all_genomes.fasta`. Generate a STAR genome index for it. Use --runThreadN [number_of_cores] and --runMode genomeGenerate. Name the output directory `STAR_Aedes_index`."
