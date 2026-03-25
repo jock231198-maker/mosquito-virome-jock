@@ -1,0 +1,8 @@
+Last login: Mon Mar 23 11:16:02 on ttys003
+(base) JK@iMac-de-LEVE ~ % 
+(base) JK@iMac-de-LEVE ~ % curl -s "https://api.telegram.org/bot8786125916:AAGtZ8zwTynQPYcnoiPZl5cQiWfOSnXFPc4/getUpdates" 
+{"ok":true,"result":[]}%                                                                                                                                                                                                                                                                                                    (base) JK@iMac-de-LEVE ~ % curl -s "https://api.telegram.org/bot8786125916:AAGtZ8zwTynQPYcnoiPZl5cQiWfOSnXFPc4/getUpdates"
+{"ok":true,"result":[{"update_id":452288651,
+"message":{"message_id":2,"from":{"id":992408106,"is_bot":false,"first_name":"Jose","last_name":"Marin","username":"jockm2","language_code":"es"},"chat":{"id":992408106,"first_name":"Jose","last_name":"Marin","username":"jockm2","type":"private"},"date":1774303977,"text":"/start","entities":[{"offset":0,"length":6,"type":"bot_command"}]}}]}%                                                                                                                                                                                                                                                                                                 (base) JK@iMac-de-LEVE ~ % nano .env
+(base) JK@iMac-de-LEVE ~ % bash prueba_bot.sh
+{"ok":true,"result":{"message_id":3,"from":{"id":8786125916,"is_bot":true,"first_name":"Jkbot","username":"jk231198bot"},"chat":{"id":992408106,"first_name":"Jose","last_name":"Marin","username":"jockm2","type":"private"},"date":1774304408,"text":"Hola \ud83d\udc4b Mensaje enviado desde Bash"}}%            (base) JK@iMac-de-LEVE ~ % 
