@@ -14,5 +14,7 @@ bowtie2 -x example/index/lambda_virus -U example/reads/longreads.fq
 
 # Aligning paired reads
 #bowtie2 -x(permission to execute) path/to/index/directory -1 path/to/read1 -2 path/to/read2 -S /path/to/outputfolder/namefile.sam
-bowtie2 -x /Users/JK/Desktop/Bow/IndexBow -1 /Users/JK/Desktop/M11_S3_R1_001.paired.fastq -2 /Users/JK/Desktop/M11_S3_R2_001.paired.fastq -S /Users/JK/Desktop/Bow/MapBow/M11_S3_mapped.sam
+bowtie2 -p 8 -x /Users/JK/Desktop/Bow/IndexBow/Aae_index/Aae_index -1 /Users/JK/Desktop/M11_S3_R1_001.paired.fastq -2 /Users/JK/Desktop/M11_S3_R2_001.paired.fastq -S /Users/JK/Desktop/Bow/MapBow/M11_S3_mapped.sam
 
+
+bowtie2 -p 4 -x /Users/JK/Desktop/Bow/IndexBow/Aae_index/Aae_index -1 /Users/JK/Desktop/JKViromedata/cat_fastq/M1_S1_R1_001.fastq.gz -2 /Users/JK/Desktop/JKViromedata/cat_fastq/M1_S1_R2_001.fastq.gz -S /Users/JK/Desktop/Bow/MapBow/M1_S1/M1_S1_mapped.sam
