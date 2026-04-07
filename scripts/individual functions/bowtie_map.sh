@@ -11,7 +11,7 @@ find "$input_dir" -type f -name "*_R1_001.fastq.gz" | while read -r file; do
 read1="$input_dir/${sample}_R1_001.fastq.gz"
 read2="$input_dir/${sample}_R2_001.fastq.gz"
 if [[ -f "$read1" && -f "$read2" ]]; then
-bowtie2 -p 4 -x /Users/JK/Desktop/Bow/IndexBow/Aae_index/Aae_index -1 "$read1" -2 "$read2" -S /${outdir}/${sample}.sam | samtools view -bS - > ${outdir}/${sample}.bam
+bowtie2 -p 8 -x /Users/JK/Desktop/Bow/IndexBow/Aae_index/Aae_index -1 "$read1" -2 "$read2" -S /${outdir}/${sample}.sam | samtools view -bS - > ${outdir}/${sample}.bam
 else
 echo "Missing files for $sample R1 and $sample R2"
 fi
