@@ -1,23 +1,28 @@
 #!/bin/bash
 # STAR align
-{                                 
-     OUTDIR="/Users/JK/Desktop/STARresults/STARalign/StarSimple/"
-     mkdir -p "$OUTDIR"
-     for R1 in /Users/JK/Desktop/JKViromedata/M1_M11/*R1.fastq ; do
-    R2="${R1/_R1/_R2}"
-    sample_name=$(basename "$R1" _R1.fastq.gz)
+SECONDS=0
+input_dir="$1"
+find "$input_dir" -type f -name "*.fastq" | while read -r file; do
+sample=$(basename "$file" .fastq) 
+outdir="/Users/JK/Desktop/STARresults/STARalign/${sample}/"
+mkdir -p "$outdir"
+echo "mapping $sample"
 
-    echo "Sample: $sample_name"
-    echo "R1: $R1"
-    echo "R2: $R2"
+read1="$input_dir/${sample}.fastq"
+read2="$input_dir/${sample}.fastq"
+if [[ -f "$read1" && -f "$read2" ]]; then
   STAR \
-        --runThreadN 4 \
+        --runThreadN 8 \
         --runMode alignReads \
-        --genomeDir /Users/JK/Desktop/STARresults/StarIndexAae \
-        --readFilesIn "$R1" "$R2" \
-        --outFileNamePrefix "${OUTDIR}${sample_names}_" \
-      
-done
-}
-conda deactivate
+        --genomeDir /Users/JK/Desktop/STARresults/Star_index_albo \
+        --readFilesIn "$read1" "$read2" \
+        --outFileNamePrefix "${outdir}${sample}_"
+else
+echo "Missing files for $sample R1 and $sample R2"
+fi
+done      
 
+duration=$SECONDS
+echo "Process finished in $(($duration / 60)) minutes and $(($duration %  60)) seconds."      
+
+find "/Users/JK/Desktop/Prueba" -type f -name "*.fastq" | while read -r file; do
