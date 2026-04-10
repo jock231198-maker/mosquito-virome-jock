@@ -11,8 +11,10 @@ do
 BASENAME=$(basename "$R1" | cut -d'_' -f1-2)
 R2="$input_dir/${BASENAME}_R2_001.fastq.gz"
 if [[ -f "$R1" && -f "$R2" ]]; then
-export JAVA_OPTS="-Xmx16g" # Ajusta la memoria según tus necesidades"
 trimmomatic PE -threads 4 -phred33 \
+-Xmx16g \
+-threads 4 \
+-phred33 \
 "$R1" "$R2" \
 "$output_dir/${BASENAME}_R1_001_paired.fastq.gz" \
 "$output_dir/${BASENAME}_R1_001_unpaired.fastq.gz" \
