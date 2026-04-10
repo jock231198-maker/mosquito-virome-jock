@@ -8,17 +8,18 @@ output_dir=/Users/JK/Desktop/trimmomatic/adapter_trim/${result_from} # carpeta s
 mkdir -p "$output_dir" # Crear carpeta de salida si no existe
 for R1 in "$input_dir"/*_R1_001.fastq.gz
 do
-BASENAME=$(basename "$R1" .fastq.gz)
+BASENAME=$(basename "$R1" | cut -d'_' -f1-2)
 R2="$input_dir/${BASENAME}_R2_001.fastq.gz"
-if [[ ! -f "$R1" && -f "$R2" ]]; then
-trimmomatic PE -threads 8 -phred33 \
+if [[ -f "$R1" && -f "$R2" ]]; then
+export JAVA_OPTS="-Xmx16g" # Ajusta la memoria según tus necesidades"
+trimmomatic PE -threads 4 -phred33 \
 "$R1" "$R2" \
 "$output_dir/${BASENAME}_R1_001_paired.fastq.gz" \
 "$output_dir/${BASENAME}_R1_001_unpaired.fastq.gz" \
 "$output_dir/${BASENAME}_R2_001_paired.fastq.gz" \
 "$output_dir/${BASENAME}_R2_001_unpaired.fastq.gz" \
-ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:true \
-LEADING:3 TRAILING:3 SLIDINGWINDOW:4:25 MINLEN:35
+ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10 \
+LEADING:3 TRAILING:3 SLIDINGWINDOW:4:25 MINLEN:35 
 else
 echo "Archivo R1 y R2 faltante para $BASENAME. Saltando..."
 fi
