@@ -11,7 +11,7 @@ do
 BASENAME=$(basename "$R1" | cut -d'_' -f1-2)
 R2="$input_dir/${BASENAME}_R2_001.fastq.gz"
 if [[ -f "$R1" && -f "$R2" ]]; then
-trimmomatic PE -threads 4 -phred33 \
+trimmomatic PE \
 -Xmx16g \
 -threads 4 \
 -phred33 \

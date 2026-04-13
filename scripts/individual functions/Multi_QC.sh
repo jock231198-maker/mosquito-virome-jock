@@ -9,7 +9,7 @@ result_from="$2" # Carpeta donde se guardará el reporte de MultiQC
 output_dir=$HOME/Desktop/multiqc/${result_from}
 mkdir -p "$output_dir" # Crear carpeta de salida si no existe
 
-multiqc "$input_dir"/*fastqc.zip -o "$output_dir" # Ejecutar MultiQC sobre los archivos FastQC (solo los *fastqc.zip)
+multiqc "$input_dir"/*_paired_fastqc.zip -o "$output_dir" # Ejecutar MultiQC sobre los archivos FastQC (solo los *fastqc.zip)
 
 conda deactivate # Desactivar el entorno conda
 echo "MultiQC finalizado"

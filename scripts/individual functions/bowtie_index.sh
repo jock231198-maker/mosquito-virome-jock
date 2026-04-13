@@ -1,20 +1,17 @@
-bowtie2 
+#!/bin/bash
+SECONDS=0
+eval "$(conda shell.bash hook)"
+conda activate Bow # Inicializa conda # Activar el entorno con Bowtie2 instalado
+input_dir="$1"  # Carpeta con archivos fna para construir el índice
+result_from="$2" # Nombre de la o las especies a indexar 
+output_dir="/Users/JK/Desktop/bowtie2/IndexBow/${result_from}" # Carpeta donde se guardará el índice
 #Indexing
 # Building a small index
 #comandtobuild /path/to/genome/fna /path/to/index/directory
-bowtie2-build /Users/JK/Desktop/AaaGenRef/GCF_002204515.2_AaegL5.0_genomic.fna /Users/JK/Desktop/Bow/IndexBow/Aae_index/Aae_index
+bowtie2-build --threads 8 "$input_dir"/*.fna "$output_dir/${result_from}_index"
+conda deactivate
+duration=$SECONDS
+echo "Process finished in $(($duration / 60)) minutes and $(($duration % 60)) seconds."     
 
-# Building a large index
-bowtie2-build --large-index example/reference/lambda_virus.fa example/index/lambda_virus
-
-#Aligning
-# Aligning unpaired reads
-bowtie2 -x example/index/lambda_virus -U example/reads/longreads.fq
-
-
-# Aligning paired reads
-#bowtie2 -x(permission to execute) path/to/index/directory -1 path/to/read1 -2 path/to/read2 -S /path/to/outputfolder/namefile.sam
-bowtie2 -p 8 -x /Users/JK/Desktop/Bow/IndexBow/Aae_index/Aae_index -1 /Users/JK/Desktop/M11_S3_R1_001.paired.fastq -2 /Users/JK/Desktop/M11_S3_R2_001.paired.fastq -S /Users/JK/Desktop/Bow/MapBow/M11_S3_mapped.sam
-
-
-bowtie2 -p 4 -x /Users/JK/Desktop/Bow/IndexBow/Aae_index/Aae_index -1 /Users/JK/Desktop/JKViromedata/cat_fastq/M1_S1_R1_001.fastq.gz -2 /Users/JK/Desktop/JKViromedata/cat_fastq/M1_S1_R2_001.fastq.gz -S /Users/JK/Desktop/Bow/MapBow/M1_S1/M1_S1_mapped.sam
+#bowtie2-build /Users/JK/Desktop/jkviromedata/aedes_ae_ref_genome/GCF_002204515.2_AaegL5.0_genomic.fna /Users/JK/Desktop/bowtie2/IndexBow/aedes_aegypti_smallindex
+# Building a large index --- bowtie2-build --large-index example/reference/lambda_virus.fa example/index/lambda_virus
