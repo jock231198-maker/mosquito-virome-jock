@@ -22,5 +22,5 @@ echo "Missing files for $sample R1 and $sample R2"
 fi
 done
 duration=$SECONDS
-echo "Process finished in $(($duration / 60)) minutes and $(($duration % 60)) seconds."
+echo "Process finished in $(($duration / 3600)) hour(s), $(($duration % 3600 / 60)) minute(s) and $(($duration % 60)) second(s)."
 conda deactivate
