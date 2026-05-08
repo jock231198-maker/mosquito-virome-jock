@@ -2,7 +2,7 @@
 # spades_assembly.sh
 SECONDS=0
 eval "$(conda shell.bash hook)"
-conda activate bow
+conda activate spades
 
 # run like this: ./spades_assembly.sh "/directory/to/my/fastqs/" "experiment_name" "rnavirus"
 # SPAdes modes available: rnavirus, rna, meta, metaviral, plasmid, bio, corona, isolate
@@ -11,7 +11,7 @@ input_dir="$1"
 result_from="$2"
 spades_mode="${3:-rnavirus}"   # rnavirus por defecto si no se especifica
 
-outdir="/Users/JK/Desktop/SPAdes/Assembly/${result_from}/"
+outdir="/Users/JK/Desktop/spades/Assembly/${result_from}/"
 mkdir -p "$outdir"
 
 # Mapa de modos válidos de SPAdes
