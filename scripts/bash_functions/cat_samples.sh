@@ -1,10 +1,10 @@
 #!/bin/bash
 #Concatenate samples in the samples path
-workdir="/Users/JK/Desktop/JKViromedata/raw_fastq"
+workdir="/Users/JK/Desktop/jkviromedata/raw_fastq/M57"
 # Cambia al directorio de trabajo
 cd "$workdir" || { echo "No se pudo acceder a $workdir"; exit 1; }
-outdir="/Users/JK/Desktop/JKViromedata/cat_fastq/${sample}"
-for sammple in $(ls *_L001_R1_001.fastq.gz | cut -d,'_' -f1-2 | sort -u); do 
+outdir="/Users/JK/Desktop/jkviromedata/cat_fastq/${sample}"
+for sample in $(ls *_L001_R1_001.fastq.gz | cut -d'_' -f1-2 | sort -u); do 
 echo "cat $sample"
 
     r1_l001="${sample}_L001_R1_001.fastq.gz"
