@@ -1,6 +1,7 @@
 #!/bin/bash
 #Concatenate samples in the samples path
-workdir="/Users/JK/Desktop/jkviromedata/raw_fastq/M57"
+M="$1"
+workdir="/Users/JK/Desktop/jkviromedata/raw_fastq/$M"
 # Cambia al directorio de trabajo
 cd "$workdir" || { echo "No se pudo acceder a $workdir"; exit 1; }
 outdir="/Users/JK/Desktop/jkviromedata/cat_fastq/${sample}"
@@ -24,7 +25,7 @@ r2_out="${sample}_R2_001.fastq.gz"
 
     # Concatenar R2 si ambos archivos existen
     if [[ -f "$r2_l001" && -f "$r2_l002" ]]; then
-        cat "$r2_l001" "$r2_l002" > "$r2_out"
+        cat "$r2_l001" "$r2_l002" > $outdir/"$r2_out"
         echo "Created: $r2_out"
     else
         echo "WARNING: Missing files for $sample R2"

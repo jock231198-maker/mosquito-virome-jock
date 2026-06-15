@@ -1,0 +1,12 @@
+blastn \
+    -query /Users/JK/Desktop/spades/Assembly/trimm_cat_fastq_unmapped/M1_S1/contigs.fasta \
+    -db /Users/JK/Desktop/ncbi_database/blast_db_viral_ftp_data/viral_nt_db \
+    -out /Users/JK/Desktop/blast_results/resultados_viral.tsv \
+    -outfmt  "6 qseqid sseqid pident length evalue bitscore ssciname" \
+    -evalue  1e-5 \
+    -perc_identity 80 \
+    -num_threads   4 \
+    -max_target_seqs 5 \
+    -max_hsps 1
+
+    column -t /Users/JK/Desktop/blast_results/resultados_viral.tsv
