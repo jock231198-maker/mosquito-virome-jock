@@ -1,9 +1,0 @@
-
-makeblastdb \
-  -in /Users/JK/Desktop/ncbi_database/viral_db_ftp_data/viral_nt.fasta \
-  -dbtype nucl \
-  -out   /Users/JK/Desktop/ncbi_database/blast_db_viral_ftp_data/viral_nt_db \
-  -title "Viral RefSeq NT database" \
-  -parse_seqids 
-
-  -taxid_map taxid_map.txt    # ← opcional, si tienes el archivo de taxonomía
