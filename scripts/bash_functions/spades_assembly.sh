@@ -69,3 +69,11 @@ duration=$SECONDS
 echo ""
 echo "Process finished in $(($duration / 3600)) hour(s), $(($duration % 3600 / 60)) minute(s) and $(($duration % 60)) second(s)."
 conda deactivate
+
+
+# Filtrar contigs >=1000 bp del ensamble original
+seqkit seq -m 1000 \
+    /Users/JK/Desktop/spades/Assembly/trimm_cat_fastq_unmapped/M1_S1/contigs.fasta \ # ruta al contigs.fasta original checar directorio de salida del spades_assembly.sh
+    > /Users/JK/Desktop/spades/contigs_1000bp.fasta
+
+grep -c ">" /Users/JK/Desktop/spades/contigs_1000bp.fasta
