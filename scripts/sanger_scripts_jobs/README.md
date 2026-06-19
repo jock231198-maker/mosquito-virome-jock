@@ -26,8 +26,11 @@ Notas importantes:
 
     ~/jkvirome/
     
-    └─|─git/mosquito-virome-jock                 cat_samples.sh, fastqc_worker.sh, run_multiqc.sh
-      ├── sanger_sc 
+    └─/git/mosquito-virome-jock
+      ├── scripts    bash R jupyter py.3.14 scripts
+      ├── results    
+      ├── docs
+      ├── sanger_scripts_jobs    Scripts made for sanger server (cat_samples.sh, fastqc_worker.sh, run_multiqc.sh)
     /lustre/scratchXXX/teamYY/jk/jkviromedata/
     ├── raw_fastq/               copia de trabajo de los crudos
     ├── cat_fastq/               salida de cat_samples.sh
