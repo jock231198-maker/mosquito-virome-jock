@@ -18,9 +18,9 @@ Notas importantes:
 
 - Los nodos de **ejecución no pueden ver `/warehouse`** — el dato tiene que
   estar en Lustre cuando corre el trabajo.
-- No pongas rutas de Lustre en tu `.bashrc` ni en el `PATH`: hace tu sesión
-  vulnerable a caídas transitorias. Instala software en `$HOME` o `/software`.
-- Revisa la cuota a menudo: `lfs quota -h /lustre/scratchXXX`.
+- No poner rutas de Lustre en `.bashrc` ni en el `PATH`: hace la sesión
+  vulnerable a caídas transitorias. Instalar software en `$HOME` o `/software`.
+- Revisar la cuota a menudo: `lfs quota -h /lustre/scratchXXX`.
 
 ## Estructura de directorios
 
@@ -31,6 +31,7 @@ Notas importantes:
       ├── results    
       ├── docs
       ├── sanger_scripts_jobs    Scripts made for sanger server (cat_samples.sh, fastqc_worker.sh, run_multiqc.sh)
+    
     /lustre/scratchXXX/teamYY/jk/jkviromedata/
     ├── raw_fastq/               copia de trabajo de los crudos
     ├── cat_fastq/               salida de cat_samples.sh
@@ -38,8 +39,8 @@ Notas importantes:
     ├── multiqc_report/          salida de MultiQC
     └── logs/                    .out / .err de LSF
 
-Mantén los nombres de subcarpetas iguales a los de tu Mac: así el mismo
-script corre en ambos sitios cambiando solo la raíz (que pasas por argumento).
+Mantengo los nombres de subcarpetas iguales a los de la Mac: así el mismo
+script corre en ambos sitios cambiando solo la raíz (que pasa por argumento).
 
 ## Pipeline (de principio a fin)
 
