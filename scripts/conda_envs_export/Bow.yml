@@ -1,0 +1,10 @@
+name: bow
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - bowtie2
+  - samtools
+  - pigz
+prefix: /opt/anaconda3/envs/bow

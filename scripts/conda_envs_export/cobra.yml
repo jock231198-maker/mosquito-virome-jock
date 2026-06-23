@@ -1,0 +1,10 @@
+name: cobra
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8
+  - cobra-meta
+  - checkv
+prefix: /opt/anaconda3/envs/cobra

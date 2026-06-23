@@ -1,0 +1,10 @@
+name: star_env
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - star
+  - gzip
+  - python
+prefix: /opt/anaconda3/envs/star_env

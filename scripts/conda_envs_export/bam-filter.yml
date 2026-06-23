@@ -1,0 +1,9 @@
+name: bam-filter
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - python[version='>=3.9,<3.10']
+  - cxx-compiler
+prefix: /opt/anaconda3/envs/bam-filter

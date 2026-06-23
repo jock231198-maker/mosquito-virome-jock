@@ -1,0 +1,8 @@
+name: mapping
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - star
+prefix: /opt/anaconda3/envs/mapping

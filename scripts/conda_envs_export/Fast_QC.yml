@@ -1,0 +1,8 @@
+name: Fast_QC
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - fastqc
+prefix: /opt/anaconda3/envs/Fast_QC
