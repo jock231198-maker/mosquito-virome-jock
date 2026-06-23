@@ -1,0 +1,40 @@
+name: bow
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - bowtie2=2.5.5=h9e91881_0
+  - bzip2=1.0.8=hd037594_9
+  - c-ares=1.34.6=hc919400_0
+  - ca-certificates=2026.4.22=hbd8a1cb_0
+  - htslib=1.23.1=h44a9eb5_0
+  - icu=78.2=hef89b57_0
+  - krb5=1.22.2=h385eeb1_0
+  - libcurl=8.19.0=hd5a2499_0
+  - libcxx=22.1.0=h55c6f16_1
+  - libdeflate=1.25=hc11a715_0
+  - libedit=3.1.20250104=pl5321hafb1f1b_0
+  - libev=4.33=h93a5062_2
+  - libexpat=2.7.4=hf6b4638_0
+  - libffi=3.5.2=hcf2aa1b_0
+  - liblzma=5.8.2=h8088a28_0
+  - libmpdec=4.0.0=h84a0fba_1
+  - libnghttp2=1.68.1=h8f3e76b_0
+  - libsqlite=3.52.0=h1ae2325_0
+  - libssh2=1.11.1=h1590b86_0
+  - libzlib=1.3.1=h8359307_2
+  - llvm-openmp=22.1.0=hc7d1edf_0
+  - ncurses=6.5=h5e97a16_3
+  - openssl=3.6.2=hd24854e_0
+  - perl=5.32.1=7_h4614cfb_perl5
+  - pigz=2.8=hfab5511_2
+  - pip=26.0.1=pyh145f28c_0
+  - python=3.14.3=h4c637c5_101_cp314
+  - python_abi=3.14=8_cp314
+  - readline=8.3=h46df422_0
+  - samtools=1.23.1=hc612e98_0
+  - tk=8.6.13=h010d191_3
+  - tzdata=2025c=hc9c84f9_1
+  - zstd=1.5.7=hbf9d68e_6
+prefix: /opt/anaconda3/envs/bow
