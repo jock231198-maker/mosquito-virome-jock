@@ -72,8 +72,9 @@ conda deactivate
 
 
 # Filtrar contigs >=1000 bp del ensamble original
+# ruta al contigs.fasta original checar directorio de salida del spades_assembly.sh
 seqkit seq -m 1000 \
-    /Users/JK/Desktop/spades/Assembly/trimm_cat_fastq_unmapped/M1_S1/contigs.fasta \ # ruta al contigs.fasta original checar directorio de salida del spades_assembly.sh
+    /Users/JK/Desktop/spades/Assembly/trimm_cat_fastq_unmapped/M1_S1/contigs.fasta \
     > /Users/JK/Desktop/spades/contigs_1000bp.fasta
 
 grep -c ">" /Users/JK/Desktop/spades/contigs_1000bp.fasta
