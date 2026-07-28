@@ -5,7 +5,7 @@
 #
 # Cómo lanzarlo (desde un nodo de login, en tu scratch de Lustre):
 #
-#   cd /lustre/scratchXXX/teamYY/jk/jkviromedata
+#   cd /lustre/scratch126/tol/teams/lawniczak/users/jm79/raw_data
 #   mkdir -p logs fastqc_results
 #   find raw_fastq -type f -name "*.fastq.gz" | sort > filelist.txt
 #   N=$(wc -l < filelist.txt)
