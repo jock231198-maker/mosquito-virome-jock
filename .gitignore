@@ -3,3 +3,7 @@
 *.fastq.gz
 *.fna
 *.gtf
+*.sam
+*.bam
+*.fasta
+*.gz
