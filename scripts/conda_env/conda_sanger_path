@@ -1,0 +1,3 @@
+usage <module load conda> ---- <module unload conda> 
+base                     /software/treeoflife/conda/miniconda
+fastqc_0.12.1            /software/treeoflife/conda/users/envs/team222/jm79/fastqc_0.12.1
