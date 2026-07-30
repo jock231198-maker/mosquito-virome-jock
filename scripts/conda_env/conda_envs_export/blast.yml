@@ -1,0 +1,11 @@
+name: blast
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - blast
+  - ncbi-datasets-cli
+  - entrez-direct
+  - biopython
+prefix: /opt/anaconda3/envs/blast

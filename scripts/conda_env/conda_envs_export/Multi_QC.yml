@@ -1,0 +1,8 @@
+name: Multi_QC
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - multiqc
+prefix: /opt/anaconda3/envs/Multi_QC

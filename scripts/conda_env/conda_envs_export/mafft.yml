@@ -1,0 +1,8 @@
+name: mafft
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - mafft
+prefix: /opt/anaconda3/envs/mafft

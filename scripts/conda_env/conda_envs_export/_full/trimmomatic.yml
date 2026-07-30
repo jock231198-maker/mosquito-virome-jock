@@ -1,0 +1,28 @@
+name: trimmomatic
+channels:
+  - defaults
+  - conda-forge
+  - bioconda
+dependencies:
+  - bzip2=1.0.8
+  - ca-certificates=2026.2.25
+  - expat=2.7.1
+  - libcxx=19.1.7
+  - libffi=3.4.4
+  - libmpdec=4.0.0
+  - ncurses=6.5
+  - openjdk=21.0.6
+  - openssl=3.6.1
+  - pip=25.1
+  - python=3.13.5
+  - python_abi=3.13
+  - readline=8.3
+  - setuptools=78.1.1
+  - sqlite=3.50.2
+  - tk=8.6.15
+  - trimmomatic=0.40
+  - tzdata=2025b
+  - wheel=0.45.1
+  - xz=5.6.4
+  - zlib=1.2.13
+prefix: /opt/anaconda3/envs/trimmomatic

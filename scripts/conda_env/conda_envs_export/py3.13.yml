@@ -1,0 +1,10 @@
+name: py3.13
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.13
+  - trimmomatic
+  - biopython
+prefix: /opt/anaconda3/envs/py3.13

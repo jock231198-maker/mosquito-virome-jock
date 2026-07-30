@@ -1,0 +1,6 @@
+name: megan
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+prefix: /opt/anaconda3/envs/megan

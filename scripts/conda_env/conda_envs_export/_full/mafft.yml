@@ -1,0 +1,18 @@
+name: mafft
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - gawk=5.4.0
+  - gmp=6.3.0
+  - libasprintf=0.25.1
+  - libcxx=22.1.6
+  - libgettextpo=0.25.1
+  - libiconv=1.18
+  - libintl=0.25.1
+  - mafft=7.526
+  - mpfr=4.2.2
+  - ncurses=6.6
+  - readline=8.3
+prefix: /opt/anaconda3/envs/mafft

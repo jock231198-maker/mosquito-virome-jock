@@ -1,0 +1,10 @@
+name: kraken
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - bracken
+  - krakentools
+  - kraken2
+prefix: /opt/anaconda3/envs/kraken

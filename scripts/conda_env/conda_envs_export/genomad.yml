@@ -1,0 +1,10 @@
+name: genomad
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - genomad
+  - python=3.11
+  - tensorflow
+prefix: /opt/anaconda3/envs/genomad

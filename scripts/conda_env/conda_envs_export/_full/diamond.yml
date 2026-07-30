@@ -1,0 +1,11 @@
+name: diamond
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - diamond=2.1.25
+  - libcxx=22.1.5
+  - libsqlite=3.53.1
+  - libzlib=1.3.2
+prefix: /opt/anaconda3/envs/diamond
