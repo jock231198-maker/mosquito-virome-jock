@@ -27,8 +27,8 @@ outdir="${2:?Falta output_dir}"
 threads="${LSB_DJOB_NUMPROC:-4}"
 
 # Inicializar conda y activar el entorno con FastQC instalado
-eval "$(conda shell.bash hook)"
-conda activate Fast_QC
+module load conda
+conda activate fastqc_
 
 # Seleccionar el archivo que corresponde a este elemento del array
 idx="${LSB_JOBINDEX:?Este script debe enviarse como job array}"
