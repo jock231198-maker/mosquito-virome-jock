@@ -6,7 +6,7 @@
 # Así cambias una ruta en un solo sitio.
 #
 # Uso manual desde un nodo de login:
-#   source ~/jkvirome/jm79/mosquito-virome-jock/sanger_scripts_jobs/config.sh
+#   source ~/jkvirome/jm79/mosquito-virome-jock/scripts/sanger_scripts_jobs/last_update_05_08_2026config.sh
 #   echo "$SCRATCH"
 # ---------------------------------------------------------------------------
 
@@ -41,7 +41,7 @@ DIAMOND_DB="${DIAMOND_DB:-$REFS_DIR/diamond_db/viral_refseq_proteins.dmnd}"
 # Cámbialos aquí conforme vayas creando cada entorno en el farm.
 ENV_FASTQC="${ENV_FASTQC:-fastqc_0.12.1}"
 ENV_MULTIQC="${ENV_MULTIQC:-multiqc_3.15}"
-ENV_TRIMMOMATIC="${ENV_TRIMMOMATIC:-trimmomatic}"
+ENV_TRIMMOMATIC="${ENV_TRIMMOMATIC:-trimmomatic_0.41}"
 ENV_BOWTIE2="${ENV_BOWTIE2:-bowtie2}"      # debe incluir bowtie2 Y samtools
 ENV_SAMTOOLS="${ENV_SAMTOOLS:-$ENV_BOWTIE2}"
 ENV_STAR="${ENV_STAR:-star_env}"
