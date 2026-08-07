@@ -1,0 +1,146 @@
+# 🐧 Linux Cheat Sheet para Bioinformáticos
+
+> *Linux es tu mejor compañero de laboratorio.*
+
+---
+
+## 1. 🧭 Navegación
+
+| Comando | Qué hace |
+|---|---|
+| `pwd` | Muestra el directorio actual |
+| `ls` | Lista archivos |
+| `ls -l` | Listado largo (detallado) |
+| `ls -lh` | Tamaños legibles para humanos |
+| `cd dir` | Entra a un directorio |
+| `cd ..` | Sube un nivel |
+| `cd ~` | Va al directorio home |
+| `cd /ruta/al/dir` | Va a una ruta específica |
+
+---
+
+## 2. 📁 Operaciones con Archivos
+
+| Comando | Qué hace |
+|---|---|
+| `cp origen destino` | Copia un archivo |
+| `cp -r dir_origen dir_destino` | Copia un directorio |
+| `mv viejo nuevo` | Mueve / renombra |
+| `rm archivo` | Elimina un archivo |
+| `rm -r dir` | Elimina un directorio |
+| `touch archivo.txt` | Crea un archivo vacío |
+| `ln -s objetivo nombre_enlace` | Crea un enlace simbólico |
+
+> ⚠️ `rm` no tiene papelera de reciclaje. Lo que borras, borrado está.
+
+---
+
+## 3. 🔍 Ver Archivos
+
+| Comando | Qué hace |
+|---|---|
+| `cat archivo.txt` | Muestra todo el contenido |
+| `less archivo.txt` | Ver con scroll |
+| `head archivo.txt` | Primeras 10 líneas |
+| `tail archivo.txt` | Últimas 10 líneas |
+| `tail -f archivo.txt` | Sigue el archivo en vivo (logs) |
+| `grep "patrón" archivo.txt` | Busca un patrón |
+| `grep -r "patrón" dir/` | Busca recursivamente en archivos |
+
+---
+
+## 4. 🧬 Trabajando con Datos (bioinfo friendly)
+
+| Comando | Qué hace |
+|---|---|
+| `zcat archivo.gz` | Ver un archivo `.gz` |
+| `zless archivo.gz` | Scroll sobre un `.gz` |
+| `gunzip archivo.gz` | Descomprime |
+| `grep -v "^>" seq.fasta` | Quita las cabeceras FASTA |
+| `cut -f1 archivo.txt` | Primera columna |
+| `sort archivo.txt` | Ordena líneas |
+| `uniq archivo.txt` | Elimina duplicados (consecutivos) |
+| `wc -l archivo.txt` | Cuenta líneas |
+| `awk '{print $1}' archivo.txt` | Imprime la 1ª columna ¡muy potente! |
+
+---
+
+## 5. 🔐 Permisos
+
+| Comando | Qué hace |
+|---|---|
+| `ls -l` | Muestra los permisos |
+| `chmod 755 file.sh` | `rwxr-xr-x` |
+| `chmod +x file.sh` | Lo hace ejecutable |
+| `chown usuario archivo` | Cambia el propietario |
+| `chgrp grupo archivo` | Cambia el grupo |
+
+---
+
+## 6. ⚙️ Gestión de Procesos
+
+| Comando | Qué hace |
+|---|---|
+| `ps aux` | Lista procesos en ejecución |
+| `top` | Visor dinámico de procesos |
+| `htop` | Mejor que `top` (si está instalado) |
+| `kill PID` | Termina un proceso |
+| `kill -9 PID` | Termina a la fuerza |
+
+---
+
+## 7. 🧪 Tareas Comunes en Bioinformática
+
+```bash
+# Contar reads en un FASTQ
+zcat reads.fq.gz | wc -l
+
+# Extraer los IDs de un FASTA
+grep ">" seq.fasta | cut -d' ' -f1
+
+# Buscar un motivo en las secuencias
+grep -r "ATGCG" *.fasta
+
+# Contar archivos en un directorio
+ls *.fastq | wc -l
+```
+
+> 💡 Recuerda: un FASTQ tiene 4 líneas por read, así que el número de reads es `wc -l` dividido entre 4.
+
+---
+
+## 8. ⌨️ Atajos Útiles
+
+| Atajo | Qué hace |
+|---|---|
+| `Ctrl + C` | Cancela |
+| `Ctrl + Z` | Suspende |
+| `Ctrl + D` | Salir / logout |
+| `!!` | Repite el último comando |
+| `!n` | Repite el comando número *n* |
+
+---
+
+## 9. 🗂️ Directorios que Deberías Conocer
+
+| Ruta | Contenido |
+|---|---|
+| `/home/usuario` | Tu carpeta personal |
+| `/data` | Almacenamiento de datos |
+| `/scratch` | Archivos temporales (en clústeres) |
+| `/tmp` | Archivos temporales |
+| `/usr/bin` | Binarios de usuario |
+| `/etc` | Configuración del sistema |
+
+---
+
+## ⭐ Tips
+
+- Pulsa **Tab** para autocompletar.
+- Usa **↑ / ↓** para navegar el historial de comandos.
+- Las páginas `man` son tu mejor amiga: `man <comando>`.
+
+---
+
+> ❤️ **Practica a diario. Explora. Rompe cosas.**
+> ¡Así es como se aprende Linux! 🙂
