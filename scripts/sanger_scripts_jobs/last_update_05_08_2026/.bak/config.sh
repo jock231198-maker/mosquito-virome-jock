@@ -30,8 +30,6 @@ LOGS_DIR="${LOGS_DIR:-$SCRATCH/logs}"
 
 # Etiqueta del lote de datos (se usa como subcarpeta en varias salidas)
 RESULT_FROM="${RESULT_FROM:-MERIDA}"
-# --- Entrada del pipeline (lanes ya concatenados) ---
-FASTQ_DIR="${FASTQ_DIR:-$SCRATCH/cat_fastq}"
 
 # --- Referencias y bases de datos -------------------------------------------
 REFS_DIR="${REFS_DIR:-$USER_ROOT/refs}"

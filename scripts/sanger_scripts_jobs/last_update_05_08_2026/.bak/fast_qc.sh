@@ -15,7 +15,7 @@ SECONDS=0
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/config.sh"
 
-input_dir="${1:-$FASTQ_DIR}"
+input_dir="${1:-$DATA_DIR}"
 output_dir="${2:-$RESULTS_DIR/fastqc_raw}"
 threads="${3:-${LSB_DJOB_NUMPROC:-4}}"
 

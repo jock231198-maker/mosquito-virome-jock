@@ -55,12 +55,12 @@ ok()   { echo "  [ok   ] $*"; }
 case "$step" in
   fastqc)
     logpre="fastqc"
-    in_dir="$FASTQ_DIR";                      in_pat="*_R1_*.fastq.gz";        in_key=file
+    in_dir="$DATA_DIR";                      in_pat="*_R1_*.fastq.gz";        in_key=file
     out_dir="$RESULTS_DIR/fastqc_raw";       out_pat="*_R1*_fastqc.zip";      out_key=file
     min_bytes=100000 ;;
   trim)
     logpre="trim"
-    in_dir="$FASTQ_DIR";                      in_pat="*_R1_*.fastq.gz";        in_key=file
+    in_dir="$DATA_DIR";                      in_pat="*_R1_*.fastq.gz";        in_key=file
     out_dir="$SCRATCH/trimmed/$RESULT_FROM"; out_pat="*_R1_001_paired.fastq.gz"; out_key=file
     min_bytes=1000000 ;;
   btmap)

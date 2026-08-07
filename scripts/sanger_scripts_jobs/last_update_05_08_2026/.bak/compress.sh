@@ -43,7 +43,7 @@ EXPECTED_LANES="${EXPECTED_LANES:-2}"
 THREADS="${LSB_DJOB_NUMPROC:-4}"
 
 if command -v pigz >/dev/null 2>&1; then
-  COMPRESS=(pigz -p "$THREADS" -1 -c); CNAME="pigz -p $THREADS"
+  COMPRESS=(pigz -p "$THREADS" -c); CNAME="pigz -p $THREADS"
 else
   COMPRESS=(gzip -c);               CNAME="gzip"
 fi
@@ -61,10 +61,10 @@ echo
 
 # Detecta gzip por los magic bytes, no por la extension
 is_gz() { [[ "$(head -c2 "$1" 2>/dev/null | od -An -tx1 | tr -d ' \n')" == "1f8b" ]]; }
-emit()  { if is_gz "$1"; then pigz -dc -p "$THREADS" "$1"; else cat "$1"; fi; }
+emit()  { if is_gz "$1"; then zcat "$1"; else cat "$1"; fi; }
 count_reads() {
   local n
-  if is_gz "$1"; then n=$(pigz -dc -p "$THREADS" "$1" | wc -l); else n=$(wc -l < "$1"); fi
+  if is_gz "$1"; then n=$(zcat "$1" | wc -l); else n=$(wc -l < "$1"); fi
   echo $(( n / 4 ))
 }
 
@@ -127,7 +127,7 @@ for sample in "${SAMPLES[@]}"; do
       echo "  [ERROR] verificacion: entrada=$in_reads salida=$out_reads"
       rm -f "$tmp"; FAIL=$((FAIL+1)); continue
     fi
-    if ! pigz -t -p "$THREADS" "$tmp" 2>/dev/null; then
+    if ! gzip -t "$tmp" 2>/dev/null; then
       echo "  [ERROR] el .gz no pasa gzip -t"; rm -f "$tmp"; FAIL=$((FAIL+1)); continue
     fi
 

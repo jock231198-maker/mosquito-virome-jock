@@ -34,7 +34,7 @@ for a in "$@"; do
     *)  INDIR="$a" ;;
   esac
 done
-INDIR="${INDIR:-$FASTQ_DIR}"
+INDIR="${INDIR:-$DATA_DIR}"
 
 REPORT_DIR="$RESULTS_DIR/qc_control"
 mkdir -p "$REPORT_DIR"

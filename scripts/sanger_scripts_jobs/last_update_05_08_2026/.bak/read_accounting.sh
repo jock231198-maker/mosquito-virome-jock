@@ -81,11 +81,11 @@ pct() {
 }
 
 # --- muestras ---------------------------------------------------------------
-mapfile -t SAMPLES < <(find "$FASTQ_DIR" -name "*_R1_*.fastq.gz" -printf '%f\n' 2>/dev/null \
+mapfile -t SAMPLES < <(find "$DATA_DIR" -name "*_R1_*.fastq.gz" -printf '%f\n' 2>/dev/null \
                        | cut -d_ -f1-2 | sort -u)
 
 if [[ ${#SAMPLES[@]} -eq 0 ]]; then
-  echo "ERROR: no se detectaron muestras en $FASTQ_DIR"; exit 1
+  echo "ERROR: no se detectaron muestras en $DATA_DIR"; exit 1
 fi
 
 # --- construir la tabla -----------------------------------------------------
