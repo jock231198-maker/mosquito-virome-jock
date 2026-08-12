@@ -1,7 +1,9 @@
-                                                                   #####PARA MANDAR LOS TRABAJOS AL SERVER######
+                                                                  #####PARA MANDAR LOS TRABAJOS AL SERVER######
 
 
-
+#rooting and directories stablishment 
+source ~/jkvirome/jm79/mosquito-virome-jock/scripts/sanger_scripts_jobs/last_update_05_08_2026/config.sh
+alias jkv='cd ~/jkvirome/jm79/mosquito-virome-jock/scripts/sanger_scripts_jobs/last_update_05_08_2026 && source ./config.sh'
 
 
 #check_inputs
@@ -15,3 +17,6 @@ bsub -J "fastqc[1-$N]%20" \
      -q normal -n 1 -M 1000 \
      -R "select[mem>1000] rusage[mem=1000] span[hosts=1]" \
      "$PWD/fastqc_worker.sh $SCRATCH/filelist.txt"
+
+./check_step.sh fastqc        # cuando termine el array
+
