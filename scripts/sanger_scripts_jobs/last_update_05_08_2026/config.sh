@@ -56,7 +56,7 @@ ENV_COBRA="${ENV_COBRA:-cobra}"
 ENV_CHECKV="${ENV_CHECKV:-checkv}"
 ENV_GENOMAD="${ENV_GENOMAD:-genomad}"
 ENV_DIAMOND="${ENV_DIAMOND:-diamond}"
-ENV_FASTP="${ENV_FASTP:-fastp}"    
+ENV_FASTP="${ENV_FASTP:-fastp_0.24.0}"    
 
 # --- Helper: cargar conda y activar un entorno ------------------------------
 # El módulo `conda` del farm YA define la función conda (setenv CONDA_EXE +
