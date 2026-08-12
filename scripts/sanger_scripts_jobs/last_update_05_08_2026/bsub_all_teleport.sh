@@ -12,6 +12,10 @@ bsub -J chkcat -o "$LOGS_DIR/chkcat.%J.log" -e "$LOGS_DIR/chkcat.%J.err" \
      "$PWD/check_inputs.sh --vs-raw --expect 23 $SCRATCH/cat_fastq"
 
 #fastqc_worker
+#make_array 
+find "$SCRATCH/cat_fastq" -type f -name "*.fastq.gz" | sort > "$SCRATCH/filelist.txt"
+N=$(wc -l < "$SCRATCH/filelist.txt"); echo "N=$N"   
+#bsub_fastqc
 bsub -J "fastqc[1-$N]%20" \
      -o "$LOGS_DIR/fastqc.%J.%I.log" -e "$LOGS_DIR/fastqc.%J.%I.err" \
      -q normal -n 1 -M 1000 \

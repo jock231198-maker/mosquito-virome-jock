@@ -56,6 +56,7 @@ ENV_COBRA="${ENV_COBRA:-cobra}"
 ENV_CHECKV="${ENV_CHECKV:-checkv}"
 ENV_GENOMAD="${ENV_GENOMAD:-genomad}"
 ENV_DIAMOND="${ENV_DIAMOND:-diamond}"
+ENV_FASTP="${ENV_FASTP:-fastp}"    
 
 # --- Helper: cargar conda y activar un entorno ------------------------------
 # El módulo `conda` del farm YA define la función conda (setenv CONDA_EXE +
@@ -73,5 +74,6 @@ activate_env() {
 
 # --- Helper: crear el árbol de directorios ----------------------------------
 make_dirs() {
-    mkdir -p "$SCRATCH" "$RESULTS_DIR" "$LOGS_DIR"
+    mkdir -p "$SCRATCH"/{cat_fastq,nopolyg,trimmed/"$RESULT_FROM",mapped/"$RESULT_FROM",unmapped_fastq,spades,aligned,logs}
+    mkdir -p "$RESULTS_DIR"/{fastqc_raw,multiqc,polyg_reports,mapping_stats,unmapped_counts,quast,genomad,checkv,diamond,qc_control}
 }
