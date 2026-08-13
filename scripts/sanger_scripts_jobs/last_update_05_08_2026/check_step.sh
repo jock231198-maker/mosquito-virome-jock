@@ -297,7 +297,7 @@ run_step() {
   echo "== 4. Muestras con entrada vs muestras con salida"
   local in_keys out_keys n_in n_out
   mapfile -t in_keys  < <(keys_of "$in_dir"  "$in_pat"  "$in_key")
-  mapfile -t out_keys < <(keys_of "$out_dir" "$out_pat" "$out_key")}
+  mapfile -t out_keys < <(keys_of "$out_dir" "$out_pat" "$out_key")
   # Muestras excluidas a proposito (p.ej. M41_S4, fallida en secuenciacion):
   # siguen teniendo entrada en disco pero no deben exigir salida.
   if [[ -n "$EXCLUDE" ]]; then
