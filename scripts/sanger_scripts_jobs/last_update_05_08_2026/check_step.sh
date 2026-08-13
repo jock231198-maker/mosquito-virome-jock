@@ -27,15 +27,16 @@ source "$SCRIPT_DIR/config.sh"
 
 SAMPLE_FIELDS="${SAMPLE_FIELDS:-2}"     # M11_S3 -> 2 campos separados por '_'
 
-STEPS_ALL=(cat fastqc trim btmap unmap star spades quast genomad checkv diamond)
+STEPS_ALL=(cat fastqc polyg trim btmap unmap star spades quast genomad checkv diamond)
 
 usage() {
   cat <<'EOF'
-Uso: ./check_step.sh <paso> | --all | --list
+Uso: ./check_step.sh <paso> | --all | --list  [--exclude M41_S4,...]
 
 Pasos:
   cat       Concatenado de lanes (compress.sh)
   fastqc    FastQC sobre cat_fastq
+  polyg     Recorte de colas polyG (fastp)
   trim      Trimmomatic
   btmap     Mapeo con bowtie2
   unmap     Extraccion de no-mapeados
@@ -48,13 +49,18 @@ Pasos:
 EOF
 }
 
-arg="${1:-}"
-case "$arg" in
-  ""|--list|-h|--help) usage; exit 0 ;;
-  --all) STEPS=("${STEPS_ALL[@]}") ;;
-  -*) echo "Opcion desconocida: $arg"; usage; exit 1 ;;
-  *)  STEPS=("$arg") ;;
-esac
+STEPS=(); EXCLUDE=""
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --list|-h|--help) usage; exit 0 ;;
+    --all)     STEPS=("${STEPS_ALL[@]}") ;;
+    --exclude) EXCLUDE="${2:?--exclude necesita una lista separada por comas}"; shift ;;
+    -*) echo "Opcion desconocida: $1"; usage; exit 1 ;;
+    *)  STEPS+=("$1") ;;
+  esac
+  shift
+done
+[[ ${#STEPS[@]} -eq 0 ]] && { usage; exit 0; }
 
 TOT_ERR=0; TOT_WARN=0
 
@@ -91,9 +97,16 @@ configure_step() {
       also_pat="*_R2*_fastqc.zip"
       list_file="$SCRATCH/filelist.txt"
       min_bytes=100000 ;;
+      polyg)
+      logpre="polyg"
+      in_dir="$SCRATCH/cat_fastq";             in_pat="*_R1_001.fastq.gz"
+      out_dir="$SCRATCH/nopolyg";              out_pat="*_R1_001.fastq.gz"
+      also_pat="*_R2_001.fastq.gz"
+      list_file="$SCRATCH/samples.txt"
+      min_bytes=1000000 ;;
     trim)
       logpre="trim"
-      in_dir="$SCRATCH/cat_fastq";             in_pat="*_R1_*.fastq.gz"
+      in_dir="$SCRATCH/cat_fastq";             in_pat="*_R1_*.fastq.gz" # in_dir="$SCRATCH/nopolyg";               in_pat="*_R1_*.fastq.gz"
       out_dir="$SCRATCH/trimmed/$RESULT_FROM"; out_pat="*_R1_001_paired.fastq.gz"
       also_pat="*_R2_001_paired.fastq.gz"
       list_file="$SCRATCH/samples.txt"
@@ -284,7 +297,19 @@ run_step() {
   echo "== 4. Muestras con entrada vs muestras con salida"
   local in_keys out_keys n_in n_out
   mapfile -t in_keys  < <(keys_of "$in_dir"  "$in_pat"  "$in_key")
-  mapfile -t out_keys < <(keys_of "$out_dir" "$out_pat" "$out_key")
+  mapfile -t out_keys < <(keys_of "$out_dir" "$out_pat" "$out_key")}
+  # Muestras excluidas a proposito (p.ej. M41_S4, fallida en secuenciacion):
+  # siguen teniendo entrada en disco pero no deben exigir salida.
+  if [[ -n "$EXCLUDE" ]]; then
+    local keep=() x skip
+    for k in ${in_keys[@]+"${in_keys[@]}"}; do
+      skip=0
+      IFS=',' read -ra _exc <<< "$EXCLUDE"
+      for x in "${_exc[@]}"; do [[ "$k" == "$x" ]] && skip=1; done
+      (( skip )) || keep+=("$k")
+    done
+    in_keys=(${keep[@]+"${keep[@]}"})
+  fi
   n_in=${#in_keys[@]}; n_out=${#out_keys[@]}
 
   echo "  entradas ($in_dir / $in_pat):  $n_in muestras"
