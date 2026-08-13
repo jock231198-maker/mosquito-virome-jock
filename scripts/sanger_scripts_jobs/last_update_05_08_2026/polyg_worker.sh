@@ -65,18 +65,24 @@ R2="$indir/${sample}_R2_001.fastq.gz"
 [[ -f "$R1" && -f "$R2" ]] || { echo "ERROR: faltan R1/R2 para $sample en $indir"; exit 1; }
 
 repdir="$RESULTS_DIR/polyg_reports"
-mkdir -p "$outdir" "$repdir"
+# OJO: fastp decide si comprime MIRANDO LA EXTENSION del fichero de salida. Un
+# nombre acabado en '.tmp' le hace escribir FASTQ en claro (8.5 GB) que luego no
+# pasa gzip -t. Por eso el staging es una CARPETA aparte y conserva el '.gz'.
+# Va fuera de $outdir porque check_step.sh busca con find recursivo.
+stage="${POLYG_STAGE:-$SCRATCH/.polyg_stage}"
+mkdir -p "$outdir" "$repdir" "$stage"
 
 O1="$outdir/${sample}_R1_001.fastq.gz"
 O2="$outdir/${sample}_R2_001.fastq.gz"
+T1="$stage/${sample}_R1_001.fastq.gz"
+T2="$stage/${sample}_R2_001.fastq.gz"
+
+rm -f "$T1" "$T2"     # restos de un intento anterior de ESTA muestra
 
 echo "polyG $sample  (host: $(hostname), hilos: $THREADS, poly_g_min_len: $POLYG_MIN)"
-
-# Se escribe a .tmp y se renombra al final: un job cortado a medias nunca deja
-# un .gz truncado con pinta de bueno. Mismo criterio que compress.sh.
 fastp \
     -i "$R1" -I "$R2" \
-    -o "$O1.tmp" -O "$O2.tmp" \
+    -o "$T1" -O "$T2"  \
     --trim_poly_g --poly_g_min_len "$POLYG_MIN" \
     --disable_adapter_trimming \
     --disable_quality_filtering \
@@ -87,15 +93,20 @@ fastp \
     --html "$repdir/${sample}.html" \
     --report_title "polyG $sample"
 
-# Verificacion: que los dos .gz esten integros antes de darlos por buenos
-for f in "$O1.tmp" "$O2.tmp"; do
+# Verificacion antes de darlos por buenos: que sean gzip de verdad y que esten
+# integros. Si esto falla con fastp, lo primero que hay que mirar es si el
+# nombre de salida acaba en .gz (ver el comentario del staging).
+for f in "$T1" "$T2"; do
   if ! gzip -t "$f" 2>/dev/null; then
-    echo "ERROR: $f no pasa gzip -t"; rm -f "$O1.tmp" "$O2.tmp"; exit 1
+    echo "ERROR: $f no pasa gzip -t"
+    echo "       magic bytes: $(head -c2 "$f" 2>/dev/null | od -An -tx1 | tr -d ' ')  (gzip = 1f8b)"
+    rm -f "$T1" "$T2"; exit 1
   fi
 done
 
-mv "$O1.tmp" "$O1"
-mv "$O2.tmp" "$O2"
+# mv dentro del mismo sistema de ficheros ($SCRATCH): es un rename atomico
+mv "$T1" "$O1"
+mv "$T2" "$O2"
 
 # Resumen legible en el log, por si no quieres abrir el JSON
 if command -v python3 >/dev/null 2>&1; then
