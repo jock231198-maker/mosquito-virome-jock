@@ -42,3 +42,10 @@ bsub -J "polyg[1-22]%10" \
 
      ./check_step.sh polyg        # cuando termine el array
 
+#bsub_trimmomatic
+bsub -J "trim[1-22]%10" \
+     -o "$LOGS_DIR/trim.%J.%I.log" -e "$LOGS_DIR/trim.%J.%I.err" \
+     -q normal -n 4 -M 5000 \
+     -R "select[mem>5000] rusage[mem=5000] span[hosts=1]" \
+     "JAVA_MEM=4g $PWD/trimmomatic_worker.sh $SCRATCH/samples.txt $SCRATCH/nopolyg"
+
