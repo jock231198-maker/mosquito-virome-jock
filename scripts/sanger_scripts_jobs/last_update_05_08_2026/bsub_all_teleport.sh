@@ -49,3 +49,21 @@ bsub -J "trim[1-22]%10" \
      -R "select[mem>5000] rusage[mem=5000] span[hosts=1]" \
      "JAVA_MEM=4g $PWD/trimmomatic_worker.sh $SCRATCH/samples.txt $SCRATCH/nopolyg"
 
+
+#bsub_bowtie_index_build
+bsub -J bt2build \
+     -o "$LOGS_DIR/bt2build.%J.log" -e "$LOGS_DIR/bt2build.%J.err" \
+     -q normal -n 8 -M 16000 \
+     -R "select[mem>16000] rusage[mem=16000] span[hosts=1]" \
+     "source $PWD/config.sh && activate_env \$ENV_BOWTIE2 && \
+      bowtie2-build --threads 8 \
+        $REFS_DIR/genome/GCF_002204515.2_AaegL5.0_genomic.fa \
+        $BT2_INDEX"
+#bowtie_bsub
+bsub -J "btmap[1-22]%6" \
+     -o "$LOGS_DIR/btmap.%J.%I.log" -e "$LOGS_DIR/btmap.%J.%I.err" \
+     -q normal -n 8 -M 8000 \
+     -R "select[mem>8000] rusage[mem=8000] span[hosts=1]" \
+     "$PWD/bowtie_map_worker.sh $SCRATCH/samples.txt $SCRATCH/trimmed/$RESULT_FROM"
+
+
