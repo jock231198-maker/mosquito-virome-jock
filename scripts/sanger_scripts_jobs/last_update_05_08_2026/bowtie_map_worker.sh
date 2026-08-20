@@ -38,7 +38,7 @@ sample=$(sed -n "${idx}p" "$samples")
 R1="$indir/${sample}_R1_001_paired.fastq.gz"
 R2="$indir/${sample}_R2_001_paired.fastq.gz"
 outdir="$outbase/$result_from"
-statsdir="$RESULTS_DIR/mapping_stats"
+statsdir="${STATS_DIR:-$RESULTS_DIR/mapping_stats}"
 mkdir -p "$outdir" "$statsdir"
 
 echo "Mapping $sample (host: $(hostname))"
