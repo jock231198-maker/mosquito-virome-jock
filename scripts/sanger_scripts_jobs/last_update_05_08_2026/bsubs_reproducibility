@@ -1,0 +1,436 @@
+# Comandos LSF del pipeline jkvirome — lote MERIDA
+
+Registro de los `bsub` ejecutados, con la construcción de cada lista de array y
+los recursos **medidos** (no estimados). Farm de Sanger, cluster `farm22`,
+cola `normal`, grupo de facturación `team222`.
+
+Todos los comandos asumen:
+
+```bash
+cd ~/jkvirome/jm79/mosquito-virome-jock/scripts/sanger_scripts_jobs/last_update_05_08_2026
+source ./config.sh
+```
+
+**Dos reglas que se aprendieron por las malas:**
+
+- Usar `$PWD` y no `./` en el `bsub`: los jobs se ejecutan desde
+  `/nfs/users/nfs_j/jm79/...`, no desde `/lustre/...` (`~/jkvirome` es un enlace).
+- Construir la lista del array **solo cuando el paso anterior haya terminado**.
+  `find` es una foto fija: a media ejecución congela una lista parcial o incluye
+  ficheros a medio escribir.
+
+---
+
+## Tabla de recursos medidos
+
+| Paso | Max Memory | Run time | `-n` | `-M` |
+|---|---:|---:|---:|---:|
+| FastQC (por fichero) | 279 MB | 274 s (mediana) | 1 | 1000 |
+| fastp polyG | 1210 MB | 134-180 s | 4 | 2000 |
+| Trimmomatic (`JAVA_MEM=4g`) | 3190 MB | 578-1103 s | 4 | 6000 |
+| `bowtie2-build` | 2636 MB | 1834 s | 8 | 16000 |
+| STAR `genomeGenerate` | 27454 MB | 1230 s | 8 | 48000 |
+| bowtie2 map | 1611 MB | 5285-6959 s @8 hilos | 16 | 6000 |
+| STAR align | — | ~1400 s | 8 | 20000 |
+| SPAdes | *por medir* | *por medir* | 16 | 68000 |
+
+---
+
+## 1. Concatenado de lanes
+
+No es array: un solo job que recorre las 23 muestras.
+
+```bash
+bsub -J compress \
+     -o "$LOGS_DIR/compress.%J.log" -e "$LOGS_DIR/compress.%J.err" \
+     -q normal -n 8 -M 4000 \
+     -R "select[mem>4000] rusage[mem=4000] span[hosts=1]" \
+     "$PWD/compress.sh"
+```
+
+Salida: `$SCRATCH/cat_fastq/`, 92 → 46 ficheros. El script verifica el conteo de
+reads de entrada contra el de salida antes de renombrar cada `.tmp`.
+
+Recuperar los conteos verificados (línea base de todo el `read_accounting`):
+
+```bash
+awk '/^== /{s=$2} /reads verificadas/{print s"\t"$3}' "$LOGS_DIR"/compress.*.log \
+  | sort -u > "$RESULTS_DIR/qc_control/raw_pairs_baseline.tsv"
+```
+
+---
+
+## 2. FastQC sobre los concatenados
+
+**Lista: un elemento por FICHERO** (no por muestra).
+
+```bash
+find "$SCRATCH/cat_fastq" -type f -name "*.fastq.gz" | sort > "$SCRATCH/filelist.txt"
+N=$(wc -l < "$SCRATCH/filelist.txt")          # 46
+```
+
+```bash
+bsub -J "fastqc[1-$N]%20" \
+     -o "$LOGS_DIR/fastqc.%J.%I.log" -e "$LOGS_DIR/fastqc.%J.%I.err" \
+     -q normal -n 1 -M 1000 \
+     -R "select[mem>1000] rusage[mem=1000] span[hosts=1]" \
+     "$PWD/fastqc_worker.sh $SCRATCH/filelist.txt"
+```
+
+**`-n 1` a propósito.** El `-t` de FastQC indica cuántos *ficheros* procesa a la
+vez, y cada hebra reserva 250 MB. Con un fichero por elemento de array, `-t 4`
+reserva cuatro hebras y usa una: `-n 4` quema tres cores por job.
+
+```bash
+./multi_qc.sh "$RESULTS_DIR/fastqc_raw" "$RESULTS_DIR/multiqc" multiqc_MERIDA
+```
+
+---
+
+## 3. Recorte de polyG (fastp)
+
+**Lista: un elemento por MUESTRA**, excluyendo M41_S4 (117 pares, fallida).
+
+```bash
+ls "$SCRATCH/cat_fastq"/*_R1_001.fastq.gz | xargs -n1 basename | cut -d_ -f1-2 | sort -u \
+  | grep -vx 'M41_S4' > "$SCRATCH/samples.txt"
+N=$(wc -l < "$SCRATCH/samples.txt")           # 22
+```
+
+```bash
+bsub -J "polyg[1-$N]%10" \
+     -o "$LOGS_DIR/polyg.%J.%I.log" -e "$LOGS_DIR/polyg.%J.%I.err" \
+     -q normal -n 4 -M 2000 \
+     -R "select[mem>2000] rusage[mem=2000] span[hosts=1]" \
+     "$PWD/polyg_worker.sh $SCRATCH/samples.txt $SCRATCH/cat_fastq"
+```
+
+```bash
+./check_step.sh polyg --exclude M41_S4
+./multi_qc.sh "$RESULTS_DIR/polyg_reports" "$RESULTS_DIR/multiqc" multiqc_polyg
+```
+
+---
+
+## 4. FastQC sobre `nopolyg`
+
+```bash
+find "$SCRATCH/nopolyg" -type f -name "*.fastq.gz" | sort > "$SCRATCH/filelist_nopolyg.txt"
+N=$(wc -l < "$SCRATCH/filelist_nopolyg.txt")  # 44
+```
+
+```bash
+bsub -J "fqnopg[1-$N]%20" \
+     -o "$LOGS_DIR/fqnopg.%J.%I.log" -e "$LOGS_DIR/fqnopg.%J.%I.err" \
+     -q normal -n 1 -M 1000 \
+     -R "select[mem>1000] rusage[mem=1000] span[hosts=1]" \
+     "$PWD/fastqc_worker.sh $SCRATCH/filelist_nopolyg.txt $RESULTS_DIR/fastqc_nopolyg"
+```
+
+**Segundo argumento = carpeta de salida.** Sin él sobrescribiría `fastqc_raw` y se
+perdería el "antes".
+
+Informe comparativo (`multi_qc.sh` solo acepta una carpeta, así que se llama a
+`multiqc` directamente):
+
+```bash
+activate_env "$ENV_MULTIQC"
+multiqc "$RESULTS_DIR/fastqc_raw" "$RESULTS_DIR/fastqc_nopolyg" \
+        --dirs --dirs-depth 1 \
+        -o "$RESULTS_DIR/multiqc" -n multiqc_polyg_antes_despues --force
+conda deactivate
+```
+
+---
+
+## 5. Trimming (Trimmomatic)
+
+Misma `samples.txt` que el polyG. Entrada: `nopolyg`, no `cat_fastq`.
+
+```bash
+bsub -J "trim[1-22]%10" \
+     -o "$LOGS_DIR/trim.%J.%I.log" -e "$LOGS_DIR/trim.%J.%I.err" \
+     -q normal -n 4 -M 6000 \
+     -R "select[mem>6000] rusage[mem=6000] span[hosts=1]" \
+     "JAVA_MEM=4g $PWD/trimmomatic_worker.sh $SCRATCH/samples.txt $SCRATCH/nopolyg"
+```
+
+**`JAVA_MEM=4g` va DENTRO de la cadena**, delante del script: así se aplica solo a
+esa ejecución y no depende de que LSF propague el entorno.
+
+**Por qué 4 GB y no los 16 del worker:** medir el `Max Memory` de una JVM con
+`-Xmx16g` no dice cuánto necesita — el heap crece hasta el techo antes de
+recolectar. Hay que probar con poco. Con 4 GB usó 3190 MB.
+
+```bash
+./check_step.sh trim --exclude M41_S4
+grep -h "Both Surviving" "$LOGS_DIR"/trim.*.err
+```
+
+---
+
+## 6. FastQC sobre trimmed y unpaired
+
+```bash
+find "$SCRATCH/trimmed/$RESULT_FROM" -type f -name "*_001_paired.fastq.gz" | sort > "$SCRATCH/filelist_trimmed.txt"
+find "$SCRATCH/trimmed/$RESULT_FROM" -type f -name "*_unpaired.fastq.gz"   | sort > "$SCRATCH/filelist_unpaired.txt"
+wc -l "$SCRATCH"/filelist_trimmed.txt "$SCRATCH"/filelist_unpaired.txt     # 44 y 44
+```
+
+El patrón `*_001_paired` excluye los `_unpaired` correctamente: `_unpaired` no
+termina en `_paired`, porque el carácter previo es `n` y no `_`.
+
+```bash
+bsub -J "fqtrim[1-44]%20" \
+     -o "$LOGS_DIR/fqtrim.%J.%I.log" -e "$LOGS_DIR/fqtrim.%J.%I.err" \
+     -q normal -n 1 -M 1000 \
+     -R "select[mem>1000] rusage[mem=1000] span[hosts=1]" \
+     "$PWD/fastqc_worker.sh $SCRATCH/filelist_trimmed.txt $RESULTS_DIR/fastqc_trimmed"
+
+bsub -J "fqunp[1-44]%20" \
+     -o "$LOGS_DIR/fqunp.%J.%I.log" -e "$LOGS_DIR/fqunp.%J.%I.err" \
+     -q normal -n 1 -M 1000 \
+     -R "select[mem>1000] rusage[mem=1000] span[hosts=1]" \
+     "$PWD/fastqc_worker.sh $SCRATCH/filelist_unpaired.txt $RESULTS_DIR/fastqc_unpaired"
+```
+
+---
+
+## 7. Índices de referencia
+
+Genoma: *Aedes aegypti* AaegL5.0, NCBI `GCF_002204515.2` (1.279 Gb, 2310 secuencias).
+
+```bash
+bsub -J bt2build \
+     -o "$LOGS_DIR/bt2build.%J.log" -e "$LOGS_DIR/bt2build.%J.err" \
+     -q normal -n 8 -M 16000 \
+     -R "select[mem>16000] rusage[mem=16000] span[hosts=1]" \
+     "$PWD/build_bt2_index.sh"
+```
+
+Medido: 2636 MB, 1834 s. Índice de 1.7 GB en 6 ficheros `.bt2`.
+
+```bash
+bsub -J starbuild \
+     -o "$LOGS_DIR/starbuild.%J.log" -e "$LOGS_DIR/starbuild.%J.err" \
+     -q normal -n 8 -M 48000 \
+     -R "select[mem>48000] rusage[mem=48000] span[hosts=1]" \
+     "$PWD/build_star_index.sh"
+```
+
+Medido: 27454 MB, 1230 s. Índice de 13.1 GB (`Genome` 1.7 + `SA` 9.9 + `SAindex` 1.5).
+**Esa suma es la RAM que STAR pide al alinear**, más búferes.
+
+Con anotación (no se usó; el índice actual es *de novo*):
+
+```bash
+./build_star_index.sh "$GENOME_FA" "$STAR_INDEX" /ruta/al/GCF_002204515.2_AaegL5.0_genomic.gtf
+```
+
+---
+
+## 8. Mapeo al huésped — bowtie2
+
+Misma `samples.txt`. **Entrada: `trimmed/$RESULT_FROM`.**
+
+### 8a. Versión rápida (la que alimenta SPAdes)
+
+```bash
+bsub -J "btmap[1-22]%10" \
+     -o "$LOGS_DIR/btmap.%J.%I.log" -e "$LOGS_DIR/btmap.%J.%I.err" \
+     -q normal -n 16 -M 6000 \
+     -R "select[mem>6000] rusage[mem=6000] span[hosts=1]" \
+     "$PWD/bowtie_map_worker_fast.sh $SCRATCH/samples.txt $SCRATCH/trimmed/$RESULT_FROM"
+```
+
+Usa `--un-conc-gz` y `-S /dev/null`: escribe 4.2 GB de no-mapeados en vez de
+~100 GB de BAM, y **elimina el paso `extract_unmapped`**.
+
+Salida: `$SCRATCH/unmapped_fastq/`, `$RESULTS_DIR/mapping_stats/`,
+`$RESULTS_DIR/unmapped_counts/`.
+
+### 8b. Versión con BAM (corrida aparte, para análisis del lado huésped)
+
+Requiere una edición previa para que el directorio de estadísticas sea
+parametrizable y no pise el de 8a:
+
+```bash
+sed -i 's|^statsdir="\$RESULTS_DIR/mapping_stats"|statsdir="${STATS_DIR:-$RESULTS_DIR/mapping_stats}"|' bowtie_map_worker.sh
+```
+
+```bash
+bsub -J "btmapbam[1-22]" \
+     -o "$LOGS_DIR/btmapbam.%J.%I.log" -e "$LOGS_DIR/btmapbam.%J.%I.err" \
+     -q normal -n 16 -M 6000 \
+     -R "select[mem>6000] rusage[mem=6000] span[hosts=1]" \
+     "STATS_DIR=$RESULTS_DIR/mapping_stats_bam $PWD/bowtie_map_worker.sh \
+      $SCRATCH/samples.txt $SCRATCH/trimmed/$RESULT_FROM $BT2_INDEX $SCRATCH/mapped_bam"
+```
+
+**Sin `%N`**: LSF coloca todos los que pueda. Es lo más rápido que se puede pedir.
+Los argumentos 3 y 4 son índice y `outbase`; `STATS_DIR` va dentro de la cadena.
+
+**Motivo de separar las rutas:** bowtie2 escribe el resumen **al final**, así que
+un elemento que muera a media deja un fichero vacío encima del bueno.
+
+### Verificación
+
+```bash
+./check_step.sh trim --exclude M41_S4
+ls "$SCRATCH/unmapped_fastq"/*_unmapped_R1.fastq.gz | wc -l     # 22
+ls -A "$SCRATCH/.btmap_stage" | wc -l                           # 0
+
+grep -H "overall alignment rate" "$RESULTS_DIR/mapping_stats"/*_bowtie2_summary.txt \
+  | sed 's|.*/||; s|_bowtie2_summary.txt:| |' | sort -k2 -n
+
+conda activate "$ENV_BOWTIE2"
+for f in "$SCRATCH/mapped_bam/$RESULT_FROM"/*.bam; do
+  samtools quickcheck "$f" || echo "TRUNCADO: $(basename "$f")"
+done; echo "--- fin ---"
+conda deactivate
+```
+
+---
+
+## 9. Mapeo al huésped — STAR
+
+### 9a. Comparación inicial, 4 muestras, parámetros por defecto
+
+```bash
+sed -n '2p;5p;8p;16p' "$SCRATCH/samples.txt" > "$SCRATCH/samples_star4.txt"
+cat "$SCRATCH/samples_star4.txt"      # M1_S1, M22_S30, M36_S17, M62_S18
+```
+
+Elegidas para cubrir el rango de `host_pct`: 90.85%, 97.48%, 40.44% y 77.33%.
+
+```bash
+bsub -J "star[1-4]%4" \
+     -o "$LOGS_DIR/star.%J.%I.log" -e "$LOGS_DIR/star.%J.%I.err" \
+     -q normal -n 8 -M 20000 \
+     -R "select[mem>20000] rusage[mem=20000] span[hosts=1]" \
+     "$PWD/star_align_worker.sh $SCRATCH/samples_star4.txt $SCRATCH/trimmed/$RESULT_FROM"
+```
+
+**Resultado: inservible.** El 89.4% de las lecturas cae en >10 loci (genoma ~50%
+elementos transponibles) y el `--outFilterMultimapNmax 10` por defecto las manda
+a `Unmapped.out`: ~20 M pares frente a 1.1 M de bowtie2 en la misma muestra.
+
+### 9b. Versión corregida, 22 muestras
+
+```bash
+bsub -J "star[1-22]%6" \
+     -o "$LOGS_DIR/star.%J.%I.log" -e "$LOGS_DIR/star.%J.%I.err" \
+     -q normal -n 8 -M 20000 \
+     -R "select[mem>20000] rusage[mem=20000] span[hosts=1]" \
+     "$PWD/star_align_worker_fast.sh $SCRATCH/samples.txt $SCRATCH/trimmed/$RESULT_FROM"
+```
+
+Parámetros clave del worker:
+
+```
+--outFilterMultimapNmax 10000   # las multimapeadas cuentan como huésped
+--outSAMmultNmax 1              # IMPRESCINDIBLE: solo 1 alineamiento por lectura
+--outSAMtype None               # el BAM no se quiere
+--outReadsUnmapped Fastx
+```
+
+Sin `--outSAMmultNmax 1`, STAR emite una línea de SAM por cada locus de cada
+lectura multimapeada y el fichero de salida crece sin control.
+
+**`%6` y no más**: cada elemento carga los 13.1 GB del índice en RAM.
+
+Salida a carpetas propias (`unmapped_fastq_star/`, `unmapped_counts_star/`) para
+no pisar bowtie2.
+
+Comparativa:
+
+```bash
+for f in "$RESULTS_DIR/unmapped_counts_star"/*.tsv; do
+  s=$(basename "$f" _unmapped_pairs.tsv)
+  printf '%-10s STAR %10s   bowtie2 %10s\n' "$s" \
+    "$(awk 'NR==2{print $2}' "$f")" \
+    "$(awk 'NR==2{print $2}' "$RESULTS_DIR/unmapped_counts/${s}_unmapped_pairs.tsv" 2>/dev/null)"
+done
+```
+
+**Decisión: bowtie2.** Ver `eleccion_alineador_bowtie2_vs_star.md`.
+
+---
+
+## 10. Ensamblaje — SPAdes
+
+```bash
+ls "$SCRATCH/unmapped_fastq"/*_unmapped_R1.fastq.gz | xargs -n1 basename \
+  | sed 's/_unmapped_R1.fastq.gz//' | sort > "$SCRATCH/asm_samples.txt"
+N=$(wc -l < "$SCRATCH/asm_samples.txt")       # 22
+
+sed -n '20p;8p' "$SCRATCH/asm_samples.txt" > "$SCRATCH/asm_smoke.txt"   # M79_S28, M36_S17
+```
+
+Humo con las dos que acotan el rango: 681 k y 11.2 M pares.
+
+```bash
+bsub -J "spsmoke[1-2]%2" \
+     -o "$LOGS_DIR/spsmoke.%J.%I.log" -e "$LOGS_DIR/spsmoke.%J.%I.err" \
+     -q normal -n 16 -M 68000 \
+     -R "select[mem>68000] rusage[mem=68000] span[hosts=1]" \
+     "$PWD/assembly_spades.sh $SCRATCH/asm_smoke.txt $SCRATCH/unmapped_fastq"
+```
+
+**El `-M` debe ser MAYOR que `SPADES_MEM`** (60 GB por defecto en el worker).
+SPAdes trata `--memory` como su propio tope, pero si LSF le da menos lo mata
+antes de que SPAdes pueda reaccionar.
+
+Array completo, con el `-M` ajustado a lo que diga el humo:
+
+```bash
+bsub -J "spades[1-22]%6" \
+     -o "$LOGS_DIR/spades.%J.%I.log" -e "$LOGS_DIR/spades.%J.%I.err" \
+     -q normal -n 16 -M 68000 \
+     -R "select[mem>68000] rusage[mem=68000] span[hosts=1]" \
+     "$PWD/assembly_spades.sh $SCRATCH/asm_samples.txt $SCRATCH/unmapped_fastq"
+```
+
+---
+
+## 11. Vigilancia y control
+
+```bash
+bjobs -w                    # en curso, con nombres completos
+bjobs -A                    # resumen del array: PEND / RUN / DONE / EXIT
+bjobs -p                    # por qué está pendiente
+bhist -l <jobid>            # histórico, incluye memoria máxima
+bqueues -l normal | grep -i runlimit
+
+bkill <jobid>               # matar un job
+bkill "<jobid>[5]"          # matar solo el elemento 5
+bkill "<jobid>[1-10]"       # matar un rango
+```
+
+**Nunca `bkill 0`.** Mata todos tus jobs, incluidos los que no querías tocar.
+Además LSF manda SIGINT antes que SIGTERM, y el envoltorio Python de Trimmomatic
+lo traduce a `KeyboardInterrupt`: el log parece un fallo del programa cuando en
+realidad fue un `bkill`.
+
+---
+
+## 12. Comprobaciones antes de cada `bsub`
+
+```bash
+bjobs -w                                  # el paso anterior, terminado
+wc -l < "$SCRATCH/<lista>.txt"            # el N esperado
+sed -i 's/\r$//' worker.sh; chmod +x worker.sh
+ls -l worker.sh                           # -rwx
+head -1 worker.sh | cat -A                # #!/bin/bash$   sin ^M
+bash -n worker.sh                         # sintaxis
+grep -c '<cadena_nueva>' worker.sh        # el código nuevo ESTÁ en la farm
+```
+
+Ese último `grep` no es paranoia: se perdieron tres intentos por lanzar con la
+versión antigua todavía en la farm.
+
+**Y `unset` antes de re-sourcear `config.sh`.** Todas sus variables usan
+`${VAR:-default}`, o sea *"usa el valor si ya existe"*. Si sourceaste el fichero
+antes de editarlo, el valor viejo de tu sesión gana y volver a sourcear no
+arregla nada. Los jobs no se ven afectados: cada worker sourcea en un proceso
+limpio.
