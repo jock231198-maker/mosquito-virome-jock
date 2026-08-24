@@ -66,4 +66,6 @@ bsub -J "btmap[1-22]%6" \
      -R "select[mem>8000] rusage[mem=8000] span[hosts=1]" \
      "$PWD/bowtie_map_worker.sh $SCRATCH/samples.txt $SCRATCH/trimmed/$RESULT_FROM"
 
+     
+
 
