@@ -187,8 +187,8 @@ mkdir -p "$(dirname "$final_dir")"
 mv "$stage" "$final_dir"
 
 # --- Estadisticas -----------------------------------------------------------
-longest=$(awk '/^>/{if(l>m)m=l; l=0; next}{l+=length($0)}END{if(l>m)m=l; print m+0}' \
-          "$final_dir/contigs.fasta")
+longest=$(awk '/^>/{if(l)print l; l=0; next}{l+=length($0)}END{if(l)print l}' \
+          "$final_dir/contigs.fasta" | sort -rn | head -1)
 total_bp=$(awk '!/^>/{t+=length($0)}END{print t+0}' "$final_dir/contigs.fasta")
 
 printf 'sample\tmode\tcontigs_total\tcontigs_ge%s\ttotal_bp\tlongest_bp\n' "$MIN_LEN" \
