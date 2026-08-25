@@ -1,0 +1,10 @@
+cd ~/jkvirome/jm79/mosquito-virome-jock/scripts/sanger_scripts_jobs/last_update_05_08_2026
+cp config.sh config.sh.bak3
+grep -q '^SCRIPTS_DIR=' config.sh || \
+  sed -i '/^USER_ROOT=/i SCRIPTS_DIR="${SCRIPTS_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" \&\& pwd)}"' config.sh
+grep -n 'SCRIPTS_DIR' config.sh
+bash -n config.sh && echo "sintaxis OK"
+
+
+alias jkv='cd ~/jkvirome/jm79/mosquito-virome-jock/scripts/sanger_scripts_jobs/last_update_05_08_2026 && unset SCRIPTS_DIR SCRATCH RESULTS_DIR LOGS_DIR DATA_DIR REFS_DIR && source ./config.sh && echo "jkv OK  |  SCRIPTS_DIR=$SCRIPTS_DIR"'
+

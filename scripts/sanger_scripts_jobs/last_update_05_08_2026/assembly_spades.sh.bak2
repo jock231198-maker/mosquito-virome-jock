@@ -87,7 +87,7 @@ R2="$indir/${sample}_unmapped_R2.fastq.gz"
 [[ -f "$R1" && -f "$R2" ]] || { echo "ERROR: faltan R1/R2 para $sample en $indir"; exit 1; }
 
 final_dir="$outbase/$sample"
-statsdir="${ASM_STATS_DIR:-$RESULTS_DIR/assembly_stats}"
+statsdir="$RESULTS_DIR/assembly_stats"
 mkdir -p "$outbase" "$statsdir"
 
 # --- Idempotencia -----------------------------------------------------------
