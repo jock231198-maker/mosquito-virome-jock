@@ -150,19 +150,7 @@ asm=""
 for cand in contigs.fasta transcripts.fasta scaffolds.fasta; do
   if [[ -s "$stage/$cand" ]]; then asm="$stage/$cand"; break; fi
 done
-if [[ -z "$asm" ]]; then
-  # metaviralSPAdes no escribe fasta cuando no encuentra ningun genoma viral:
-  # es un resultado valido, no un fallo. Para rnaviral/rna si es un error.
-  if [[ "$mode" == "metaviral" || "$mode" == "metaplasmid" ]]; then
-    echo "  SPAdes no encontro ningun contig viral (resultado valido en modo $mode)"
-    mkdir -p "$statsdir"
-    printf 'sample\tmode\tcontigs_total\tcontigs_ge%s\ttotal_bp\tlongest_bp\n' "$MIN_LEN" > "$statsdir/${sample}_assembly.tsv"
-    printf '%s\t%s\t0\t0\t0\t0\n' "$sample" "$mode" >> "$statsdir/${sample}_assembly.tsv"
-    rm -rf "$stage"
-    exit 0
-  fi
-  echo "ERROR: SPAdes no dejo ningun fasta de ensamblaje en $stage"; ls -la "$stage"; exit 1
-fi
+[[ -n "$asm" ]] || { echo "ERROR: SPAdes no dejo ningun fasta de ensamblaje en $stage"; ls -la "$stage"; exit 1; }
 echo "  ensamblaje encontrado: $(basename "$asm")"
 [[ "$(basename "$asm")" == "contigs.fasta" ]] || cp "$asm" "$stage/contigs.fasta"
 
