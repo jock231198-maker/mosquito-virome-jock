@@ -101,6 +101,8 @@ Pasos:
   btmapbam   mapeo al huesped (bowtie2, con BAM)
   star       mapeo al huesped (STAR corregido)
   spades     ensamblaje            [modo]           rnavirus | rna | meta | metaviral
+  megahit    ensamblaje            [preset]         "" | meta-sensitive | meta-large
+  trinity    ensamblaje            [sufijo lista]   usa $SCRATCH/trin_<sufijo>.txt
   quast      QC de ensamblaje
   genomad    clasificacion viral
   checkv     calidad de contigs virales
@@ -275,6 +277,52 @@ case "$step" in
      -R \"select[mem>8000] rusage[mem=8000] span[hosts=1]\" \\
      \"SPADES_MEM=6 ASM_STATS_DIR=$stats $SCRIPTS_DIR/assembly_spades.sh \\
       $SCRATCH/asm_samples.txt $SCRATCH/unmapped_fastq $mode $out\""
+    ;;
+
+  megahit)
+    pre="${variant:-}"
+    out="$SCRATCH/megahit${pre:+_$pre}"
+    stats="$RESULTS_DIR/assembly_stats_megahit"
+    chk_worker assembly_megahit.sh
+    chk_dir "$SCRATCH/unmapped_fastq" "*_unmapped_R1.fastq.gz"
+    chk_list "$SCRATCH/asm_samples.txt" 22
+    chk_env "$ENV_MEGAHIT"
+    chk_writable "$out"
+    chk_writable "$stats"
+    chk_queue normal
+    echo
+    echo "  Recuerda: -m se le pasa en BYTES absolutos dentro del worker."
+    echo "  Una fraccion haria que MEGAHIT leyera la RAM del NODO, no la del job."
+    BSUB="bsub -J \"megahit${pre}[1-$N]%10\" \\
+     -o \"$LOGS_DIR/megahit${pre}.%J.%I.log\" -e \"$LOGS_DIR/megahit${pre}.%J.%I.err\" \\
+     -q normal -n 4 -M 20000 \\
+     -R \"select[mem>20000] rusage[mem=20000] span[hosts=1]\" \\
+     \"MEGAHIT_MEM=16 $SCRIPTS_DIR/assembly_megahit.sh \\
+      $SCRATCH/asm_samples.txt $SCRATCH/unmapped_fastq '$pre' $out\""
+    ;;
+
+  trinity)
+    lst="${variant:+$SCRATCH/trin_${variant}.txt}"
+    lst="${lst:-$SCRATCH/asm_samples.txt}"
+    chk_worker assembly_trinity.sh
+    chk_dir "$SCRATCH/unmapped_fastq" "*_unmapped_R1.fastq.gz"
+    chk_list "$lst"
+    chk_env "$ENV_TRINITY"
+    chk_writable "$SCRATCH/trinity"
+    chk_writable "$RESULTS_DIR/assembly_stats_trinity"
+    chk_queue long
+    echo
+    warn "Trinity son HORAS por muestra, no minutos: cola 'long', no 'normal'."
+    warn "Chrysalis crea decenas de miles de ficheros. El worker trabaja en disco"
+    warn "     local y usa --full_cleanup; no lo desactives sin mirar la cuota de inodes."
+    echo "  Cuota actual de inodes:"
+    lfs quota -h -u "$USER" "$SCRATCH" 2>/dev/null | sed 's/^/    /' || echo "    (no disponible)"
+    BSUB="bsub -J \"trinity[1-$N]%4\" \\
+     -o \"$LOGS_DIR/trinity.%J.%I.log\" -e \"$LOGS_DIR/trinity.%J.%I.err\" \\
+     -q long -n 8 -M 40000 \\
+     -R \"select[mem>40000] rusage[mem=40000] span[hosts=1]\" \\
+     \"TRINITY_MEM=32 $SCRIPTS_DIR/assembly_trinity.sh \\
+      $lst $SCRATCH/unmapped_fastq\""
     ;;
 
   quast)
