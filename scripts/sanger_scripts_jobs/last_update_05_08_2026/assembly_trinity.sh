@@ -17,9 +17,14 @@
 #    llega el resultado. No quites esto por comodidad.
 #
 # 2. --full_cleanup. Trinity borra su directorio de trabajo y deja solo el FASTA
-#    final. Es la otra mitad de la defensa contra el punto 1. El precio es que
-#    no se puede reanudar un trabajo interrumpido: hay que repetirlo entero.
-#    Ponlo a 0 solo si estas depurando una muestra concreta.
+#    final. CUIDADO CON LO QUE PROTEGE: como ya trabajamos en disco local, la
+#    cuota de inodes de Lustre esta a salvo por el punto 1, no por este. Lo que
+#    --full_cleanup cuida es el DISCO LOCAL del nodo durante la ejecucion.
+#    Precio: no se puede reanudar un trabajo interrumpido, hay que repetirlo.
+#
+#    Y ojo: el trap de salida borra $work pase lo que pase, asi que si Trinity
+#    falla no queda nada que inspeccionar. Para depurar usa KEEP_WORK=1, que
+#    conserva el directorio local e imprime su ruta (en ese nodo, no en Lustre).
 #
 # 3. EL NOMBRE DEL DIRECTORIO DE SALIDA DEBE CONTENER "trinity". Trinity aborta
 #    si no. Es una comprobacion suya, no un capricho de este script.
@@ -37,6 +42,7 @@
 #   TRINITY_NORM      1 normalizacion in silico (defecto de Trinity), 0 la apaga (1)
 #   TRINITY_SS        "" | RF | FR   protocolo de hebra        ("")
 #   FULL_CLEANUP      1 borra el directorio de trabajo          (1)
+#   KEEP_WORK         1 NO borra $work al salir (depuracion)    (0)
 #   MIN_LEN           longitud del filtro posterior            (1000)
 #
 # OJO: TRINITY_MEM por debajo del -M del bsub.
@@ -68,6 +74,7 @@ TRINITY_MINLEN="${TRINITY_MINLEN:-200}"
 TRINITY_NORM="${TRINITY_NORM:-1}"
 TRINITY_SS="${TRINITY_SS:-}"
 FULL_CLEANUP="${FULL_CLEANUP:-1}"
+KEEP_WORK="${KEEP_WORK:-0}"
 MIN_LEN="${MIN_LEN:-1000}"
 
 idx="${LSB_JOBINDEX:?Este script debe enviarse como job array}"
@@ -92,7 +99,14 @@ fi
 # --- Trabajo en disco local del nodo ----------------------------------------
 work="${TMPDIR:-/tmp}/trin_${sample}_${LSB_JOBID:-$$}"
 rm -rf "$work"; mkdir -p "$work"
-cleanup() { rm -rf "$work"; }
+cleanup() {
+  if [[ "$KEEP_WORK" == "1" ]]; then
+    echo "KEEP_WORK=1: se conserva $work en $(hostname). NO esta en Lustre;"
+    echo "  desaparecera cuando el nodo limpie /tmp. Copia lo que necesites ya."
+  else
+    rm -rf "$work"
+  fi
+}
 trap cleanup EXIT
 
 # Espacio libre en el disco local. Trinity necesita holgura y es mejor enterarse
