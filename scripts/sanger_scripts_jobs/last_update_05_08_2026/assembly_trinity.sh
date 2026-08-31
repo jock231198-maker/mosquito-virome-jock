@@ -43,6 +43,7 @@
 #   TRINITY_SS        "" | RF | FR   protocolo de hebra        ("")
 #   FULL_CLEANUP      1 borra el directorio de trabajo          (1)
 #   KEEP_WORK         1 NO borra $work al salir (depuracion)    (0)
+#   TRINITY_NO_SALMON 1 salta el filtrado por expresion final   (0)
 #   MIN_LEN           longitud del filtro posterior            (1000)
 #
 # OJO: TRINITY_MEM por debajo del -M del bsub.
@@ -122,11 +123,32 @@ trin_out="$work/trinity_${sample}"
 activate_env "$ENV_TRINITY"
 command -v Trinity >/dev/null || { echo "ERROR: Trinity no esta en el PATH (ojo: T mayuscula)"; exit 1; }
 
+# --- Guardia de dependencias ------------------------------------------------
+# Trinity encadena herramientas externas y solo falla cuando le toca a cada una.
+# El caso real: salmon se usa en el ULTIMO paso, asi que una incompatibilidad
+# ahi tumba el trabajo despues de haber ensamblado. Dos horas para nada.
+# Se comprueba antes, que cuesta un segundo.
+for p in jellyfish salmon bowtie2 java samtools; do
+  command -v "$p" >/dev/null || { echo "ERROR: falta '$p' en $ENV_TRINITY"; exit 1; }
+done
+
+# salmon 2.x es la reescritura en Rust y quito banderas que Trinity 2.15 usa
+# (--minAssignedFrags, --validateMappings). Con salmon>=2 el ensamblaje termina
+# y muere en salmon_expr_filtering.  Arreglo:  mamba install 'salmon<2'
+smaj=$(salmon --version 2>&1 | grep -oE '[0-9]+' | head -1)
+if [[ -n "${smaj:-}" ]] && (( smaj >= 2 )) && [[ "${TRINITY_NO_SALMON:-0}" != "1" ]]; then
+  echo "ERROR: salmon $(salmon --version 2>&1 | head -1) es incompatible con Trinity 2.15."
+  echo "  Arreglo:  mamba install -n $ENV_TRINITY -c bioconda 'salmon<2' -y"
+  echo "  O salta el paso:  TRINITY_NO_SALMON=1  (pierdes el filtrado por expresion)"
+  exit 1
+fi
+
 # --- Opciones ---------------------------------------------------------------
 opts=()
 [[ "$TRINITY_NORM"  == "0" ]] && opts+=( --no_normalize_reads )
 [[ "$FULL_CLEANUP"  == "1" ]] && opts+=( --full_cleanup )
 [[ -n "$TRINITY_SS" ]]        && opts+=( --SS_lib_type "$TRINITY_SS" )
+[[ "${TRINITY_NO_SALMON:-0}" == "1" ]] && opts+=( --no_salmon )
 
 echo "==========================================================="
 echo "Trinity $sample   (host: $(hostname))"
