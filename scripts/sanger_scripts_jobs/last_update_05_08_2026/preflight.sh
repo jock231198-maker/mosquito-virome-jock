@@ -97,13 +97,16 @@ Pasos:
   fastqc     FastQC                  [carpeta]       cat_fastq | nopolyg | trimmed | unpaired
   polyg      recorte de polyG (fastp)
   trim       Trimmomatic
+  smrdb      base + indice de SortMeRNA  [variante]  fast | default | sensitive
+  rrna       depleción de rRNA (SortMeRNA) [variante]
   btmap      mapeo al huesped (bowtie2, sin BAM)
   btmapbam   mapeo al huesped (bowtie2, con BAM)
   star       mapeo al huesped (STAR corregido)
   spades     ensamblaje            [modo]           rnavirus | rna | meta | metaviral
   megahit    ensamblaje            [preset]         "" | meta-sensitive | meta-large
   trinity    ensamblaje            [sufijo lista]   usa $SCRATCH/trin_<sufijo>.txt
-  quast      QC de ensamblaje
+  quastcmp   QUAST comparando ensambladores (1 corrida por muestra)
+  quast      QC de ensamblaje (1 corrida por ensamblaje)
   genomad    clasificacion viral
   checkv     calidad de contigs virales
   diamond    blastx
@@ -115,6 +118,11 @@ Recursos MEDIDOS en este proyecto (no estimados):
   bowtie2     1611 MB / 6959 s   -n 16 -M 6000
   STAR             — / 1400 s    -n 8  -M 20000  (indice 13.1 GB en RAM)
   SPAdes      2077 MB / 1703 s   -n 4  -M 8000
+  MEGAHIT      558 MB /  277 s   -n 2  -M 2000   (mediana 300 MB / ~180 s)
+  Trinity     1474 MB / >7470 s  -n 8  -M 12000  (no llego a terminar)
+
+  MEGAHIT es 20-50x mas barato que SPAdes para un numero de contigs comparable.
+  Trinity es otro orden de magnitud por encima: 2 h para 1.26M pares.
 EOF
 }
 
@@ -279,6 +287,45 @@ case "$step" in
       $SCRATCH/asm_samples.txt $SCRATCH/unmapped_fastq $mode $out\""
     ;;
 
+  smrdb)
+    v="${variant:-default}"
+    chk_worker build_sortmerna_db.sh
+    chk_env "$ENV_SORTMERNA"
+    chk_writable "${SMR_DIR:-$REFS_DIR/sortmerna}"
+    chk_queue normal
+    echo
+    echo "  No es un array. Necesita RED para descargar database.tar.gz (~2 GB)."
+    BSUB="bsub -J smrdb \\
+     -o \"$LOGS_DIR/smrdb.%J.log\" -e \"$LOGS_DIR/smrdb.%J.err\" \\
+     -q normal -n 4 -M 8000 \\
+     -R \"select[mem>8000] rusage[mem=8000] span[hosts=1]\" \\
+     \"$SCRIPTS_DIR/build_sortmerna_db.sh $v\""
+    ;;
+
+  rrna)
+    v="${variant:-default}"
+    db="${SMR_DB:-$REFS_DIR/sortmerna/smr_v4.3_${v}_db.fasta}"
+    ix="${SMR_IDX:-$REFS_DIR/sortmerna/idx_${v}}"
+    chk_worker rrna_worker.sh
+    chk_dir "$SCRATCH/unmapped_fastq" "*_unmapped_R1.fastq.gz"
+    chk_list "$SCRATCH/asm_samples.txt" 22
+    chk_env "$ENV_SORTMERNA"
+    chk_file "$db" "base de rRNA"
+    chk_dir "$ix"
+    chk_writable "$SCRATCH/norrna"
+    chk_writable "$RESULTS_DIR/rrna_stats"
+    chk_queue long
+    echo
+    warn "El indice se usa en SOLO LECTURA. Si no existe, corre antes:  ./preflight.sh smrdb"
+    warn "SortMeRNA es lento: cola 'long'. Mide con un smoke antes de las 22."
+    BSUB="bsub -J \"rrna[1-$N]%8\" \\
+     -o \"$LOGS_DIR/rrna.%J.%I.log\" -e \"$LOGS_DIR/rrna.%J.%I.err\" \\
+     -q long -n 8 -M 16000 \\
+     -R \"select[mem>16000] rusage[mem=16000] span[hosts=1]\" \\
+     \"SMR_DB=$db SMR_IDX=$ix $SCRIPTS_DIR/rrna_worker.sh \\
+      $SCRATCH/asm_samples.txt $SCRATCH/unmapped_fastq\""
+    ;;
+
   megahit)
     pre="${variant:-}"
     out="$SCRATCH/megahit${pre:+_$pre}"
@@ -293,11 +340,15 @@ case "$step" in
     echo
     echo "  Recuerda: -m se le pasa en BYTES absolutos dentro del worker."
     echo "  Una fraccion haria que MEGAHIT leyera la RAM del NODO, no la del job."
-    BSUB="bsub -J \"megahit${pre}[1-$N]%10\" \\
+    echo
+    echo "  Recursos MEDIDOS en las 22 (31 ago): max 558 MB, 88-277 s por muestra."
+    echo "  Con -n 2 se evita el 'Affinity resource requirement cannot be met'"
+    echo "  que aparecio con -n 4, y MEGAHIT apenas pierde velocidad."
+    BSUB="bsub -J \"megahit${pre}[1-$N]\" \\
      -o \"$LOGS_DIR/megahit${pre}.%J.%I.log\" -e \"$LOGS_DIR/megahit${pre}.%J.%I.err\" \\
-     -q normal -n 4 -M 20000 \\
-     -R \"select[mem>20000] rusage[mem=20000] span[hosts=1]\" \\
-     \"MEGAHIT_MEM=16 $SCRIPTS_DIR/assembly_megahit.sh \\
+     -q normal -n 2 -M 2000 \\
+     -R \"select[mem>2000] rusage[mem=2000] span[hosts=1]\" \\
+     \"MEGAHIT_MEM=1 $SCRIPTS_DIR/assembly_megahit.sh \\
       $SCRATCH/asm_samples.txt $SCRATCH/unmapped_fastq '$pre' $out\""
     ;;
 
@@ -323,6 +374,28 @@ case "$step" in
      -R \"select[mem>40000] rusage[mem=40000] span[hosts=1]\" \\
      \"TRINITY_MEM=32 $SCRIPTS_DIR/assembly_trinity.sh \\
       $lst $SCRATCH/unmapped_fastq\""
+    ;;
+
+  quastcmp)
+    chk_worker quast_compare_worker.sh
+    chk_list "$SCRATCH/asm_samples.txt" 22
+    chk_env "$ENV_QUAST"
+    chk_writable "$RESULTS_DIR/quast_compare"
+    chk_queue normal
+    echo
+    echo "  Ensamblajes que encontrara para comparar:"
+    for d in "$SCRATCH"/spades "$SCRATCH"/spades_* "$SCRATCH"/megahit "$SCRATCH"/megahit_* \
+             "$SCRATCH"/trinity "$SCRATCH"/trinity_* "$SCRATCH"/union; do
+      [[ -d "$d" ]] || continue
+      nn=$(find "$d" -mindepth 2 -maxdepth 2 -name contigs.fasta -size +0 2>/dev/null | wc -l)
+      (( nn > 0 )) && printf '    %-28s %3d muestras\n' "$(basename "$d")" "$nn"
+    done
+    warn "Sin -r (genoma de referencia): QUAST da contiguidad, NO errores de ensamblaje."
+    BSUB="bsub -J \"quastcmp[1-$N]\" \\
+     -o \"$LOGS_DIR/quastcmp.%J.%I.log\" -e \"$LOGS_DIR/quastcmp.%J.%I.err\" \\
+     -q normal -n 2 -M 8000 \\
+     -R \"select[mem>8000] rusage[mem=8000] span[hosts=1]\" \\
+     \"$SCRIPTS_DIR/quast_compare_worker.sh $SCRATCH/asm_samples.txt\""
     ;;
 
   quast)
