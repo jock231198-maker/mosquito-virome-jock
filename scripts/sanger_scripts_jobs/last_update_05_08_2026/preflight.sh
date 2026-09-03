@@ -119,7 +119,9 @@ Recursos MEDIDOS en este proyecto (no estimados):
   STAR             — / 1400 s    -n 8  -M 20000  (indice 13.1 GB en RAM)
   SPAdes      2077 MB / 1703 s   -n 4  -M 8000
   MEGAHIT      558 MB /  277 s   -n 2  -M 2000   (mediana 300 MB / ~180 s)
-  Trinity      754 MB / 6596 s   -n 8  -M 4000   (M11_S3, 1.26M pares)
+  Trinity      754 MB / 6596 s   -n 8  -M 12000  (medido en M11_S3, 1.26M pares;
+                                                  M36_S17 tiene 9x mas datos, de
+                                                  ahi el margen hasta 12000)
 
   MEGAHIT es 20-50x mas barato que SPAdes para un numero de contigs comparable.
   Trinity cuesta POCA MEMORIA (754 MB medidos) pero mucho TIEMPO: 1h50m para
@@ -370,11 +372,19 @@ case "$step" in
     warn "     local y usa --full_cleanup; no lo desactives sin mirar la cuota de inodes."
     echo "  Cuota actual de inodes:"
     lfs quota -h -u "$USER" "$SCRATCH" 2>/dev/null | sed 's/^/    /' || echo "    (no disponible)"
+    echo
+    echo "  MEMORIA: 754 MB medidos en M11_S3 (1.26M pares), pero M36_S17 tiene"
+    echo "  11.2M pares. Escalando la proporcion medida salen ~7 GB. Se piden 12000"
+    echo "  a proposito: que LSF mate una muestra en la hora 5 cuesta mucho mas que"
+    echo "  esperar un poco mas en cola."
+    echo "  NUCLEOS: 8 y no mas. Medido: 1.1 nucleos de media (8205s CPU / 7470s"
+    echo "  reloj). Trinity es poco paralelo salvo en Butterfly; subirlos solo"
+    echo "  empeora la afinidad."
     BSUB="bsub -J \"trinity[1-$N]%6\" \\
      -o \"$LOGS_DIR/trinity.%J.%I.log\" -e \"$LOGS_DIR/trinity.%J.%I.err\" \\
-     -q long -n 8 -M 4000 \\
-     -R \"select[mem>4000] rusage[mem=4000] span[hosts=1]\" \\
-     \"TRINITY_MEM=3 $SCRIPTS_DIR/assembly_trinity.sh \\
+     -q long -n 8 -M 12000 \\
+     -R \"select[mem>12000] rusage[mem=12000] span[hosts=1]\" \\
+     \"TRINITY_MEM=10 $SCRIPTS_DIR/assembly_trinity.sh \\
       $lst $SCRATCH/unmapped_fastq\""
     ;;
 
