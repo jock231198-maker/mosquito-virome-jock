@@ -119,10 +119,11 @@ Recursos MEDIDOS en este proyecto (no estimados):
   STAR             — / 1400 s    -n 8  -M 20000  (indice 13.1 GB en RAM)
   SPAdes      2077 MB / 1703 s   -n 4  -M 8000
   MEGAHIT      558 MB /  277 s   -n 2  -M 2000   (mediana 300 MB / ~180 s)
-  Trinity     1474 MB / >7470 s  -n 8  -M 12000  (no llego a terminar)
+  Trinity      754 MB / 6596 s   -n 8  -M 4000   (M11_S3, 1.26M pares)
 
   MEGAHIT es 20-50x mas barato que SPAdes para un numero de contigs comparable.
-  Trinity es otro orden de magnitud por encima: 2 h para 1.26M pares.
+  Trinity cuesta POCA MEMORIA (754 MB medidos) pero mucho TIEMPO: 1h50m para
+  1.26M pares. El limite es la cola, no la RAM: pedir 12 GB fue 16x de mas.
 EOF
 }
 
@@ -363,16 +364,17 @@ case "$step" in
     chk_writable "$RESULTS_DIR/assembly_stats_trinity"
     chk_queue long
     echo
+    warn "MEDIDO: 754 MB y 1h50m para 1.26M pares. El cuello es el TIEMPO, no la RAM."
     warn "Trinity son HORAS por muestra, no minutos: cola 'long', no 'normal'."
     warn "Chrysalis crea decenas de miles de ficheros. El worker trabaja en disco"
     warn "     local y usa --full_cleanup; no lo desactives sin mirar la cuota de inodes."
     echo "  Cuota actual de inodes:"
     lfs quota -h -u "$USER" "$SCRATCH" 2>/dev/null | sed 's/^/    /' || echo "    (no disponible)"
-    BSUB="bsub -J \"trinity[1-$N]%4\" \\
+    BSUB="bsub -J \"trinity[1-$N]%6\" \\
      -o \"$LOGS_DIR/trinity.%J.%I.log\" -e \"$LOGS_DIR/trinity.%J.%I.err\" \\
-     -q long -n 8 -M 40000 \\
-     -R \"select[mem>40000] rusage[mem=40000] span[hosts=1]\" \\
-     \"TRINITY_MEM=32 $SCRIPTS_DIR/assembly_trinity.sh \\
+     -q long -n 8 -M 4000 \\
+     -R \"select[mem>4000] rusage[mem=4000] span[hosts=1]\" \\
+     \"TRINITY_MEM=3 $SCRIPTS_DIR/assembly_trinity.sh \\
       $lst $SCRATCH/unmapped_fastq\""
     ;;
 
