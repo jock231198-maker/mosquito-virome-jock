@@ -40,9 +40,10 @@ GENOME_FA="${GENOME_FA:-$REFS_DIR/genome/GCF_002204515.2_AaegL5.0_genomic.fa}"
 ADAPTERS="${ADAPTERS:-$REFS_DIR/adapters/TruSeq3-PE-2.fa}"
 BT2_INDEX="${BT2_INDEX:-$REFS_DIR/bt2_index/aedes_aegypti_index}"
 STAR_INDEX="${STAR_INDEX:-$REFS_DIR/star_index}"
-CHECKV_DB="${CHECKV_DB:-$REFS_DIR/checkv-db-v1.5}"
-GENOMAD_DB="${GENOMAD_DB:-$REFS_DIR/genomad_db}"
-DIAMOND_DB="${DIAMOND_DB:-$REFS_DIR/diamond_db/viral_refseq_proteins.dmnd}"
+GENOMAD_DB="$REFS_DIR/genomad/genomad_db"
+CHECKV_DB="$REFS_DIR/checkv/checkv-db-v1.5"
+DIAMOND_DB="$REFS_DIR/diamond/nr.dmnd"
+DIAMOND_DB_RVDB="$REFS_DIR/diamond/rvdb.dmnd"
 
 # --- Entornos conda (nombres tal cual aparecen en `conda env list`) ----------
 # Cámbialos aquí conforme vayas creando cada entorno en el farm.
@@ -54,14 +55,14 @@ ENV_SAMTOOLS="${ENV_SAMTOOLS:-$ENV_BOWTIE2}"
 ENV_STAR="${ENV_STAR:-star_2.7.11b}"
 ENV_SPADES="${ENV_SPADES:-spades_4.3.0}"
 ENV_QUAST="${ENV_QUAST:-quast_5.3.0}"
-ENV_CDHIT=cdhit_4.8.1
+ENV_CDHIT="${ENV_CDHIT:-cdhit_4.8.1}"
 ENV_COBRA="${ENV_COBRA:-cobra}"
-ENV_CHECKV="${ENV_CHECKV:-checkv}"
-ENV_GENOMAD="${ENV_GENOMAD:-genomad}"
-ENV_DIAMOND="${ENV_DIAMOND:-diamond}"
+ENV_CHECKV="${ENV_CHECKV:-checkv_1.1.1}"
+ENV_GENOMAD="${ENV_GENOMAD:-genomad_1.12.0}"
+ENV_DIAMOND="${ENV_DIAMOND:-diamond_2.2.6}"
 ENV_FASTP="${ENV_FASTP:-fastp_1.3.6}"
-ENV_MEGAHIT=megahit_1.2.9
-ENV_TRINITY=trinity_2.15.2
+ENV_MEGAHIT="${ENV_MEGAHIT:-megahit_1.2.9}"
+ENV_TRINITY="${ENV_TRINITY:-trinity_2.15.2}"
 # --- Helper: cargar conda y activar un entorno ------------------------------
 # El módulo `conda` del farm YA define la función conda (setenv CONDA_EXE +
 # set-function conda), así que NO hace falta `eval "$(conda shell.bash hook)"`.
