@@ -11,7 +11,6 @@
 #   ./build_downstream_dbs.sh genomad    # ~3 GB
 #   ./build_downstream_dbs.sh checkv     # ~7 GB
 #   ./build_downstream_dbs.sh rvdb       # ~5 GB   base viral curada
-
 #   ./build_downstream_dbs.sh nr         # ~250 GB  ¡lee el aviso de 'check'!
 #
 # CADA PASO ES UN ENVIO APARTE. Nada de 'all': si nr falla a las seis horas no
@@ -61,10 +60,31 @@ check)
   echo "  pide ampliacion de cuota o usa una copia compartida."
 
   hdr "2. Copias compartidas en la farm (antes de descargar nada)"
-  for pat in nr.dmnd genomad_db checkv-db "*.dmnd"; do
-    echo "  buscando '$pat' ..."
-    find /lustre /data /nfs -maxdepth 6 -name "$pat" 2>/dev/null | head -5 | sed 's/^/    /'
+  # OJO: NO recorrer /lustre entero. Es un sistema de ficheros de petabytes y un
+  # find a profundidad 6 tarda horas. Solo se miran rutas plausibles, poco
+  # profundas y con timeout.
+  cands=(
+    /lustre/scratch*/tol/teams/*/refs
+    /lustre/scratch*/blastdb
+    /data/blastdb /data/blastdbs
+    /nfs/*/blastdb
+    /software/db /software/blastdb
+    "$REFS_DIR"
+  )
+  found=0
+  for d in "${cands[@]}"; do
+    [[ -d "$d" ]] || continue
+    while IFS= read -r hit; do
+      echo "    $hit"; found=1
+    done < <(timeout 30 find "$d" -maxdepth 3 \
+               \( -name "nr.dmnd" -o -name "genomad_db" -o -name "checkv-db-*" \) 2>/dev/null | head -5)
   done
+  (( found )) || echo "    (nada en las rutas habituales)"
+  echo
+  echo "  Esta busqueda es deliberadamente corta. Si quieres saber de verdad si"
+  echo "  el equipo ya tiene nr montado, pregunta en el helpdesk de Sanger o mira:"
+  echo "    module avail 2>&1 | grep -i -E 'blast|diamond'"
+  echo "    ls -d /lustre/scratch*/tol/teams/lawniczak/*/refs* 2>/dev/null"
   echo
   echo "  Si aparece un nr.dmnd compartido, comprueba la version de formato:"
   echo "    diamond dbinfo -d <ruta>.dmnd"
