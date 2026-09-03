@@ -27,7 +27,6 @@ outbase="${2:-$RESULTS_DIR/genomad}"
 db="${3:-$GENOMAD_DB}"
 
 SPLITS="${SPLITS:-8}"
-THREADS="${LSB_DJOB_NUMPROC:-8}"
 activate_env "$ENV_GENOMAD"
 
 idx="${LSB_JOBINDEX:?Enviar como job array}"
@@ -38,5 +37,5 @@ outdir="$outbase/$sample"
 mkdir -p "$outdir"
 
 echo "geNomad $sample (host: $(hostname))"
-genomad end-to-end "$fasta" "$outdir" "$db" --cleanup --splits "$SPLITS" --threads "$THREADS"
+genomad end-to-end "$fasta" "$outdir" "$db" --cleanup --splits "$SPLITS"
 echo "Done: $outdir"
