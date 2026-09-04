@@ -26,7 +26,7 @@ fasta_list="${1:?Uso: genomad_worker.sh <fasta_list.txt> [output_base] [genomad_
 outbase="${2:-$RESULTS_DIR/genomad}"
 db="${3:-$GENOMAD_DB}"
 
-SPLITS="${SPLITS:-8}"
+SPLITS="${SPLITS:-1}"
 THREADS="${LSB_DJOB_NUMPROC:-8}"
 activate_env "$ENV_GENOMAD"
 
