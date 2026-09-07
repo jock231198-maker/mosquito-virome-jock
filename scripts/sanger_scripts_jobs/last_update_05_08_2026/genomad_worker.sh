@@ -38,5 +38,5 @@ outdir="$outbase/$sample"
 mkdir -p "$outdir"
 
 echo "geNomad $sample (host: $(hostname))"
-genomad end-to-end "$fasta" "$outdir" "$db" --cleanup --splits "$SPLITS" --threads "$THREADS"
+genomad end-to-end "$fasta" "$outdir" "$db" --cleanup --splits "$SPLITS" --threads "$THREADS" ${GENOMAD_EXTRA:-}
 echo "Done: $outdir"
