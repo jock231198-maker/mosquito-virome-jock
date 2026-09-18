@@ -44,6 +44,7 @@ GENOMAD_DB="$REFS_DIR/genomad/genomad_db"
 CHECKV_DB="$REFS_DIR/checkv/checkv-db-v1.5"
 DIAMOND_DB="$REFS_DIR/diamond/nr.dmnd"
 DIAMOND_DB_RVDB="$REFS_DIR/diamond/rvdb.dmnd"
+KRAKEN_DB="${KRAKEN_DB:-$REFS_DIR/kraken2/pluspf}"
 
 # --- Entornos conda (nombres tal cual aparecen en `conda env list`) ----------
 # Cámbialos aquí conforme vayas creando cada entorno en el farm.
@@ -65,6 +66,7 @@ ENV_DIAMOND="${ENV_DIAMOND:-diamond_2.2.6}"
 ENV_FASTP="${ENV_FASTP:-fastp_1.3.6}"
 ENV_MEGAHIT="${ENV_MEGAHIT:-megahit_1.2.9}"
 ENV_TRINITY="${ENV_TRINITY:-trinity_2.15.2}"
+ENV_KRAKEN="${ENV_KRAKEN:-kraken2_2.17.1}"
 # --- Helper: cargar conda y activar un entorno ------------------------------
 # El módulo `conda` del farm YA define la función conda (setenv CONDA_EXE +
 # set-function conda), así que NO hace falta `eval "$(conda shell.bash hook)"`.
