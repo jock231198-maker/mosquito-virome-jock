@@ -91,6 +91,12 @@ shopt -u nullglob
 (( ${#files[@]} )) || { echo "ERROR: 0 ficheros '$LOTE_GLOB' en $LOTE_DATA"; exit 1; }
 
 : > "$SCRATCH/samples.txt"
+# La lista de ficheros la escribe el staging, no un `find` posterior.
+# MOTIVO: lo que hay en $DEST son SYMLINKS, y `find -type f` NO los encuentra
+# (son -type l). Un `find -type f` sobre este directorio devuelve 0 y parece
+# que el staging fallo cuando esta perfecto. Lo mismo vale para cualquier otro
+# chequeo que uses aqui: necesita `find -L` o `-type l`.
+: > "$SCRATCH/filelist.txt"
 echo
 
 for r1 in "${files[@]}"; do
@@ -116,6 +122,7 @@ for r1 in "${files[@]}"; do
   done
 
   echo "$sample" >> "$SCRATCH/samples.txt"
+  printf '%s\n%s\n' "$DEST/${sample}${SUF1}" "$DEST/${sample}${SUF2}" >> "$SCRATCH/filelist.txt"
   if [[ "$sample" == "$orig" ]]; then
     printf '  %-14s %8s  %s\n' "$sample" \
       "$(du -h --apparent-size "$r1" | cut -f1)" "$(instrumento "$(first_header "$r1")")"
@@ -146,7 +153,9 @@ while read -r s; do
 done < "$SCRATCH/samples.txt"
 
 echo
+sort -o "$SCRATCH/filelist.txt" "$SCRATCH/filelist.txt"
 echo "  samples.txt : $(wc -l < "$SCRATCH/samples.txt") muestras -> $SCRATCH/samples.txt"
+echo "  filelist.txt: $(wc -l < "$SCRATCH/filelist.txt") ficheros -> $SCRATCH/filelist.txt  (para FastQC)"
 echo "  trazabilidad: $MAP"
 if (( fallos )); then
   echo
