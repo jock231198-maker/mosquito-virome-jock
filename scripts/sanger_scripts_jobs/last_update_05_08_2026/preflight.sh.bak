@@ -171,7 +171,7 @@ case "$step" in
     chk_queue normal
     echo
     echo "  Si la lista no existe o esta desfasada:"
-    echo "    find -L $indir -type f -name \"$pat\" | sort > $list"
+    echo "    find $indir -type f -name \"$pat\" | sort > $list"
     BSUB="bsub -J \"fq${src}[1-$N]%20\" \\
      -o \"$LOGS_DIR/fq${src}.%J.%I.log\" -e \"$LOGS_DIR/fq${src}.%J.%I.err\" \\
      -q normal -n 1 -M 1000 \\

@@ -120,7 +120,7 @@ echo
 
 # --- 0. Inventario y layout -------------------------------------------------
 echo "== 0. Inventario"
-mapfile -t FILES < <(find -L "$INDIR" -maxdepth 1 -type f -name "*.fastq.gz" | sort)
+mapfile -t FILES < <(find "$INDIR" -maxdepth 1 -type f -name "*.fastq.gz" | sort)
 if [[ ${#FILES[@]} -eq 0 ]]; then
   echo "  [ERROR] no hay .fastq.gz en $INDIR"; exit 1
 fi
