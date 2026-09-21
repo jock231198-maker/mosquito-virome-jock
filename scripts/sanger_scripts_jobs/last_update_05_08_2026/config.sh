@@ -86,3 +86,5 @@ make_dirs() {
     mkdir -p "$SCRATCH"/{cat_fastq,nopolyg,trimmed/"$RESULT_FROM",mapped/"$RESULT_FROM",unmapped_fastq,spades,aligned,logs}
     mkdir -p "$RESULTS_DIR"/{fastqc_raw,multiqc,polyg_reports,mapping_stats,unmapped_counts,quast,genomad,checkv,diamond,qc_control}
 }
+ENV_KRAKEN="${ENV_KRAKEN:-kraken2_2.17.1}"
+KRAKEN_DB="${KRAKEN_DB:-$REFS_DIR/kraken2/pluspf}"
