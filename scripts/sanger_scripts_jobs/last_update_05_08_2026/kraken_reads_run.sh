@@ -23,6 +23,9 @@ DB="${KRAKEN_DB:-$REFS_DIR/kraken2/pluspf}"
 READLEN="${READLEN:-150}"        # para Bracken; ajustar si las lecturas no son 150 bp
 LEVEL="${LEVEL:-S}"              # nivel de Bracken: S especie, G genero, F familia
 MINHITS="${MINHITS:-10}"         # lecturas minimas para que Bracken estime una especie
+CONFIDENCE="${CONFIDENCE:-0.1}"  # fraccion de k-meros que deben apoyar el taxon (0 = el mas permisivo)
+R1_SUFFIX="${R1_SUFFIX:-_R1_001_paired.fastq.gz}"   # para no-huesped: _unmapped_R1.fastq.gz
+R2_SUFFIX="${R2_SUFFIX:-_R2_001_paired.fastq.gz}"   # para no-huesped: _unmapped_R2.fastq.gz
 
 mkdir -p "$outdir"
 activate_env "${ENV_KRAKEN:-kraken2}"
@@ -31,7 +34,8 @@ THREADS="${LSB_DJOB_NUMPROC:-16}"
 
 [[ -s "$DB/hash.k2d" ]] || { echo "ERROR: no encuentro la base en $DB"; exit 1; }
 echo "== base: $DB  ($(du -h "$DB/hash.k2d" | cut -f1))"
-echo "== hilos: $THREADS   lecturas de $READLEN bp"
+echo "== hilos: $THREADS   lecturas de $READLEN bp   confidence $CONFIDENCE"
+echo "== patron: <sample>$R1_SUFFIX / <sample>$R2_SUFFIX"
 echo
 
 brk="$DB/database${READLEN}mers.kmer_distrib"
@@ -41,8 +45,8 @@ n=0
 while read -r sample; do
   [[ -n "$sample" ]] || continue
   n=$((n+1))
-  R1="$indir/${sample}_R1_001_paired.fastq.gz"
-  R2="$indir/${sample}_R2_001_paired.fastq.gz"
+  R1="$indir/${sample}${R1_SUFFIX}"
+  R2="$indir/${sample}${R2_SUFFIX}"
   rep="$outdir/${sample}.report"
 
   if [[ -s "$rep" ]]; then
@@ -56,6 +60,7 @@ while read -r sample; do
   kraken2 \
     --db "$DB" \
     --threads "$THREADS" \
+    --confidence "$CONFIDENCE" \
     --paired "$R1" "$R2" \
     --gzip-compressed \
     --report "$rep.partial" \
@@ -83,15 +88,18 @@ done < "$list"
 
 # ---- resumen ----------------------------------------------------------------
 echo
-echo "===== RESUMEN: % de lecturas clasificadas por muestra ====="
+echo "===== RESUMEN por muestra ====="
+echo "  (con --report-minimizer-data: rango en col 6, nombre en col 8)"
 for rep in "$outdir"/*.report; do
+  [[ "$rep" == *bracken* ]] && continue
   [[ -s "$rep" ]] || continue
   s=$(basename "$rep" .report)
-  # linea 'unclassified' = taxon 0; el resto es lo clasificado
-  awk -v S="$s" -F'\t' '
-    $NF ~ /^[ ]*unclassified/ { u=$1 }
-    $(NF-2)=="R" || $(NF-2)=="root" { r=$1 }
-    END { printf "  %-10s sin clasificar %6.2f%%\n", S, u }' "$rep"
+  awk -F'\t' -v S="$s" '
+    $6=="U"   { u=$1 }
+    $6=="R"   { r=$3 }
+    $6=="S"   { sp+=$3 }
+    $6!="U"   { tot+=$3 }
+    END { printf "  %-10s sin_clasificar=%6.2f%%  en_raiz=%5.1f%%  a_especie=%5.1f%%\n", S, u, (tot?100*r/tot:0), (tot?100*sp/tot:0) }' "$rep"
 done
 
 echo
