@@ -62,6 +62,7 @@ MAX_LEN_MAP="${MAX_LEN_MAP:-500000}"     # mapeo: fuera virus gigantes (CD-HIT M
 CDHIT_C="${CDHIT_C:-0.95}"               # mismos umbrales que los vOTUs (95/85)
 CDHIT_AS="${CDHIT_AS:-0.85}"
 PROT_A2T="${PROT_A2T:-}"                 # opcional: prot.accession2taxid.FULL.gz para rellenar huecos
+KEEP_MATURE="${KEEP_MATURE:-0}"          # 1 = conservar peptidos maduros ([polyprotein_range=...])
 
 NCBI_FTP="https://ftp.ncbi.nlm.nih.gov"
 step="${1:-}"
@@ -218,7 +219,9 @@ prepare)
   echo "== nucleotidos =="
   # rmdup -n: misma accesion en los dos sets.  rmdup -s: misma secuencia con otra
   # accesion (las NC_ son copias de registros GenBank). Se queda la primera = RefSeq.
+  # ID sin sufijo de rango (acc:1-123 -> acc), igual que en proteinas
   cat "$RAW/refseq/genomic.fna" "$RAW/host/genomic.fna" \
+    | seqkit replace -p '^([^\s:]+):\S*' -r '${1}' \
     | seqkit seq -m "$MIN_LEN_NT" -u -g \
     | seqkit rmdup -n 2>/dev/null \
     | seqkit rmdup -s -D dup_nt.tsv -o viral_nt.fa.tmp 2> rmdup_nt.log \
@@ -234,7 +237,18 @@ prepare)
     [[ -s "$RAW/$s/annotation_report.jsonl" ]] && ANN+=("$RAW/$s/annotation_report.jsonl")
   done
   (( ${#FAA[@]} )) || die "no hay protein.faa: ¿INCLUDE sin 'protein'?"
+  # Formato real (probe 25-sep): el ID de la poliproteina trae rango
+  # (">NP_059433.1:1-3392 ...") y ese sufijo impide casar la accesion con el
+  # annotation_report y con --taxonmap: se quita. Los peptidos maduros
+  # ([polyprotein_range=...]) son trozos de la poliproteina: por defecto fuera,
+  # para que un mismo hit no ocupe varias plazas de -k.
+  MATURE=(cat); [[ "$KEEP_MATURE" == 1 ]] || MATURE=(seqkit grep -v -n -r -p 'polyprotein_range=')
+  n_raw=$(cat "${FAA[@]}" | grep -c '^>')
+  n_mat=$(cat "${FAA[@]}" | grep '^>' | grep -c 'polyprotein_range=')
+  echo "  proteinas crudas: $n_raw | peptidos maduros: $n_mat (KEEP_MATURE=$KEEP_MATURE)"
   cat "${FAA[@]}" \
+    | seqkit replace -p '^([^\s:]+):\S*' -r '${1}' \
+    | "${MATURE[@]}" \
     | seqkit rmdup -n 2>/dev/null \
     | seqkit rmdup -s -D dup_prot.tsv -o viral_prot.faa.tmp 2> rmdup_prot.log \
     && mv viral_prot.faa.tmp viral_prot.faa || die "fallo dedup prot"

@@ -179,7 +179,8 @@ def cmd_protmap(a):
     for faa in a.faa:
         for pid, hdr in fasta_ids(faa):
             prot_ids.add(pid)
-            mm = re.search(r"\[([^\[\]]+)\]\s*$", hdr)
+            # "[organism=X]" (formato actual de Datasets) o "[X]" (clasico)
+            mm = re.search(r"\[organism=([^\]]+)\]", hdr) or re.search(r"\[([^\[\]=]+)\]\s*$", hdr)
             if mm:
                 prot_org[pid] = mm.group(1)
     p2t, conflicts = {}, 0
