@@ -67,6 +67,7 @@ ENV_FASTP="${ENV_FASTP:-fastp_1.3.6}"
 ENV_MEGAHIT="${ENV_MEGAHIT:-megahit_1.2.9}"
 ENV_TRINITY="${ENV_TRINITY:-trinity_2.15.2}"
 ENV_KRAKEN="${ENV_KRAKEN:-kraken2_2.17.1}"
+ENV_VIRALDB="${ENV_VIRALDB:-viraldb}"
 # --- Helper: cargar conda y activar un entorno ------------------------------
 # El módulo `conda` del farm YA define la función conda (setenv CONDA_EXE +
 # set-function conda), así que NO hace falta `eval "$(conda shell.bash hook)"`.
