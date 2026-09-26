@@ -9,6 +9,7 @@ Subcomandos
   select   IDs de la referencia de mapeo (completos o RefSeq)
   clstr    .clstr de CD-HIT -> TSV representante / miembro / identidad
   summary  conteos por fuente, completitud, familia
+  hostscan metadatos por ramas del arbol viral -> accesiones con huesped bajo un taxon
   probe    muestra la estructura REAL de los ficheros de Datasets (antes de la descarga grande)
 
 Por qué el JSON se RECORRE en vez de leerse por claves fijas: el esquema de
@@ -304,6 +305,116 @@ def cmd_summary(a):
     show("huesped (top 20)", Counter(r["host_name"] for r in rows), 20)
 
 
+# --------------------------------------------------------------------------- hostscan
+# Datasets filtra --host por el taxon EXACTO (probado 26-sep: --host 6656 solo da
+# registros cuyo huesped es literalmente "Arthropoda"). Aqui se recorre el arbol
+# viral del taxdump, se piden SOLO metadatos (datasets summary) por ramas y se
+# filtra el huesped por su LINAJE. Las ramas enormes y sin interes (SARS-CoV-2,
+# VIH, gripe...) se saltan con --skip para no bajar millones de registros.
+def _host_lineage_ids(r, tax):
+    h = r.get("host") or {}
+    ids = {str(x.get("tax_id", x.get("taxId", ""))) for x in (h.get("lineage") or [])}
+    tid = str(h.get("tax_id", h.get("taxId", "")) or "")
+    if tid:
+        ids.add(tid)
+        if len(ids) == 1:                      # sin linaje en el registro: taxdump
+            t, n = tax.current(tid), 0
+            while t in tax.parent and n < 80:
+                ids.add(t)
+                if tax.parent[t] == t: break
+                t = tax.parent[t]; n += 1
+    return ids, (h.get("organism_name") or h.get("organismName") or "")
+
+
+def cmd_hostscan(a):
+    import subprocess, time
+    tax = Taxonomy(a.taxdump)
+    children = defaultdict(list)
+    for t, par in tax.parent.items():
+        if t != par:
+            children[par].append(t)
+    root = tax.current(str(a.root))
+    skip = {}
+    for x in a.skip.split(","):
+        x = x.strip()
+        if not x: continue
+        cur = tax.current(x)
+        if cur not in tax.parent:
+            print(f"[aviso] skip {x}: no esta en el taxdump, se ignora"); continue
+        skip[cur] = tax.name.get(cur, "?")
+    anc = set()                                 # nodos por encima de algun skip
+    for s_ in skip:
+        t = tax.parent.get(s_)
+        while t and t != "1":
+            anc.add(t)
+            if t == root: break
+            t = tax.parent.get(t)
+    queries, stack = [], [root]
+    while stack:
+        t = stack.pop()
+        if t in skip: continue
+        if t in anc: stack.extend(children[t])
+        else: queries.append(t)
+    queries.sort(key=int)
+    os.makedirs(a.outdir, exist_ok=True)
+    print(f"ramas a consultar: {len(queries)} | saltadas: " +
+          ", ".join(f"{k} ({v})" for k, v in skip.items()))
+    with open(os.path.join(a.outdir, "plan.tsv"), "w") as fh:
+        for q in queries: fh.write(f"{q}\t{tax.name.get(q, '?')}\n")
+    host = str(a.host)
+    base = ["datasets", "summary", "virus", "genome", "taxon"]
+    extra = ["--as-json-lines"] + (["--api-key", a.api_key] if a.api_key else [])
+    failed, t0 = [], time.time()
+    for i, q in enumerate(queries, 1):
+        done = os.path.join(a.outdir, f"q_{q}.done")
+        if os.path.exists(done): continue
+        for attempt in range(1, a.retries + 1):
+            scanned, kept, hosts = 0, [], Counter()
+            p = subprocess.Popen(base + [q] + extra, stdout=subprocess.PIPE,
+                                 stderr=subprocess.PIPE, text=True)
+            for line in p.stdout:
+                if not line.strip(): continue
+                scanned += 1
+                r = json.loads(line)
+                ids, hname = _host_lineage_ids(r, tax)
+                if host in ids:
+                    kept.append(r.get("accession", "")); hosts[hname] += 1
+            err = p.stderr.read(); rc = p.wait()
+            empty = rc != 0 and scanned == 0 and re.search(r"no .*(found|match)|0 genomes", err, re.I)
+            if rc == 0 or empty:
+                with open(os.path.join(a.outdir, f"q_{q}.acc"), "w") as fh:
+                    fh.write("".join(x + "\n" for x in kept if x))
+                with open(os.path.join(a.outdir, f"q_{q}.hosts"), "w") as fh:
+                    fh.write("".join(f"{v}\t{k}\n" for k, v in hosts.items()))
+                open(done, "w").write(f"{q}\t{tax.name.get(q,'?')}\t{scanned}\t{len(kept)}\n")
+                if scanned:
+                    print(f"[{i}/{len(queries)}] {q} {tax.name.get(q,'?')[:40]:40s} "
+                          f"leidos {scanned:>9} | artropodo {len(kept):>7} | {time.time()-t0:7.0f}s", flush=True)
+                break
+            print(f"[{i}/{len(queries)}] {q} intento {attempt} fallo (rc={rc}): {err.strip()[:200]}", flush=True)
+            time.sleep(30 * attempt)
+        else:
+            failed.append(q)
+    # consolidar
+    accs, hosts, tot_s = set(), Counter(), 0
+    for q in queries:
+        d = os.path.join(a.outdir, f"q_{q}.done")
+        if not os.path.exists(d): continue
+        tot_s += int(open(d).read().split("\t")[2])
+        accs.update(l.strip() for l in open(os.path.join(a.outdir, f"q_{q}.acc")) if l.strip())
+        for l in open(os.path.join(a.outdir, f"q_{q}.hosts")):
+            v, k = l.rstrip("\n").split("\t", 1); hosts[k] += int(v)
+    with open(os.path.join(a.outdir, "accessions.txt"), "w") as fh:
+        fh.write("".join(x + "\n" for x in sorted(accs)))
+    with open(os.path.join(a.outdir, "hosts.tsv"), "w") as fh:
+        for k, v in hosts.most_common(): fh.write(f"{v}\t{k}\n")
+    print(f"\nregistros leidos: {tot_s} | con huesped bajo {host}: {len(accs)}")
+    print("huespedes mas frecuentes:")
+    for k, v in hosts.most_common(10): print(f"  {v:>8}  {k}")
+    if failed:
+        die(f"{len(failed)} ramas fallaron ({','.join(failed[:10])}...). Relanza: retoma donde se quedo.")
+
+
 # --------------------------------------------------------------------------- probe
 def cmd_probe(a):
     d = a.dir
@@ -352,9 +463,15 @@ def main():
     p = sp.add_parser("clstr"); p.add_argument("clstr"); p.add_argument("--out", required=True)
     p = sp.add_parser("summary"); p.add_argument("--meta", required=True); p.add_argument("--fasta")
     p = sp.add_parser("probe"); p.add_argument("dir")
+    p = sp.add_parser("hostscan"); p.add_argument("--taxdump", required=True)
+    p.add_argument("--outdir", required=True); p.add_argument("--host", default="6656")
+    p.add_argument("--skip", default=""); p.add_argument("--api-key", default="")
+    p.add_argument("--retries", type=int, default=4)
+    p.add_argument("--root", default="10239", help="raiz del recorrido (10239 = Viruses; otra para pruebas)")
     a = ap.parse_args()
     {"meta": cmd_meta, "protmap": cmd_protmap, "ntmap": cmd_ntmap, "select": cmd_select,
-     "clstr": cmd_clstr, "summary": cmd_summary, "probe": cmd_probe}[a.cmd](a)
+     "clstr": cmd_clstr, "summary": cmd_summary, "probe": cmd_probe,
+     "hostscan": cmd_hostscan}[a.cmd](a)
 
 
 if __name__ == "__main__":

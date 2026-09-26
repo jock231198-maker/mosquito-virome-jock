@@ -12,7 +12,9 @@
 # Uso (cada paso es un envío aparte, igual que build_downstream_dbs.sh):
 #   ./build_viral_db.sh check      # herramientas, red, cuota.       EMPIEZA AQUI
 #   ./build_viral_db.sh probe      # 1 genoma de prueba: valida el formato de Datasets
-#   ./build_viral_db.sh download   # RED. RefSeq + GenBank(host) + taxdump + taxdb
+#   ./build_viral_db.sh download   # RED. RefSeq + taxdump + taxdb
+#   ./build_viral_db.sh hostscan   # RED. metadatos por ramas -> accesiones con huesped artropodo
+#   ./build_viral_db.sh download_host  # RED. esas accesiones, por lotes
 #   ./build_viral_db.sh prepare    # descomprime, metadatos, dedup, mapas de taxid
 #   ./build_viral_db.sh blastn     # makeblastdb + autocomprobacion
 #   ./build_viral_db.sh diamond    # diamond makedb + autocomprobacion
@@ -34,6 +36,9 @@
 #   bsub -J vdbdl -o "$LOGS_DIR/vdbdl.%J.log" -e "$LOGS_DIR/vdbdl.%J.err" \
 #        -q normal -n 2 -M 4000 -R "select[mem>4000] rusage[mem=4000] span[hosts=1]" \
 #        "$PWD/build_viral_db.sh download"
+#   bsub -J vdbscan -o "$LOGS_DIR/vdbscan.%J.log" -e "$LOGS_DIR/vdbscan.%J.err" \
+#        -q normal -n 1 -M 8000 -R "select[mem>8000] rusage[mem=8000] span[hosts=1]" \
+#        "$PWD/build_viral_db.sh hostscan"      (luego igual con download_host, -M 2000)
 #   bsub -J vdbprep -o "$LOGS_DIR/vdbprep.%J.log" -e "$LOGS_DIR/vdbprep.%J.err" \
 #        -q normal -n 4 -M 16000 -R "select[mem>16000] rusage[mem=16000] span[hosts=1]" \
 #        "$PWD/build_viral_db.sh prepare"
@@ -51,8 +56,13 @@ VIRALDB_ROOT="${VIRALDB_ROOT:-$REFS_DIR/viral_custom}"
 ENV_VIRALDB="${ENV_VIRALDB:-viraldb}"
 
 # --- Qué se descarga --------------------------------------------------------
-HOST_TAXON="${HOST_TAXON:-Arthropoda}"   # --host de Datasets (nombre o taxid; 6656)
-COMPLETE_ONLY="${COMPLETE_ONLY:-0}"      # 1 = solo genomas completos del set de host
+# --host de Datasets es EXACTO (26-sep: --host 6656 = solo huesped literal "Arthropoda").
+# Por eso el huesped se filtra aqui, por LINAJE, en 'hostscan'.
+HOST_TAXID="${HOST_TAXID:-6656}"         # Arthropoda: todo lo que cuelgue de aqui
+# Ramas enormes sin huesped artropodo que no merece la pena leer (millones de registros):
+# SARS-CoV-2, VIH-1, VIH-2, gripe A, gripe B, VHB, VHC
+HOSTSCAN_SKIP="${HOSTSCAN_SKIP:-2697049,11676,11709,11320,11520,10407,11103}"
+HOST_CHUNK="${HOST_CHUNK:-20000}"        # accesiones por zip en download_host
 INCLUDE="${INCLUDE:-genome,protein,annotation}"
 
 # --- Filtros -----------------------------------------------------------------
@@ -124,10 +134,25 @@ dl_ftp_md5() {   # fichero del FTP de NCBI + su .md5
 }
 
 # Extrae del zip solo los ficheros que interesan, sin reventar inodes.
+# Si existe raw/<name>_parts/ (descarga por lotes), concatena todos los lotes.
 unpack() {
   local name="$1"; local out="$RAW/$name"
-  mkdir -p "$out"
-  unzip -oq -j "$RAW/$name.zip" 'ncbi_dataset/data/*' -d "$out" || die "no se pudo descomprimir $name.zip"
+  rm -rf "$out"; mkdir -p "$out"
+  if [[ -d "$RAW/${name}_parts" ]]; then
+    [[ -e "$RAW/$name.zip" ]] && echo "  (se ignora $name.zip: hay ${name}_parts/)"
+    local z tmp f n=0
+    for z in "$RAW/${name}_parts"/*.zip; do
+      tmp=$(mktemp -d -p "$RAW")
+      unzip -oq -j "$z" 'ncbi_dataset/data/*' -d "$tmp" || die "no se pudo descomprimir $z"
+      for f in genomic.fna protein.faa data_report.jsonl annotation_report.jsonl; do
+        [[ -s "$tmp/$f" ]] && sed -e '$a\' "$tmp/$f" >> "$out/$f"   # garantiza \n final
+      done
+      rm -rf "$tmp"; n=$((n + 1))
+    done
+    echo "  $name: $n lotes unidos"
+  else
+    unzip -oq -j "$RAW/$name.zip" 'ncbi_dataset/data/*' -d "$out" || die "no se pudo descomprimir $name.zip"
+  fi
   for f in genomic.fna data_report.jsonl; do [[ -s "$out/$f" ]] || die "$name: falta $f"; done
   ok "$name: $(nseq "$out/genomic.fna") genomas, $(nseq "$out/protein.faa") proteinas"
 }
@@ -181,9 +206,7 @@ download)
   use_env "$ENV_VIRALDB"
   datasets --version
 
-  CO=(); [[ "$COMPLETE_ONLY" == 1 ]] && CO=(--complete-only)
-  dl_datasets refseq taxon Viruses --refseq                       || die "fallo refseq"
-  dl_datasets host   taxon Viruses --host "$HOST_TAXON" "${CO[@]}" || die "fallo host=$HOST_TAXON"
+  dl_datasets refseq taxon Viruses --refseq || die "fallo refseq"
 
   cd "$TAX" || exit 1
   # taxdump FRESCO: los taxids de Datasets son de hoy; un taxdump viejo (el del
@@ -197,10 +220,47 @@ download)
     echo "fecha_descarga: $(date -Iseconds)"
     echo "datasets: $(datasets --version 2>&1)"
     echo "refseq: datasets download virus genome taxon Viruses --refseq --include $INCLUDE"
-    echo "host:   datasets download virus genome taxon Viruses --host $HOST_TAXON ${CO[*]} --include $INCLUDE"
     echo "taxdump/taxdb: $NCBI_FTP (md5 verificado)"
   } > "$VDIR/MANIFEST.txt"
   ok "current -> $VDIR"
+  ;;
+
+hostscan)
+  hdr "Host scan: metadatos por ramas, huesped bajo taxid $HOST_TAXID (RED, sin secuencias)"
+  resolve_version
+  use_env "$ENV_VIRALDB"
+  [[ -s "$TAX/nodes.dmp" ]] || die "falta el taxdump: corre 'download' primero"
+  # Retoma solo: cada rama terminada deja q_<taxid>.done. Relanzar = seguir.
+  python3 "$TOOLS" hostscan --taxdump "$TAX" --outdir "$VDIR/hostscan" \
+      --host "$HOST_TAXID" --skip "$HOSTSCAN_SKIP" --api-key "${NCBI_API_KEY:-}" \
+    || die "hostscan incompleto: relanza el mismo comando"
+  n=$(wc -l < "$VDIR/hostscan/accessions.txt")
+  (( n > 0 )) || die "0 accesiones con huesped bajo $HOST_TAXID"
+  ok "$n accesiones -> $VDIR/hostscan/accessions.txt  (huespedes: hostscan/hosts.tsv)"
+  echo "hostscan: $(date -Iseconds) | host_taxid=$HOST_TAXID | skip=$HOSTSCAN_SKIP | accesiones=$n" >> "$VDIR/MANIFEST.txt"
+  ;;
+
+download_host)
+  hdr "Descarga del set de huesped por accesiones (RED)"
+  resolve_version
+  use_env "$ENV_VIRALDB"
+  A="$VDIR/hostscan/accessions.txt"
+  [[ -s "$A" ]] || die "falta $A: corre 'hostscan'"
+  P="$RAW/host_parts"; mkdir -p "$P"
+  # Los lotes se regeneran igual cada vez (mismo orden, mismo tamaño): los zips
+  # ya bajados y validos se saltan, asi que relanzar retoma.
+  rm -f "$P"/acc_*.txt
+  split -d -a 4 -l "$HOST_CHUNK" "$A" "$P/acc_"
+  for f in "$P"/acc_[0-9][0-9][0-9][0-9]; do mv "$f" "$f.txt"; done
+  nlot=$(ls "$P"/acc_*.txt | wc -l); i=0; fail=0
+  for f in "$P"/acc_*.txt; do
+    i=$((i + 1)); b=$(basename "$f" .txt)
+    echo "  lote $i/$nlot ($(wc -l < "$f") accesiones)"
+    dl_datasets "host_parts/$b" accession --inputfile "$f" || { bad "fallo $b"; fail=$((fail + 1)); }
+  done
+  (( fail == 0 )) || die "$fail lotes fallaron: relanza 'download_host' (retoma)"
+  ok "$nlot lotes en $P"
+  echo "download_host: $(date -Iseconds) | lotes=$nlot | chunk=$HOST_CHUNK" >> "$VDIR/MANIFEST.txt"
   ;;
 
 prepare)
@@ -282,7 +342,7 @@ blastn)
   tar -xzf "$TAX/taxdb.tar.gz" -C "$B"
   makeblastdb -in "$WORK/viral_nt.fa" -dbtype nucl -parse_seqids \
       -taxid_map "$WORK/viral_nt.taxidmap" -blastdb_version 5 \
-      -title "viral_nt RefSeq+host:$HOST_TAXON $(basename "$VDIR")" \
+      -title "viral_nt RefSeq+host_taxid:$HOST_TAXID $(basename "$VDIR")" \
       -out "$B/viral_nt" || die "fallo makeblastdb"
   export BLASTDB="$B"
   blastdbcmd -db viral_nt -info | head -8
