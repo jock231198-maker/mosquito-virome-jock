@@ -203,7 +203,14 @@ def cmd_protmap(a):
                         if s in p2t and p2t[s] != t:
                             conflicts += 1
                         p2t.setdefault(s, t)
-    via_annot = len(p2t)
+    # 1b) CDS sin accesion propia: ID "NC_139268.1_123-456" -> taxid del nucleotido
+    via_nuc = 0
+    for pid in prot_ids:
+        if pid in p2t: continue
+        mm = re.match(r"^([A-Z]+_?[0-9]+\.[0-9]+)_", pid)
+        if mm and mm.group(1) in meta and meta[mm.group(1)]["taxid"]:
+            p2t[pid] = meta[mm.group(1)]["taxid"]; via_nuc += 1
+    via_annot = len(p2t) - via_nuc
     # 2) respaldo: nombre del organismo entre corchetes en la cabecera -> taxid (solo si es unico)
     name2tid = defaultdict(set)
     for d in meta.values():
@@ -225,7 +232,7 @@ def cmd_protmap(a):
         fh.write("\n".join(missing) + ("\n" if missing else ""))
     n = len(prot_ids)
     pct = 100 * len(p2t) / n if n else 0
-    print(f"proteinas: {n} | via annotation_report: {via_annot} | via nombre: {via_name} | "
+    print(f"proteinas: {n} | via annotation_report: {via_annot} | via CDS-nucleotido: {via_nuc} | via nombre: {via_name} | "
           f"sin taxid: {len(missing)} ({100-pct:.2f}%) | conflictos: {conflicts}")
     if n and pct < a.min_pct:
         die(f"solo {pct:.1f}% de proteinas con taxid (< {a.min_pct}%). Corre 'probe'.")

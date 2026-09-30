@@ -277,13 +277,13 @@ prepare)
     && mv metadata.tsv.tmp metadata.tsv || die "fallo meta"
 
   echo "== nucleotidos =="
-  # rmdup -n: misma accesion en los dos sets.  rmdup -s: misma secuencia con otra
+  # rmdup (por ID): misma accesion en los dos sets.  rmdup -s: misma secuencia con otra
   # accesion (las NC_ son copias de registros GenBank). Se queda la primera = RefSeq.
   # ID sin sufijo de rango (acc:1-123 -> acc), igual que en proteinas
   cat "$RAW/refseq/genomic.fna" "$RAW/host/genomic.fna" \
     | seqkit replace -p '^([^\s:]+):\S*' -r '${1}' \
     | seqkit seq -m "$MIN_LEN_NT" -u -g \
-    | seqkit rmdup -n 2>/dev/null \
+    | seqkit rmdup 2>/dev/null \
     | seqkit rmdup -s -D dup_nt.tsv -o viral_nt.fa.tmp 2> rmdup_nt.log \
     && mv viral_nt.fa.tmp viral_nt.fa || die "fallo dedup nt"
   cat rmdup_nt.log
@@ -306,10 +306,19 @@ prepare)
   n_raw=$(cat "${FAA[@]}" | grep -c '^>')
   n_mat=$(cat "${FAA[@]}" | grep '^>' | grep -c 'polyprotein_range=')
   echo "  proteinas crudas: $n_raw | peptidos maduros: $n_mat (KEEP_MATURE=$KEEP_MATURE)"
+  # ID "acc:rango": si acc es de PROTEINA (NP_/YP_/.../3 letras+digitos) se queda
+  # acc. Si es de NUCLEOTIDO (CDS sin accesion propia, p.ej. NC_139268.1:123-456)
+  # se conserva el rango como "NC_139268.1_123-456": si se quitara, todas las
+  # proteinas de ese genoma tendrian el mismo ID y rmdup dejaria solo una.
   cat "${FAA[@]}" \
-    | seqkit replace -p '^([^\s:]+):\S*' -r '${1}' \
+    | awk '/^>/{ id=substr($1,2); rest=(length($0)>length($1)) ? substr($0,length($1)+1) : "";
+                 p=index(id,":");
+                 if (p) { pre=substr(id,1,p-1);
+                          if (pre ~ /^([A-Z][A-Z][A-Z][0-9]+|(NP|YP|XP|WP|AP)_[0-9]+)\.[0-9]+$/) id=pre;
+                          else gsub(":","_",id) }
+                 print ">" id rest; next } {print}' \
     | "${MATURE[@]}" \
-    | seqkit rmdup -n 2>/dev/null \
+    | seqkit rmdup 2>/dev/null \
     | seqkit rmdup -s -D dup_prot.tsv -o viral_prot.faa.tmp 2> rmdup_prot.log \
     && mv viral_prot.faa.tmp viral_prot.faa || die "fallo dedup prot"
   cat rmdup_prot.log
@@ -347,7 +356,7 @@ blastn)
   export BLASTDB="$B"
   blastdbcmd -db viral_nt -info | head -8
 
-  echo "== autocomprobacion: 3 secuencias contra la base, deben encontrarse a si mismas con taxid =="
+  echo "== autocomprobacion: 5 secuencias contra la base, deben encontrarse a si mismas con taxid =="
   # las 3 primeras (RefSeq) y las 2 ultimas (set de huesped)
   { seqkit range -r 1:3 "$WORK/viral_nt.fa"; seqkit range -r -2:-1 "$WORK/viral_nt.fa"; } > selftest.fa
   blastn -task megablast -query selftest.fa -db viral_nt -max_target_seqs 1 -num_threads "$THREADS" \
