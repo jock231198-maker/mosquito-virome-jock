@@ -10,6 +10,7 @@ Subcomandos
   clstr    .clstr de CD-HIT -> TSV representante / miembro / identidad
   summary  conteos por fuente, completitud, familia
   hostscan metadatos por ramas del arbol viral -> accesiones con huesped bajo un taxon
+  annot    mejor hit blastn/DIAMOND por query + linaje -> tabla por vOTU
   probe    muestra la estructura REAL de los ficheros de Datasets (antes de la descarga grande)
 
 Por qué el JSON se RECORRE en vez de leerse por claves fijas: el esquema de
@@ -422,6 +423,77 @@ def cmd_hostscan(a):
         die(f"{len(failed)} ramas fallaron ({','.join(failed[:10])}...). Relanza: retoma donde se quedo.")
 
 
+# --------------------------------------------------------------------------- annot
+# Mejor hit por query (bitscore) de blastn y de DIAMOND + linaje del taxdump.
+def _best_hits(path, cols):
+    best = {}
+    if not path or not os.path.exists(path):
+        return best
+    with open(path) as fh:
+        for line in fh:
+            f = line.rstrip("\n").split("\t")
+            if len(f) < len(cols):
+                f += [""] * (len(cols) - len(f))
+            d = dict(zip(cols, f))
+            q = d["qseqid"]
+            try:
+                b = float(d["bitscore"])
+            except ValueError:
+                continue
+            if q not in best or b > float(best[q]["bitscore"]):
+                best[q] = d
+    return best
+
+
+def cmd_annot(a):
+    tax = Taxonomy(a.taxdump)
+    BN = ["qseqid", "sacc", "pident", "length", "qlen", "slen", "evalue", "bitscore", "staxids", "sscinames", "qcovs"]
+    DM = ["qseqid", "sseqid", "pident", "length", "qlen", "slen", "evalue", "bitscore", "staxids", "sscinames", "qcovhsp", "stitle"]
+    bn = _best_hits(a.blastn, BN)
+    dm = _best_hits(a.diamond, DM)
+    lens = {}
+    with open(a.lengths) as fh:
+        for line in fh:
+            sid, ln = line.rstrip("\n").split("\t")[:2]
+            lens[sid] = ln
+    def lin(t):
+        t = (t or "").split(";")[0]
+        return tax.lineage(t) if t and t != "0" else {k: "" for k in RANKS}
+    cols = ["votu", "longitud", "categoria",
+            "bn_acc", "bn_pident", "bn_qcov", "bn_evalue", "bn_taxid", "bn_nombre", "bn_familia", "bn_genero",
+            "dm_acc", "dm_pident", "dm_qcov_hsp", "dm_evalue", "dm_taxid", "dm_nombre", "dm_familia", "dm_genero",
+            "dm_titulo", "familia", "orden", "realm"]
+    cat = Counter(); fam = Counter()
+    with open(a.out, "w") as out:
+        out.write("\t".join(cols) + "\n")
+        for q in lens:
+            b, d = bn.get(q), dm.get(q)
+            lb = lin(b["staxids"]) if b else {k: "" for k in RANKS}
+            ld = lin(d["staxids"]) if d else {k: "" for k in RANKS}
+            if b and float(b["pident"]) >= a.id_known and float(b["qcovs"] or 0) >= a.cov_known:
+                c = "conocido_nt"
+            elif b:
+                c = "pariente_nt"
+            elif d:
+                c = "divergente_solo_aa"
+            else:
+                c = "sin_hit_viral"
+            L = lb if b else ld
+            row = [q, lens[q], c]
+            row += [b[k] for k in ("sacc", "pident", "qcovs", "evalue", "staxids", "sscinames")] if b else [""] * 6
+            row += [lb["family"], lb["genus"]]
+            row += [d[k] for k in ("sseqid", "pident", "qcovhsp", "evalue", "staxids", "sscinames")] if d else [""] * 6
+            row += [ld["family"], ld["genus"], d["stitle"] if d else ""]
+            row += [L["family"], L["order"], L["realm"]]
+            out.write("\t".join(str(x) for x in row) + "\n")
+            cat[c] += 1; fam[L["family"] or ("(sin familia asignada)" if c != "sin_hit_viral" else "(sin hit)")] += 1
+    print(f"vOTUs: {len(lens)} | con hit blastn: {len(set(bn) & set(lens))} | con hit DIAMOND: {len(set(dm) & set(lens))}")
+    print("\n## categoria")
+    for k, v in cat.most_common(): print(f"{v:>6}  {k}")
+    print("\n## familia (mejor hit; blastn si lo hay, si no DIAMOND)")
+    for k, v in fam.most_common(25): print(f"{v:>6}  {k}")
+
+
 # --------------------------------------------------------------------------- probe
 def cmd_probe(a):
     d = a.dir
@@ -475,10 +547,14 @@ def main():
     p.add_argument("--skip", default=""); p.add_argument("--api-key", default="")
     p.add_argument("--retries", type=int, default=4)
     p.add_argument("--root", default="10239", help="raiz del recorrido (10239 = Viruses; otra para pruebas)")
+    p = sp.add_parser("annot"); p.add_argument("--taxdump", required=True)
+    p.add_argument("--lengths", required=True); p.add_argument("--blastn", default="")
+    p.add_argument("--diamond", default=""); p.add_argument("--out", required=True)
+    p.add_argument("--id-known", type=float, default=95.0); p.add_argument("--cov-known", type=float, default=80.0)
     a = ap.parse_args()
     {"meta": cmd_meta, "protmap": cmd_protmap, "ntmap": cmd_ntmap, "select": cmd_select,
      "clstr": cmd_clstr, "summary": cmd_summary, "probe": cmd_probe,
-     "hostscan": cmd_hostscan}[a.cmd](a)
+     "hostscan": cmd_hostscan, "annot": cmd_annot}[a.cmd](a)
 
 
 if __name__ == "__main__":
