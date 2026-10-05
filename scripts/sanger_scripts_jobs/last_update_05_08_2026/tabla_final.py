@@ -1,0 +1,179 @@
+#!/usr/bin/env python3
+"""
+tabla_final.py — paso 10: integra todas las tablas en una sola, marca el rRNA
+y recalcula prevalencia y diversidad con abundancia por mapeo.
+
+Uso:
+    python3 tabla_final.py [RESULTS_DIR]
+    (si no se pasa, lo toma de la variable de entorno RESULTS_DIR)
+
+Entradas (todas ya en disco):
+    qc_control/votus_master.tsv                         vOTU + score + muestras + CheckV
+    qc_control/votu_coverage.tsv                        amplitud por mapeo (samtools coverage)
+    qc_control/contigs_union.tsv.cov                    cobertura de ensamblaje de los 6004
+    votu_annot/votus_viraldb20260925/annot_por_votu.tsv blastn + DIAMOND + linaje
+
+Salidas (en qc_control/):
+    TABLA_FINAL_votus.tsv       una fila por vOTU, todo integrado
+    prevalencia_por_especie.tsv prevalencia por mapeo y por ensamblaje
+    diversidad_por_muestra.tsv  riqueza por muestra, sin rRNA
+
+Criterios (explícitos, para poder defenderlos):
+    presencia por mapeo   >= 70 % del genoma cubierto a >= 1x
+    rRNA                  cobertura de ensamblaje >= 1000x Y sin hit viral
+    catalogo firme        categoria conocido_nt o pariente_nt con bn_qcov >= 50
+"""
+import os, sys, csv
+from collections import defaultdict
+
+RD = sys.argv[1] if len(sys.argv) > 1 else os.environ.get("RESULTS_DIR", "")
+if not RD:
+    sys.exit("ERROR: pasa RESULTS_DIR como argumento o expórtalo")
+
+QC     = os.path.join(RD, "qc_control")
+MASTER = os.path.join(QC, "votus_master.tsv")
+COVER  = os.path.join(QC, "votu_coverage.tsv")
+UNION  = os.path.join(QC, "contigs_union.tsv.cov")
+ANNOT  = os.path.join(RD, "votu_annot", "votus_viraldb20260925", "annot_por_votu.tsv")
+
+COV_MIN   = 70.0     # % del genoma cubierto para contar como presente
+RRNA_COV  = 1000.0   # cobertura de ensamblaje a partir de la cual sospechamos rRNA
+
+def leer(path, tiene_cabecera=True):
+    if not os.path.exists(path):
+        sys.exit(f"ERROR: falta {path}")
+    with open(path) as fh:
+        r = csv.reader(fh, delimiter="\t")
+        filas = list(r)
+    return filas[1:] if tiene_cabecera else filas
+
+# ---- 1. tabla maestra de vOTUs ----------------------------------------------
+master = {}
+for f in leer(MASTER):
+    if len(f) < 10: continue
+    master[f[0]] = dict(longitud=f[1], score=f[2], hallmarks=f[3],
+                        n_contigs=f[4], n_muestras_asm=f[5], muestras_asm=f[6],
+                        checkv=f[7], completeness=f[8], tax_genomad=f[9])
+print(f"vOTUs en votus_master: {len(master)}")
+
+# ---- 2. cobertura de ensamblaje (para marcar rRNA) ---------------------------
+cov_asm = {}
+for f in leer(UNION):
+    if len(f) < 6: continue
+    try: cov_asm[f[2]] = float(f[5])      # col6 = cov_fix
+    except ValueError: pass
+print(f"contigs con cobertura de ensamblaje: {len(cov_asm)}")
+
+# ---- 3. amplitud por mapeo ---------------------------------------------------
+# votu_coverage.tsv no tiene cabecera: muestra, votu, long, cubiertas, %cub, prof
+presencia = defaultdict(list)   # votu -> [(muestra, %cub, profundidad)]
+for f in leer(COVER, tiene_cabecera=False):
+    if len(f) < 6: continue
+    try: pct, prof = float(f[4]), float(f[5])
+    except ValueError: continue
+    if pct >= COV_MIN:
+        presencia[f[1]].append((f[0], pct, prof))
+print(f"vOTUs detectadas por mapeo (>= {COV_MIN:.0f}%): {len(presencia)}")
+
+# ---- 4. anotacion contra la base viral propia --------------------------------
+annot = {}
+for f in leer(ANNOT):
+    if len(f) < 23: continue
+    annot[f[0]] = dict(categoria=f[2], bn_pident=f[4], bn_qcov=f[5], bn_nombre=f[8],
+                       dm_pident=f[12], dm_qcov=f[13], dm_nombre=f[16],
+                       familia=f[20], orden=f[21], realm=f[22])
+print(f"vOTUs anotadas: {len(annot)}")
+
+# ---- 5. integrar -------------------------------------------------------------
+def num(x, d=0.0):
+    try: return float(x)
+    except (TypeError, ValueError): return d
+
+filas = []
+for v, m in master.items():
+    a   = annot.get(v, {})
+    cat = a.get("categoria", "sin_anotacion")
+    ca  = cov_asm.get(v, -1.0)
+    det = presencia.get(v, [])
+
+    es_rrna = (ca >= RRNA_COV) and cat in ("sin_hit_viral", "sin_anotacion")
+
+    # especie: el nombre de blastn si lo hay; si no, el de DIAMOND
+    especie = a.get("bn_nombre", "") or a.get("dm_nombre", "") or ""
+
+    firme = (cat in ("conocido_nt", "pariente_nt")) and num(a.get("bn_qcov")) >= 50
+
+    if es_rrna:                       clase = "rRNA"
+    elif cat == "conocido_nt":        clase = "identificado"
+    elif firme:                       clase = "identificado"
+    elif cat == "divergente_solo_aa": clase = "divergente"
+    elif cat == "pariente_nt":        clase = "pariente_debil"
+    else:                             clase = "sin_hit"
+
+    prof = sum(p for _, _, p in det) / len(det) if det else 0.0
+
+    filas.append([
+        v, m["longitud"], m["score"], m["hallmarks"],
+        clase, cat, especie, a.get("familia", ""), a.get("orden", ""), a.get("realm", ""),
+        a.get("bn_pident", ""), a.get("bn_qcov", ""), a.get("dm_pident", ""), a.get("dm_qcov", ""),
+        m["checkv"], m["completeness"],
+        m["n_muestras_asm"], len(det), f"{prof:.1f}", f"{ca:.1f}",
+        ",".join(s for s, _, _ in sorted(det)),
+    ])
+
+CAB = ["votu","longitud","genomad_score","hallmarks","clase","categoria","especie",
+       "familia","orden","realm","bn_pident","bn_qcov","dm_pident","dm_qcov",
+       "checkv_quality","completeness","n_muestras_asm","n_muestras_mapeo",
+       "profundidad_media","cov_ensamblaje","muestras_mapeo"]
+
+out1 = os.path.join(QC, "TABLA_FINAL_votus.tsv")
+with open(out1, "w") as fh:
+    w = csv.writer(fh, delimiter="\t", lineterminator="\n")
+    w.writerow(CAB)
+    w.writerows(sorted(filas, key=lambda r: (-int(r[17]), -int(r[1]))))
+
+# ---- 6. prevalencia por especie (solo lo identificado, sin rRNA) -------------
+prev = defaultdict(lambda: [set(), set(), 0])   # especie -> [muestras_mapeo, muestras_asm, n_votus]
+for r in filas:
+    if r[4] != "identificado" or not r[6]: continue
+    prev[r[6]][0].update(x for x in r[20].split(",") if x)
+    prev[r[6]][1].update(x for x in master[r[0]]["muestras_asm"].split(",") if x)
+    prev[r[6]][2] += 1
+
+out2 = os.path.join(QC, "prevalencia_por_especie.tsv")
+with open(out2, "w") as fh:
+    w = csv.writer(fh, delimiter="\t", lineterminator="\n")
+    w.writerow(["especie","familia","n_votus","n_muestras_mapeo","n_muestras_ensamblaje","muestras_mapeo"])
+    fam = {r[6]: r[7] for r in filas if r[6]}
+    for sp, (mm, ma, n) in sorted(prev.items(), key=lambda kv: -len(kv[1][0])):
+        w.writerow([sp, fam.get(sp, ""), n, len(mm), len(ma), ",".join(sorted(mm))])
+
+# ---- 7. diversidad por muestra ----------------------------------------------
+div = defaultdict(lambda: defaultdict(int))
+for r in filas:
+    for s in (x for x in r[20].split(",") if x):
+        div[s][r[4]] += 1
+
+out3 = os.path.join(QC, "diversidad_por_muestra.tsv")
+clases = ["identificado","divergente","pariente_debil","sin_hit","rRNA"]
+with open(out3, "w") as fh:
+    w = csv.writer(fh, delimiter="\t", lineterminator="\n")
+    w.writerow(["muestra"] + clases + ["total_sin_rRNA"])
+    for s in sorted(div):
+        c = div[s]
+        w.writerow([s] + [c[k] for k in clases] + [sum(c[k] for k in clases if k != "rRNA")])
+
+# ---- resumen -----------------------------------------------------------------
+print()
+print("== reparto por clase ==")
+cnt = defaultdict(int)
+for r in filas: cnt[r[4]] += 1
+for k in ["identificado","divergente","pariente_debil","sin_hit","rRNA"]:
+    print(f"  {k:<16} {cnt[k]:5d}")
+print()
+print("== prevalencia por especie (por mapeo) ==")
+for sp, (mm, ma, n) in sorted(prev.items(), key=lambda kv: -len(kv[1][0]))[:15]:
+    print(f"  {sp[:38]:<38} {len(mm):2d}/22 mapeo   {len(ma):2d}/22 ensamblaje   {n} vOTUs")
+print()
+for p in (out1, out2, out3):
+    print(f"  escrito: {p}")
