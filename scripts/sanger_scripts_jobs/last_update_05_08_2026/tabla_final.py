@@ -20,7 +20,7 @@ Salidas (en qc_control/):
 
 Criterios (explícitos, para poder defenderlos):
     presencia por mapeo   >= 70 % del genoma cubierto a >= 1x
-    rRNA                  cobertura de ensamblaje >= 1000x Y sin hit viral
+    rRNA                  profundidad media por mapeo >= 500x Y sin hit viral
     catalogo firme        categoria conocido_nt o pariente_nt con bn_qcov >= 50
 """
 import os, sys, csv
@@ -37,7 +37,8 @@ UNION  = os.path.join(QC, "contigs_union.tsv.cov")
 ANNOT  = os.path.join(RD, "votu_annot", "votus_viraldb20260925", "annot_por_votu.tsv")
 
 COV_MIN   = 70.0     # % del genoma cubierto para contar como presente
-RRNA_COV  = 1000.0   # cobertura de ensamblaje a partir de la cual sospechamos rRNA
+RRNA_PROF = 500.0    # profundidad media por mapeo
+RRNA_MUESTRAS = 20   # presente en casi todas
 
 def leer(path, tiene_cabecera=True):
     if not os.path.exists(path):
@@ -96,7 +97,8 @@ for v, m in master.items():
     ca  = cov_asm.get(v, -1.0)
     det = presencia.get(v, [])
 
-    es_rrna = (ca >= RRNA_COV) and cat in ("sin_hit_viral", "sin_anotacion")
+    es_rrna = (prof >= RRNA_PROF and len(det) >= RRNA_MUESTRAS
+               and cat in ("sin_hit_viral", "sin_anotacion", "divergente_solo_aa"))
 
     # especie: el nombre de blastn si lo hay; si no, el de DIAMOND
     especie = a.get("bn_nombre", "") or a.get("dm_nombre", "") or ""
