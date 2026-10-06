@@ -90,14 +90,6 @@ def num(x, d=0.0):
     try: return float(x)
     except (TypeError, ValueError): return d
 
-# Familias de virus de ADN de doble cadena grande. La biblioteca es de ARN total
-# sin paso de ADN, asi que no pueden estar representadas: sus hits son homologia
-# espuria contra proteinas repetitivas (HSP70, spaninas, hipoteticas).
-FAM_ADN = {"Nimaviridae","Mimiviridae","Poxviridae","Phycodnaviridae","Iridoviridae",
-           "Baculoviridae","Nudiviridae","Marseilleviridae","Ascoviridae",
-           "Schizomimiviridae","Orpheoviridae","Polydnaviriformidae","Retroviridae",
-           "Orthoherpesviridae","Solspiviridae","Steitzviridae"}
-
 filas = []
 for v, m in master.items():
     a   = annot.get(v, {})
@@ -109,11 +101,8 @@ for v, m in master.items():
     # rRNA: profundidad por mapeo altisima, en casi todas las muestras, sin hit viral.
     # El corte en 5000x separa dos poblaciones con tres ordenes de magnitud de margen
     # (los virus reales de este lote van a 36-154x).
-    # rRNA: profundidad por mapeo altisima con cobertura de blastn baja. Un virus
-    # real abundante alinea de forma continua contra una referencia (qcov alto);
-    # el rRNA casa en tramos cortos contra referencias virales contaminadas.
-    es_rrna = (prof >= 5000.0 and num(a.get("bn_qcov")) < 70)
-    es_adn  = a.get("familia", "") in FAM_ADN
+    es_rrna = (prof >= 5000.0 and len(det) >= 20
+               and cat in ("sin_hit_viral", "sin_anotacion", "divergente_solo_aa"))
 
     # especie: el nombre de blastn si lo hay; si no, el de DIAMOND
     especie = a.get("bn_nombre", "") or a.get("dm_nombre", "") or ""
@@ -121,7 +110,6 @@ for v, m in master.items():
     firme = (cat in ("conocido_nt", "pariente_nt")) and num(a.get("bn_qcov")) >= 50
 
     if es_rrna:                       clase = "rRNA"
-    elif es_adn:                      clase = "ADN_descartado"
     elif cat == "conocido_nt":        clase = "identificado"
     elif firme:                       clase = "identificado"
     elif cat == "divergente_solo_aa": clase = "divergente"
@@ -168,13 +156,13 @@ for r in filas:
         div[s][r[4]] += 1
 
 out3 = os.path.join(QC, "diversidad_por_muestra.tsv")
-clases = ["identificado","divergente","pariente_debil","sin_hit","rRNA","ADN_descartado"]
+clases = ["identificado","divergente","pariente_debil","sin_hit","rRNA"]
 with open(out3, "w") as fh:
     w = csv.writer(fh, delimiter="\t", lineterminator="\n")
     w.writerow(["muestra"] + clases + ["total_sin_rRNA"])
     for s in sorted(div):
         c = div[s]
-        w.writerow([s] + [c[k] for k in clases] + [sum(c[k] for k in clases if k not in ("rRNA","ADN_descartado"))])
+        w.writerow([s] + [c[k] for k in clases] + [sum(c[k] for k in clases if k != "rRNA")])
 
 print()
 print("== reparto por clase ==")
