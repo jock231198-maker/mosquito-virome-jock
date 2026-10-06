@@ -97,24 +97,28 @@ for v, m in master.items():
     ca  = cov_asm.get(v, -1.0)
     det = presencia.get(v, [])
 
-    es_rrna = (prof >= RRNA_PROF and len(det) >= RRNA_MUESTRAS
+
+det  = presencia.get(v, [])
+prof = sum(p for _, _, p in det) / len(det) if det else 0.0
+
+es_rrna = (prof >= 5000.0 and len(det) >= 20
                and cat in ("sin_hit_viral", "sin_anotacion", "divergente_solo_aa"))
 
     # especie: el nombre de blastn si lo hay; si no, el de DIAMOND
-    especie = a.get("bn_nombre", "") or a.get("dm_nombre", "") or ""
+especie = a.get("bn_nombre", "") or a.get("dm_nombre", "") or ""
 
-    firme = (cat in ("conocido_nt", "pariente_nt")) and num(a.get("bn_qcov")) >= 50
+firme = (cat in ("conocido_nt", "pariente_nt")) and num(a.get("bn_qcov")) >= 50
 
-    if es_rrna:                       clase = "rRNA"
-    elif cat == "conocido_nt":        clase = "identificado"
-    elif firme:                       clase = "identificado"
-    elif cat == "divergente_solo_aa": clase = "divergente"
-    elif cat == "pariente_nt":        clase = "pariente_debil"
-    else:                             clase = "sin_hit"
+if es_rrna:                       clase = "rRNA"
+elif cat == "conocido_nt":        clase = "identificado"
+elif firme:                       clase = "identificado"
+elif cat == "divergente_solo_aa": clase = "divergente"
+elif cat == "pariente_nt":        clase = "pariente_debil"
+else:                             clase = "sin_hit"
 
-    prof = sum(p for _, _, p in det) / len(det) if det else 0.0
+prof = sum(p for _, _, p in det) / len(det) if det else 0.0
 
-    filas.append([
+filas.append([
         v, m["longitud"], m["score"], m["hallmarks"],
         clase, cat, especie, a.get("familia", ""), a.get("orden", ""), a.get("realm", ""),
         a.get("bn_pident", ""), a.get("bn_qcov", ""), a.get("dm_pident", ""), a.get("dm_qcov", ""),
