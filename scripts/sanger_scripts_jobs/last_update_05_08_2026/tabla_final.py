@@ -96,29 +96,27 @@ for v, m in master.items():
     cat = a.get("categoria", "sin_anotacion")
     ca  = cov_asm.get(v, -1.0)
     det = presencia.get(v, [])
+    prof = sum(p for _, _, p in det) / len(det) if det else 0.0
 
-
-det  = presencia.get(v, [])
-prof = sum(p for _, _, p in det) / len(det) if det else 0.0
-
-es_rrna = (prof >= 5000.0 and len(det) >= 20
+    # rRNA: profundidad por mapeo altisima, en casi todas las muestras, sin hit viral.
+    # El corte en 5000x separa dos poblaciones con tres ordenes de magnitud de margen
+    # (los virus reales de este lote van a 36-154x).
+    es_rrna = (prof >= 5000.0 and len(det) >= 20
                and cat in ("sin_hit_viral", "sin_anotacion", "divergente_solo_aa"))
 
     # especie: el nombre de blastn si lo hay; si no, el de DIAMOND
-especie = a.get("bn_nombre", "") or a.get("dm_nombre", "") or ""
+    especie = a.get("bn_nombre", "") or a.get("dm_nombre", "") or ""
 
-firme = (cat in ("conocido_nt", "pariente_nt")) and num(a.get("bn_qcov")) >= 50
+    firme = (cat in ("conocido_nt", "pariente_nt")) and num(a.get("bn_qcov")) >= 50
 
-if es_rrna:                       clase = "rRNA"
-elif cat == "conocido_nt":        clase = "identificado"
-elif firme:                       clase = "identificado"
-elif cat == "divergente_solo_aa": clase = "divergente"
-elif cat == "pariente_nt":        clase = "pariente_debil"
-else:                             clase = "sin_hit"
+    if es_rrna:                       clase = "rRNA"
+    elif cat == "conocido_nt":        clase = "identificado"
+    elif firme:                       clase = "identificado"
+    elif cat == "divergente_solo_aa": clase = "divergente"
+    elif cat == "pariente_nt":        clase = "pariente_debil"
+    else:                             clase = "sin_hit"
 
-prof = sum(p for _, _, p in det) / len(det) if det else 0.0
-
-filas.append([
+    filas.append([
         v, m["longitud"], m["score"], m["hallmarks"],
         clase, cat, especie, a.get("familia", ""), a.get("orden", ""), a.get("realm", ""),
         a.get("bn_pident", ""), a.get("bn_qcov", ""), a.get("dm_pident", ""), a.get("dm_qcov", ""),
@@ -126,60 +124,3 @@ filas.append([
         m["n_muestras_asm"], len(det), f"{prof:.1f}", f"{ca:.1f}",
         ",".join(s for s, _, _ in sorted(det)),
     ])
-
-CAB = ["votu","longitud","genomad_score","hallmarks","clase","categoria","especie",
-       "familia","orden","realm","bn_pident","bn_qcov","dm_pident","dm_qcov",
-       "checkv_quality","completeness","n_muestras_asm","n_muestras_mapeo",
-       "profundidad_media","cov_ensamblaje","muestras_mapeo"]
-
-out1 = os.path.join(QC, "TABLA_FINAL_votus.tsv")
-with open(out1, "w") as fh:
-    w = csv.writer(fh, delimiter="\t", lineterminator="\n")
-    w.writerow(CAB)
-    w.writerows(sorted(filas, key=lambda r: (-int(r[17]), -int(r[1]))))
-
-# ---- 6. prevalencia por especie (solo lo identificado, sin rRNA) -------------
-prev = defaultdict(lambda: [set(), set(), 0])   # especie -> [muestras_mapeo, muestras_asm, n_votus]
-for r in filas:
-    if r[4] != "identificado" or not r[6]: continue
-    prev[r[6]][0].update(x for x in r[20].split(",") if x)
-    prev[r[6]][1].update(x for x in master[r[0]]["muestras_asm"].split(",") if x)
-    prev[r[6]][2] += 1
-
-out2 = os.path.join(QC, "prevalencia_por_especie.tsv")
-with open(out2, "w") as fh:
-    w = csv.writer(fh, delimiter="\t", lineterminator="\n")
-    w.writerow(["especie","familia","n_votus","n_muestras_mapeo","n_muestras_ensamblaje","muestras_mapeo"])
-    fam = {r[6]: r[7] for r in filas if r[6]}
-    for sp, (mm, ma, n) in sorted(prev.items(), key=lambda kv: -len(kv[1][0])):
-        w.writerow([sp, fam.get(sp, ""), n, len(mm), len(ma), ",".join(sorted(mm))])
-
-# ---- 7. diversidad por muestra ----------------------------------------------
-div = defaultdict(lambda: defaultdict(int))
-for r in filas:
-    for s in (x for x in r[20].split(",") if x):
-        div[s][r[4]] += 1
-
-out3 = os.path.join(QC, "diversidad_por_muestra.tsv")
-clases = ["identificado","divergente","pariente_debil","sin_hit","rRNA"]
-with open(out3, "w") as fh:
-    w = csv.writer(fh, delimiter="\t", lineterminator="\n")
-    w.writerow(["muestra"] + clases + ["total_sin_rRNA"])
-    for s in sorted(div):
-        c = div[s]
-        w.writerow([s] + [c[k] for k in clases] + [sum(c[k] for k in clases if k != "rRNA")])
-
-# ---- resumen -----------------------------------------------------------------
-print()
-print("== reparto por clase ==")
-cnt = defaultdict(int)
-for r in filas: cnt[r[4]] += 1
-for k in ["identificado","divergente","pariente_debil","sin_hit","rRNA"]:
-    print(f"  {k:<16} {cnt[k]:5d}")
-print()
-print("== prevalencia por especie (por mapeo) ==")
-for sp, (mm, ma, n) in sorted(prev.items(), key=lambda kv: -len(kv[1][0]))[:15]:
-    print(f"  {sp[:38]:<38} {len(mm):2d}/22 mapeo   {len(ma):2d}/22 ensamblaje   {n} vOTUs")
-print()
-for p in (out1, out2, out3):
-    print(f"  escrito: {p}")
