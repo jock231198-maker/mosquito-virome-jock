@@ -3,7 +3,7 @@ title: "MERIDA — viroma de *Aedes aegypti*: figuras"
 author: "Jose Carlos Marin Montesino"
 date: today
 params:
-  datos: "datos_v1"
+  datos: "datos_v2"
 format:
   html:
     embed-resources: true
@@ -200,7 +200,8 @@ GRUPO <- c(identificado = "Virus", divergente = "Virus", pariente_debil = "Virus
            EVE_genoma = "EVE", EVE_candidato = "EVE",
            huesped = "Huésped / celular", celular_otro = "Huésped / celular",
            rRNA = "Artefacto", ADN_descartado = "Artefacto",
-           oscura = "Sin resolver", ambiguo = "Sin resolver", sin_hit = "Sin resolver")
+           oscura = "Sin resolver", ambiguo = "Sin resolver", sin_hit = "Sin resolver",
+           evidencia_debil = "Sin resolver")
 col_grupo <- c("Virus" = PAL[["azul"]], "EVE" = PAL[["naranja"]], "Huésped / celular" = PAL[["aqua"]],
                "Artefacto" = GRIS, "Sin resolver" = PAL[["violeta"]])
 
@@ -209,7 +210,8 @@ ETIQ_CLASE <- c(identificado = "Virus identificado", divergente = "Virus diverge
                 EVE_genoma = "EVE en el genoma", EVE_candidato = "EVE candidato",
                 huesped = "Huésped", celular_otro = "Otro celular",
                 rRNA = "rRNA", ADN_descartado = "Familia de ADN (descartada)",
-                oscura = "Sin hit en ninguna base", ambiguo = "Ambiguo", sin_hit = "Sin hit")
+                oscura = "Sin hit en ninguna base", ambiguo = "Ambiguo", sin_hit = "Sin hit",
+                evidencia_debil = "Evidencia débil (solo nt corto)")
 
 cl <- votus |>
   count(clase_final) |>
@@ -240,7 +242,7 @@ p5b <- ggplot(fam, aes(n, familia)) +
 
 p5 <- (p5a | p5b) + plot_layout(guides = "collect", widths = c(1.1, 1)) +
   plot_annotation(title = paste0("Clasificación de las ", nrow(votus), " vOTUs"),
-                  subtitle = "Izquierda: clase final tras el árbitro de nr y el cribado contra AaegL5. Derecha: familias de las vOTUs virales") &
+                  subtitle = "Izquierda: clase final tras el árbitro de nr y el cribado contra AaegL5. Derecha: familias de las vOTUs virales (incluye fagos)") &
   theme(legend.position = "top")
 guardar(p5, "05_clasificacion", alto = 120, ancho = 200)
 p5
