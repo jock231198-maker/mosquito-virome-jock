@@ -1,0 +1,415 @@
+---
+title: "MERIDA — viroma de *Aedes aegypti*: figuras"
+author: "Jose Carlos Marin Montesino"
+date: today
+params:
+  datos: "datos_v1"
+format:
+  html:
+    embed-resources: true
+    toc: true
+    toc-depth: 2
+    fig-width: 7.2
+    fig-height: 4.5
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r setup}
+DATOS <- params$datos
+source("R/leer.R")
+source("R/tema.R")
+suppressPackageStartupMessages({
+  library(forcats)
+  library(stringr)
+  library(patchwork)
+  library(knitr)
+})
+
+meta     <- leer_metadata()
+lecturas <- leer_lecturas()
+N_MUESTRAS <- nrow(lecturas)
+K_POOL     <- unique(meta$individuos_pool)
+stopifnot(length(K_POOL) == 1)
+
+# las secciones que dependen de la tabla integrada se saltan si aun no esta
+HAY_VOTUS <- existe("TABLA_FINAL_votus_arb.tsv") && existe("votu_coverage.tsv")
+```
+
+Datos: **`r DATOS`** · `r N_MUESTRAS` pools de `r K_POOL` hembras no alimentadas, Mérida (Yucatán), sep–oct 2024.
+
+# 1. Lecturas
+
+```{r fig-lecturas, fig.height = 5.2}
+DESTINOS <- c(descartadas = "Descartadas en el recorte",
+              huesped     = "Huésped (Ae. aegypti)",
+              no_huesped  = "No huésped")
+
+lec <- lecturas |>
+  transmute(muestra, raw_pairs,
+            descartadas = raw_pairs - trimmed_pairs,
+            huesped     = trimmed_pairs - unmapped_pairs,
+            no_huesped  = unmapped_pairs) |>
+  pivot_longer(c(descartadas, huesped, no_huesped), names_to = "destino", values_to = "pares") |>
+  group_by(muestra) |>
+  mutate(frac = pares / sum(pares)) |>
+  ungroup()
+
+nh <- lec |> filter(destino == "no_huesped") |> arrange(frac)
+atipicas <- nh |> filter(frac > 0.4) |> pull(muestra)
+etiq <- setNames(paste0(etiqueta_muestra(nh$muestra), if_else(nh$muestra %in% atipicas, " *", "")), nh$muestra)
+
+lec <- lec |>
+  mutate(etiqueta = factor(etiq[muestra], levels = unname(etiq)),
+         destino  = factor(destino, levels = names(DESTINOS)))
+
+totales <- lec |> distinct(etiqueta, raw_pairs)
+
+p1 <- ggplot(lec, aes(frac, etiqueta, fill = destino)) +
+  geom_col(width = 0.72, colour = SUPERFICIE, linewidth = 0.25) +
+  geom_text(data = totales, aes(x = 1.01, y = etiqueta, label = millones(raw_pairs)),
+            inherit.aes = FALSE, hjust = 0, size = 2.7, colour = TINTA_2) +
+  scale_fill_manual(values = c(descartadas = GRIS, huesped = PAL[["azul"]], no_huesped = PAL[["naranja"]]),
+                    labels = DESTINOS) +
+  scale_x_continuous(labels = label_percent(), expand = expansion(c(0, 0.09)),
+                     breaks = seq(0, 1, 0.25)) +
+  labs(title = "Destino de las lecturas por pool",
+       subtitle = "Fracción de los pares crudos; a la derecha, pares crudos totales",
+       x = NULL, y = NULL,
+       caption = str_wrap(paste0("* Más del 40 % de lecturas no huésped (", paste(etiqueta_muestra(atipicas), collapse = ", "),
+                                 "). La abundancia viral se normaliza por pares recortados, no por pares no huésped."),
+                          width = 120)) +
+  theme(panel.grid.major.y = element_blank())
+guardar(p1, "01_lecturas", alto = 130)
+p1
+```
+
+# 2. Ensamblaje
+
+```{r fig-ensamblaje, fig.height = 6.5}
+contigs <- leer_contigs() |>
+  mutate(ens = factor(ENSAMBLADORES[ensamblador], levels = ENSAMBLADORES))
+
+col_ens <- setNames(unname(PAL[1:length(ENSAMBLADORES)]), ENSAMBLADORES)
+
+por_muestra <- contigs |>
+  count(muestra, ens) |>
+  mutate(etiqueta = etiqueta_muestra(muestra))
+orden_m <- por_muestra |> group_by(etiqueta) |> summarise(n = sum(n)) |> arrange(n) |> pull(etiqueta)
+
+p2a <- ggplot(por_muestra, aes(n, factor(etiqueta, levels = orden_m), fill = ens)) +
+  geom_col(width = 0.72, colour = SUPERFICIE, linewidth = 0.25) +
+  scale_fill_manual(values = col_ens, drop = TRUE) +
+  scale_x_continuous(expand = expansion(c(0, 0.05))) +
+  labs(x = "contigs en la unión dereplicada", y = NULL) +
+  theme(panel.grid.major.y = element_blank())
+
+n_ens <- contigs |> count(ens)
+p2b <- ggplot(contigs, aes(longitud, ens, colour = ens)) +
+  geom_boxplot(outlier.size = 0.4, outlier.alpha = 0.4, width = 0.55, linewidth = 0.4, fill = NA) +
+  geom_text(data = n_ens, aes(x = Inf, y = ens, label = paste0("n = ", n)),
+            inherit.aes = FALSE, hjust = 1.05, vjust = -0.9, size = 2.6, colour = TINTA_2) +
+  scale_x_log10(labels = label_number(big.mark = ","), breaks = c(1e3, 3e3, 1e4, 3e4)) +
+  scale_colour_manual(values = col_ens, guide = "none") +
+  labs(x = "longitud del contig (pb, escala log)", y = NULL) +
+  theme(panel.grid.major.y = element_blank())
+
+p2 <- (p2a / p2b) + plot_layout(heights = c(2.2, 1)) +
+  plot_annotation(title = "Contigs de la unión por ensamblador",
+                  subtitle = paste0(format(nrow(contigs), big.mark = ","), " contigs ≥ 1,000 pb de ",
+                                    n_distinct(contigs$ens), " ensambladores, dereplicados por muestra"))
+guardar(p2, "02_ensamblaje", alto = 170)
+p2
+```
+
+# 3. Calidad de los contigs virales (CheckV)
+
+```{r fig-checkv, fig.height = 4}
+NIVELES_CV <- c("Complete", "High-quality", "Medium-quality", "Low-quality", "Not-determined")
+cv <- leer_checkv() |>
+  mutate(ens = factor(ENSAMBLADORES[ensamblador], levels = ENSAMBLADORES),
+         calidad = factor(checkv_quality, levels = NIVELES_CV)) |>
+  count(ens, calidad)
+
+col_cv <- setNames(c(rev(AZUL_ORD), GRIS), NIVELES_CV)
+
+p3 <- ggplot(cv, aes(n, fct_rev(ens), fill = calidad)) +
+  geom_col(width = 0.65, colour = SUPERFICIE, linewidth = 0.25) +
+  scale_fill_manual(values = col_cv, drop = FALSE) +
+  scale_x_continuous(expand = expansion(c(0, 0.05))) +
+  labs(title = "Calidad CheckV de los contigs virales (geNomad)",
+       subtitle = paste0(format(sum(cv$n), big.mark = ","), " contigs; ",
+                         round(100 * sum(cv$n[cv$calidad == "Not-determined"], na.rm = TRUE) / sum(cv$n)),
+                         " % sin calidad determinable (fragmentos sin genes de referencia)"),
+       x = "contigs", y = NULL) +
+  theme(panel.grid.major.y = element_blank()) +
+  guides(fill = guide_legend(nrow = 1))
+guardar(p3, "03_checkv", alto = 85)
+p3
+```
+
+```{r tabla-checkv}
+cv |>
+  pivot_wider(names_from = calidad, values_from = n, values_fill = 0) |>
+  rename(Ensamblador = ens) |>
+  kable()
+```
+
+# 4. Del contig al virus
+
+```{r fig-embudo, eval = HAY_VOTUS, fig.height = 3.8}
+votus <- leer_votus()
+gen   <- leer_tsv("genomad_virus_summary.tsv")
+etapas <- tibble(
+  etapa = c("Contigs en la unión", "Virales según geNomad", "vOTUs (95 % id, 85 % cob.)",
+            "vOTUs virales", "Especies virales"),
+  n = c(nrow(leer_contigs()), nrow(gen), nrow(votus),
+        sum(votus$es_virus == "si"),
+        votus |> filter(es_virus == "si") |>
+          mutate(e = coalesce(na_if(especie, ""), na_if(nr_nombre, ""), votu)) |> pull(e) |> n_distinct())
+) |>
+  mutate(etapa = factor(etapa, levels = rev(etapa)))
+
+diamond_viral <- if (existe("veredicto_contigs.tsv")) {
+  sum(leer_veredicto_contigs()$veredicto == "viral", na.rm = TRUE)
+} else NA
+
+p4 <- ggplot(etapas, aes(n, etapa)) +
+  geom_col(width = 0.6, fill = PAL[["azul"]]) +
+  geom_text(aes(label = format(n, big.mark = ",")), hjust = -0.15, size = 3, colour = TINTA) +
+  scale_x_log10(expand = expansion(c(0, 0.15)), labels = label_number(big.mark = ",")) +
+  labs(title = "Del contig al virus",
+       subtitle = "Vía principal: geNomad → CheckV → vOTUs → anotación y árbitro de nr",
+       x = "n (escala log)", y = NULL,
+       caption = if (!is.na(diamond_viral))
+         str_wrap(paste0("Vía paralela: DIAMOND sobre los ", format(etapas$n[1], big.mark = ","),
+                         " contigs llama virales a ", diamond_viral,
+                         ", incluidos virus que geNomad no detectó (nudivirus de M71, Guadeloupe mosquito virus)."),
+                  width = 120)) +
+  theme(panel.grid.major.y = element_blank())
+guardar(p4, "04_embudo", alto = 80)
+p4
+```
+
+# 5. Clasificación de las vOTUs
+
+```{r fig-clases, eval = HAY_VOTUS, fig.height = 6.5}
+GRUPO <- c(identificado = "Virus", divergente = "Virus", pariente_debil = "Virus", viral_solo_nr = "Virus",
+           EVE_genoma = "EVE", EVE_candidato = "EVE",
+           huesped = "Huésped / celular", celular_otro = "Huésped / celular",
+           rRNA = "Artefacto", ADN_descartado = "Artefacto",
+           oscura = "Sin resolver", ambiguo = "Sin resolver", sin_hit = "Sin resolver")
+col_grupo <- c("Virus" = PAL[["azul"]], "EVE" = PAL[["naranja"]], "Huésped / celular" = PAL[["aqua"]],
+               "Artefacto" = GRIS, "Sin resolver" = PAL[["violeta"]])
+
+ETIQ_CLASE <- c(identificado = "Virus identificado", divergente = "Virus divergente",
+                pariente_debil = "Pariente débil", viral_solo_nr = "Viral solo en nr",
+                EVE_genoma = "EVE en el genoma", EVE_candidato = "EVE candidato",
+                huesped = "Huésped", celular_otro = "Otro celular",
+                rRNA = "rRNA", ADN_descartado = "Familia de ADN (descartada)",
+                oscura = "Sin hit en ninguna base", ambiguo = "Ambiguo", sin_hit = "Sin hit")
+
+cl <- votus |>
+  count(clase_final) |>
+  mutate(grupo = factor(GRUPO[clase_final], levels = names(col_grupo)),
+         etiqueta = coalesce(ETIQ_CLASE[clase_final], clase_final),
+         etiqueta = fct_reorder(etiqueta, n))
+
+p5a <- ggplot(cl, aes(n, etiqueta, fill = grupo)) +
+  geom_col(width = 0.65) +
+  geom_text(aes(label = n), hjust = -0.2, size = 2.8, colour = TINTA) +
+  scale_fill_manual(values = col_grupo, drop = FALSE) +
+  scale_x_continuous(expand = expansion(c(0, 0.12))) +
+  labs(x = "vOTUs", y = NULL) +
+  theme(panel.grid.major.y = element_blank())
+
+fam <- votus |>
+  filter(es_virus == "si") |>
+  mutate(familia = coalesce(na_if(familia, ""), "sin familia asignada")) |>
+  count(familia) |>
+  mutate(familia = fct_relevel(fct_reorder(familia, n), "sin familia asignada"))
+
+p5b <- ggplot(fam, aes(n, familia)) +
+  geom_col(width = 0.65, fill = PAL[["azul"]]) +
+  geom_text(aes(label = n), hjust = -0.2, size = 2.8, colour = TINTA) +
+  scale_x_continuous(expand = expansion(c(0, 0.12))) +
+  labs(x = "vOTUs virales", y = NULL) +
+  theme(panel.grid.major.y = element_blank())
+
+p5 <- (p5a | p5b) + plot_layout(guides = "collect", widths = c(1.1, 1)) +
+  plot_annotation(title = paste0("Clasificación de las ", nrow(votus), " vOTUs"),
+                  subtitle = "Izquierda: clase final tras el árbitro de nr y el cribado contra AaegL5. Derecha: familias de las vOTUs virales") &
+  theme(legend.position = "top")
+guardar(p5, "05_clasificacion", alto = 120, ancho = 200)
+p5
+```
+
+```{r tabla-eve, eval = HAY_VOTUS}
+votus |>
+  filter(clase_final %in% c("EVE_genoma", "EVE_candidato")) |>
+  transmute(vOTU = votu, Clase = clase_final, `Hit viral` = especie,
+            `nr (celular)` = celular_nombre, `Frac. en AaegL5` = frac_en_genoma,
+            Cromosomas = cromosomas_genoma) |>
+  arrange(Clase, desc(`Frac. en AaegL5`)) |>
+  kable(caption = "vOTUs con hit viral cuya secuencia es del mosquito (EVE_genoma) o cuyo mejor hit en nr es un artrópodo sin estar en la referencia (EVE_candidato, pendiente de small RNA).")
+```
+
+# 6. Prevalencia y tasa de infección
+
+```{r fig-prevalencia, eval = HAY_VOTUS, fig.height = 5.5}
+cob <- leer_cobertura()
+pres <- presencia_especies(votus, cob, lecturas)
+
+orden_muestras <- meta |>
+  arrange(is.na(fecha), fecha, muestra) |>
+  pull(muestra)
+prev <- pres |> count(especie_fig, name = "pools") |> arrange(pools)
+
+hm <- pres |>
+  mutate(especie_fig = factor(especie_fig, levels = prev$especie_fig),
+         muestra = factor(muestra, levels = orden_muestras))
+
+p6 <- ggplot(hm, aes(muestra, especie_fig, fill = prof_norm)) +
+  geom_tile(colour = SUPERFICIE, linewidth = 0.6) +
+  geom_text(data = prev, aes(x = Inf, y = especie_fig, label = paste0(pools, "/", N_MUESTRAS)),
+            inherit.aes = FALSE, hjust = -0.2, size = 2.7, colour = TINTA_2) +
+  scale_fill_gradientn(colours = AZUL_SEQ, trans = "log10", labels = label_number(accuracy = 0.01),
+                       name = "profundidad por millón de pares recortados") +
+  scale_x_discrete(labels = etiqueta_muestra, drop = FALSE) +
+  coord_cartesian(clip = "off") +
+  labs(title = "Prevalencia de las especies virales por pool",
+       subtitle = "Presente: ≥ 70 % del genoma cubierto a ≥ 1×. Pools ordenados por fecha de colecta; a la derecha, pools positivos",
+       x = NULL, y = NULL) +
+  theme(panel.grid = element_blank(),
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1, size = 7),
+        legend.title = element_text(size = 8, colour = TINTA_2),
+        plot.margin = margin(5, 40, 5, 5)) +
+  guides(fill = guide_colourbar(title.position = "top", barwidth = unit(55, "mm"), barheight = unit(3, "mm")))
+guardar(p6, "06_prevalencia", alto = 120, ancho = 200)
+p6
+```
+
+```{r fig-asm-vs-mapeo, eval = HAY_VOTUS, fig.height = 5}
+asm <- votus |>
+  filter(es_virus == "si") |>
+  mutate(especie_fig = coalesce(na_if(especie, ""), na_if(nr_nombre, ""), votu)) |>
+  group_by(especie_fig) |>
+  summarise(ensamblaje = max(n_muestras_asm), .groups = "drop")
+comp <- prev |> rename(mapeo = pools) |> inner_join(asm, by = "especie_fig") |>
+  mutate(especie_fig = factor(especie_fig, levels = prev$especie_fig))
+comp_l <- comp |> pivot_longer(c(mapeo, ensamblaje), names_to = "via", values_to = "pools") |>
+  mutate(via = factor(via, levels = c("ensamblaje", "mapeo"),
+                      labels = c("Ensamblada en el pool", "Detectada por mapeo")))
+
+p6b <- ggplot(comp_l, aes(pools, especie_fig)) +
+  geom_segment(data = comp, aes(x = ensamblaje, xend = mapeo, y = especie_fig, yend = especie_fig),
+               inherit.aes = FALSE, colour = REJILLA, linewidth = 1.6) +
+  geom_point(aes(colour = via), size = 2.6) +
+  scale_colour_manual(values = c("Ensamblada en el pool" = PAL[["naranja"]], "Detectada por mapeo" = PAL[["azul"]])) +
+  scale_x_continuous(limits = c(0, N_MUESTRAS), breaks = seq(0, N_MUESTRAS, 5)) +
+  labs(title = "El ensamblaje subestima la prevalencia",
+       subtitle = "Pools en los que cada especie se ensambló frente a pools donde se detecta por mapeo",
+       x = paste0("pools (de ", N_MUESTRAS, ")"), y = NULL) +
+  theme(panel.grid.major.y = element_blank())
+guardar(p6b, "06b_ensamblaje_vs_mapeo", alto = 110)
+p6b
+```
+
+```{r tabla-tasa, eval = HAY_VOTUS}
+prev |>
+  arrange(desc(pools)) |>
+  rowwise() |>
+  mutate(t = list(tasa_infeccion(pools, N_MUESTRAS, K_POOL))) |>
+  ungroup() |>
+  select(especie_fig, t) |>
+  unnest(t) |>
+  transmute(Especie = especie_fig,
+            `Pools +` = paste0(pools_pos, "/", N_MUESTRAS),
+            `MIR (‰)` = round(mir, 1),
+            `MLE (‰)` = if_else(pools_pos == N_MUESTRAS, NA_real_, round(mle, 1)),
+            `IC 95 %` = if_else(pools_pos == N_MUESTRAS, "todos los pools positivos",
+                                paste0(round(mle_inf, 1), "–", round(mle_sup, 1)))) |>
+  kable(caption = paste0("Tasa de infección individual por 1,000 hembras (pools de ", K_POOL,
+                         "). MLE de Chiang y Reeves con IC de Clopper-Pearson transformado; sin estimación cuando todos los pools son positivos."))
+```
+
+# 7. Riqueza viral por pool
+
+```{r fig-riqueza, eval = HAY_VOTUS, fig.height = 4.2}
+riq <- pres |>
+  count(muestra, name = "especies") |>
+  right_join(select(meta, muestra, fecha), by = "muestra") |>
+  mutate(especies = coalesce(especies, 0L),
+         colecta = if_else(is.na(fecha), "Mix", format(fecha, "%d %b")),
+         colecta = factor(colecta, levels = unique(colecta[order(is.na(fecha), fecha)])),
+         muestra = factor(muestra, levels = orden_muestras))
+
+niv <- levels(riq$colecta)
+col_fecha <- setNames(rep(GRIS, length(niv)), niv)
+con_fecha <- niv != "Mix"
+col_fecha[con_fecha] <- unname(PAL[seq_len(sum(con_fecha))])
+
+p7 <- ggplot(riq, aes(muestra, especies, fill = colecta)) +
+  geom_col(width = 0.7) +
+  scale_fill_manual(values = col_fecha) +
+  scale_x_discrete(labels = etiqueta_muestra) +
+  scale_y_continuous(breaks = pretty_breaks(), expand = expansion(c(0, 0.05))) +
+  labs(title = "Especies virales detectadas por pool",
+       subtitle = "Color: fecha de colecta (2024)", x = NULL, y = "especies") +
+  theme(panel.grid.major.x = element_blank(),
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1, size = 7))
+guardar(p7, "07_riqueza", alto = 95)
+p7
+```
+
+# 8. Composición no viral (Kraken2 + Bracken, lecturas no huésped)
+
+```{r fig-kraken, fig.height = 5.5}
+br <- leer_bracken()
+TOP <- 7
+top <- br |>
+  group_by(name) |>
+  summarise(media = sum(fraction_total_reads) / N_MUESTRAS, .groups = "drop") |>
+  slice_max(media, n = TOP) |>
+  pull(name)
+
+kr <- br |>
+  mutate(taxon = if_else(name %in% top, name, "Otros")) |>
+  group_by(muestra, taxon) |>
+  summarise(frac = sum(fraction_total_reads), .groups = "drop") |>
+  mutate(taxon = factor(taxon, levels = c(top, "Otros")),
+         etiqueta = etiqueta_muestra(muestra))
+
+col_tax <- setNames(c(unname(PAL[seq_len(TOP)]), GRIS), c(top, "Otros"))
+orden_k <- kr |> filter(taxon == top[1]) |> arrange(frac) |> pull(etiqueta)
+kr <- kr |> mutate(etiqueta = factor(etiqueta, levels = union(orden_k, unique(etiqueta))))
+
+p8 <- ggplot(kr, aes(frac, etiqueta, fill = taxon)) +
+  geom_col(width = 0.72, colour = SUPERFICIE, linewidth = 0.25) +
+  scale_fill_manual(values = col_tax) +
+  scale_x_continuous(labels = label_percent(), expand = expansion(c(0, 0.02))) +
+  labs(title = "Composición taxonómica de las lecturas no huésped",
+       subtitle = paste0("Los ", TOP, " taxones más abundantes en promedio; nivel ",
+                         paste(unique(br$taxonomy_lvl), collapse = "/"), " de Bracken"),
+       x = "fracción de lecturas clasificadas", y = NULL,
+       caption = "PlusPF no incluye genomas de insectos: lo que queda de mosquito tras quitar el huésped puede asignarse al eucariota más cercano.") +
+  theme(panel.grid.major.y = element_blank()) +
+  guides(fill = guide_legend(nrow = 3))
+guardar(p8, "08_kraken2", alto = 140)
+p8
+```
+
+# Datos usados
+
+```{r manifest}
+m <- file.path(DATOS, "MANIFEST.tsv")
+if (file.exists(m)) {
+  cat(paste(readLines(m, n = 2), collapse = "\n"))
+  read_tsv(m, comment = "#", show_col_types = FALSE) |>
+    filter(!str_starts(archivo, "kraken2_nohost/")) |>
+    select(archivo, lineas, md5, modificado_origen) |>
+    kable()
+}
+```
