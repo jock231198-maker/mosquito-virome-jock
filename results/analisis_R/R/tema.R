@@ -46,15 +46,42 @@ tema_viroma <- function(base = 10) {
 theme_set(tema_viroma())
 
 # Guarda PDF (para la tesis) y PNG (para presentaciones) con el mismo nombre.
-# El PDF va por Cairo: el dispositivo pdf() por defecto no dibuja simbolos como >= o x.
-DISPOSITIVO_PDF <- if (capabilities("cairo")) cairo_pdf else "pdf"
+# Dispositivo PDF. El pdf() por defecto no dibuja >= ni x; en Mac se usa Quartz
+# (nativo, no necesita XQuartz) y en Linux Cairo. cairo_pdf en un Mac sin XQuartz
+# falla en silencio, y si ggsave sigue adelante dibuja sobre el dispositivo del
+# informe y lo cierra: la figura desaparece del HTML. Por eso guardar() abre el
+# dispositivo a mano, comprueba que se abrio y devuelve el foco al anterior.
+DISPOSITIVO_PDF <- if (capabilities("aqua")) {
+  function(f, w, h) grDevices::quartz(type = "pdf", file = f, width = w, height = h)
+} else if (capabilities("cairo")) {
+  function(f, w, h) grDevices::cairo_pdf(f, width = w, height = h)
+} else {
+  function(f, w, h) grDevices::pdf(f, width = w, height = h)
+}
 
 guardar <- function(p, nombre, ancho = 180, alto = 110) {
   dir.create("figuras", showWarnings = FALSE)
-  ggsave(file.path("figuras", paste0(nombre, ".pdf")), p, width = ancho, height = alto, units = "mm",
-         device = DISPOSITIVO_PDF)
+  w <- ancho / 25.4
+  h <- alto / 25.4
+  f_pdf <- file.path("figuras", paste0(nombre, ".pdf"))
+
+  previo <- grDevices::dev.cur()
+  abierto <- tryCatch(
+    withCallingHandlers({ DISPOSITIVO_PDF(f_pdf, w, h); grDevices::dev.cur() != previo },
+                        warning = function(cond) invokeRestart("muffleWarning")),
+    error = function(e) FALSE)
+  if (isTRUE(abierto)) {
+    print(p)
+    grDevices::dev.off()
+  } else {
+    # a stderr: el informe oculta los mensajes, pero esto tiene que verse en la terminal
+    cat("AVISO: no se pudo abrir el dispositivo PDF; ", f_pdf, " no se ha guardado\n", file = stderr())
+  }
+  if (previo > 1 && previo %in% grDevices::dev.list()) grDevices::dev.set(previo)
+
   ggsave(file.path("figuras", paste0(nombre, ".png")), p, width = ancho, height = alto, units = "mm",
          dpi = 300, bg = SUPERFICIE)
+  if (previo > 1 && previo %in% grDevices::dev.list()) grDevices::dev.set(previo)
   invisible(p)
 }
 

@@ -1,6 +1,7 @@
 ---
-title: "MERIDA — viroma de *Aedes aegypti*: figuras"
+title: "MERIDA — *Aedes aegypti* virome: figures"
 author: "Jose Carlos Marin Montesino"
+lang: en
 date: today
 params:
   datos: "datos_v3"
@@ -34,18 +35,22 @@ N_MUESTRAS <- nrow(lecturas)
 K_POOL     <- unique(meta$individuos_pool)
 stopifnot(length(K_POOL) == 1)
 
-# las secciones que dependen de la tabla integrada se saltan si aun no esta
+# sections that need the integrated vOTU table are skipped if it is missing
 HAY_VOTUS <- existe("TABLA_FINAL_votus_arb.tsv") && existe("votu_coverage.tsv")
+
+# "14 Sep" independent of the system locale
+fecha_corta <- function(d) if_else(is.na(d), NA_character_,
+                                   paste(as.integer(format(d, "%d")), month.abb[as.integer(format(d, "%m"))]))
 ```
 
-Datos: **`r DATOS`** · `r N_MUESTRAS` pools de `r K_POOL` hembras no alimentadas, Mérida (Yucatán), sep–oct 2024.
+Data: **`r DATOS`** · `r N_MUESTRAS` pools of `r K_POOL` unfed females, Mérida (Yucatán, Mexico), Sep–Oct 2024.
 
-# 1. Lecturas
+# 1. Reads
 
-```{r fig-lecturas, fig.height = 5.2}
-DESTINOS <- c(descartadas = "Descartadas en el recorte",
-              huesped     = "Huésped (Ae. aegypti)",
-              no_huesped  = "No huésped")
+```{r g-reads, fig.height = 5.2}
+DESTINOS <- c(descartadas = "Removed by trimming",
+              huesped     = "Host (Ae. aegypti)",
+              no_huesped  = "Non-host")
 
 lec <- lecturas |>
   transmute(muestra, raw_pairs,
@@ -75,20 +80,20 @@ p1 <- ggplot(lec, aes(frac, etiqueta, fill = destino)) +
                     labels = DESTINOS) +
   scale_x_continuous(labels = label_percent(), expand = expansion(c(0, 0.09)),
                      breaks = seq(0, 1, 0.25)) +
-  labs(title = "Destino de las lecturas por pool",
-       subtitle = "Fracción de los pares crudos; a la derecha, pares crudos totales",
+  labs(title = "Fate of the reads in each pool",
+       subtitle = "Fraction of raw read pairs; total raw pairs on the right",
        x = NULL, y = NULL,
-       caption = str_wrap(paste0("* Más del 40 % de lecturas no huésped (", paste(etiqueta_muestra(atipicas), collapse = ", "),
-                                 "). La abundancia viral se normaliza por pares recortados, no por pares no huésped."),
+       caption = str_wrap(paste0("* More than 40% non-host reads (", paste(etiqueta_muestra(atipicas), collapse = ", "),
+                                 "). Viral abundance is normalised by trimmed pairs, not by non-host pairs."),
                           width = 120)) +
   theme(panel.grid.major.y = element_blank())
-guardar(p1, "01_lecturas", alto = 130)
+guardar(p1, "01_reads", alto = 130)
 p1
 ```
 
-# 2. Ensamblaje
+# 2. Assembly
 
-```{r fig-ensamblaje, fig.height = 6.5}
+```{r g-assembly, fig.height = 6.5}
 contigs <- leer_contigs() |>
   mutate(ens = factor(ENSAMBLADORES[ensamblador], levels = ENSAMBLADORES))
 
@@ -103,30 +108,30 @@ p2a <- ggplot(por_muestra, aes(n, factor(etiqueta, levels = orden_m), fill = ens
   geom_col(width = 0.72, colour = SUPERFICIE, linewidth = 0.25) +
   scale_fill_manual(values = col_ens, drop = TRUE) +
   scale_x_continuous(expand = expansion(c(0, 0.05))) +
-  labs(x = "contigs en la unión dereplicada", y = NULL) +
+  labs(x = "contigs in the dereplicated union", y = NULL) +
   theme(panel.grid.major.y = element_blank())
 
 n_ens <- contigs |> count(ens)
 p2b <- ggplot(contigs, aes(longitud, ens, colour = ens)) +
   geom_boxplot(outlier.size = 0.4, outlier.alpha = 0.4, width = 0.55, linewidth = 0.4, fill = NA) +
-  geom_text(data = n_ens, aes(x = Inf, y = ens, label = paste0("n = ", n)),
+  geom_text(data = n_ens, aes(x = Inf, y = ens, label = paste0("n = ", format(n, big.mark = ","))),
             inherit.aes = FALSE, hjust = 1.05, vjust = -0.9, size = 2.6, colour = TINTA_2) +
   scale_x_log10(labels = label_number(big.mark = ","), breaks = c(1e3, 3e3, 1e4, 3e4)) +
   scale_colour_manual(values = col_ens, guide = "none") +
-  labs(x = "longitud del contig (pb, escala log)", y = NULL) +
+  labs(x = "contig length (bp, log scale)", y = NULL) +
   theme(panel.grid.major.y = element_blank())
 
 p2 <- (p2a / p2b) + plot_layout(heights = c(2.2, 1)) +
-  plot_annotation(title = "Contigs de la unión por ensamblador",
-                  subtitle = paste0(format(nrow(contigs), big.mark = ","), " contigs ≥ 1,000 pb de ",
-                                    n_distinct(contigs$ens), " ensambladores, dereplicados por muestra"))
-guardar(p2, "02_ensamblaje", alto = 170)
+  plot_annotation(title = "Contigs in the union, by assembler",
+                  subtitle = paste0(format(nrow(contigs), big.mark = ","), " contigs ≥ 1,000 bp from ",
+                                    n_distinct(contigs$ens), " assemblers, dereplicated per sample"))
+guardar(p2, "02_assembly", alto = 170)
 p2
 ```
 
-# 3. Calidad de los contigs virales (CheckV)
+# 3. Quality of viral contigs (CheckV)
 
-```{r fig-checkv, fig.height = 4}
+```{r g-checkv, fig.height = 4}
 NIVELES_CV <- c("Complete", "High-quality", "Medium-quality", "Low-quality", "Not-determined")
 cv <- leer_checkv() |>
   mutate(ens = factor(ENSAMBLADORES[ensamblador], levels = ENSAMBLADORES),
@@ -139,10 +144,10 @@ p3 <- ggplot(cv, aes(n, fct_rev(ens), fill = calidad)) +
   geom_col(width = 0.65, colour = SUPERFICIE, linewidth = 0.25) +
   scale_fill_manual(values = col_cv, drop = FALSE) +
   scale_x_continuous(expand = expansion(c(0, 0.05))) +
-  labs(title = "Calidad CheckV de los contigs virales (geNomad)",
+  labs(title = "CheckV quality of viral contigs (geNomad)",
        subtitle = paste0(format(sum(cv$n), big.mark = ","), " contigs; ",
                          round(100 * sum(cv$n[cv$calidad == "Not-determined"], na.rm = TRUE) / sum(cv$n)),
-                         " % sin calidad determinable (fragmentos sin genes de referencia)"),
+                         "% not determined (fragments without reference genes)"),
        x = "contigs", y = NULL) +
   theme(panel.grid.major.y = element_blank()) +
   guides(fill = guide_legend(nrow = 1))
@@ -150,21 +155,22 @@ guardar(p3, "03_checkv", alto = 85)
 p3
 ```
 
-```{r tabla-checkv}
+```{r table-checkv}
 cv |>
+  arrange(calidad) |>
   pivot_wider(names_from = calidad, values_from = n, values_fill = 0) |>
-  rename(Ensamblador = ens) |>
+  rename(Assembler = ens) |>
   kable()
 ```
 
-# 4. Del contig al virus
+# 4. From contig to virus
 
-```{r fig-embudo, eval = HAY_VOTUS, fig.height = 3.8}
+```{r g-funnel, eval = HAY_VOTUS, fig.height = 3.8}
 votus <- leer_votus()
 gen   <- leer_tsv("genomad_virus_summary.tsv")
 etapas <- tibble(
-  etapa = c("Contigs en la unión", "Virales según geNomad", "vOTUs (95 % id, 85 % cob.)",
-            "vOTUs virales", "Especies virales"),
+  etapa = c("Contigs in the union", "Viral according to geNomad", "vOTUs (95% id, 85% cov.)",
+            "Viral vOTUs", "Viral species"),
   n = c(nrow(leer_contigs()), nrow(gen), nrow(votus),
         sum(votus$es_virus == "si"),
         votus |> filter(es_virus == "si") |>
@@ -180,39 +186,39 @@ p4 <- ggplot(etapas, aes(n, etapa)) +
   geom_col(width = 0.6, fill = PAL[["azul"]]) +
   geom_text(aes(label = format(n, big.mark = ",")), hjust = -0.15, size = 3, colour = TINTA) +
   scale_x_log10(expand = expansion(c(0, 0.15)), labels = label_number(big.mark = ",")) +
-  labs(title = "Del contig al virus",
-       subtitle = "Vía principal: geNomad → CheckV → vOTUs → anotación y árbitro de nr",
-       x = "n (escala log)", y = NULL,
+  labs(title = "From contig to virus",
+       subtitle = "Main path: geNomad → CheckV → vOTUs → annotation and nr arbiter",
+       x = "n (log scale)", y = NULL,
        caption = if (!is.na(diamond_viral))
-         str_wrap(paste0("Vía paralela: DIAMOND sobre los ", format(etapas$n[1], big.mark = ","),
-                         " contigs llama virales a ", diamond_viral,
-                         ", incluidos virus que geNomad no detectó (nudivirus de M71, Guadeloupe mosquito virus)."),
+         str_wrap(paste0("Parallel path: DIAMOND on all ", format(etapas$n[1], big.mark = ","),
+                         " contigs calls ", diamond_viral,
+                         " viral, including viruses geNomad missed (nudivirus in M71, Guadeloupe mosquito virus)."),
                   width = 120)) +
   theme(panel.grid.major.y = element_blank())
-guardar(p4, "04_embudo", alto = 80)
+guardar(p4, "04_funnel", alto = 80)
 p4
 ```
 
-# 5. Clasificación de las vOTUs
+# 5. vOTU classification
 
-```{r fig-clases, eval = HAY_VOTUS, fig.height = 6.5}
+```{r g-classes, eval = HAY_VOTUS, fig.height = 6.5}
 GRUPO <- c(identificado = "Virus", pariente = "Virus", divergente = "Virus", pariente_debil = "Virus", viral_solo_nr = "Virus",
            EVE_genoma = "EVE", EVE_candidato = "EVE",
-           huesped = "Huésped / celular", celular_otro = "Huésped / celular",
-           rRNA = "Artefacto", ADN_descartado = "Artefacto",
-           oscura = "Sin resolver", ambiguo = "Sin resolver", sin_hit = "Sin resolver",
-           evidencia_debil = "Sin resolver")
-col_grupo <- c("Virus" = PAL[["azul"]], "EVE" = PAL[["naranja"]], "Huésped / celular" = PAL[["aqua"]],
-               "Artefacto" = GRIS, "Sin resolver" = PAL[["violeta"]])
+           huesped = "Host / cellular", celular_otro = "Host / cellular",
+           rRNA = "Artefact", ADN_descartado = "Artefact",
+           oscura = "Unresolved", ambiguo = "Unresolved", sin_hit = "Unresolved",
+           evidencia_debil = "Unresolved")
+col_grupo <- c("Virus" = PAL[["azul"]], "EVE" = PAL[["naranja"]], "Host / cellular" = PAL[["aqua"]],
+               "Artefact" = GRIS, "Unresolved" = PAL[["violeta"]])
 
-ETIQ_CLASE <- c(identificado = "Virus identificado (≥ 90 % nt)", pariente = "Pariente (posible especie nueva)",
-                divergente = "Virus divergente",
-                pariente_debil = "Pariente débil", viral_solo_nr = "Viral solo en nr",
-                EVE_genoma = "EVE en el genoma", EVE_candidato = "EVE candidato",
-                huesped = "Huésped", celular_otro = "Otro celular",
-                rRNA = "rRNA", ADN_descartado = "Familia de ADN (descartada)",
-                oscura = "Sin hit en ninguna base", ambiguo = "Ambiguo", sin_hit = "Sin hit",
-                evidencia_debil = "Evidencia débil (solo nt corto)")
+ETIQ_CLASE <- c(identificado = "Identified virus (≥ 90% nt)", pariente = "Relative (putative new species)",
+                divergente = "Divergent virus",
+                pariente_debil = "Distant relative", viral_solo_nr = "Viral in nr only",
+                EVE_genoma = "EVE in host genome", EVE_candidato = "Candidate EVE",
+                huesped = "Host", celular_otro = "Other cellular",
+                rRNA = "rRNA", ADN_descartado = "DNA family (discarded)",
+                oscura = "No hit in any database", ambiguo = "Ambiguous", sin_hit = "No hit",
+                evidencia_debil = "Weak evidence (short nt hit only)")
 
 cl <- votus |>
   count(clase_final) |>
@@ -230,38 +236,40 @@ p5a <- ggplot(cl, aes(n, etiqueta, fill = grupo)) +
 
 fam <- votus |>
   filter(es_virus == "si") |>
-  mutate(familia = coalesce(na_if(familia, ""), "sin familia asignada")) |>
+  mutate(familia = coalesce(na_if(familia, ""), "unassigned family")) |>
   count(familia) |>
-  mutate(familia = fct_relevel(fct_reorder(familia, n), "sin familia asignada"))
+  mutate(familia = fct_relevel(fct_reorder(familia, n), "unassigned family"))
 
 p5b <- ggplot(fam, aes(n, familia)) +
   geom_col(width = 0.65, fill = PAL[["azul"]]) +
   geom_text(aes(label = n), hjust = -0.2, size = 2.8, colour = TINTA) +
   scale_x_continuous(expand = expansion(c(0, 0.12))) +
-  labs(x = "vOTUs virales", y = NULL) +
+  labs(x = "viral vOTUs", y = NULL) +
   theme(panel.grid.major.y = element_blank())
 
 p5 <- (p5a | p5b) + plot_layout(guides = "collect", widths = c(1.1, 1)) +
-  plot_annotation(title = paste0("Clasificación de las ", nrow(votus), " vOTUs"),
-                  subtitle = "Izquierda: clase final tras el árbitro de nr y el cribado contra AaegL5. Derecha: familias de las vOTUs virales (incluye fagos)") &
+  plot_annotation(title = paste0("Classification of the ", nrow(votus), " vOTUs"),
+                  subtitle = "Left: final class after the nr arbiter and the AaegL5 screen. Right: families of the viral vOTUs (phages included)") &
   theme(legend.position = "top")
-guardar(p5, "05_clasificacion", alto = 120, ancho = 200)
+guardar(p5, "05_classification", alto = 120, ancho = 200)
 p5
 ```
 
-```{r tabla-eve, eval = HAY_VOTUS}
+```{r table-eve, eval = HAY_VOTUS}
 votus |>
   filter(clase_final %in% c("EVE_genoma", "EVE_candidato")) |>
-  transmute(vOTU = votu, Clase = clase_final, `Hit viral` = especie,
-            `nr (celular)` = celular_nombre, `Frac. en AaegL5` = frac_en_genoma,
-            Cromosomas = cromosomas_genoma) |>
-  arrange(Clase, desc(`Frac. en AaegL5`)) |>
-  kable(caption = "vOTUs con hit viral cuya secuencia es del mosquito (EVE_genoma) o cuyo mejor hit en nr es un artrópodo sin estar en la referencia (EVE_candidato, pendiente de small RNA).")
+  transmute(vOTU = votu,
+            Class = if_else(clase_final == "EVE_genoma", "EVE in genome", "Candidate EVE"),
+            `Viral hit` = especie,
+            `nr (cellular)` = celular_nombre, `Fraction in AaegL5` = frac_en_genoma,
+            Chromosomes = cromosomas_genoma) |>
+  arrange(Class, desc(`Fraction in AaegL5`)) |>
+  kable(caption = "vOTUs with a viral hit whose sequence is mosquito (EVE in genome), or whose best nr hit is an arthropod but which are absent from the reference (candidate EVE, pending small RNA).")
 ```
 
-# 6. Prevalencia y tasa de infección
+# 6. Prevalence and infection rate
 
-```{r fig-prevalencia, eval = HAY_VOTUS, fig.height = 5.5}
+```{r g-prevalence, eval = HAY_VOTUS, fig.height = 5.5}
 cob <- leer_cobertura()
 pres <- presencia_especies(votus, cob, lecturas)
 
@@ -280,15 +288,15 @@ p6 <- ggplot(hm, aes(muestra, especie_fig, fill = prof_norm)) +
   geom_text(data = prev_f, aes(x = Inf, y = especie_fig, label = paste0(pools, "/", N_MUESTRAS)),
             inherit.aes = FALSE, hjust = -0.2, size = 2.7, colour = TINTA_2) +
   facet_grid(rows = vars(grupo), scales = "free_y", space = "free_y", switch = "y",
-             labeller = as_labeller(c("Virus de artrópodos" = "Artrópodos", "Fagos (microbiota)" = "Fagos"))) +
+             labeller = as_labeller(c("Arthropod viruses" = "Arthropod", "Phages (microbiota)" = "Phages"))) +
   scale_fill_gradientn(colours = AZUL_SEQ, trans = "log10", labels = label_number(accuracy = 0.01),
-                       name = "profundidad por millón de pares recortados") +
+                       name = "depth per million trimmed pairs") +
   scale_x_discrete(labels = etiqueta_muestra, drop = FALSE) +
   coord_cartesian(clip = "off") +
-  labs(title = "Prevalencia de las especies virales por pool",
-       subtitle = "Presente: ≥ 70 % del genoma cubierto a ≥ 1×. Pools ordenados por fecha de colecta; a la derecha, pools positivos",
+  labs(title = "Prevalence of viral species across pools",
+       subtitle = "Present: ≥ 70% of the genome covered at ≥ 1×. Pools ordered by collection date; positive pools on the right",
        x = NULL, y = NULL,
-       caption = "«afín a X»: pariente de X por debajo del 90 % de identidad nucleotídica; no es una detección de X.") +
+       caption = "X-like: a relative of X below 90% nucleotide identity, with its amino-acid identity in brackets; not a detection of X.") +
   theme(panel.grid = element_blank(),
         strip.text.y.left = element_text(angle = 0, hjust = 1, size = 8, face = "bold", colour = TINTA_2),
         strip.placement = "outside",
@@ -296,11 +304,11 @@ p6 <- ggplot(hm, aes(muestra, especie_fig, fill = prof_norm)) +
         legend.title = element_text(size = 8, colour = TINTA_2),
         plot.margin = margin(5, 40, 5, 5)) +
   guides(fill = guide_colourbar(title.position = "top", barwidth = unit(55, "mm"), barheight = unit(3, "mm")))
-guardar(p6, "06_prevalencia", alto = 120, ancho = 200)
+guardar(p6, "06_prevalence", alto = 120, ancho = 200)
 p6
 ```
 
-```{r fig-asm-vs-mapeo, eval = HAY_VOTUS, fig.height = 5}
+```{r g-assembly-vs-mapping, eval = HAY_VOTUS, fig.height = 5}
 asm <- votus |>
   filter(es_virus == "si") |>
   mutate(especie_fig = nombre_virus(pick(everything()))) |>
@@ -310,56 +318,56 @@ comp <- prev |> rename(mapeo = pools) |> inner_join(asm, by = "especie_fig") |>
   mutate(especie_fig = factor(especie_fig, levels = prev$especie_fig))
 comp_l <- comp |> pivot_longer(c(mapeo, ensamblaje), names_to = "via", values_to = "pools") |>
   mutate(via = factor(via, levels = c("ensamblaje", "mapeo"),
-                      labels = c("Ensamblada en el pool", "Detectada por mapeo")))
+                      labels = c("Assembled in the pool", "Detected by read mapping")))
 
 p6b <- ggplot(comp_l, aes(pools, especie_fig)) +
   geom_segment(data = comp, aes(x = ensamblaje, xend = mapeo, y = especie_fig, yend = especie_fig),
                inherit.aes = FALSE, colour = REJILLA, linewidth = 1.6) +
   geom_point(aes(colour = via), size = 2.6) +
-  scale_colour_manual(values = c("Ensamblada en el pool" = PAL[["naranja"]], "Detectada por mapeo" = PAL[["azul"]])) +
+  scale_colour_manual(values = c("Assembled in the pool" = PAL[["naranja"]], "Detected by read mapping" = PAL[["azul"]])) +
   scale_x_continuous(limits = c(0, N_MUESTRAS), breaks = seq(0, N_MUESTRAS, 5)) +
-  labs(title = "El ensamblaje subestima la prevalencia",
-       subtitle = "Pools en los que cada especie se ensambló frente a pools donde se detecta por mapeo",
-       x = paste0("pools (de ", N_MUESTRAS, ")"), y = NULL) +
+  labs(title = "Assembly underestimates prevalence",
+       subtitle = "Pools in which each species was assembled versus pools in which it is detected by read mapping",
+       x = paste0("pools (of ", N_MUESTRAS, ")"), y = NULL) +
   theme(panel.grid.major.y = element_blank())
-guardar(p6b, "06b_ensamblaje_vs_mapeo", alto = 110)
+guardar(p6b, "06b_assembly_vs_mapping", alto = 110)
 p6b
 ```
 
-```{r tabla-tasa, eval = HAY_VOTUS}
+```{r table-rate, eval = HAY_VOTUS}
 prev |>
-  filter(grupo == "Virus de artrópodos") |>
+  filter(grupo == GRUPOS_VIRUS[["artropodo"]]) |>
   arrange(desc(pools)) |>
   rowwise() |>
   mutate(t = list(tasa_infeccion(pools, N_MUESTRAS, K_POOL))) |>
   ungroup() |>
   select(especie_fig, t) |>
   unnest(t) |>
-  transmute(Especie = especie_fig,
-            `Pools +` = paste0(pools_pos, "/", N_MUESTRAS),
+  transmute(Species = especie_fig,
+            `Positive pools` = paste0(pools_pos, "/", N_MUESTRAS),
             `MIR (‰)` = round(mir, 1),
             `MLE (‰)` = if_else(pools_pos == N_MUESTRAS, NA_real_, round(mle, 1)),
-            `IC 95 %` = if_else(pools_pos == N_MUESTRAS, "todos los pools positivos",
+            `95% CI` = if_else(pools_pos == N_MUESTRAS, "all pools positive",
                                 paste0(round(mle_inf, 1), "–", round(mle_sup, 1)))) |>
-  kable(caption = paste0("Tasa de infección individual por 1,000 hembras (pools de ", K_POOL,
-                         "). MLE de Chiang y Reeves con IC de Clopper-Pearson transformado; sin estimación cuando todos los pools son positivos."))
+  kable(caption = paste0("Individual infection rate per 1,000 females (pools of ", K_POOL,
+                         "). MLE after Chiang and Reeves with a transformed Clopper-Pearson CI; not estimable when all pools are positive."))
 ```
 
-# 7. Riqueza viral por pool
+# 7. Viral richness per pool
 
-```{r fig-riqueza, eval = HAY_VOTUS, fig.height = 4.2}
+```{r g-richness, eval = HAY_VOTUS, fig.height = 4.2}
 riq <- pres |>
-  filter(grupo == "Virus de artrópodos") |>
+  filter(grupo == GRUPOS_VIRUS[["artropodo"]]) |>
   count(muestra, name = "especies") |>
   right_join(select(meta, muestra, fecha), by = "muestra") |>
   mutate(especies = coalesce(especies, 0L),
-         colecta = if_else(is.na(fecha), "Mix", format(fecha, "%d %b")),
+         colecta = coalesce(fecha_corta(fecha), "Mixed"),
          colecta = factor(colecta, levels = unique(colecta[order(is.na(fecha), fecha)])),
          muestra = factor(muestra, levels = orden_muestras))
 
 niv <- levels(riq$colecta)
 col_fecha <- setNames(rep(GRIS, length(niv)), niv)
-con_fecha <- niv != "Mix"
+con_fecha <- niv != "Mixed"
 col_fecha[con_fecha] <- unname(PAL[seq_len(sum(con_fecha))])
 
 p7 <- ggplot(riq, aes(muestra, especies, fill = colecta)) +
@@ -367,17 +375,17 @@ p7 <- ggplot(riq, aes(muestra, especies, fill = colecta)) +
   scale_fill_manual(values = col_fecha) +
   scale_x_discrete(labels = etiqueta_muestra) +
   scale_y_continuous(breaks = pretty_breaks(), expand = expansion(c(0, 0.05))) +
-  labs(title = "Especies de virus de artrópodos detectadas por pool",
-       subtitle = "Color: fecha de colecta (2024). Sin fagos", x = NULL, y = "especies") +
+  labs(title = "Arthropod virus species detected per pool",
+       subtitle = "Colour: collection date (2024). Phages excluded", x = NULL, y = "species") +
   theme(panel.grid.major.x = element_blank(),
         axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1, size = 7))
-guardar(p7, "07_riqueza", alto = 95)
+guardar(p7, "07_richness", alto = 95)
 p7
 ```
 
-# 8. Composición no viral (Kraken2 + Bracken, lecturas no huésped)
+# 8. Non-viral composition (Kraken2 + Bracken, non-host reads)
 
-```{r fig-kraken, fig.height = 5.5}
+```{r g-kraken, fig.height = 5.5}
 br <- leer_bracken()
 TOP <- 7
 top <- br |>
@@ -387,13 +395,13 @@ top <- br |>
   pull(name)
 
 kr <- br |>
-  mutate(taxon = if_else(name %in% top, name, "Otros")) |>
+  mutate(taxon = if_else(name %in% top, name, "Other")) |>
   group_by(muestra, taxon) |>
   summarise(frac = sum(fraction_total_reads), .groups = "drop") |>
-  mutate(taxon = factor(taxon, levels = c(top, "Otros")),
+  mutate(taxon = factor(taxon, levels = c(top, "Other")),
          etiqueta = etiqueta_muestra(muestra))
 
-col_tax <- setNames(c(unname(PAL[seq_len(TOP)]), GRIS), c(top, "Otros"))
+col_tax <- setNames(c(unname(PAL[seq_len(TOP)]), GRIS), c(top, "Other"))
 orden_k <- kr |> filter(taxon == top[1]) |> arrange(frac) |> pull(etiqueta)
 kr <- kr |> mutate(etiqueta = factor(etiqueta, levels = union(orden_k, unique(etiqueta))))
 
@@ -401,18 +409,18 @@ p8 <- ggplot(kr, aes(frac, etiqueta, fill = taxon)) +
   geom_col(width = 0.72, colour = SUPERFICIE, linewidth = 0.25) +
   scale_fill_manual(values = col_tax) +
   scale_x_continuous(labels = label_percent(), expand = expansion(c(0, 0.02))) +
-  labs(title = "Composición taxonómica de las lecturas no huésped",
-       subtitle = paste0("Los ", TOP, " taxones más abundantes en promedio; nivel ",
-                         paste(unique(br$taxonomy_lvl), collapse = "/"), " de Bracken"),
-       x = "fracción de lecturas clasificadas", y = NULL,
-       caption = "PlusPF no incluye genomas de insectos: lo que queda de mosquito tras quitar el huésped puede asignarse al eucariota más cercano.") +
+  labs(title = "Taxonomic composition of non-host reads",
+       subtitle = paste0("The ", TOP, " most abundant taxa on average; Bracken level ",
+                         paste(unique(br$taxonomy_lvl), collapse = "/")),
+       x = "fraction of classified reads", y = NULL,
+       caption = "PlusPF contains no insect genomes: residual mosquito reads may be assigned to the closest eukaryote.") +
   theme(panel.grid.major.y = element_blank()) +
   guides(fill = guide_legend(nrow = 3))
 guardar(p8, "08_kraken2", alto = 140)
 p8
 ```
 
-# Datos usados
+# Data used
 
 ```{r manifest}
 m <- file.path(DATOS, "MANIFEST.tsv")
@@ -420,7 +428,7 @@ if (file.exists(m)) {
   cat(paste(readLines(m, n = 2), collapse = "\n"))
   read_tsv(m, comment = "#", show_col_types = FALSE) |>
     filter(!str_starts(archivo, "kraken2_nohost/")) |>
-    select(archivo, lineas, md5, modificado_origen) |>
+    select(File = archivo, Lines = lineas, md5, `Modified at source` = modificado_origen) |>
     kable()
 }
 ```

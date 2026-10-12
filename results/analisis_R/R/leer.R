@@ -114,15 +114,33 @@ leer_veredicto_contigs <- function() {
 nombre_virus <- function(votus) {
   if ("nombre_virus" %in% names(votus)) {
     base <- coalesce(na_if(votus$nombre_virus, ""), votus$votu)
-    pid  <- suppressWarnings(coalesce(as.numeric(votus$dm_pident), as.numeric(votus$nr_pident)))
-    return(if_else(startsWith(base, "afín a ") & !is.na(pid),
-                   paste0(base, " (", round(pid), " % aa)"), base))
+    dm   <- suppressWarnings(as.numeric(votus$dm_pident))
+    nr   <- suppressWarnings(as.numeric(votus$nr_pident))
+    # la identidad tiene que ser la del hit que da el nombre: si el nombre viene
+    # de nr, la de nr (Hattula totivirus 3: 45 % en nr, no el 30 % de DIAMOND)
+    del_nr <- !is.na(votus$nr_nombre) & base == paste0("afín a ", votus$nr_nombre)
+    pid  <- if_else(del_nr, coalesce(nr, dm), coalesce(dm, nr))
+    # la tabla guarda "afin a X"; en las figuras, la convencion "X-like" y su identidad
+    pariente <- startsWith(base, "afín a ")
+    nombre   <- if_else(pariente, como_like(sub("^afín a ", "", base)), base)
+    return(if_else(pariente & !is.na(pid), paste0(nombre, " (", round(pid), "% aa)"), nombre))
   }
   base <- coalesce(na_if(votus$especie, ""), na_if(votus$nr_nombre, ""), votus$votu)
-  if_else(votus$clase_final %in% c("pariente_debil", "divergente"), paste0("afín a ", base), base)
+  if_else(votus$clase_final %in% c("pariente_debil", "divergente", "pariente"), como_like(base), base)
 }
 
-GRUPOS_VIRUS <- c(artropodo = "Virus de artrópodos", fago = "Fagos (microbiota)")
+# "Liao ning virus" -> "Liao ning-like virus"; "Hattula totivirus 3" -> "Hattula totivirus 3-like";
+# "Aedes anphevirus" -> "Aedes anphevirus-like". Un nombre que ya lleva "-like"
+# (Culex-associated Tombus-like virus) recibe "-related" para no duplicarlo.
+como_like <- function(x) {
+  case_when(
+    grepl("-like", x, fixed = TRUE) ~ paste0(x, "-related"),
+    grepl(" virus$", x)             ~ sub(" virus$", "-like virus", x),
+    TRUE                            ~ paste0(x, "-like")
+  )
+}
+
+GRUPOS_VIRUS <- c(artropodo = "Arthropod viruses", fago = "Phages (microbiota)")
 
 # Fagos (virus de la microbiota bacteriana) frente a virus de artropodos.
 grupo_virus <- function(votus) {
