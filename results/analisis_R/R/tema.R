@@ -86,3 +86,9 @@ guardar <- function(p, nombre, ancho = 180, alto = 110) {
 }
 
 millones <- label_number(scale = 1e-6, suffix = " M", accuracy = 1)
+
+# 950 -> "950", 12400 -> "12k", 3.2e6 -> "3.2M" (sin depender de la version de scales)
+lecturas_cortas <- function(x) {
+  ifelse(x >= 1e6, paste0(format(round(x / 1e6, 1), trim = TRUE), "M"),
+         ifelse(x >= 1e3, paste0(round(x / 1e3), "k"), format(round(x), trim = TRUE)))
+}

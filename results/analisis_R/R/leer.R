@@ -140,12 +140,16 @@ como_like <- function(x) {
   )
 }
 
-# TRUE si el nombre de la vOTU es un "afin a X" con X tomado de nr (porque el hit
-# de blastn era demasiado corto). En esas vOTUs la familia de la tabla viene del
-# blastn corto y no es fiable: Kamiti River-like salia como Rhabdoviridae.
+# TRUE si el nombre de la vOTU es un "afin a X" con X tomado de nr y distinto de la
+# especie de blastn. Solo en ese caso la familia de la tabla (que viene del blastn)
+# contradice al nombre y no es fiable: Kamiti River-like salia como Rhabdoviridae
+# porque el blastn corto decia Bafoussam. Si blastn y nr dicen lo mismo (Liao ning,
+# Mos8Chu0), la familia vale.
 nombre_por_nr <- function(votus) {
   if (!"nombre_virus" %in% names(votus)) return(rep(FALSE, nrow(votus)))
-  !is.na(votus$nr_nombre) & coalesce(votus$nombre_virus, "") == paste0("afín a ", votus$nr_nombre)
+  nr  <- coalesce(votus$nr_nombre, "")
+  esp <- coalesce(votus$especie, "")
+  nr != "" & coalesce(votus$nombre_virus, "") == paste0("afín a ", nr) & esp != nr
 }
 
 familia_fig <- function(votus) {
