@@ -109,8 +109,15 @@ leer_veredicto_contigs <- function() {
 # Desde integrar_arbitro.py v3 el nombre lo decide el pipeline (columna
 # nombre_virus: en los parientes, el mejor hit de proteina en nr). Esto es el
 # respaldo para tablas anteriores.
+# A los "afin a X" se les anade la identidad aa: tres parientes de Usinis al 69,
+# 47 y 32 % son virus distintos y no deben fundirse en una fila.
 nombre_virus <- function(votus) {
-  if ("nombre_virus" %in% names(votus)) return(coalesce(na_if(votus$nombre_virus, ""), votus$votu))
+  if ("nombre_virus" %in% names(votus)) {
+    base <- coalesce(na_if(votus$nombre_virus, ""), votus$votu)
+    pid  <- suppressWarnings(coalesce(as.numeric(votus$dm_pident), as.numeric(votus$nr_pident)))
+    return(if_else(startsWith(base, "afín a ") & !is.na(pid),
+                   paste0(base, " (", round(pid), " % aa)"), base))
+  }
   base <- coalesce(na_if(votus$especie, ""), na_if(votus$nr_nombre, ""), votus$votu)
   if_else(votus$clase_final %in% c("pariente_debil", "divergente"), paste0("afín a ", base), base)
 }
