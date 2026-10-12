@@ -106,15 +106,23 @@ leer_veredicto_contigs <- function() {
 # de la especie tal cual; en pariente_debil y divergente el nombre es el del mejor
 # hit, no una identificacion, y se marca como "afin a". Asi una vOTU cuyo pariente
 # mas cercano es Oropouche virus no se lee como deteccion de OROV.
+# Desde integrar_arbitro.py v3 el nombre lo decide el pipeline (columna
+# nombre_virus: en los parientes, el mejor hit de proteina en nr). Esto es el
+# respaldo para tablas anteriores.
 nombre_virus <- function(votus) {
+  if ("nombre_virus" %in% names(votus)) return(coalesce(na_if(votus$nombre_virus, ""), votus$votu))
   base <- coalesce(na_if(votus$especie, ""), na_if(votus$nr_nombre, ""), votus$votu)
   if_else(votus$clase_final %in% c("pariente_debil", "divergente"), paste0("afín a ", base), base)
 }
 
+GRUPOS_VIRUS <- c(artropodo = "Virus de artrópodos", fago = "Fagos (microbiota)")
+
 # Fagos (virus de la microbiota bacteriana) frente a virus de artropodos.
-grupo_virus <- function(nombre) {
-  if_else(grepl("phage|Leviviricetes|Caudoviricetes", nombre, ignore.case = TRUE),
-          "Fagos (microbiota)", "Virus de artrópodos")
+grupo_virus <- function(votus) {
+  if ("grupo_virus" %in% names(votus)) return(unname(GRUPOS_VIRUS[votus$grupo_virus]))
+  nombres <- paste(votus$especie, votus$nr_nombre)
+  if_else(grepl("phage|Leviviricetes|Caudoviricetes", nombres, ignore.case = TRUE),
+          GRUPOS_VIRUS[["fago"]], GRUPOS_VIRUS[["artropodo"]])
 }
 
 # Presencia por especie y muestra: presente si alguna vOTU de esa especie
@@ -124,7 +132,7 @@ presencia_especies <- function(votus, cob, lecturas, umbral = 70) {
   v <- votus |>
     filter(es_virus == "si") |>
     mutate(especie_fig = nombre_virus(pick(everything())),
-           grupo = grupo_virus(especie_fig))
+           grupo = grupo_virus(pick(everything())))
   cob |>
     inner_join(select(v, votu, especie_fig, grupo, familia), by = "votu") |>
     filter(pct_cubierto >= umbral) |>
