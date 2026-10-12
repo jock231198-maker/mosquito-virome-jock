@@ -29,8 +29,8 @@ En el Mac:
 ```bash
 git pull
 cd results/analisis_R
-quarto render figuras.qmd                     # usa datos_v1
-quarto render figuras.qmd -P datos:datos_v2   # otra versión
+quarto render figuras.qmd                     # usa datos_v3 (por defecto)
+quarto render figuras.qmd -P datos:datos_v1   # otra versión
 ```
 
 Sale `figuras.html` (informe con tablas) y los PDF/PNG en `figuras/`.
@@ -39,7 +39,7 @@ Sale `figuras.html` (informe con tablas) y los PDF/PNG en `figuras/`.
 
 ```bash
 brew install --cask quarto
-Rscript -e 'install.packages(c("readr","dplyr","tidyr","ggplot2","scales","forcats","stringr","patchwork","knitr","rmarkdown"))'
+Rscript -e 'install.packages(c("readr","dplyr","tidyr","ggplot2","scales","forcats","stringr","patchwork","knitr","rmarkdown"), repos = "https://cloud.r-project.org")'
 ```
 
 ## Criterios usados en las figuras
