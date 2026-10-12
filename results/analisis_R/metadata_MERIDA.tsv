@@ -1,0 +1,23 @@
+muestra	sample_id	fecha	sitio	clase_sitio	sexo	estado_alimenticio	individuos_pool	lecturas_crudas	notas
+M1_S1	M1	2024-09-04	Merida (Yucatan)	urban	H	no_alimentada	15	151000000	
+M2_S2	M2	2024-09-04	Merida (Yucatan)	urban	H	no_alimentada	15	94700000	
+M7_S15	M7	2024-09-04	Merida (Yucatan)	urban	H	no_alimentada	15	110000000	
+M9_S16	M9	2024-09-04	Merida (Yucatan)	urban	H	no_alimentada	15	88700000	
+M11_S3	M11	2024-09-04	Merida (Yucatan)	urban	H	no_alimentada	15	101000000	
+M20_S25	M20	2024-09-05	Merida (Yucatan)	urban	H	no_alimentada	15	84300000	
+M21_S29	M21	2024-09-05	Merida (Yucatan)	urban	H	no_alimentada	15	96600000	
+M22_S30	M22	2024-09-05	Merida (Yucatan)	urban	H	no_alimentada	15	55500000	
+M35_S31	M35	2024-09-05	Merida (Yucatan)	urban	H	no_alimentada	15	98400000	
+M36_S17	M36	2024-09-05	Merida (Yucatan)	urban	H	no_alimentada	15	45300000	
+M48_S5	M48	2024-09-05	Merida (Yucatan)	urban	H	no_alimentada	15	102000000	
+M55_S6	M55	2024-09-05	Merida (Yucatan)	urban	H	no_alimentada	15	87400000	
+M56_S7	M56	2024-09-05	Merida (Yucatan)	urban	H	no_alimentada	15	85400000	
+M57_S8	M57	2024-09-05	Merida (Yucatan)	urban	H	no_alimentada	15	138000000	
+M58_S9	M58	2024-09-05	Merida (Yucatan)	urban	H	no_alimentada	15	87900000	
+M59_S10	M59	2024-09-05	Merida (Yucatan)	urban	H	no_alimentada	15	106000000	
+M60_S11	M60	2024-09-05	Merida (Yucatan)	urban	H	no_alimentada	15	110000000	
+M62_S18	M62	NA	Merida (Yucatan)	urban	H	no_alimentada	15	19100000	fecha "Mix" en el Excel: por confirmar
+M71_S19	M71	2024-10-17	Merida (Yucatan)	urban	H	no_alimentada	15	55200000	
+M72_S20	M72	2024-10-17	Merida (Yucatan)	urban	H	no_alimentada	15	56100000	
+M74_S21	M74	NA	Merida (Yucatan)	urban	H	no_alimentada	15	38900000	fecha "Mix" en el Excel: por confirmar
+M79_S28	M79	2024-09-18	Merida (Yucatan)	urban	H	no_alimentada	15	65900000	
