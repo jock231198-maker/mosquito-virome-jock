@@ -14,6 +14,8 @@ Reglas (en este orden; EN_GENOMA = frac_en_genoma >= 0.5):
       nr celular_Artropodo, clase divergente    huesped        (homologia espuria: fagos, gigantes, retro)
       nr celular_Artropodo, resto               EVE_candidato  (no esta en la referencia; small RNA lo decide)
       nr otro celular                           celular_otro   (bacteria, hongo, planta, metazoo)
+      pariente_debil sin proteina (sin hit DIAMOND, nr no viral)
+        y blastn con qcov < 30 %                evidencia_debil (solo un tramo corto de nt)
       resto                                     se mantiene
   sin_hit:
       nr viral                                  viral_solo_nr  (EVE_genoma si EN_GENOMA)
@@ -24,10 +26,16 @@ Reglas (en este orden; EN_GENOMA = frac_en_genoma >= 0.5):
 
 es_virus = clase_final in {identificado, divergente, pariente_debil, viral_solo_nr}
 
+nombre_virus (solo vOTUs virales): en "identificado", la especie de blastn; en el resto,
+"afin a <X>" con X el mejor hit de proteina en nr si es viral (la evidencia mas fuerte),
+y si no, el de blastn. Un hit de blastn sobre el 5 % de la vOTU no da nombre.
+grupo_virus: "fago" si cualquiera de los dos nombres es de fago; "artropodo" si no.
+
 Uso:
   python3 integrar_arbitro.py TABLA_FINAL_votus.tsv veredicto_por_votu.tsv SALIDA.tsv [votus_en_genoma.tsv]
 """
 import csv
+import re
 import sys
 from collections import Counter
 
@@ -37,6 +45,7 @@ f_tabla, f_arb, f_out = sys.argv[1:4]
 f_gen = sys.argv[4] if len(sys.argv) == 5 else None
 
 EN_GENOMA = 0.5
+QCOV_MIN = 30.0          # cobertura minima de blastn para nombrar sin apoyo de proteina
 COLS_ARB = ["veredicto", "nr_nombre", "nr_grupo", "nr_pident", "celular_nombre"]
 CONSERVAR = {"rRNA", "ADN_descartado"}
 VIRALES = {"identificado", "divergente", "pariente_debil"}
@@ -62,7 +71,15 @@ if f_gen:
     gen = {r["votu"]: r for r in gen_filas}
 
 
-def clase_final(clase, ver, fg):
+def num(x):
+    try:
+        return float(x)
+    except (TypeError, ValueError):
+        return None
+
+
+def clase_final(r, ver, fg):
+    clase = r["clase"]
     if clase in CONSERVAR:
         return clase, ""
     cel = ver.startswith("celular_")
@@ -74,6 +91,10 @@ def clase_final(clase, ver, fg):
             return ("huesped" if clase == "divergente" else "EVE_candidato"), "si"
         if cel:
             return "celular_otro", "si"
+        sin_proteina = num(r.get("dm_pident")) is None and ver != "viral"
+        qcov = num(r.get("bn_qcov"))
+        if clase == "pariente_debil" and sin_proteina and (qcov is None or qcov < QCOV_MIN):
+            return "evidencia_debil", ""
         return clase, ""
     if ver == "viral":
         return ("EVE_genoma" if en_gen else "viral_solo_nr"), ""
@@ -106,7 +127,7 @@ for r in tabla:
     elif f_gen:
         sin_gen += 1
 
-    cf, conflicto = clase_final(r["clase"], ver, fg)
+    cf, conflicto = clase_final(r, ver, fg)
     cruce[(r["clase"], ver)] += 1
 
     r2 = dict(r)
@@ -118,10 +139,24 @@ for r in tabla:
     r2["clase_final"] = cf
     r2["es_virus"] = "si" if cf in ES_VIRUS else "no"
     r2["conflicto"] = conflicto
+    if r2["es_virus"] == "si":
+        especie = (r.get("especie") or "").strip()
+        nr_viral = (a["nr_nombre"] or "").strip() if ver == "viral" else ""
+        if cf == "identificado":
+            nombre = especie or nr_viral or v
+        else:
+            nombre = "afín a " + (nr_viral or especie or v)
+        es_fago = any(re.search(r"phage|Leviviricetes|Caudoviricetes", x, re.I) for x in (especie, nr_viral))
+        r2["nombre_virus"] = nombre
+        r2["grupo_virus"] = "fago" if es_fago else "artropodo"
+    else:
+        r2["nombre_virus"] = ""
+        r2["grupo_virus"] = ""
     salida.append(r2)
 
 cab_out = cab + ["nr_veredicto"] + COLS_ARB[1:] + ["frac_en_genoma", "cromosomas_genoma",
-                                                   "clase_final", "es_virus", "conflicto"]
+                                                   "clase_final", "es_virus", "conflicto",
+                                                   "nombre_virus", "grupo_virus"]
 with open(f_out, "w", newline="") as fh:
     w = csv.DictWriter(fh, fieldnames=cab_out, delimiter="\t", lineterminator="\n")
     w.writeheader()
@@ -154,9 +189,15 @@ if f_gen:
     for r in sorted(virus, key=lambda r: -float(r["frac_en_genoma"])):
         print(f"  {r['clase_final']:14s} {r['especie'][:30]:30s} frac={r['frac_en_genoma']}")
 
-print("\n== especies virales (es_virus = si) ==")
-esp = Counter(r["especie"] or "(sin nombre)" for r in salida if r["es_virus"] == "si")
-for e, n in esp.most_common():
-    print(f"  {e[:40]:40s} {n:3d} vOTUs")
+for g in ("artropodo", "fago"):
+    esp = Counter(r["nombre_virus"] for r in salida if r["es_virus"] == "si" and r["grupo_virus"] == g)
+    print(f"\n== virus ({g}): {len(esp)} nombres, {sum(esp.values())} vOTUs ==")
+    for e, n in esp.most_common():
+        print(f"  {e[:45]:45s} {n:3d} vOTUs")
+
+deb = [r for r in salida if r["clase_final"] == "evidencia_debil"]
+print(f"\n== evidencia_debil: solo un tramo corto de nt, sin proteina ({len(deb)}) ==")
+for r in deb:
+    print(f"  {r['especie'][:32]:32s} bn={r['bn_pident']}%/{r['bn_qcov']}%  ensamblada en {r['n_muestras_asm']}")
 
 print(f"\n  escrito: {f_out}")
