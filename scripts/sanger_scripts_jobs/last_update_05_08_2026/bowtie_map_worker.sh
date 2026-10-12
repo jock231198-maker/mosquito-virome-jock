@@ -35,8 +35,8 @@ idx="${LSB_JOBINDEX:?Enviar como job array}"
 sample=$(sed -n "${idx}p" "$samples")
 [[ -n "$sample" ]] || { echo "ERROR: linea $idx vacia en $samples"; exit 1; }
 
-R1="$indir/${sample}_R1_001_paired.fastq.gz"
-R2="$indir/${sample}_R2_001_paired.fastq.gz"
+R1="$indir/${sample}${R1_SUFFIX:-_R1_001_paired.fastq.gz}"
+R2="$indir/${sample}${R2_SUFFIX:-_R2_001_paired.fastq.gz}"
 outdir="$outbase/$result_from"
 statsdir="${STATS_DIR:-$RESULTS_DIR/mapping_stats}"
 mkdir -p "$outdir" "$statsdir"

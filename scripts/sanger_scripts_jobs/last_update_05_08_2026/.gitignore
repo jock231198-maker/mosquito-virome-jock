@@ -1,0 +1,6 @@
+__pycache__/
+*.bak
+*.ids
+*.fa
+resto_vs_rrna_dc.tsv
+inventario_*.txt

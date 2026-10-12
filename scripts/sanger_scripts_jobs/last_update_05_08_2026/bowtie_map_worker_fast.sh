@@ -59,7 +59,7 @@ R1="$indir/${sample}_R1_001_paired.fastq.gz"
 R2="$indir/${sample}_R2_001_paired.fastq.gz"
 [[ -f "$R1" && -f "$R2" ]] || { echo "ERROR: faltan R1/R2 para $sample en $indir"; exit 1; }
 
-statsdir="$RESULTS_DIR/mapping_stats"
+statsdir="${STATS_DIR:-$RESULTS_DIR/mapping_stats}"
 countdir="$RESULTS_DIR/unmapped_counts"
 
 # Staging aparte: un job matado no debe dejar un .gz con nombre bueno y
