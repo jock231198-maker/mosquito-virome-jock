@@ -1,0 +1,86 @@
+name	taxonomy_id	taxonomy_lvl	kraken_assigned_reads	added_reads	new_est_reads	fraction_total_reads
+Homo sapiens	9606	S	530362	71271	601633	0.89026
+Ascochyta rabiei	5454	S	76	516	592	0.00088
+Alternaria dauci	48095	S	17	62	79	0.00012
+Cercospora beticola	122368	S	18	233	251	0.00037
+Zymoseptoria tritici	1047171	S	17	59	76	0.00011
+Botrytis cinerea	40559	S	34	59	93	0.00014
+Aspergillus oryzae	5062	S	15	114	129	0.00019
+Aspergillus chevalieri	182096	S	23	156	179	0.00026
+Sugiyamaella lignohabitans	796027	S	23	126	149	0.00022
+Yarrowia lipolytica	4952	S	16	2	18	0.00003
+Rhizoctonia solani	456999	S	203	108	311	0.00046
+Psilocybe cubensis	181762	S	61	62	123	0.00018
+Marasmius oreades	181124	S	34	232	266	0.00039
+Malassezia restricta	76775	S	236	452	688	0.00102
+Malassezia japonica	223818	S	11	21	32	0.00005
+Sporisorium graminicola	280036	S	12	10	22	0.00003
+Puccinia striiformis	27350	S	131	91	222	0.00033
+Encephalitozoon hellem	27973	S	12	712	724	0.00107
+Rhizophagus irregularis	588596	S	12	371	383	0.00057
+Plasmodium relictum	85471	S	33215	1196	34411	0.05092
+Babesia bigemina	5866	S	164	38	202	0.00030
+Theileria equi	5872	S	12	0	12	0.00002
+Toxoplasma gondii	5811	S	47	22	69	0.00010
+Cryptosporidium parvum	5807	S	22	1	23	0.00003
+Phaeodactylum tricornutum	2850	S	12	1533	1545	0.00229
+Guillardia theta	55529	S	428	114	542	0.00080
+Trypanosoma brucei	5691	S	10	0	10	0.00001
+Pantoea ananatis	553	S	80	1423	1503	0.00222
+Erwinia sp. LJJL01	3391839	S	13	82	95	0.00014
+Escherichia coli	562	S	138	11670	11808	0.01747
+Klebsiella pneumoniae	573	S	37	6302	6339	0.00938
+Stenotrophomonas maltophilia	40324	S	301	1745	2046	0.00303
+Orbus mooreae	3074107	S	17	74	91	0.00013
+Orbus wheelerorum	3074111	S	15	45	60	0.00009
+Zophobihabitans entericus	1635327	S	16	27	43	0.00006
+Acinetobacter baumannii	470	S	10	231	241	0.00036
+Halomonas sp. JS92-SW72	2306583	S	34	42	76	0.00011
+Haemophilus parainfluenzae	729	S	12	39	51	0.00008
+Vibrio anguillarum	55601	S	10	9	19	0.00003
+Cardiobacterium hominis	2718	S	12	6	18	0.00003
+Asaia sp. BMEF1	3155932	S	52	401	453	0.00067
+Asaia prunellae	610245	S	17	74	91	0.00013
+Wolbachia endosymbiont (group A) of Lypha dubia	3066146	S	15	104	119	0.00018
+Brevundimonas sp. KH_060	3465236	S	31	113	144	0.00021
+Acidovorax sp. BLS4	3273430	S	95	202	297	0.00044
+Entomospira culicis	2719989	S	209	154	363	0.00054
+Entomospira entomophila	2719988	S	49	163	212	0.00031
+Entomospira nematocerorum	2719987	S	22	84	106	0.00016
+Capnocytophaga sputigena	1019	S	12	109	121	0.00018
+uncultured Acetobacteroides sp.	1760811	S	53	8	61	0.00009
+Porphyromonas sp. oral taxon 275	712435	S	11	46	57	0.00008
+Ignavibacterium sp.	2651167	S	12	4	16	0.00002
+Cutibacterium acnes	1747	S	692	814	1506	0.00223
+Arachnia propionica	1750	S	44	29	73	0.00011
+Corynebacterium tuberculostearicum	38304	S	39	351	390	0.00058
+Corynebacterium marquesiae	2913503	S	24	231	255	0.00038
+Corynebacterium matruchotii	43768	S	19	4	23	0.00003
+Corynebacterium kroppenstedtii	161879	S	15	46	61	0.00009
+Tsukamurella tyrosinosolvens	57704	S	13	74	87	0.00013
+Lawsonella clevelandensis	1528099	S	30	32	62	0.00009
+Rothia dentocariosa	2047	S	26	34	60	0.00009
+Rothia aeria	172042	S	26	36	62	0.00009
+Kocuria palustris	71999	S	10	68	78	0.00012
+Curtobacterium flaccumfaciens	2035	S	71	246	317	0.00047
+Streptomyces sp. T12	477697	S	271	263	534	0.00079
+Streptococcus gordonii	1302	S	21	531	552	0.00082
+Latilactobacillus sakei	1599	S	10	146	156	0.00023
+Staphylococcus pettenkoferi	170573	S	37	55	92	0.00014
+Staphylococcus hominis	1290	S	36	231	267	0.00040
+Staphylococcus epidermidis	1282	S	34	243	277	0.00041
+Gemella haemolysans	1379	S	18	54	72	0.00011
+Bacillus cereus	1396	S	14	199	213	0.00032
+Anaerococcus prevotii	33034	S	55	97	152	0.00022
+Anaerococcus nagyae	1755241	S	13	71	84	0.00012
+Finegoldia magna	1260	S	83	86	169	0.00025
+Peptoniphilus harei	54005	S	19	60	79	0.00012
+Aedoeadaptatus ivorii	54006	S	44	13	57	0.00008
+Geminocystis herdmanii	669359	S	11	63	74	0.00011
+Leptotrichia sp. oral taxon 212	712357	S	20	27	47	0.00007
+Betabaculovirus chofumiferanae	3051997	S	2141	0	2141	0.00317
+Phasivirus phasiense	3052631	S	473	0	473	0.00070
+Gylbovirus aagae	2955967	S	84	0	84	0.00012
+Vesiculovirus piry	1972575	S	10	0	10	0.00001
+Orthoflavivirus iunctionis	3703353	S	12	0	12	0.00002
+Harbinvirus semele	2734052	S	19	3	22	0.00003

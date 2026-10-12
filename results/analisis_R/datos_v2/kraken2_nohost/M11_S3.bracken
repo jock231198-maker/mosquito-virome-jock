@@ -1,0 +1,67 @@
+name	taxonomy_id	taxonomy_lvl	kraken_assigned_reads	added_reads	new_est_reads	fraction_total_reads
+Homo sapiens	9606	S	382655	253283	635938	0.88986
+Aspergillus luchuensis	1069201	S	13	59	72	0.00010
+Aspergillus chevalieri	182096	S	23	147	170	0.00024
+Ascochyta rabiei	5454	S	31	186	217	0.00030
+Botrytis cinerea	40559	S	12	24	36	0.00005
+Puccinia striiformis	27350	S	335	152	487	0.00068
+Malassezia restricta	76775	S	130	257	387	0.00054
+Psilocybe cubensis	181762	S	16	38	54	0.00008
+Kwoniella mangrovensis	463800	S	10	45	55	0.00008
+Plasmodium relictum	85471	S	35271	5092	40363	0.05648
+Babesia bigemina	5866	S	35	62	97	0.00014
+Babesia duncani	323732	S	17	1	18	0.00003
+Toxoplasma gondii	5811	S	15	13	28	0.00004
+Cryptosporidium parvum	5807	S	12	0	12	0.00002
+Phaeodactylum tricornutum	2850	S	11	392	403	0.00056
+Bremia lactucae	4779	S	16	3226	3242	0.00454
+Dictyostelium discoideum	44689	S	12	0	12	0.00002
+Zymobacter palmae	33074	S	37	2119	2156	0.00302
+Halotalea alkalilenta	376489	S	307	2255	2562	0.00358
+Pistricoccus aurantiacus	1883414	S	142	787	929	0.00130
+Halomonas sp. JS92-SW72	2306583	S	21	710	731	0.00102
+Halomonas chromatireducens	507626	S	10	85	95	0.00013
+Tatumella ptyseos	82987	S	40	261	301	0.00042
+Morganella morganii	582	S	19	474	493	0.00069
+Acinetobacter sp. ESL0695	2983215	S	25	356	381	0.00053
+Stenotrophomonas maltophilia	40324	S	202	5178	5380	0.00753
+Motilimonas cestriensis	2742685	S	41	99	140	0.00020
+Vibrio anguillarum	55601	S	19	162	181	0.00025
+Vibrio parahaemolyticus	670	S	14	188	202	0.00028
+Asaia bogorensis	91915	S	69	543	612	0.00086
+Asaia prunellae	610245	S	20	144	164	0.00023
+Wolbachia endosymbiont (group A) of Lypha dubia	3066146	S	22	126	148	0.00021
+Acidovorax sp. BLS4	3273430	S	20	148	168	0.00024
+Conchiformibius steedae	153493	S	12	98	110	0.00015
+Entomospira culicis	2719989	S	2089	1200	3289	0.00460
+Entomospira entomophila	2719988	S	53	130	183	0.00026
+Entomospira nematocerorum	2719987	S	41	117	158	0.00022
+uncultured Acetobacteroides sp.	1760811	S	147	35	182	0.00025
+Porphyromonas sp. oral taxon 275	712435	S	10	21	31	0.00004
+Cutibacterium acnes	1747	S	643	488	1131	0.00158
+Cutibacterium granulosum	33011	S	10	64	74	0.00010
+Arachnia propionica	1750	S	37	13	50	0.00007
+Corynebacterium marquesiae	2913503	S	23	151	174	0.00024
+Corynebacterium tuberculostearicum	38304	S	22	139	161	0.00023
+Corynebacterium kroppenstedtii	161879	S	19	49	68	0.00010
+Corynebacterium glucuronolyticum	39791	S	12	23	35	0.00005
+Lawsonella clevelandensis	1528099	S	18	21	39	0.00005
+Rothia dentocariosa	2047	S	29	39	68	0.00010
+Rothia aeria	172042	S	13	20	33	0.00005
+Kocuria palustris	71999	S	14	70	84	0.00012
+Curtobacterium flaccumfaciens	2035	S	24	92	116	0.00016
+Streptomyces sp. T12	477697	S	114	108	222	0.00031
+Streptomyces sp. BR1	1592323	S	51	52	103	0.00014
+Streptococcus gordonii	1302	S	18	257	275	0.00038
+Latilactobacillus sakei	1599	S	11	88	99	0.00014
+Staphylococcus epidermidis	1282	S	49	1238	1287	0.00180
+Staphylococcus hominis	1290	S	48	588	636	0.00089
+Staphylococcus pettenkoferi	170573	S	40	90	130	0.00018
+Gemella haemolysans	1379	S	17	26	43	0.00006
+Anaerococcus prevotii	33034	S	11	18	29	0.00004
+Anaerococcus nagyae	1755241	S	10	19	29	0.00004
+Finegoldia magna	1260	S	47	73	120	0.00017
+Peptoniphilus harei	54005	S	12	57	69	0.00010
+Gylbovirus aagae	2955967	S	5144	0	5144	0.00720
+Betabaculovirus chofumiferanae	3051997	S	3538	0	3538	0.00495
+Gorganvirus isfahan	2560650	S	50	621	671	0.00094

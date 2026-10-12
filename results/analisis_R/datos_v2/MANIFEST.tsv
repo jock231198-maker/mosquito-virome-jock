@@ -1,0 +1,34 @@
+# congelado: 2026-10-12 22:49:57  host: farm22-head1  lote: MERIDA
+# scripts: e5493aa update figuras.qmd
+archivo	origen	lineas	md5	modificado_origen
+read_accounting.tsv	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/qc_control/read_accounting.tsv	23	b6095dbb954766c099ed7f27e6dbf7a4	2026-08-18 18:02:09
+contigs_union.tsv	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/qc_control/contigs_union.tsv.cov	6005	d4b997ea7e2ac6526614d536d1974fe2	2026-10-05 23:54:38
+genomad_virus_summary.tsv	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/genomad_all/all_final/all_final_summary/all_final_virus_summary.tsv	1145	cf64ac8f59e8a77eab95cd62a9ec5685	2026-09-07 09:12:42
+checkv_viral.tsv	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/checkv_viral/all_final_virus.fna/quality_summary.tsv	1145	17b52acfb0815a93a6b47243d8ec3eea	2026-09-08 00:43:01
+votus.clstr	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/qc_control/votus.clstr	1892	27a1c9b458a2a1a4d3e204dbb8dd0361	2026-09-10 19:52:42
+votu_coverage.tsv	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/qc_control/votu_coverage.tsv	16456	ba55bb33177011ed2b09926ff70498db	2026-09-18 23:12:22
+votus_en_genoma.tsv	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/qc_control/votus_en_genoma.tsv	749	6dcb0c723e85fb591170b99e9f0c811a	2026-10-12 19:31:11
+TABLA_FINAL_votus_arb.tsv	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/qc_control/TABLA_FINAL_votus_arb.tsv	749	604257ad5401999731e60dde19480bf0	2026-10-12 22:49:57
+veredicto_contigs.tsv	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/contig_annot/contigs_union_MERIDA_nr_jr46/veredicto_por_votu.tsv	6005	d9d2a02820333a50be93dba4a23e90fe	2026-10-08 09:58:29
+kraken2_nohost/M11_S3.bracken	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/kraken2_nohost/M11_S3.bracken	67	f29d696d87bd24b65f63e14562443019	2026-09-22 02:05:49
+kraken2_nohost/M1_S1.bracken	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/kraken2_nohost/M1_S1.bracken	146	85711635f410e1dd394aa19b8f153ec0	2026-09-22 02:08:42
+kraken2_nohost/M20_S25.bracken	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/kraken2_nohost/M20_S25.bracken	106	33f0b2b530a70b588da7a8c2e24fd7ff	2026-09-22 02:11:22
+kraken2_nohost/M21_S29.bracken	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/kraken2_nohost/M21_S29.bracken	93	6eab8058077696a16bd5c65df14a7994	2026-09-22 02:12:51
+kraken2_nohost/M22_S30.bracken	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/kraken2_nohost/M22_S30.bracken	32	a9df62ac12671ba920f0e8078c49647d	2026-09-22 02:14:32
+kraken2_nohost/M2_S2.bracken	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/kraken2_nohost/M2_S2.bracken	67	fb646a4ef4a2df4c7d59363e91e968c6	2026-09-22 02:16:28
+kraken2_nohost/M35_S31.bracken	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/kraken2_nohost/M35_S31.bracken	41	727fe7314b5d7f29fcd48438a07e239e	2026-09-22 02:18:11
+kraken2_nohost/M36_S17.bracken	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/kraken2_nohost/M36_S17.bracken	111	d5ab28cbbbb083375611ac4d00c2d256	2026-09-22 02:21:01
+kraken2_nohost/M48_S5.bracken	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/kraken2_nohost/M48_S5.bracken	40	b64d08bf796895d917fd108c1d5b7df6	2026-09-22 02:22:43
+kraken2_nohost/M55_S6.bracken	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/kraken2_nohost/M55_S6.bracken	69	36ee5ed0129f71fbf61b47ec37d7c18c	2026-09-22 02:24:25
+kraken2_nohost/M56_S7.bracken	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/kraken2_nohost/M56_S7.bracken	86	99f32cc0660840f778706f6e19eda2ac	2026-09-22 02:25:58
+kraken2_nohost/M57_S8.bracken	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/kraken2_nohost/M57_S8.bracken	86	24ca122165e06e39e039bc2ab12ddd51	2026-09-22 02:27:43
+kraken2_nohost/M58_S9.bracken	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/kraken2_nohost/M58_S9.bracken	60	0491f46ab393741cd9d2ccf4b5c3672d	2026-09-22 02:29:16
+kraken2_nohost/M59_S10.bracken	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/kraken2_nohost/M59_S10.bracken	46	b911225e50a1812a07180e2da41669b5	2026-09-22 02:30:46
+kraken2_nohost/M60_S11.bracken	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/kraken2_nohost/M60_S11.bracken	68	420c7b02d6a007de975ba95f9cd0e71e	2026-09-22 02:32:16
+kraken2_nohost/M62_S18.bracken	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/kraken2_nohost/M62_S18.bracken	46	4dfa49aa84d97edccee05af5cc7b87e9	2026-09-22 02:33:48
+kraken2_nohost/M71_S19.bracken	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/kraken2_nohost/M71_S19.bracken	60	035a271955981fa6b2f8c840088e4fb3	2026-09-22 02:35:35
+kraken2_nohost/M72_S20.bracken	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/kraken2_nohost/M72_S20.bracken	84	bfd0fb0164bcfa65380c7530418b3c33	2026-09-22 02:37:30
+kraken2_nohost/M74_S21.bracken	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/kraken2_nohost/M74_S21.bracken	83	cd1af14e12fe7b033c1f23ee8df65b36	2026-09-22 02:39:28
+kraken2_nohost/M79_S28.bracken	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/kraken2_nohost/M79_S28.bracken	66	00ed78d46d9fa000dba08f324e6ab5b5	2026-09-22 02:41:04
+kraken2_nohost/M7_S15.bracken	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/kraken2_nohost/M7_S15.bracken	148	bd1ba17a2ff9165113ea197631ea2e62	2026-09-22 02:42:41
+kraken2_nohost/M9_S16.bracken	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/kraken2_nohost/M9_S16.bracken	133	ffa7bb9a255813542de5c3a8a07c0647	2026-09-22 02:44:18

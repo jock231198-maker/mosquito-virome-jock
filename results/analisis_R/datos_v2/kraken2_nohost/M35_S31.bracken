@@ -1,0 +1,41 @@
+name	taxonomy_id	taxonomy_lvl	kraken_assigned_reads	added_reads	new_est_reads	fraction_total_reads
+Homo sapiens	9606	S	113907	282165	396072	0.81116
+Aspergillus luchuensis	1069201	S	10	66	76	0.00016
+Aspergillus chevalieri	182096	S	16	151	167	0.00034
+Aspergillus fumigatus	746128	S	11	36	47	0.00010
+Ascochyta rabiei	5454	S	28	226	254	0.00052
+Zymoseptoria tritici	1047171	S	12	86	98	0.00020
+Sugiyamaella lignohabitans	796027	S	18	179	197	0.00040
+Yarrowia lipolytica	4952	S	16	4	20	0.00004
+Psilocybe cubensis	181762	S	76	107	183	0.00037
+Marasmius oreades	181124	S	41	120	161	0.00033
+Rhizoctonia solani	456999	S	48	53	101	0.00021
+Kwoniella mangrovensis	463800	S	27	150	177	0.00036
+Cutaneotrichosporon cavernicola	279322	S	11	25	36	0.00007
+Puccinia striiformis	27350	S	91	197	288	0.00059
+Sporisorium graminicola	280036	S	10	63	73	0.00015
+Rhizophagus irregularis	588596	S	14	10	24	0.00005
+Plasmodium relictum	85471	S	30766	15443	46209	0.09464
+Babesia bigemina	5866	S	15	62	77	0.00016
+Toxoplasma gondii	5811	S	10	34	44	0.00009
+Cryptosporidium parvum	5807	S	11	3	14	0.00003
+Bremia lactucae	4779	S	13	3306	3319	0.00680
+Dictyostelium discoideum	44689	S	15	4	19	0.00004
+Wolbachia pipientis	955	S	765	13161	13926	0.02852
+Asaia bogorensis	91915	S	359	3478	3837	0.00786
+Brevundimonas sp. KH_060	3465236	S	26	70	96	0.00020
+Haematospirillum jordaniae	1549855	S	17	21	38	0.00008
+Morganella morganii	582	S	62	951	1013	0.00207
+Vibrio anguillarum	55601	S	137	580	717	0.00147
+Stenotrophomonas maltophilia	40324	S	63	1796	1859	0.00381
+Entomospira culicis	2719989	S	540	232	772	0.00158
+Entomospira nematocerorum	2719987	S	13	27	40	0.00008
+uncultured Acetobacteroides sp.	1760811	S	116	61	177	0.00036
+Sulfidibacter corallicola	2818388	S	11	0	11	0.00002
+Cutibacterium acnes	1747	S	23	55	78	0.00016
+Curtobacterium flaccumfaciens	2035	S	35	278	313	0.00064
+Streptomyces sp. T12	477697	S	14	58	72	0.00015
+Solwaraspora sp. WMMD791	3016086	S	15	28	43	0.00009
+Nostoc sp. MS1	2764711	S	10	13	23	0.00005
+Vesiculovirus piry	1972575	S	15876	0	15876	0.03251
+Betabaculovirus chofumiferanae	3051997	S	1714	0	1714	0.00351
