@@ -45,7 +45,7 @@ first_dir() {
 FQ_RAW_DIR="${FQ_RAW_DIR:-$(first_dir "$RESULTS_DIR/fastqc_raw" "$RESULTS_DIR/fastqc/raw")}"
 FQ_NOPOLYG_DIR="${FQ_NOPOLYG_DIR:-$(first_dir "$RESULTS_DIR/fastqc_nopolyg" "$RESULTS_DIR/fastqc/nopolyg" "$RESULTS_DIR/fastqc_polyg")}"
 FQ_TRIMMED_DIR="${FQ_TRIMMED_DIR:-$(first_dir "$RESULTS_DIR/fastqc_trimmed" "$RESULTS_DIR/fastqc/trimmed")}"
-BT_STATS_DIR="${BT_STATS_DIR:-$(first_dir "$RESULTS_DIR/mapping_stats")}"
+BT_STATS_DIR="${BT_STATS_DIR:-$(first_dir "$RESULTS_DIR/mapping_stats_bam")}"
 UNMAPPED_COUNTS_DIR="${UNMAPPED_COUNTS_DIR:-$(first_dir "$RESULTS_DIR/unmapped_counts")}"
 STAR_DIR="${STAR_DIR:-$(first_dir "$SCRATCH/aligned" "$SCRATCH/star" "$SCRATCH/aligned_star")}"
 BASELINE="$RESULTS_DIR/qc_control/raw_pairs_baseline.tsv"

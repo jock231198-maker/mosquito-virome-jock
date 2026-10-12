@@ -157,7 +157,7 @@ printf '%s\n' "sample${SEP}raw_pairs${SEP}trimmed_pairs${SEP}pct_trim${SEP}bt_pa
 for s in "${SAMPLES[@]}"; do
   raw=$(reads_raw "$s");                   raw=${raw:-NA}
   trim=$(reads_from_trimlog "$s");         trim=${trim:-NA}
-  bsum="$RESULTS_DIR/mapping_stats/${s}_bowtie2_summary.txt"
+  bsum="${BT_STATS_DIR:-$RESULTS_DIR/mapping_stats_bam}/${s}_bowtie2_summary.txt"
   btot=$(bowtie_total "$bsum");            btot=${btot:-NA}
   rate=$(bowtie_rate "$bsum");             rate=${rate:-NA}
   unm=$(unmapped_pairs "$s");              unm=${unm:-NA}
