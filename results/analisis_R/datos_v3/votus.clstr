@@ -1,0 +1,1892 @@
+>Cluster 0
+0	15488nt, >M1_S1__trinity__TRINITY_DN6_c0_g1_i10... *
+1	1057nt, >M59_S10__rnaviral__NODE_18_length_1057_cov_2.887897... at +/99.43%
+>Cluster 1
+0	12887nt, >M11_S3__rnaviral__NODE_1_length_12887_cov_36.291323... at -/99.08%
+1	12945nt, >M1_S1__rnaviral__NODE_1_length_12945_cov_150.857553... at -/95.48%
+2	12882nt, >M20_S25__rnaviral__NODE_1_length_12882_cov_41.670147... at +/99.48%
+3	13129nt, >M21_S29__megahit__k119_2559... *
+4	12898nt, >M22_S30__rnaviral__NODE_1_length_12898_cov_29.016966... at +/99.24%
+5	12906nt, >M2_S2__rnaviral__NODE_1_length_12906_cov_154.093101... at -/98.96%
+6	12902nt, >M48_S5__megahit__k119_425... at +/98.98%
+7	12897nt, >M55_S6__rnaviral__NODE_1_length_12897_cov_123.844879... at -/99.02%
+8	12895nt, >M60_S11__rnaviral__NODE_1_length_12895_cov_73.685272... at -/99.07%
+9	12898nt, >M62_S18__rnaviral__NODE_1_length_12898_cov_10.703012... at -/98.48%
+10	12888nt, >M72_S20__trinity__TRINITY_DN20_c0_g1_i10... at -/99.34%
+11	1766nt, >M74_S21__rnaviral__NODE_17_length_1766_cov_5.177053... at -/99.83%
+12	12912nt, >M7_S15__megahit__k119_1244... at +/98.96%
+>Cluster 2
+0	13043nt, >M1_S1__metaviral__NODE_1_length_13043_cov_63.244177_cutoff_5_type_linearrepeat... *
+>Cluster 3
+0	13015nt, >M1_S1__megahit__k119_12197... *
+1	3072nt, >M74_S21__rnaviral__NODE_5_length_3072_cov_6.070460... at -/99.54%
+>Cluster 4
+0	6925nt, >M48_S5__rnaviral__NODE_2_length_6925_cov_8.232112... at -/99.36%
+1	2254nt, >M48_S5__rnaviral__NODE_9_length_2254_cov_5.524263... at -/99.33%
+2	10680nt, >M72_S20__rnaviral__NODE_2_length_10680_cov_163.588374... *
+>Cluster 5
+0	5622nt, >M1_S1__rnaviral__NODE_2_length_5622_cov_4.909026... *
+1	1853nt, >M20_S25__rnaviral__NODE_40_length_1853_cov_4.389690... at -/98.81%
+2	1128nt, >M20_S25__rnaviral__NODE_197_length_1128_cov_3.950880... at -/95.04%
+3	1483nt, >M20_S25__megahit__k119_3570... at -/99.06%
+4	1862nt, >M55_S6__rnaviral__NODE_25_length_1862_cov_2.793712... at +/98.82%
+>Cluster 6
+0	5398nt, >M72_S20__rna__NODE_3_length_5398_cov_130.323799_g1_i1... *
+>Cluster 7
+0	4707nt, >M11_S3__rnaviral__NODE_2_length_4707_cov_10.928725... at +/98.66%
+1	3085nt, >M22_S30__rnaviral__NODE_4_length_3085_cov_5.513505... at +/98.61%
+2	4797nt, >M48_S5__rnaviral__NODE_3_length_4797_cov_5.618576... *
+>Cluster 8
+0	4680nt, >M11_S3__rnaviral__NODE_3_length_4680_cov_29.648888... at -/95.83%
+1	4676nt, >M22_S30__rnaviral__NODE_2_length_4676_cov_23.139615... at -/95.89%
+2	2624nt, >M35_S31__rnaviral__NODE_6_length_2624_cov_26.172816... at +/96.34%
+3	2062nt, >M35_S31__rnaviral__NODE_12_length_2062_cov_15.964232... at +/95.83%
+4	1122nt, >M36_S17__rnaviral__NODE_8_length_1122_cov_9.039143... at +/96.35%
+5	4683nt, >M48_S5__megahit__k119_37... *
+>Cluster 9
+0	1124nt, >M20_S25__rnaviral__NODE_198_length_1124_cov_4.989767... at -/97.86%
+1	4361nt, >M21_S29__trinity__TRINITY_DN83_c0_g1_i1... *
+>Cluster 10
+0	4338nt, >M11_S3__megahit__k119_37... *
+1	1215nt, >M48_S5__rnaviral__NODE_31_length_1215_cov_5.016295... at +/99.09%
+>Cluster 11
+0	2288nt, >M2_S2__megahit__k119_765... at +/99.83%
+1	4110nt, >M57_S8__rnaviral__NODE_2_length_4110_cov_6.035952... *
+2	1809nt, >M58_S9__rna__NODE_32_length_1809_cov_5.356818_g18_i0... at -/99.78%
+3	1774nt, >M71_S19__trinity__TRINITY_DN1211_c0_g1_i1... at +/99.77%
+>Cluster 12
+0	1126nt, >M55_S6__rnaviral__NODE_139_length_1126_cov_4.057567... at -/99.82%
+1	4012nt, >M57_S8__megahit__k119_5235... *
+2	1032nt, >M58_S9__megahit__k119_429... at +/99.81%
+>Cluster 13
+0	3731nt, >M58_S9__rna__NODE_2_length_3731_cov_8907.629821_g1_i0... *
+1	2805nt, >M59_S10__rna__NODE_2_length_2805_cov_42.039550_g1_i0... at -/95.94%
+>Cluster 14
+0	1690nt, >M1_S1__rnaviral__NODE_71_length_1690_cov_11.517367... at -/99.76%
+1	2216nt, >M1_S1__trinity__TRINITY_DN9387_c0_g2_i2... at -/97.97%
+2	1423nt, >M1_S1__trinity__TRINITY_DN9387_c1_g1_i1... at -/99.86%
+3	3679nt, >M20_S25__rnaviral__NODE_10_length_3679_cov_8.450138... *
+4	2163nt, >M55_S6__rnaviral__NODE_14_length_2163_cov_2.088931... at -/97.27%
+>Cluster 15
+0	3465nt, >M20_S25__trinity__TRINITY_DN346_c0_g1_i3... *
+>Cluster 16
+0	3189nt, >M11_S3__megahit__k119_575... at +/97.59%
+1	3448nt, >M20_S25__megahit__k119_3000... *
+2	3231nt, >M21_S29__megahit__k119_1496... at +/97.09%
+3	3109nt, >M2_S2__megahit__k119_6108... at +/99.16%
+4	3098nt, >M35_S31__rnaviral__NODE_2_length_3098_cov_932.306658... at +/99.32%
+5	3150nt, >M48_S5__megahit__k119_393... at -/98.76%
+6	3096nt, >M55_S6__rnaviral__NODE_7_length_3096_cov_87.252708... at +/99.52%
+7	1661nt, >M56_S7__rnaviral__NODE_18_length_1661_cov_3.259926... at -/99.46%
+8	1010nt, >M56_S7__rnaviral__NODE_136_length_1010_cov_4.017690... at +/99.80%
+9	3099nt, >M60_S11__rnaviral__NODE_2_length_3099_cov_119.877049... at +/99.58%
+10	3176nt, >M71_S19__megahit__k119_3565... at +/98.17%
+11	3116nt, >M72_S20__megahit__k119_32... at +/98.94%
+12	3103nt, >M74_S21__rnaviral__NODE_4_length_3103_cov_307.882449... at -/99.29%
+13	3098nt, >M79_S28__rnaviral__NODE_1_length_3098_cov_1013.490653... at +/99.00%
+14	1244nt, >M7_S15__rnaviral__NODE_30_length_1244_cov_2.627615... at -/99.36%
+15	3117nt, >M9_S16__rna__NODE_8_length_3117_cov_31.284876_g4_i0... at -/98.65%
+>Cluster 17
+0	3400nt, >M35_S31__rna__NODE_6_length_3400_cov_10.052223_g3_i0... *
+>Cluster 18
+0	3367nt, >M56_S7__trinity__TRINITY_DN471_c1_g1_i72... *
+>Cluster 19
+0	3351nt, >M21_S29__rna__NODE_11_length_3351_cov_774.764991_g2_i2... *
+>Cluster 20
+0	3335nt, >M22_S30__rna__NODE_8_length_3335_cov_7010.034084_g7_i0... *
+>Cluster 21
+0	2016nt, >M20_S25__rna__NODE_54_length_2016_cov_13.358922_g34_i0... at +/98.61%
+1	1478nt, >M20_S25__trinity__TRINITY_DN108_c0_g1_i14... at +/96.82%
+2	1623nt, >M21_S29__rnaviral__NODE_43_length_1623_cov_17.895172... at -/97.35%
+3	1015nt, >M21_S29__rnaviral__NODE_141_length_1015_cov_8.059006... at -/95.57%
+4	3297nt, >M35_S31__trinity__TRINITY_DN258_c0_g1_i5... *
+>Cluster 22
+0	3155nt, >M22_S30__rna__NODE_10_length_3155_cov_3766.839665_g9_i0... *
+>Cluster 23
+0	3080nt, >M71_S19__trinity__TRINITY_DN138_c0_g1_i2... *
+>Cluster 24
+0	3046nt, >M1_S1__trinity__TRINITY_DN6022_c0_g1_i2... *
+>Cluster 25
+0	2990nt, >M60_S11__rna__NODE_3_length_2990_cov_2015.394424_g2_i0... *
+>Cluster 26
+0	2969nt, >M21_S29__trinity__TRINITY_DN3_c0_g1_i14... *
+>Cluster 27
+0	2926nt, >M21_S29__trinity__TRINITY_DN1084_c0_g1_i10... *
+>Cluster 28
+0	2807nt, >M48_S5__rna__NODE_6_length_2807_cov_1763.550036_g5_i0... at +/99.89%
+1	2849nt, >M56_S7__rna__NODE_12_length_2849_cov_3733.097500_g0_i7... at +/100.00%
+2	2916nt, >M57_S8__megahit__k119_5737... *
+>Cluster 29
+0	2906nt, >M79_S28__megahit__k119_208... *
+>Cluster 30
+0	2724nt, >M7_S15__trinity__TRINITY_DN4_c0_g1_i1... *
+>Cluster 31
+0	2721nt, >M1_S1__trinity__TRINITY_DN222_c0_g1_i11... *
+>Cluster 32
+0	2713nt, >M21_S29__rnaviral__NODE_9_length_2713_cov_3.207207... *
+>Cluster 33
+0	2706nt, >M21_S29__megahit__k119_1430... *
+>Cluster 34
+0	2704nt, >M35_S31__rnaviral__NODE_5_length_2704_cov_8.403013... *
+>Cluster 35
+0	2697nt, >M22_S30__rna__NODE_20_length_2697_cov_6969.324773_g16_i0... *
+>Cluster 36
+0	1144nt, >M20_S25__megahit__k119_4403... at +/95.89%
+1	2679nt, >M21_S29__megahit__k119_1118... *
+2	1177nt, >M35_S31__rna__NODE_75_length_1177_cov_9.772163_g47_i0... at +/97.71%
+>Cluster 37
+0	2614nt, >M58_S9__rna__NODE_11_length_2614_cov_2828.720468_g1_i4... *
+>Cluster 38
+0	2576nt, >M20_S25__megahit__k119_1620... *
+>Cluster 39
+0	2571nt, >M71_S19__megahit__k119_29... *
+1	1925nt, >M72_S20__rna__NODE_25_length_1925_cov_224.208422_g8_i5... at -/99.01%
+>Cluster 40
+0	2556nt, >M1_S1__rnaviral__NODE_13_length_2556_cov_7.270443... *
+1	1616nt, >M55_S6__trinity__TRINITY_DN884_c1_g1_i9... at -/98.82%
+>Cluster 41
+0	1808nt, >M11_S3__trinity__TRINITY_DN1_c0_g1_i6... at +/98.84%
+1	2551nt, >M56_S7__rna__NODE_15_length_2551_cov_1446.486011_g5_i0... *
+2	1931nt, >M59_S10__trinity__TRINITY_DN2_c0_g1_i19... at +/99.22%
+3	1883nt, >M60_S11__trinity__TRINITY_DN0_c0_g1_i12... at +/99.36%
+4	2270nt, >M71_S19__rna__NODE_34_length_2270_cov_2149.879784_g20_i4... at +/95.86%
+>Cluster 42
+0	2546nt, >M1_S1__trinity__TRINITY_DN38_c0_g1_i4... *
+>Cluster 43
+0	2520nt, >M1_S1__megahit__k119_9739... *
+>Cluster 44
+0	1838nt, >M1_S1__rnaviral__NODE_57_length_1838_cov_6.880380... at -/99.51%
+1	2512nt, >M20_S25__rna__NODE_24_length_2512_cov_5.853431_g20_i0... *
+>Cluster 45
+0	1229nt, >M20_S25__rnaviral__NODE_151_length_1229_cov_4.398305... at -/97.40%
+1	1234nt, >M20_S25__megahit__k119_389... at +/97.73%
+2	2508nt, >M21_S29__rna__NODE_43_length_2508_cov_7.807645_g15_i0... *
+>Cluster 46
+0	1510nt, >M20_S25__trinity__TRINITY_DN786_c0_g1_i7... at +/96.69%
+1	2487nt, >M21_S29__rna__NODE_50_length_2487_cov_20.819524_g5_i2... *
+>Cluster 47
+0	2476nt, >M20_S25__trinity__TRINITY_DN1976_c0_g1_i19... *
+>Cluster 48
+0	2470nt, >M58_S9__rna__NODE_12_length_2470_cov_2872.415118_g1_i5... *
+>Cluster 49
+0	2465nt, >M1_S1__rna__NODE_21_length_2465_cov_22.950745_g11_i0... *
+>Cluster 50
+0	2456nt, >M20_S25__rna__NODE_27_length_2456_cov_722.085999_g21_i0... *
+1	2415nt, >M79_S28__rna__NODE_16_length_2415_cov_55.514793_g4_i0... at +/99.21%
+>Cluster 51
+0	2414nt, >M20_S25__rnaviral__NODE_22_length_2414_cov_9.127273... *
+>Cluster 52
+0	2391nt, >M21_S29__megahit__k119_2881... *
+>Cluster 53
+0	1396nt, >M35_S31__rnaviral__NODE_44_length_1396_cov_3.593912... at +/100.00%
+1	2390nt, >M55_S6__megahit__k119_5455... *
+2	1054nt, >M56_S7__rnaviral__NODE_115_length_1054_cov_2.881592... at -/99.91%
+3	1151nt, >M71_S19__rnaviral__NODE_93_length_1151_cov_3.497278... at -/99.91%
+>Cluster 54
+0	2384nt, >M35_S31__rna__NODE_18_length_2384_cov_1651.471949_g11_i0... *
+>Cluster 55
+0	2367nt, >M20_S25__trinity__TRINITY_DN511_c0_g1_i9... *
+>Cluster 56
+0	2357nt, >M2_S2__rna__NODE_23_length_2357_cov_23665.445407_g10_i1... *
+1	1668nt, >M36_S17__rnaviral__NODE_2_length_1668_cov_291850.812847... at +/95.62%
+>Cluster 57
+0	1484nt, >M20_S25__trinity__TRINITY_DN108_c0_g1_i13... at +/96.29%
+1	2354nt, >M21_S29__trinity__TRINITY_DN42_c0_g1_i14... *
+>Cluster 58
+0	2344nt, >M35_S31__rna__NODE_19_length_2344_cov_8.298039_g12_i0... *
+>Cluster 59
+0	2344nt, >M48_S5__rnaviral__NODE_7_length_2344_cov_5.389978... *
+>Cluster 60
+0	2335nt, >M56_S7__rnaviral__NODE_4_length_2335_cov_7.678915... *
+>Cluster 61
+0	2304nt, >M21_S29__rnaviral__NODE_13_length_2304_cov_3.183592... *
+>Cluster 62
+0	2279nt, >M21_S29__rna__NODE_60_length_2279_cov_5.508520_g22_i0... *
+>Cluster 63
+0	2259nt, >M1_S1__trinity__TRINITY_DN5685_c0_g1_i8... *
+>Cluster 64
+0	2248nt, >M21_S29__rnaviral__NODE_14_length_2248_cov_5.199636... *
+>Cluster 65
+0	2246nt, >M71_S19__megahit__k119_3499... *
+>Cluster 66
+0	2236nt, >M1_S1__trinity__TRINITY_DN5685_c0_g1_i3... *
+>Cluster 67
+0	1766nt, >M11_S3__trinity__TRINITY_DN1_c0_g1_i19... at -/99.60%
+1	2220nt, >M58_S9__trinity__TRINITY_DN0_c0_g1_i13... *
+2	1175nt, >M9_S16__trinity__TRINITY_DN13_c0_g1_i7... at -/97.11%
+>Cluster 68
+0	2204nt, >M55_S6__rnaviral__NODE_12_length_2204_cov_2.847332... *
+>Cluster 69
+0	2203nt, >M22_S30__rna__NODE_28_length_2203_cov_6836.062674_g24_i0... *
+>Cluster 70
+0	2188nt, >M22_S30__megahit__k119_1148... *
+>Cluster 71
+0	1491nt, >M1_S1__rnaviral__NODE_105_length_1491_cov_590.819001... at +/99.80%
+1	2182nt, >M21_S29__rnaviral__NODE_15_length_2182_cov_976.964838... *
+2	1494nt, >M48_S5__megahit__k119_167... at -/99.67%
+3	1511nt, >M56_S7__rnaviral__NODE_32_length_1511_cov_1300.991108... at -/97.15%
+4	2033nt, >M57_S8__rna__NODE_27_length_2033_cov_1239.978327_g12_i0... at +/96.75%
+5	1722nt, >M58_S9__megahit__k119_4489... at +/98.14%
+6	1507nt, >M60_S11__rnaviral__NODE_13_length_1507_cov_601.141289... at +/98.87%
+7	1526nt, >M72_S20__rnaviral__NODE_16_length_1526_cov_101.109005... at -/99.02%
+8	1553nt, >M74_S21__megahit__k119_126... at +/95.69%
+>Cluster 72
+0	2182nt, >M21_S29__trinity__TRINITY_DN266_c0_g1_i1... *
+1	1909nt, >M35_S31__trinity__TRINITY_DN447_c1_g1_i9... at -/96.60%
+>Cluster 73
+0	2077nt, >M1_S1__trinity__TRINITY_DN465_c0_g2_i4... at +/95.67%
+1	2176nt, >M55_S6__rna__NODE_27_length_2176_cov_12.929948_g14_i0... *
+>Cluster 74
+0	1592nt, >M1_S1__trinity__TRINITY_DN1766_c0_g1_i1... at -/99.87%
+1	2175nt, >M57_S8__trinity__TRINITY_DN886_c0_g1_i3... *
+>Cluster 75
+0	1369nt, >M11_S3__rnaviral__NODE_28_length_1369_cov_6.363636... at +/99.78%
+1	1414nt, >M59_S10__rna__NODE_15_length_1414_cov_12.877656_g12_i0... at +/99.15%
+2	1024nt, >M60_S11__rnaviral__NODE_32_length_1024_cov_11.149744... at +/99.51%
+3	1305nt, >M62_S18__rnaviral__NODE_19_length_1305_cov_7.613854... at +/99.39%
+4	1363nt, >M71_S19__rnaviral__NODE_67_length_1363_cov_20.060883... at +/99.34%
+5	1428nt, >M72_S20__rnaviral__NODE_24_length_1428_cov_16.697607... at +/99.86%
+6	1157nt, >M74_S21__rnaviral__NODE_39_length_1157_cov_9.087545... at -/99.48%
+7	1482nt, >M79_S28__rnaviral__NODE_10_length_1482_cov_11.531054... at +/99.80%
+8	1350nt, >M7_S15__rna__NODE_97_length_1350_cov_11.744043_g36_i0... at +/99.63%
+9	2173nt, >M9_S16__rnaviral__NODE_9_length_2173_cov_57.931733... *
+>Cluster 76
+0	2169nt, >M21_S29__rna__NODE_65_length_2169_cov_13092.142925_g25_i0... *
+>Cluster 77
+0	2093nt, >M1_S1__trinity__TRINITY_DN120_c0_g1_i8... at -/99.52%
+1	1377nt, >M20_S25__rnaviral__NODE_106_length_1377_cov_9.381024... at -/99.49%
+2	1412nt, >M20_S25__megahit__k119_4980... at +/98.87%
+3	1577nt, >M21_S29__rnaviral__NODE_46_length_1577_cov_6.305628... at -/99.30%
+4	1664nt, >M22_S30__trinity__TRINITY_DN154_c0_g1_i2... at -/98.98%
+5	2130nt, >M2_S2__megahit__k119_5764... at -/99.53%
+6	1880nt, >M35_S31__megahit__k119_1618... at -/99.57%
+7	2166nt, >M55_S6__megahit__k119_1740... *
+8	2037nt, >M56_S7__trinity__TRINITY_DN78_c0_g1_i5... at -/99.26%
+9	1887nt, >M57_S8__trinity__TRINITY_DN242_c0_g1_i4... at -/99.26%
+10	1900nt, >M58_S9__trinity__TRINITY_DN132_c0_g1_i12... at +/98.95%
+11	1792nt, >M59_S10__rna__NODE_9_length_1792_cov_15.327596_g6_i0... at +/99.22%
+12	1843nt, >M60_S11__trinity__TRINITY_DN67_c0_g1_i2... at -/99.46%
+13	2060nt, >M62_S18__trinity__TRINITY_DN63_c0_g1_i2... at -/99.61%
+14	2091nt, >M71_S19__rna__NODE_40_length_2091_cov_32.098923_g29_i0... at +/99.71%
+15	2064nt, >M72_S20__trinity__TRINITY_DN61_c0_g1_i1... at -/99.22%
+16	1784nt, >M74_S21__trinity__TRINITY_DN230_c0_g1_i3... at -/99.33%
+17	1406nt, >M79_S28__trinity__TRINITY_DN64_c0_g1_i2... at -/99.57%
+18	1886nt, >M9_S16__trinity__TRINITY_DN523_c0_g2_i2... at -/99.20%
+>Cluster 78
+0	1011nt, >M20_S25__rnaviral__NODE_270_length_1011_cov_7.706861... at -/97.13%
+1	2165nt, >M21_S29__megahit__k119_1006... *
+>Cluster 79
+0	2162nt, >M55_S6__megahit__k119_675... *
+>Cluster 80
+0	2161nt, >M20_S25__megahit__k119_5051... *
+1	1893nt, >M79_S28__rnaviral__NODE_5_length_1893_cov_37.327007... at +/98.31%
+>Cluster 81
+0	2143nt, >M21_S29__rnaviral__NODE_17_length_2143_cov_2.286533... *
+>Cluster 82
+0	1672nt, >M11_S3__trinity__TRINITY_DN1_c0_g2_i5... at -/95.22%
+1	2136nt, >M22_S30__rna__NODE_32_length_2136_cov_5672.627216_g27_i0... *
+2	1262nt, >M56_S7__trinity__TRINITY_DN1_c0_g1_i16... at +/95.80%
+3	1667nt, >M58_S9__trinity__TRINITY_DN5_c0_g1_i21... at +/95.98%
+>Cluster 83
+0	2125nt, >M1_S1__rnaviral__NODE_31_length_2125_cov_870.500000... at +/95.67%
+1	1741nt, >M2_S2__rna__NODE_48_length_1741_cov_403.421986_g30_i0... at +/97.01%
+2	2131nt, >M55_S6__megahit__k119_3170... *
+3	1680nt, >M62_S18__rnaviral__NODE_11_length_1680_cov_118.205395... at -/99.82%
+4	1966nt, >M71_S19__rnaviral__NODE_32_length_1966_cov_162.370370... at -/99.44%
+5	1548nt, >M7_S15__rnaviral__NODE_18_length_1548_cov_106.097398... at -/100.00%
+>Cluster 84
+0	2128nt, >M1_S1__rna__NODE_56_length_2128_cov_9.328523_g31_i0... *
+1	1664nt, >M2_S2__rnaviral__NODE_36_length_1664_cov_3.941176... at -/100.00%
+>Cluster 85
+0	2122nt, >M48_S5__rna__NODE_13_length_2122_cov_1552.941148_g7_i1... *
+>Cluster 86
+0	1388nt, >M22_S30__rnaviral__NODE_26_length_1388_cov_4.084391... at -/99.71%
+1	2111nt, >M56_S7__rna__NODE_25_length_2111_cov_44.358390_g12_i0... *
+2	1193nt, >M71_S19__rnaviral__NODE_87_length_1193_cov_10.446678... at -/96.56%
+3	1193nt, >M72_S20__rnaviral__NODE_37_length_1193_cov_8.315559... at -/96.98%
+>Cluster 87
+0	2108nt, >M55_S6__rna__NODE_31_length_2108_cov_307.029140_g16_i0... *
+>Cluster 88
+0	2068nt, >M1_S1__trinity__TRINITY_DN342_c0_g1_i7... at +/95.94%
+1	2105nt, >M2_S2__trinity__TRINITY_DN34_c0_g1_i2... *
+2	1367nt, >M56_S7__rna__NODE_78_length_1367_cov_5.994689_g45_i0... at -/99.63%
+3	1368nt, >M58_S9__trinity__TRINITY_DN79_c0_g1_i2... at +/99.42%
+>Cluster 89
+0	2104nt, >M55_S6__rnaviral__NODE_16_length_2104_cov_1.879805... *
+>Cluster 90
+0	2095nt, >M20_S25__rna__NODE_49_length_2095_cov_5501.783969_g31_i0... *
+1	1319nt, >M7_S15__rna__NODE_98_length_1319_cov_1555.502362_g3_i11... at +/98.03%
+>Cluster 91
+0	2080nt, >M22_S30__rna__NODE_34_length_2080_cov_5064.252585_g29_i0... *
+>Cluster 92
+0	1484nt, >M11_S3__megahit__k119_218... at +/99.19%
+1	2061nt, >M2_S2__trinity__TRINITY_DN93_c0_g1_i1... at +/99.47%
+2	2071nt, >M55_S6__trinity__TRINITY_DN24_c0_g1_i3... *
+3	1835nt, >M58_S9__rna__NODE_31_length_1835_cov_33.039194_g15_i1... at -/97.33%
+4	1090nt, >M60_S11__rna__NODE_58_length_1090_cov_14.259366_g42_i0... at -/98.72%
+5	1341nt, >M79_S28__trinity__TRINITY_DN64_c0_g1_i1... at +/99.40%
+6	1648nt, >M7_S15__trinity__TRINITY_DN215_c0_g1_i1... at -/97.09%
+>Cluster 93
+0	1576nt, >M2_S2__rna__NODE_69_length_1576_cov_18677.284217_g10_i3... at +/98.79%
+1	2060nt, >M55_S6__rna__NODE_35_length_2060_cov_6272.217802_g1_i7... *
+>Cluster 94
+0	2057nt, >M57_S8__megahit__k119_3916... *
+>Cluster 95
+0	2050nt, >M20_S25__rna__NODE_51_length_2050_cov_16.310345_g32_i1... *
+>Cluster 96
+0	2038nt, >M1_S1__rnaviral__NODE_37_length_2038_cov_6.583710... *
+>Cluster 97
+0	2031nt, >M2_S2__rna__NODE_32_length_2031_cov_835.256811_g19_i0... *
+1	1670nt, >M56_S7__rnaviral__NODE_16_length_1670_cov_1116.750771... at +/97.43%
+2	1781nt, >M71_S19__rna__NODE_58_length_1781_cov_681.177829_g20_i9... at -/99.66%
+>Cluster 98
+0	2018nt, >M7_S15__rna__NODE_37_length_2018_cov_3912.798883_g3_i8... *
+>Cluster 99
+0	2013nt, >M9_S16__rnaviral__NODE_12_length_2013_cov_3.115580... *
+>Cluster 100
+0	2003nt, >M20_S25__megahit__k119_1515... *
+1	1422nt, >M21_S29__megahit__k119_1332... at +/99.16%
+2	1188nt, >M36_S17__rnaviral__NODE_6_length_1188_cov_4.114135... at -/99.83%
+>Cluster 101
+0	1999nt, >M58_S9__rna__NODE_24_length_1999_cov_3241.755385_g1_i9... *
+>Cluster 102
+0	1993nt, >M20_S25__rnaviral__NODE_32_length_1993_cov_3.266975... *
+>Cluster 103
+0	1652nt, >M57_S8__trinity__TRINITY_DN5_c0_g1_i71... at +/99.46%
+1	1986nt, >M58_S9__trinity__TRINITY_DN0_c0_g1_i2... *
+>Cluster 104
+0	1985nt, >M21_S29__trinity__TRINITY_DN3_c0_g1_i28... *
+>Cluster 105
+0	1974nt, >M1_S1__trinity__TRINITY_DN3499_c0_g1_i1... *
+>Cluster 106
+0	1965nt, >M57_S8__trinity__TRINITY_DN242_c0_g1_i5... *
+>Cluster 107
+0	1964nt, >M79_S28__rna__NODE_29_length_1964_cov_1528.801044_g7_i0... *
+>Cluster 108
+0	1961nt, >M21_S29__trinity__TRINITY_DN1084_c0_g1_i9... *
+>Cluster 109
+0	1960nt, >M21_S29__trinity__TRINITY_DN1084_c0_g1_i13... *
+>Cluster 110
+0	1957nt, >M1_S1__rnaviral__NODE_40_length_1957_cov_9.778302... *
+>Cluster 111
+0	1946nt, >M55_S6__trinity__TRINITY_DN411_c0_g1_i9... *
+>Cluster 112
+0	1675nt, >M1_S1__rna__NODE_110_length_1675_cov_19134.200492_g67_i0... at +/98.99%
+1	1941nt, >M72_S20__rna__NODE_21_length_1941_cov_48270.543869_g5_i4... *
+>Cluster 113
+0	1937nt, >M11_S3__rna__NODE_12_length_1937_cov_27.903602_g8_i0... *
+1	1885nt, >M22_S30__rnaviral__NODE_9_length_1885_cov_23.587691... at +/99.95%
+2	1889nt, >M35_S31__rnaviral__NODE_14_length_1889_cov_12.799457... at +/99.89%
+3	1053nt, >M36_S17__rnaviral__NODE_9_length_1053_cov_7.135458... at +/99.62%
+4	1890nt, >M48_S5__rnaviral__NODE_12_length_1890_cov_19.110266... at -/98.41%
+>Cluster 114
+0	1933nt, >M57_S8__rna__NODE_29_length_1933_cov_841.249469_g14_i0... *
+>Cluster 115
+0	1919nt, >M21_S29__rnaviral__NODE_22_length_1919_cov_4.509091... *
+>Cluster 116
+0	1909nt, >M56_S7__megahit__k119_3495... *
+>Cluster 117
+0	1901nt, >M11_S3__megahit__k119_579... *
+1	1600nt, >M59_S10__trinity__TRINITY_DN7_c0_g1_i1... at -/96.69%
+>Cluster 118
+0	1162nt, >M1_S1__rna__NODE_331_length_1162_cov_761.022462_g30_i1... at -/97.25%
+1	1899nt, >M9_S16__rna__NODE_48_length_1899_cov_159.704865_g24_i0... *
+>Cluster 119
+0	1892nt, >M48_S5__rna__NODE_18_length_1892_cov_770.560499_g9_i0... *
+>Cluster 120
+0	1331nt, >M1_S1__trinity__TRINITY_DN41_c0_g1_i7... at +/98.12%
+1	1892nt, >M7_S15__rna__NODE_43_length_1892_cov_1940.167119_g3_i9... *
+>Cluster 121
+0	1891nt, >M1_S1__trinity__TRINITY_DN3478_c0_g2_i1... *
+>Cluster 122
+0	1888nt, >M22_S30__rna__NODE_44_length_1888_cov_7318.726482_g36_i0... *
+>Cluster 123
+0	1881nt, >M35_S31__rna__NODE_27_length_1881_cov_1501.673035_g11_i1... *
+>Cluster 124
+0	1881nt, >M79_S28__trinity__TRINITY_DN4_c0_g1_i2... *
+>Cluster 125
+0	1698nt, >M11_S3__rnaviral__NODE_13_length_1698_cov_134.021831... at -/99.29%
+1	1690nt, >M1_S1__rnaviral__NODE_70_length_1690_cov_58.723339... at -/99.47%
+2	1879nt, >M20_S25__megahit__k119_2619... *
+3	1693nt, >M21_S29__rnaviral__NODE_37_length_1693_cov_63.684307... at +/99.29%
+4	1695nt, >M22_S30__rnaviral__NODE_10_length_1695_cov_153.602066... at -/99.41%
+5	1797nt, >M2_S2__megahit__k119_3570... at +/96.61%
+6	1677nt, >M35_S31__rnaviral__NODE_23_length_1677_cov_29.390663... at +/99.40%
+7	1702nt, >M48_S5__rnaviral__NODE_19_length_1702_cov_305.436177... at +/99.35%
+8	1672nt, >M55_S6__rnaviral__NODE_40_length_1672_cov_5.632163... at +/99.40%
+9	1702nt, >M56_S7__rnaviral__NODE_15_length_1702_cov_92.521476... at +/99.35%
+10	1703nt, >M57_S8__rnaviral__NODE_22_length_1703_cov_499.063482... at +/99.18%
+11	1689nt, >M58_S9__rnaviral__NODE_24_length_1689_cov_71.588415... at +/99.47%
+12	1721nt, >M59_S10__rnaviral__NODE_6_length_1721_cov_76.444378... at +/98.20%
+13	1698nt, >M60_S11__rnaviral__NODE_8_length_1698_cov_42.442086... at +/99.41%
+14	1686nt, >M62_S18__rnaviral__NODE_10_length_1686_cov_13.421503... at +/99.29%
+15	1710nt, >M71_S19__rnaviral__NODE_46_length_1710_cov_526.913305... at +/99.06%
+16	1705nt, >M72_S20__rnaviral__NODE_13_length_1705_cov_679.971014... at -/99.12%
+17	1702nt, >M7_S15__rnaviral__NODE_15_length_1702_cov_73.676346... at -/99.29%
+18	1696nt, >M9_S16__rnaviral__NODE_24_length_1696_cov_81.044930... at +/99.41%
+>Cluster 126
+0	1878nt, >M55_S6__trinity__TRINITY_DN6_c0_g1_i10... *
+>Cluster 127
+0	1869nt, >M1_S1__rnaviral__NODE_52_length_1869_cov_10.861538... *
+>Cluster 128
+0	1867nt, >M1_S1__rnaviral__NODE_53_length_1867_cov_62.849835... *
+1	1045nt, >M2_S2__rnaviral__NODE_184_length_1045_cov_51.963855... at -/100.00%
+2	1062nt, >M55_S6__rnaviral__NODE_174_length_1062_cov_43.023692... at +/100.00%
+3	1117nt, >M58_S9__trinity__TRINITY_DN942_c0_g1_i1... at +/99.37%
+4	1114nt, >M62_S18__rnaviral__NODE_29_length_1114_cov_14.093897... at -/100.00%
+5	1065nt, >M71_S19__rnaviral__NODE_116_length_1065_cov_24.734252... at +/99.81%
+>Cluster 129
+0	1865nt, >M11_S3__megahit__k119_636... *
+>Cluster 130
+0	1720nt, >M20_S25__rnaviral__NODE_49_length_1720_cov_20.795332... at -/98.78%
+1	1859nt, >M21_S29__rnaviral__NODE_25_length_1859_cov_39.380110... *
+>Cluster 131
+0	1846nt, >M56_S7__trinity__TRINITY_DN1124_c0_g1_i5... *
+>Cluster 132
+0	1355nt, >M11_S3__megahit__k119_178... at +/96.24%
+1	1285nt, >M1_S1__rnaviral__NODE_209_length_1285_cov_452.625405... at +/98.91%
+2	1845nt, >M22_S30__megahit__k119_846... *
+3	1263nt, >M36_S17__rnaviral__NODE_4_length_1263_cov_4.929984... at -/99.45%
+4	1370nt, >M48_S5__rnaviral__NODE_26_length_1370_cov_1033.378501... at +/95.99%
+5	1279nt, >M55_S6__rnaviral__NODE_94_length_1279_cov_22.648780... at -/99.22%
+>Cluster 133
+0	1840nt, >M48_S5__rna__NODE_22_length_1840_cov_793.805137_g9_i1... *
+>Cluster 134
+0	1839nt, >M79_S28__trinity__TRINITY_DN4_c0_g1_i21... *
+>Cluster 135
+0	1834nt, >M21_S29__rnaviral__NODE_27_length_1834_cov_6.275070... *
+>Cluster 136
+0	1832nt, >M55_S6__trinity__TRINITY_DN6_c0_g1_i4... *
+>Cluster 137
+0	1829nt, >M20_S25__rnaviral__NODE_43_length_1829_cov_32.983146... *
+1	1165nt, >M79_S28__rnaviral__NODE_22_length_1165_cov_6.765233... at -/99.91%
+>Cluster 138
+0	1827nt, >M20_S25__megahit__k119_181... *
+>Cluster 139
+0	1823nt, >M71_S19__rna__NODE_53_length_1823_cov_763.984216_g20_i7... *
+>Cluster 140
+0	1821nt, >M1_S1__rna__NODE_89_length_1821_cov_17.765237_g52_i0... *
+1	1383nt, >M2_S2__trinity__TRINITY_DN6815_c0_g1_i3... at -/96.02%
+2	1692nt, >M55_S6__trinity__TRINITY_DN287_c0_g1_i9... at -/100.00%
+>Cluster 141
+0	1820nt, >M1_S1__rna__NODE_90_length_1820_cov_18.156409_g4_i1... *
+>Cluster 142
+0	1818nt, >M48_S5__rna__NODE_24_length_1818_cov_1314.150367_g9_i2... *
+>Cluster 143
+0	1816nt, >M22_S30__rna__NODE_47_length_1816_cov_5988.026033_g39_i0... *
+>Cluster 144
+0	1806nt, >M48_S5__rnaviral__NODE_14_length_1806_cov_6.763233... *
+>Cluster 145
+0	1804nt, >M57_S8__trinity__TRINITY_DN119_c0_g1_i2... *
+>Cluster 146
+0	1804nt, >M58_S9__rna__NODE_34_length_1804_cov_3151.881481_g1_i11... *
+>Cluster 147
+0	1801nt, >M21_S29__megahit__k119_1744... *
+1	1549nt, >M2_S2__megahit__k119_7044... at -/98.00%
+2	1511nt, >M35_S31__rnaviral__NODE_31_length_1511_cov_69.173051... at -/99.87%
+3	1510nt, >M55_S6__megahit__k119_113... at +/99.80%
+4	1583nt, >M57_S8__rnaviral__NODE_36_length_1583_cov_1729.945241... at -/97.73%
+5	1522nt, >M58_S9__rnaviral__NODE_33_length_1522_cov_245.245078... at +/99.47%
+6	1522nt, >M60_S11__megahit__k119_486... at +/99.61%
+7	1521nt, >M62_S18__rnaviral__NODE_15_length_1521_cov_25.692255... at +/99.67%
+8	1524nt, >M72_S20__rnaviral__NODE_17_length_1524_cov_2121.018305... at -/99.48%
+9	1523nt, >M7_S15__megahit__k119_813... at +/99.34%
+10	1529nt, >M9_S16__rnaviral__NODE_32_length_1529_cov_313.843243... at -/99.02%
+>Cluster 148
+0	1799nt, >M55_S6__rnaviral__NODE_29_length_1799_cov_3.577714... *
+>Cluster 149
+0	1793nt, >M2_S2__trinity__TRINITY_DN798_c0_g1_i1... *
+1	1397nt, >M35_S31__trinity__TRINITY_DN184_c0_g1_i2... at -/96.56%
+2	1777nt, >M55_S6__trinity__TRINITY_DN155_c0_g1_i3... at -/99.27%
+>Cluster 150
+0	1792nt, >M22_S30__rna__NODE_49_length_1792_cov_3850.295468_g41_i0... *
+>Cluster 151
+0	1790nt, >M21_S29__rnaviral__NODE_29_length_1790_cov_2.882252... *
+>Cluster 152
+0	1787nt, >M11_S3__megahit__k119_160... *
+>Cluster 153
+0	1061nt, >M20_S25__rnaviral__NODE_233_length_1061_cov_4.038538... at +/100.00%
+1	1778nt, >M21_S29__rnaviral__NODE_30_length_1778_cov_10.506651... *
+>Cluster 154
+0	1772nt, >M1_S1__trinity__TRINITY_DN519_c0_g1_i5... *
+>Cluster 155
+0	1770nt, >M1_S1__rna__NODE_96_length_1770_cov_13.392214_g58_i0... *
+>Cluster 156
+0	1769nt, >M1_S1__trinity__TRINITY_DN342_c0_g1_i1... *
+1	1129nt, >M57_S8__trinity__TRINITY_DN244_c0_g1_i4... at +/99.38%
+2	1010nt, >M58_S9__trinity__TRINITY_DN79_c0_g1_i3... at +/99.90%
+>Cluster 157
+0	1762nt, >M11_S3__trinity__TRINITY_DN1_c0_g1_i15... *
+>Cluster 158
+0	1737nt, >M1_S1__rnaviral__NODE_66_length_1737_cov_14.183057... at +/99.54%
+1	1762nt, >M2_S2__rnaviral__NODE_32_length_1762_cov_7.162288... *
+>Cluster 159
+0	1762nt, >M2_S2__trinity__TRINITY_DN1327_c0_g1_i3... *
+>Cluster 160
+0	1757nt, >M21_S29__trinity__TRINITY_DN196_c1_g1_i1... *
+>Cluster 161
+0	1750nt, >M21_S29__rna__NODE_80_length_1750_cov_5.309230_g34_i0... *
+>Cluster 162
+0	1747nt, >M21_S29__trinity__TRINITY_DN66_c0_g1_i5... *
+>Cluster 163
+0	1670nt, >M1_S1__megahit__k119_2853... at -/95.09%
+1	1742nt, >M22_S30__megahit__k119_1075... *
+2	1634nt, >M48_S5__megahit__k119_78... at +/95.35%
+3	1565nt, >M56_S7__rnaviral__NODE_27_length_1565_cov_266.044855... at +/97.83%
+4	1573nt, >M71_S19__rnaviral__NODE_52_length_1573_cov_1405.540682... at +/97.58%
+>Cluster 164
+0	1740nt, >M74_S21__megahit__k119_20... *
+>Cluster 165
+0	1643nt, >M2_S2__trinity__TRINITY_DN798_c0_g1_i2... at +/97.08%
+1	1247nt, >M35_S31__rna__NODE_70_length_1247_cov_7.283806_g43_i0... at -/99.44%
+2	1652nt, >M55_S6__rna__NODE_54_length_1652_cov_8.818465_g32_i0... at +/96.67%
+3	1230nt, >M72_S20__rnaviral__NODE_33_length_1230_cov_3.799323... at -/99.76%
+4	1738nt, >M9_S16__rnaviral__NODE_23_length_1738_cov_6.548253... *
+>Cluster 166
+0	1733nt, >M48_S5__rnaviral__NODE_17_length_1733_cov_8.393705... *
+>Cluster 167
+0	1376nt, >M11_S3__rnaviral__NODE_27_length_1376_cov_120.458176... at +/100.00%
+1	1553nt, >M2_S2__trinity__TRINITY_DN1700_c0_g1_i3... at -/99.87%
+2	1733nt, >M56_S7__rnaviral__NODE_13_length_1733_cov_99.628860... *
+>Cluster 168
+0	1732nt, >M71_S19__trinity__TRINITY_DN185_c0_g1_i11... *
+>Cluster 169
+0	1724nt, >M2_S2__rna__NODE_50_length_1724_cov_16839.463284_g10_i2... *
+>Cluster 170
+0	1723nt, >M58_S9__trinity__TRINITY_DN222_c0_g1_i2... *
+>Cluster 171
+0	1722nt, >M9_S16__rna__NODE_66_length_1722_cov_14.172744_g31_i1... *
+>Cluster 172
+0	1721nt, >M20_S25__megahit__k119_3691... *
+>Cluster 173
+0	1713nt, >M55_S6__megahit__k119_1998... *
+1	1432nt, >M9_S16__trinity__TRINITY_DN577_c0_g1_i3... at +/96.23%
+>Cluster 174
+0	1634nt, >M11_S3__rnaviral__NODE_14_length_1634_cov_1135.370347... at -/99.27%
+1	1639nt, >M21_S29__rna__NODE_89_length_1639_cov_2000.237107_g42_i0... at -/99.51%
+2	1647nt, >M2_S2__rnaviral__NODE_37_length_1647_cov_836.026283... at -/99.33%
+3	1627nt, >M35_S31__rnaviral__NODE_27_length_1627_cov_718.949303... at +/99.39%
+4	1710nt, >M48_S5__megahit__k119_286... *
+5	1625nt, >M55_S6__rnaviral__NODE_43_length_1625_cov_65.941624... at -/99.94%
+6	1630nt, >M60_S11__rnaviral__NODE_10_length_1630_cov_80.436433... at -/99.57%
+7	1635nt, >M71_S19__rnaviral__NODE_50_length_1635_cov_1245.763556... at -/99.20%
+8	1632nt, >M72_S20__rnaviral__NODE_14_length_1632_cov_465.128238... at +/99.51%
+9	1632nt, >M79_S28__rnaviral__NODE_8_length_1632_cov_687.082754... at +/97.43%
+10	1603nt, >M9_S16__rnaviral__NODE_28_length_1603_cov_17.852638... at -/99.13%
+>Cluster 175
+0	1580nt, >M1_S1__trinity__TRINITY_DN342_c0_g1_i4... at +/99.05%
+1	1709nt, >M2_S2__trinity__TRINITY_DN34_c0_g1_i4... *
+>Cluster 176
+0	1701nt, >M7_S15__megahit__k119_690... *
+>Cluster 177
+0	1699nt, >M20_S25__trinity__TRINITY_DN511_c0_g1_i8... *
+>Cluster 178
+0	1694nt, >M1_S1__megahit__k119_11164... *
+1	1150nt, >M2_S2__megahit__k119_5061... at +/98.09%
+2	1204nt, >M57_S8__rnaviral__NODE_72_length_1204_cov_3.927273... at -/97.92%
+3	1498nt, >M9_S16__rna__NODE_94_length_1498_cov_5.291925_g52_i0... at -/98.93%
+>Cluster 179
+0	1138nt, >M22_S30__rnaviral__NODE_41_length_1138_cov_11.756657... at +/99.82%
+1	1398nt, >M2_S2__rnaviral__NODE_63_length_1398_cov_31.134915... at +/95.14%
+2	1694nt, >M57_S8__rnaviral__NODE_24_length_1694_cov_30.025532... *
+3	1022nt, >M58_S9__rnaviral__NODE_141_length_1022_cov_54.432682... at +/96.97%
+>Cluster 180
+0	1692nt, >M21_S29__rnaviral__NODE_38_length_1692_cov_4.383445... *
+>Cluster 181
+0	1690nt, >M35_S31__rna__NODE_36_length_1690_cov_1574.003047_g11_i2... *
+>Cluster 182
+0	1688nt, >M48_S5__trinity__TRINITY_DN1317_c0_g1_i1... *
+>Cluster 183
+0	1685nt, >M1_S1__rnaviral__NODE_72_length_1685_cov_9.218215... *
+>Cluster 184
+0	1560nt, >M35_S31__rnaviral__NODE_29_length_1560_cov_28.512244... at -/99.87%
+1	1597nt, >M55_S6__trinity__TRINITY_DN112_c0_g1_i2... at +/99.62%
+2	1579nt, >M56_S7__rnaviral__NODE_26_length_1579_cov_33.943137... at -/99.18%
+3	1577nt, >M62_S18__rna__NODE_24_length_1577_cov_23.481021_g13_i0... at +/99.87%
+4	1685nt, >M71_S19__trinity__TRINITY_DN225_c0_g1_i1... *
+5	1563nt, >M72_S20__trinity__TRINITY_DN11117_c0_g1_i1... at -/99.04%
+>Cluster 185
+0	1684nt, >M11_S3__rna__NODE_19_length_1684_cov_5569.258104_g13_i0... *
+>Cluster 186
+0	1684nt, >M59_S10__megahit__k119_351... *
+>Cluster 187
+0	1680nt, >M62_S18__megahit__k119_1865... *
+>Cluster 188
+0	1677nt, >M2_S2__rna__NODE_54_length_1677_cov_10.589681_g35_i0... *
+1	1029nt, >M55_S6__rnaviral__NODE_192_length_1029_cov_5.859184... at -/97.76%
+2	1414nt, >M58_S9__trinity__TRINITY_DN606_c0_g1_i1... at -/95.26%
+3	1418nt, >M71_S19__rnaviral__NODE_59_length_1418_cov_5.649379... at -/96.33%
+>Cluster 189
+0	1676nt, >M60_S11__trinity__TRINITY_DN0_c0_g1_i15... *
+>Cluster 190
+0	1673nt, >M20_S25__rna__NODE_103_length_1673_cov_2350.954433_g52_i0... *
+>Cluster 191
+0	1312nt, >M55_S6__rna__NODE_108_length_1312_cov_1520.260491_g1_i9... at +/98.86%
+1	1573nt, >M71_S19__trinity__TRINITY_DN1_c0_g1_i17... at +/100.00%
+2	1536nt, >M74_S21__rnaviral__NODE_22_length_1536_cov_1776.452589... at +/98.50%
+3	1669nt, >M9_S16__rna__NODE_71_length_1669_cov_910.425926_g8_i4... *
+>Cluster 192
+0	1235nt, >M1_S1__rnaviral__NODE_246_length_1235_cov_6.764755... at -/98.79%
+1	1667nt, >M20_S25__rnaviral__NODE_54_length_1667_cov_4.582200... *
+>Cluster 193
+0	1667nt, >M21_S29__rna__NODE_88_length_1667_cov_3.070457_g41_i0... *
+>Cluster 194
+0	1663nt, >M35_S31__rnaviral__NODE_25_length_1663_cov_1.951673... *
+>Cluster 195
+0	1659nt, >M1_S1__trinity__TRINITY_DN2030_c0_g2_i5... *
+>Cluster 196
+0	1651nt, >M21_S29__rnaviral__NODE_39_length_1651_cov_4.341448... *
+>Cluster 197
+0	1348nt, >M62_S18__trinity__TRINITY_DN0_c0_g1_i34... at -/98.66%
+1	1647nt, >M71_S19__trinity__TRINITY_DN185_c0_g1_i7... *
+>Cluster 198
+0	1646nt, >M55_S6__rna__NODE_55_length_1646_cov_994.536005_g1_i8... *
+>Cluster 199
+0	1646nt, >M55_S6__trinity__TRINITY_DN115_c0_g1_i3... *
+1	1558nt, >M57_S8__trinity__TRINITY_DN244_c0_g1_i2... at -/99.17%
+2	1547nt, >M58_S9__rna__NODE_47_length_1547_cov_12.381842_g27_i0... at +/99.61%
+>Cluster 200
+0	1646nt, >M57_S8__rnaviral__NODE_29_length_1646_cov_6.139637... *
+>Cluster 201
+0	1639nt, >M11_S3__rna__NODE_21_length_1639_cov_2730.449057_g13_i1... *
+>Cluster 202
+0	1638nt, >M1_S1__trinity__TRINITY_DN259_c0_g1_i37... *
+>Cluster 203
+0	1638nt, >M62_S18__metaviral__NODE_1_length_1638_cov_10.243434_cutoff_0_type_circular... *
+>Cluster 204
+0	1637nt, >M58_S9__rna__NODE_38_length_1637_cov_3112.486146_g1_i12... *
+>Cluster 205
+0	1632nt, >M1_S1__rna__NODE_118_length_1632_cov_36.656349_g74_i0... *
+1	1586nt, >M55_S6__megahit__k119_5337... at -/98.74%
+>Cluster 206
+0	1630nt, >M20_S25__rnaviral__NODE_60_length_1630_cov_10.827324... *
+>Cluster 207
+0	1630nt, >M57_S8__rnaviral__NODE_30_length_1630_cov_15.076534... *
+>Cluster 208
+0	1627nt, >M55_S6__trinity__TRINITY_DN411_c0_g1_i2... *
+>Cluster 209
+0	1625nt, >M21_S29__trinity__TRINITY_DN189_c0_g1_i4... *
+>Cluster 210
+0	1624nt, >M59_S10__rnaviral__NODE_8_length_1624_cov_24.380317... *
+>Cluster 211
+0	1621nt, >M1_S1__trinity__TRINITY_DN405_c3_g1_i25... *
+>Cluster 212
+0	1143nt, >M1_S1__rnaviral__NODE_322_length_1143_cov_1.679159... at +/98.60%
+1	1620nt, >M20_S25__rnaviral__NODE_61_length_1620_cov_3.000637... *
+>Cluster 213
+0	1619nt, >M1_S1__rna__NODE_121_length_1619_cov_17.555414_g77_i0... *
+1	1039nt, >M55_S6__trinity__TRINITY_DN16170_c0_g1_i2... at +/95.28%
+2	1094nt, >M71_S19__rnaviral__NODE_105_length_1094_cov_6.912919... at -/98.26%
+>Cluster 214
+0	1363nt, >M1_S1__rnaviral__NODE_159_length_1363_cov_5.154490... at -/99.56%
+1	1616nt, >M2_S2__rna__NODE_60_length_1616_cov_5.720485_g39_i0... *
+>Cluster 215
+0	1612nt, >M1_S1__rna__NODE_123_length_1612_cov_5.404351_g79_i0... *
+1	1100nt, >M58_S9__rnaviral__NODE_110_length_1100_cov_3.836346... at +/100.00%
+2	1244nt, >M71_S19__rnaviral__NODE_78_length_1244_cov_3.650209... at +/100.00%
+>Cluster 216
+0	1612nt, >M20_S25__trinity__TRINITY_DN23_c0_g1_i4... *
+>Cluster 217
+0	1611nt, >M9_S16__megahit__k119_2263... *
+>Cluster 218
+0	1610nt, >M62_S18__rnaviral__NODE_12_length_1610_cov_22.853940... *
+>Cluster 219
+0	1609nt, >M1_S1__trinity__TRINITY_DN9493_c0_g1_i1... *
+>Cluster 220
+0	1607nt, >M1_S1__rnaviral__NODE_80_length_1607_cov_14.337612... *
+1	1121nt, >M2_S2__megahit__k119_2391... at -/95.99%
+2	1106nt, >M55_S6__rnaviral__NODE_146_length_1106_cov_5.771050... at -/99.64%
+>Cluster 221
+0	1605nt, >M1_S1__rna__NODE_126_length_1605_cov_3.570694_g24_i1... *
+>Cluster 222
+0	1601nt, >M1_S1__rnaviral__NODE_84_length_1601_cov_3.459407... *
+>Cluster 223
+0	1595nt, >M58_S9__rnaviral__NODE_28_length_1595_cov_6.280078... *
+>Cluster 224
+0	1589nt, >M2_S2__rnaviral__NODE_41_length_1589_cov_3.534416... *
+>Cluster 225
+0	1587nt, >M2_S2__rna__NODE_64_length_1587_cov_1452.547464_g11_i7... *
+>Cluster 226
+0	1582nt, >M1_S1__trinity__TRINITY_DN3176_c0_g1_i4... *
+>Cluster 227
+0	1578nt, >M21_S29__rna__NODE_98_length_1578_cov_10060.362328_g47_i0... *
+>Cluster 228
+0	1578nt, >M9_S16__trinity__TRINITY_DN4_c0_g1_i12... *
+>Cluster 229
+0	1505nt, >M2_S2__trinity__TRINITY_DN260_c0_g1_i3... at -/99.00%
+1	1568nt, >M55_S6__trinity__TRINITY_DN12815_c0_g1_i2... *
+2	1031nt, >M56_S7__rna__NODE_144_length_1031_cov_11.442974_g104_i0... at +/99.81%
+3	1524nt, >M57_S8__rnaviral__NODE_40_length_1524_cov_12.364746... at -/99.80%
+4	1242nt, >M57_S8__trinity__TRINITY_DN372_c0_g1_i1... at -/95.01%
+5	1565nt, >M58_S9__rnaviral__NODE_30_length_1565_cov_11.620053... at +/99.30%
+6	1361nt, >M62_S18__rna__NODE_37_length_1361_cov_5.454268_g22_i0... at +/99.85%
+7	1452nt, >M71_S19__rnaviral__NODE_57_length_1452_cov_8.220955... at +/99.10%
+8	1479nt, >M72_S20__rnaviral__NODE_20_length_1479_cov_6.261538... at -/99.12%
+>Cluster 230
+0	1567nt, >M1_S1__rnaviral__NODE_95_length_1567_cov_7.727931... *
+>Cluster 231
+0	1563nt, >M1_S1__trinity__TRINITY_DN5801_c0_g1_i1... *
+>Cluster 232
+0	1563nt, >M56_S7__trinity__TRINITY_DN18_c0_g1_i2... *
+>Cluster 233
+0	1562nt, >M9_S16__rna__NODE_82_length_1562_cov_3512.540648_g12_i2... *
+>Cluster 234
+0	1557nt, >M1_S1__trinity__TRINITY_DN878_c0_g1_i2... *
+>Cluster 235
+0	1554nt, >M56_S7__trinity__TRINITY_DN18_c0_g1_i4... *
+>Cluster 236
+0	1553nt, >M1_S1__rna__NODE_146_length_1553_cov_5880.915559_g98_i0... *
+>Cluster 237
+0	1552nt, >M57_S8__rna__NODE_66_length_1552_cov_12674.959415_g0_i8... *
+>Cluster 238
+0	1550nt, >M58_S9__trinity__TRINITY_DN579_c0_g1_i1... *
+>Cluster 239
+0	1547nt, >M2_S2__rnaviral__NODE_45_length_1547_cov_451.496662... *
+>Cluster 240
+0	1546nt, >M56_S7__trinity__TRINITY_DN5_c1_g1_i5... *
+>Cluster 241
+0	1543nt, >M1_S1__trinity__TRINITY_DN1474_c0_g1_i11... *
+>Cluster 242
+0	1541nt, >M20_S25__rnaviral__NODE_70_length_1541_cov_4.125335... *
+>Cluster 243
+0	1540nt, >M1_S1__trinity__TRINITY_DN1540_c0_g1_i20... *
+>Cluster 244
+0	1540nt, >M71_S19__trinity__TRINITY_DN5_c0_g1_i35... *
+>Cluster 245
+0	1540nt, >M9_S16__trinity__TRINITY_DN577_c0_g1_i1... *
+>Cluster 246
+0	1466nt, >M2_S2__rnaviral__NODE_53_length_1466_cov_16.016937... at +/99.93%
+1	1539nt, >M58_S9__rnaviral__NODE_31_length_1539_cov_10.100671... *
+2	1139nt, >M71_S19__rnaviral__NODE_95_length_1139_cov_6.529358... at +/100.00%
+>Cluster 247
+0	1537nt, >M20_S25__rnaviral__NODE_71_length_1537_cov_5.995296... *
+>Cluster 248
+0	1424nt, >M11_S3__rnaviral__NODE_22_length_1424_cov_251.535273... at +/99.65%
+1	1537nt, >M22_S30__megahit__k119_487... *
+2	1511nt, >M2_S2__megahit__k119_206... at +/96.62%
+3	1413nt, >M35_S31__rnaviral__NODE_43_length_1413_cov_13.824780... at -/99.50%
+4	1478nt, >M48_S5__megahit__k119_16... at -/97.63%
+5	1413nt, >M55_S6__rnaviral__NODE_64_length_1413_cov_21.939883... at -/99.65%
+6	1425nt, >M56_S7__rnaviral__NODE_40_length_1425_cov_297.118459... at +/99.58%
+7	1435nt, >M57_S8__rnaviral__NODE_44_length_1435_cov_302.696248... at -/99.30%
+8	1432nt, >M58_S9__rnaviral__NODE_41_length_1432_cov_137.170644... at -/99.44%
+9	1424nt, >M59_S10__rnaviral__NODE_10_length_1424_cov_202.914909... at -/99.72%
+10	1425nt, >M60_S11__rnaviral__NODE_15_length_1425_cov_100.704942... at -/99.65%
+11	1413nt, >M62_S18__rnaviral__NODE_16_length_1413_cov_13.629032... at +/99.43%
+12	1433nt, >M71_S19__rnaviral__NODE_58_length_1433_cov_965.542630... at -/99.16%
+13	1436nt, >M72_S20__rnaviral__NODE_23_length_1436_cov_956.465753... at +/99.30%
+14	1424nt, >M7_S15__trinity__TRINITY_DN4042_c0_g1_i1... at +/99.58%
+15	1431nt, >M9_S16__rnaviral__NODE_43_length_1431_cov_656.540521... at -/99.30%
+>Cluster 249
+0	1537nt, >M2_S2__trinity__TRINITY_DN25_c0_g1_i2... *
+>Cluster 250
+0	1536nt, >M1_S1__trinity__TRINITY_DN1122_c0_g1_i3... *
+1	1195nt, >M55_S6__rnaviral__NODE_119_length_1195_cov_10.541012... at +/95.65%
+2	1064nt, >M56_S7__rnaviral__NODE_112_length_1064_cov_6.524138... at -/99.53%
+3	1130nt, >M57_S8__rnaviral__NODE_100_length_1130_cov_9.267345... at -/96.64%
+4	1133nt, >M58_S9__trinity__TRINITY_DN17242_c0_g1_i1... at +/95.68%
+>Cluster 251
+0	1530nt, >M21_S29__megahit__k119_2987... *
+>Cluster 252
+0	1529nt, >M20_S25__rna__NODE_127_length_1529_cov_2.919595_g68_i0... *
+>Cluster 253
+0	1527nt, >M72_S20__rna__NODE_48_length_1527_cov_21.763870_g16_i0... *
+>Cluster 254
+0	1475nt, >M35_S31__rna__NODE_47_length_1475_cov_4.485273_g28_i0... at -/95.12%
+1	1526nt, >M71_S19__trinity__TRINITY_DN395_c0_g1_i3... *
+>Cluster 255
+0	1526nt, >M9_S16__rnaviral__NODE_33_length_1526_cov_4.501016... *
+>Cluster 256
+0	1524nt, >M1_S1__trinity__TRINITY_DN5801_c0_g1_i2... *
+>Cluster 257
+0	1223nt, >M1_S1__rnaviral__NODE_252_length_1223_cov_15.178024... at -/99.84%
+1	1524nt, >M55_S6__rnaviral__NODE_52_length_1524_cov_6.650169... *
+2	1199nt, >M71_S19__rnaviral__NODE_85_length_1199_cov_5.102609... at -/99.50%
+3	1505nt, >M9_S16__megahit__k119_2607... at +/99.40%
+>Cluster 258
+0	1522nt, >M1_S1__trinity__TRINITY_DN505_c0_g1_i31... *
+>Cluster 259
+0	1522nt, >M72_S20__trinity__TRINITY_DN44_c0_g1_i21... *
+>Cluster 260
+0	1047nt, >M1_S1__rnaviral__NODE_433_length_1047_cov_7.146293... at -/99.90%
+1	1516nt, >M2_S2__rna__NODE_77_length_1516_cov_5.882072_g50_i0... *
+2	1109nt, >M57_S8__rnaviral__NODE_112_length_1109_cov_6.917925... at -/99.91%
+3	1446nt, >M58_S9__trinity__TRINITY_DN5627_c0_g1_i1... at -/95.30%
+>Cluster 261
+0	1512nt, >M56_S7__rnaviral__NODE_31_length_1512_cov_5.947368... *
+>Cluster 262
+0	1509nt, >M20_S25__trinity__TRINITY_DN162_c0_g1_i6... *
+>Cluster 263
+0	1373nt, >M1_S1__trinity__TRINITY_DN342_c0_g1_i9... at +/98.91%
+1	1502nt, >M2_S2__trinity__TRINITY_DN34_c0_g1_i3... *
+2	1283nt, >M72_S20__trinity__TRINITY_DN183_c0_g1_i1... at +/96.96%
+>Cluster 264
+0	1501nt, >M55_S6__trinity__TRINITY_DN285_c0_g1_i4... *
+>Cluster 265
+0	1500nt, >M20_S25__rnaviral__NODE_78_length_1500_cov_8.134390... *
+>Cluster 266
+0	1500nt, >M20_S25__rnaviral__NODE_79_length_1500_cov_1.677464... *
+>Cluster 267
+0	1499nt, >M48_S5__rna__NODE_39_length_1499_cov_1442.894483_g7_i4... *
+1	1024nt, >M59_S10__trinity__TRINITY_DN2_c0_g1_i7... at -/98.63%
+>Cluster 268
+0	1498nt, >M1_S1__trinity__TRINITY_DN189_c0_g1_i1... *
+>Cluster 269
+0	1491nt, >M71_S19__trinity__TRINITY_DN5_c0_g1_i11... *
+>Cluster 270
+0	1489nt, >M1_S1__rna__NODE_158_length_1489_cov_106.299306_g108_i0... *
+>Cluster 271
+0	1489nt, >M35_S31__rnaviral__NODE_33_length_1489_cov_3.265278... *
+>Cluster 272
+0	1488nt, >M21_S29__rna__NODE_123_length_1488_cov_6.341209_g57_i0... *
+>Cluster 273
+0	1486nt, >M22_S30__rna__NODE_69_length_1486_cov_8771.057063_g55_i0... *
+>Cluster 274
+0	1482nt, >M20_S25__trinity__TRINITY_DN5_c0_g1_i11... *
+>Cluster 275
+0	1479nt, >M2_S2__rna__NODE_83_length_1479_cov_815.018182_g11_i10... *
+>Cluster 276
+0	1478nt, >M1_S1__rnaviral__NODE_110_length_1478_cov_7.770469... *
+1	1412nt, >M55_S6__rnaviral__NODE_65_length_1412_cov_3.550257... at -/99.58%
+>Cluster 277
+0	1478nt, >M60_S11__megahit__k119_491... *
+>Cluster 278
+0	1474nt, >M22_S30__trinity__TRINITY_DN5_c0_g1_i11... *
+>Cluster 279
+0	1474nt, >M72_S20__trinity__TRINITY_DN44_c0_g1_i7... *
+>Cluster 280
+0	1469nt, >M1_S1__megahit__k119_10201... *
+>Cluster 281
+0	1469nt, >M56_S7__rnaviral__NODE_34_length_1469_cov_27.341549... *
+1	1419nt, >M71_S19__megahit__k119_26... at +/97.74%
+>Cluster 282
+0	1466nt, >M1_S1__rnaviral__NODE_114_length_1466_cov_5.575865... *
+1	1007nt, >M58_S9__rna__NODE_176_length_1007_cov_3.201461_g144_i0... at +/99.70%
+2	1143nt, >M9_S16__rnaviral__NODE_96_length_1143_cov_2.769653... at -/99.91%
+>Cluster 283
+0	1464nt, >M1_S1__trinity__TRINITY_DN36406_c0_g1_i3... *
+>Cluster 284
+0	1464nt, >M55_S6__trinity__TRINITY_DN115_c0_g1_i5... *
+>Cluster 285
+0	1459nt, >M1_S1__trinity__TRINITY_DN556_c0_g1_i8... *
+>Cluster 286
+0	1428nt, >M1_S1__rnaviral__NODE_133_length_1428_cov_7.824511... at +/98.39%
+1	1459nt, >M20_S25__trinity__TRINITY_DN1696_c0_g1_i1... *
+>Cluster 287
+0	1457nt, >M11_S3__rnaviral__NODE_20_length_1457_cov_3.428977... *
+>Cluster 288
+0	1456nt, >M1_S1__megahit__k119_1868... *
+>Cluster 289
+0	1456nt, >M57_S8__rnaviral__NODE_43_length_1456_cov_4.751244... *
+>Cluster 290
+0	1452nt, >M48_S5__megahit__k119_6... *
+>Cluster 291
+0	1451nt, >M57_S8__trinity__TRINITY_DN8083_c0_g1_i1... *
+>Cluster 292
+0	1450nt, >M20_S25__rnaviral__NODE_85_length_1450_cov_3.770164... *
+>Cluster 293
+0	1449nt, >M20_S25__rnaviral__NODE_87_length_1449_cov_3.155714... *
+>Cluster 294
+0	1448nt, >M2_S2__rna__NODE_92_length_1448_cov_10.125089_g58_i0... *
+>Cluster 295
+0	1447nt, >M58_S9__rnaviral__NODE_39_length_1447_cov_4.077969... *
+>Cluster 296
+0	1445nt, >M21_S29__trinity__TRINITY_DN256_c0_g1_i4... *
+>Cluster 297
+0	1444nt, >M1_S1__rnaviral__NODE_126_length_1444_cov_18.519713... *
+>Cluster 298
+0	1146nt, >M71_S19__trinity__TRINITY_DN6963_c0_g1_i1... at +/98.95%
+1	1441nt, >M72_S20__rnaviral__NODE_22_length_1441_cov_3.018678... *
+>Cluster 299
+0	1439nt, >M1_S1__megahit__k119_3977... *
+>Cluster 300
+0	1438nt, >M35_S31__trinity__TRINITY_DN1717_c0_g1_i1... *
+>Cluster 301
+0	1436nt, >M20_S25__rnaviral__NODE_88_length_1436_cov_3.351839... *
+>Cluster 302
+0	1435nt, >M1_S1__trinity__TRINITY_DN505_c0_g1_i1... *
+>Cluster 303
+0	1435nt, >M20_S25__rnaviral__NODE_89_length_1435_cov_4.775613... *
+>Cluster 304
+0	1434nt, >M2_S2__trinity__TRINITY_DN18_c0_g2_i3... *
+>Cluster 305
+0	1434nt, >M35_S31__rnaviral__NODE_40_length_1434_cov_5.919856... *
+1	1220nt, >M57_S8__rnaviral__NODE_69_length_1220_cov_9.983775... at +/95.41%
+2	1153nt, >M72_S20__rnaviral__NODE_44_length_1153_cov_6.152174... at +/96.01%
+3	1217nt, >M9_S16__trinity__TRINITY_DN184_c0_g1_i6... at -/97.70%
+>Cluster 306
+0	1433nt, >M1_S1__trinity__TRINITY_DN1789_c0_g1_i1... *
+>Cluster 307
+0	1430nt, >M35_S31__rnaviral__NODE_42_length_1430_cov_3.066618... *
+>Cluster 308
+0	1430nt, >M35_S31__trinity__TRINITY_DN113_c0_g1_i5... *
+1	1391nt, >M57_S8__trinity__TRINITY_DN1417_c0_g1_i1... at +/99.57%
+>Cluster 309
+0	1427nt, >M1_S1__rnaviral__NODE_134_length_1427_cov_11.452830... *
+>Cluster 310
+0	1410nt, >M11_S3__rnaviral__NODE_23_length_1410_cov_395.189566... at -/98.51%
+1	1408nt, >M20_S25__rna__NODE_152_length_1408_cov_295.888153_g89_i0... at +/98.37%
+2	1403nt, >M21_S29__megahit__k119_214... at +/97.51%
+3	1391nt, >M22_S30__rna__NODE_77_length_1391_cov_228.885246_g63_i0... at -/98.99%
+4	1383nt, >M2_S2__rnaviral__NODE_67_length_1383_cov_158.904048... at -/99.35%
+5	1376nt, >M35_S31__rnaviral__NODE_46_length_1376_cov_103.503391... at +/99.20%
+6	1375nt, >M48_S5__rnaviral__NODE_25_length_1375_cov_510.305430... at -/98.76%
+7	1358nt, >M55_S6__rnaviral__NODE_74_length_1358_cov_9.546218... at +/99.26%
+8	1376nt, >M56_S7__rnaviral__NODE_44_length_1376_cov_347.253203... at -/99.06%
+9	1397nt, >M57_S8__rnaviral__NODE_46_length_1397_cov_783.296736... at +/98.43%
+10	1420nt, >M59_S10__rnaviral__NODE_11_length_1420_cov_141.625821... at +/98.24%
+11	1372nt, >M62_S18__megahit__k119_1490... at +/98.03%
+12	1385nt, >M71_S19__rnaviral__NODE_63_length_1385_cov_430.891467... at -/98.12%
+13	1426nt, >M72_S20__rna__NODE_59_length_1426_cov_917.763253_g25_i0... *
+>Cluster 311
+0	1418nt, >M35_S31__rna__NODE_49_length_1418_cov_5.411980_g30_i0... *
+>Cluster 312
+0	1380nt, >M11_S3__rnaviral__NODE_26_length_1380_cov_10.010518... at -/99.93%
+1	1410nt, >M22_S30__rnaviral__NODE_22_length_1410_cov_6.501837... *
+2	1295nt, >M48_S5__rnaviral__NODE_28_length_1295_cov_9.192616... at -/98.69%
+>Cluster 313
+0	1409nt, >M20_S25__rna__NODE_151_length_1409_cov_2.871324_g88_i0... *
+>Cluster 314
+0	1404nt, >M72_S20__rna__NODE_60_length_1404_cov_3.691513_g26_i0... *
+>Cluster 315
+0	1403nt, >M1_S1__rnaviral__NODE_142_length_1403_cov_26.212703... *
+>Cluster 316
+0	1399nt, >M9_S16__trinity__TRINITY_DN117_c0_g1_i3... *
+>Cluster 317
+0	1395nt, >M11_S3__rnaviral__NODE_24_length_1395_cov_4.930906... *
+>Cluster 318
+0	1394nt, >M11_S3__rnaviral__NODE_25_length_1394_cov_1226.420074... *
+>Cluster 319
+0	1394nt, >M1_S1__trinity__TRINITY_DN8458_c0_g1_i1... *
+>Cluster 320
+0	1393nt, >M1_S1__rnaviral__NODE_145_length_1393_cov_55.355655... *
+>Cluster 321
+0	1393nt, >M21_S29__rna__NODE_140_length_1393_cov_8.219494_g15_i1... *
+>Cluster 322
+0	1392nt, >M57_S8__trinity__TRINITY_DN138_c1_g1_i7... *
+>Cluster 323
+0	1201nt, >M57_S8__trinity__TRINITY_DN118_c0_g1_i4... at -/97.67%
+1	1392nt, >M9_S16__megahit__k119_340... *
+>Cluster 324
+0	1390nt, >M20_S25__rnaviral__NODE_101_length_1390_cov_1.759135... *
+>Cluster 325
+0	1389nt, >M1_S1__rna__NODE_194_length_1389_cov_145.132836_g136_i0... *
+>Cluster 326
+0	1387nt, >M1_S1__rnaviral__NODE_146_length_1387_cov_4047.529148... *
+>Cluster 327
+0	1385nt, >M1_S1__trinity__TRINITY_DN1866_c0_g1_i12... *
+>Cluster 328
+0	1384nt, >M1_S1__rna__NODE_198_length_1384_cov_8783.005993_g98_i1... *
+>Cluster 329
+0	1384nt, >M22_S30__rna__NODE_78_length_1384_cov_7666.706367_g64_i0... *
+>Cluster 330
+0	1073nt, >M55_S6__rna__NODE_183_length_1073_cov_25.404297_g138_i0... at +/96.64%
+1	1026nt, >M57_S8__trinity__TRINITY_DN164_c0_g1_i2... at +/100.00%
+2	1382nt, >M71_S19__rnaviral__NODE_64_length_1382_cov_18.012753... *
+>Cluster 331
+0	1381nt, >M1_S1__trinity__TRINITY_DN405_c3_g1_i21... *
+>Cluster 332
+0	1381nt, >M56_S7__trinity__TRINITY_DN164_c0_g1_i7... *
+>Cluster 333
+0	1376nt, >M9_S16__megahit__k119_4569... *
+>Cluster 334
+0	1375nt, >M20_S25__trinity__TRINITY_DN2482_c0_g1_i1... *
+>Cluster 335
+0	1375nt, >M56_S7__trinity__TRINITY_DN701_c0_g2_i1... *
+>Cluster 336
+0	1375nt, >M57_S8__megahit__k119_5798... *
+>Cluster 337
+0	1375nt, >M57_S8__trinity__TRINITY_DN104_c0_g1_i22... *
+>Cluster 338
+0	1374nt, >M11_S3__trinity__TRINITY_DN1_c0_g2_i4... *
+>Cluster 339
+0	1296nt, >M1_S1__rnaviral__NODE_196_length_1296_cov_3.438653... at -/97.99%
+1	1373nt, >M20_S25__trinity__TRINITY_DN10626_c0_g1_i1... *
+>Cluster 340
+0	1373nt, >M20_S25__trinity__TRINITY_DN1301_c0_g1_i6... *
+>Cluster 341
+0	1372nt, >M55_S6__rnaviral__NODE_71_length_1372_cov_7.848828... *
+1	1134nt, >M9_S16__rnaviral__NODE_99_length_1134_cov_11.556682... at +/99.65%
+>Cluster 342
+0	1371nt, >M20_S25__rnaviral__NODE_110_length_1371_cov_3.946293... *
+>Cluster 343
+0	1371nt, >M21_S29__rnaviral__NODE_66_length_1371_cov_3.130862... *
+>Cluster 344
+0	1371nt, >M58_S9__megahit__k119_2017... *
+>Cluster 345
+0	1370nt, >M55_S6__trinity__TRINITY_DN1259_c0_g1_i2... *
+>Cluster 346
+0	1368nt, >M1_S1__rnaviral__NODE_158_length_1368_cov_15.331312... *
+>Cluster 347
+0	1367nt, >M20_S25__rna__NODE_167_length_1367_cov_48.355842_g98_i0... *
+>Cluster 348
+0	1024nt, >M2_S2__rnaviral__NODE_196_length_1024_cov_6.498462... at +/100.00%
+1	1365nt, >M9_S16__rnaviral__NODE_51_length_1365_cov_5.166413... *
+>Cluster 349
+0	1364nt, >M1_S1__trinity__TRINITY_DN8458_c0_g1_i3... *
+>Cluster 350
+0	1364nt, >M20_S25__rnaviral__NODE_111_length_1364_cov_2.835741... *
+>Cluster 351
+0	1362nt, >M35_S31__rna__NODE_57_length_1362_cov_778.084539_g16_i2... *
+>Cluster 352
+0	1361nt, >M20_S25__trinity__TRINITY_DN1696_c0_g1_i2... *
+>Cluster 353
+0	1358nt, >M1_S1__megahit__k119_8796... *
+>Cluster 354
+0	1358nt, >M71_S19__trinity__TRINITY_DN395_c0_g1_i4... *
+>Cluster 355
+0	1357nt, >M21_S29__rnaviral__NODE_67_length_1357_cov_24.548930... *
+>Cluster 356
+0	1355nt, >M55_S6__rna__NODE_102_length_1355_cov_52.711332_g70_i0... *
+>Cluster 357
+0	1354nt, >M2_S2__trinity__TRINITY_DN319_c0_g1_i1... *
+1	1153nt, >M55_S6__trinity__TRINITY_DN8560_c0_g3_i1... at +/95.40%
+>Cluster 358
+0	1350nt, >M72_S20__megahit__k119_2549... *
+>Cluster 359
+0	1349nt, >M1_S1__rnaviral__NODE_163_length_1349_cov_3.663846... *
+>Cluster 360
+0	1347nt, >M1_S1__trinity__TRINITY_DN578_c0_g1_i26... *
+>Cluster 361
+0	1207nt, >M2_S2__trinity__TRINITY_DN248_c0_g1_i4... at -/95.03%
+1	1194nt, >M56_S7__megahit__k119_3642... at +/97.40%
+2	1347nt, >M57_S8__trinity__TRINITY_DN104_c0_g1_i14... *
+3	1019nt, >M71_S19__trinity__TRINITY_DN238_c0_g1_i5... at +/99.71%
+>Cluster 362
+0	1346nt, >M35_S31__trinity__TRINITY_DN113_c0_g1_i4... *
+>Cluster 363
+0	1030nt, >M1_S1__rnaviral__NODE_465_length_1030_cov_11.123344... at +/99.90%
+1	1211nt, >M57_S8__rnaviral__NODE_70_length_1211_cov_5.308950... at -/99.67%
+2	1346nt, >M58_S9__rna__NODE_74_length_1346_cov_6.110254_g51_i0... *
+>Cluster 364
+0	1344nt, >M2_S2__megahit__k119_6126... *
+1	1308nt, >M71_S19__rna__NODE_97_length_1308_cov_26.931692_g71_i0... at +/97.17%
+2	1258nt, >M74_S21__rna__NODE_59_length_1258_cov_7.376344_g41_i0... at +/96.98%
+>Cluster 365
+0	1339nt, >M2_S2__trinity__TRINITY_DN837_c0_g1_i4... *
+>Cluster 366
+0	1336nt, >M1_S1__rnaviral__NODE_170_length_1336_cov_4.113442... *
+>Cluster 367
+0	1336nt, >M55_S6__megahit__k119_2393... *
+1	1067nt, >M57_S8__trinity__TRINITY_DN155_c0_g1_i3... at -/95.41%
+2	1010nt, >M58_S9__rnaviral__NODE_145_length_1010_cov_20.160250... at +/97.62%
+>Cluster 368
+0	1335nt, >M1_S1__trinity__TRINITY_DN2460_c0_g1_i7... *
+>Cluster 369
+0	1264nt, >M1_S1__rnaviral__NODE_224_length_1264_cov_9.014815... at -/99.21%
+1	1334nt, >M58_S9__trinity__TRINITY_DN476_c0_g1_i2... *
+>Cluster 370
+0	1333nt, >M57_S8__metaviral__NODE_1_length_1333_cov_111.866242_cutoff_0_type_circular... *
+>Cluster 371
+0	1330nt, >M2_S2__trinity__TRINITY_DN25_c0_g1_i3... *
+>Cluster 372
+0	1330nt, >M58_S9__rnaviral__NODE_54_length_1330_cov_3.264637... *
+>Cluster 373
+0	1329nt, >M55_S6__trinity__TRINITY_DN118_c0_g1_i1... *
+1	1073nt, >M57_S8__rna__NODE_185_length_1073_cov_10.162109_g119_i0... at +/99.91%
+2	1192nt, >M71_S19__trinity__TRINITY_DN193_c0_g1_i2... at +/99.66%
+>Cluster 374
+0	1325nt, >M55_S6__trinity__TRINITY_DN5_c0_g1_i1... *
+1	1090nt, >M56_S7__trinity__TRINITY_DN12_c0_g1_i9... at -/99.82%
+>Cluster 375
+0	1308nt, >M11_S3__megahit__k119_685... at -/96.94%
+1	1290nt, >M1_S1__rnaviral__NODE_206_length_1290_cov_90.693795... at -/98.29%
+2	1277nt, >M20_S25__rnaviral__NODE_133_length_1277_cov_389.691368... at -/98.43%
+3	1323nt, >M21_S29__megahit__k119_1227... *
+4	1293nt, >M22_S30__megahit__k119_23... at +/98.22%
+5	1282nt, >M2_S2__megahit__k119_3686... at -/98.60%
+6	1285nt, >M48_S5__rnaviral__NODE_29_length_1285_cov_302.655340... at -/98.68%
+7	1222nt, >M55_S6__rna__NODE_127_length_1222_cov_6.105712_g91_i0... at +/98.69%
+8	1281nt, >M56_S7__rnaviral__NODE_58_length_1281_cov_101.150974... at -/98.75%
+9	1313nt, >M57_S8__trinity__TRINITY_DN56_c0_g1_i1... at +/96.57%
+10	1283nt, >M58_S9__rnaviral__NODE_64_length_1283_cov_240.535656... at -/98.60%
+11	1285nt, >M59_S10__rnaviral__NODE_15_length_1285_cov_89.550971... at -/98.60%
+12	1277nt, >M60_S11__rnaviral__NODE_23_length_1277_cov_45.684039... at -/98.83%
+13	1277nt, >M62_S18__rnaviral__NODE_21_length_1277_cov_11.829805... at +/98.59%
+14	1291nt, >M71_S19__rnaviral__NODE_71_length_1291_cov_337.621578... at -/97.91%
+15	1316nt, >M72_S20__rnaviral__NODE_29_length_1316_cov_421.198106... at -/96.50%
+16	1277nt, >M7_S15__rnaviral__NODE_28_length_1277_cov_32.343648... at +/98.75%
+17	1283nt, >M9_S16__megahit__k119_460... at -/98.83%
+>Cluster 376
+0	1322nt, >M72_S20__trinity__TRINITY_DN44_c0_g1_i17... *
+>Cluster 377
+0	1322nt, >M9_S16__trinity__TRINITY_DN6528_c0_g1_i4... *
+>Cluster 378
+0	1321nt, >M20_S25__trinity__TRINITY_DN16_c0_g1_i8... *
+>Cluster 379
+0	1318nt, >M20_S25__rna__NODE_181_length_1318_cov_7.750197_g104_i0... *
+>Cluster 380
+0	1316nt, >M1_S1__rnaviral__NODE_183_length_1316_cov_9.921073... *
+1	1045nt, >M57_S8__rna__NODE_194_length_1045_cov_5.538153_g125_i0... at -/95.41%
+>Cluster 381
+0	1313nt, >M1_S1__rna__NODE_227_length_1313_cov_11.791139_g161_i0... *
+>Cluster 382
+0	1313nt, >M1_S1__trinity__TRINITY_DN807_c0_g1_i1... *
+>Cluster 383
+0	1312nt, >M1_S1__trinity__TRINITY_DN22_c0_g1_i17... *
+>Cluster 384
+0	1311nt, >M35_S31__megahit__k119_2235... *
+>Cluster 385
+0	1311nt, >M55_S6__megahit__k119_6769... *
+>Cluster 386
+0	1305nt, >M56_S7__rnaviral__NODE_52_length_1305_cov_2.610669... *
+>Cluster 387
+0	1305nt, >M57_S8__rnaviral__NODE_57_length_1305_cov_260.225318... *
+>Cluster 388
+0	1305nt, >M9_S16__megahit__k119_2933... *
+>Cluster 389
+0	1304nt, >M72_S20__trinity__TRINITY_DN409_c0_g1_i8... *
+>Cluster 390
+0	1302nt, >M1_S1__rnaviral__NODE_192_length_1302_cov_3.225060... *
+>Cluster 391
+0	1302nt, >M9_S16__rnaviral__NODE_61_length_1302_cov_6.458101... *
+>Cluster 392
+0	1301nt, >M35_S31__rnaviral__NODE_52_length_1301_cov_20.454473... *
+>Cluster 393
+0	1299nt, >M2_S2__trinity__TRINITY_DN6815_c0_g1_i4... *
+>Cluster 394
+0	1297nt, >M1_S1__trinity__TRINITY_DN2460_c0_g1_i29... *
+>Cluster 395
+0	1295nt, >M1_S1__rnaviral__NODE_198_length_1295_cov_3.706260... *
+>Cluster 396
+0	1294nt, >M1_S1__rnaviral__NODE_199_length_1294_cov_4.693173... *
+>Cluster 397
+0	1293nt, >M55_S6__rnaviral__NODE_88_length_1293_cov_3.569936... *
+>Cluster 398
+0	1291nt, >M2_S2__rna__NODE_125_length_1291_cov_25053.512882_g10_i5... *
+>Cluster 399
+0	1290nt, >M57_S8__trinity__TRINITY_DN104_c0_g1_i12... *
+1	1144nt, >M58_S9__rna__NODE_128_length_1144_cov_14.443836_g101_i0... at +/98.78%
+>Cluster 400
+0	1290nt, >M9_S16__trinity__TRINITY_DN83_c0_g1_i7... *
+>Cluster 401
+0	1288nt, >M11_S3__trinity__TRINITY_DN425_c0_g1_i1... *
+>Cluster 402
+0	1288nt, >M1_S1__rnaviral__NODE_208_length_1288_cov_6.827280... *
+>Cluster 403
+0	1287nt, >M1_S1__megahit__k119_356... *
+>Cluster 404
+0	1287nt, >M1_S1__trinity__TRINITY_DN629_c0_g1_i2... *
+>Cluster 405
+0	1286nt, >M21_S29__rnaviral__NODE_79_length_1286_cov_9.905416... *
+>Cluster 406
+0	1286nt, >M22_S30__rna__NODE_85_length_1286_cov_9749.963622_g70_i0... *
+>Cluster 407
+0	1285nt, >M1_S1__megahit__k119_11606... *
+>Cluster 408
+0	1283nt, >M1_S1__rnaviral__NODE_211_length_1283_cov_23.066451... *
+>Cluster 409
+0	1283nt, >M2_S2__rna__NODE_128_length_1283_cov_397.846029_g11_i14... *
+>Cluster 410
+0	1282nt, >M55_S6__trinity__TRINITY_DN0_c0_g1_i18... *
+>Cluster 411
+0	1278nt, >M1_S1__trinity__TRINITY_DN4591_c0_g1_i10... *
+>Cluster 412
+0	1275nt, >M58_S9__rnaviral__NODE_66_length_1275_cov_9.066884... *
+>Cluster 413
+0	1270nt, >M1_S1__trinity__TRINITY_DN505_c0_g1_i7... *
+>Cluster 414
+0	1234nt, >M1_S1__trinity__TRINITY_DN15457_c0_g1_i2... at -/99.92%
+1	1181nt, >M2_S2__rnaviral__NODE_124_length_1181_cov_15.566254... at +/99.92%
+2	1269nt, >M56_S7__rnaviral__NODE_61_length_1269_cov_8.463934... *
+>Cluster 415
+0	1263nt, >M20_S25__trinity__TRINITY_DN7976_c0_g1_i1... *
+>Cluster 416
+0	1262nt, >M1_S1__trinity__TRINITY_DN4326_c0_g1_i1... *
+>Cluster 417
+0	1259nt, >M1_S1__megahit__k119_3450... *
+>Cluster 418
+0	1257nt, >M21_S29__megahit__k119_2272... *
+>Cluster 419
+0	1257nt, >M55_S6__trinity__TRINITY_DN115_c0_g1_i6... *
+1	1142nt, >M72_S20__megahit__k119_436... at +/100.00%
+>Cluster 420
+0	1256nt, >M58_S9__rna__NODE_93_length_1256_cov_5.314830_g69_i0... *
+>Cluster 421
+0	1254nt, >M57_S8__rna__NODE_113_length_1254_cov_4.625726_g69_i0... *
+>Cluster 422
+0	1253nt, >M35_S31__rna__NODE_69_length_1253_cov_1144.434385_g11_i5... *
+>Cluster 423
+0	1253nt, >M35_S31__megahit__k119_1080... *
+>Cluster 424
+0	1252nt, >M57_S8__megahit__k119_5659... *
+>Cluster 425
+0	1251nt, >M1_S1__rnaviral__NODE_233_length_1251_cov_17.502496... *
+1	1130nt, >M35_S31__rnaviral__NODE_77_length_1130_cov_8.522664... at +/100.00%
+2	1100nt, >M56_S7__rnaviral__NODE_103_length_1100_cov_9.006660... at -/99.91%
+3	1014nt, >M60_S11__megahit__k119_413... at +/100.00%
+4	1232nt, >M9_S16__rnaviral__NODE_73_length_1232_cov_8.820795... at +/99.51%
+>Cluster 426
+0	1251nt, >M1_S1__megahit__k119_10078... *
+>Cluster 427
+0	1251nt, >M1_S1__trinity__TRINITY_DN2030_c0_g2_i4... *
+>Cluster 428
+0	1251nt, >M56_S7__rnaviral__NODE_63_length_1251_cov_2.842762... *
+>Cluster 429
+0	1248nt, >M2_S2__megahit__k119_3320... *
+>Cluster 430
+0	1247nt, >M1_S1__rna__NODE_266_length_1247_cov_29.450751_g194_i0... *
+>Cluster 431
+0	1247nt, >M20_S25__rna__NODE_216_length_1247_cov_37.622705_g122_i0... *
+>Cluster 432
+0	1246nt, >M56_S7__trinity__TRINITY_DN317_c0_g1_i1... *
+>Cluster 433
+0	1246nt, >M57_S8__megahit__k119_5008... *
+>Cluster 434
+0	1245nt, >M20_S25__trinity__TRINITY_DN888_c0_g1_i1... *
+>Cluster 435
+0	1244nt, >M1_S1__rna__NODE_268_length_1244_cov_19.770711_g196_i0... *
+>Cluster 436
+0	1242nt, >M1_S1__rnaviral__NODE_239_length_1242_cov_5.533110... *
+>Cluster 437
+0	1242nt, >M9_S16__rna__NODE_161_length_1242_cov_13.939648_g100_i0... *
+>Cluster 438
+0	1081nt, >M20_S25__trinity__TRINITY_DN126_c0_g1_i1... at -/98.06%
+1	1240nt, >M57_S8__trinity__TRINITY_DN89_c0_g1_i1... *
+2	1149nt, >M58_S9__trinity__TRINITY_DN26_c0_g1_i2... at +/99.22%
+>Cluster 439
+0	1236nt, >M1_S1__rnaviral__NODE_245_length_1236_cov_3.178602... *
+>Cluster 440
+0	1233nt, >M1_S1__trinity__TRINITY_DN505_c0_g1_i15... *
+>Cluster 441
+0	1232nt, >M22_S30__trinity__TRINITY_DN14_c0_g1_i2... *
+>Cluster 442
+0	1232nt, >M58_S9__trinity__TRINITY_DN17792_c0_g1_i1... *
+>Cluster 443
+0	1217nt, >M1_S1__megahit__k119_6723... at -/98.60%
+1	1231nt, >M2_S2__rnaviral__NODE_103_length_1231_cov_3.917936... *
+>Cluster 444
+0	1231nt, >M71_S19__megahit__k119_833... *
+>Cluster 445
+0	1231nt, >M9_S16__trinity__TRINITY_DN4670_c0_g1_i1... *
+>Cluster 446
+0	1229nt, >M20_S25__rnaviral__NODE_152_length_1229_cov_2.666102... *
+>Cluster 447
+0	1229nt, >M9_S16__trinity__TRINITY_DN6528_c0_g1_i1... *
+>Cluster 448
+0	1227nt, >M1_S1__trinity__TRINITY_DN2455_c0_g1_i1... *
+>Cluster 449
+0	1227nt, >M20_S25__trinity__TRINITY_DN2745_c0_g1_i1... *
+>Cluster 450
+0	1225nt, >M55_S6__rna__NODE_125_length_1225_cov_6.019558_g89_i0... *
+>Cluster 451
+0	1146nt, >M2_S2__megahit__k119_1555... at +/99.56%
+1	1223nt, >M58_S9__rnaviral__NODE_70_length_1223_cov_3.621806... *
+>Cluster 452
+0	1222nt, >M1_S1__rnaviral__NODE_253_length_1222_cov_78.922421... *
+>Cluster 453
+0	1222nt, >M9_S16__rnaviral__NODE_75_length_1222_cov_4.278772... *
+>Cluster 454
+0	1221nt, >M20_S25__rnaviral__NODE_156_length_1221_cov_2.627133... *
+>Cluster 455
+0	1221nt, >M2_S2__trinity__TRINITY_DN541_c0_g1_i3... *
+>Cluster 456
+0	1219nt, >M1_S1__trinity__TRINITY_DN674_c0_g1_i3... *
+>Cluster 457
+0	1219nt, >M57_S8__trinity__TRINITY_DN4_c0_g1_i18... *
+>Cluster 458
+0	1215nt, >M20_S25__rnaviral__NODE_159_length_1215_cov_5.685249... *
+>Cluster 459
+0	1212nt, >M1_S1__rna__NODE_291_length_1212_cov_11.380911_g216_i0... *
+>Cluster 460
+0	1212nt, >M1_S1__trinity__TRINITY_DN2425_c0_g1_i18... *
+>Cluster 461
+0	1211nt, >M55_S6__rnaviral__NODE_113_length_1211_cov_8.991394... *
+>Cluster 462
+0	1210nt, >M71_S19__trinity__TRINITY_DN4181_c0_g1_i1... *
+>Cluster 463
+0	1206nt, >M1_S1__rnaviral__NODE_269_length_1206_cov_11.275713... *
+>Cluster 464
+0	1206nt, >M20_S25__trinity__TRINITY_DN7189_c2_g1_i1... *
+>Cluster 465
+0	1205nt, >M1_S1__rnaviral__NODE_270_length_1205_cov_9.373702... *
+>Cluster 466
+0	1204nt, >M1_S1__megahit__k119_11910... *
+>Cluster 467
+0	1202nt, >M71_S19__trinity__TRINITY_DN185_c0_g2_i5... *
+1	1115nt, >M9_S16__trinity__TRINITY_DN4_c0_g1_i21... at +/99.55%
+>Cluster 468
+0	1199nt, >M21_S29__rnaviral__NODE_87_length_1199_cov_3.135652... *
+>Cluster 469
+0	1197nt, >M9_S16__rnaviral__NODE_79_length_1197_cov_5.707317... *
+>Cluster 470
+0	1196nt, >M57_S8__rna__NODE_131_length_1196_cov_11.932868_g80_i0... *
+>Cluster 471
+0	1196nt, >M58_S9__trinity__TRINITY_DN43_c0_g1_i1... *
+>Cluster 472
+0	1193nt, >M57_S8__rna__NODE_132_length_1193_cov_10.494755_g81_i0... *
+>Cluster 473
+0	1191nt, >M1_S1__rnaviral__NODE_285_length_1191_cov_4.315236... *
+>Cluster 474
+0	1191nt, >M1_S1__rna__NODE_313_length_1191_cov_31.929072_g236_i0... *
+>Cluster 475
+0	1191nt, >M20_S25__rnaviral__NODE_170_length_1191_cov_2.014886... *
+>Cluster 476
+0	1191nt, >M74_S21__rna__NODE_66_length_1191_cov_6.076182_g46_i0... *
+>Cluster 477
+0	1189nt, >M58_S9__rnaviral__NODE_78_length_1189_cov_4.249123... *
+>Cluster 478
+0	1188nt, >M20_S25__rna__NODE_243_length_1188_cov_2.412643_g143_i0... *
+>Cluster 479
+0	1187nt, >M71_S19__rnaviral__NODE_88_length_1187_cov_3.535149... *
+>Cluster 480
+0	1186nt, >M1_S1__trinity__TRINITY_DN1578_c0_g1_i2... *
+>Cluster 481
+0	1186nt, >M59_S10__trinity__TRINITY_DN113_c0_g1_i9... *
+>Cluster 482
+0	1185nt, >M9_S16__trinity__TRINITY_DN53_c0_g1_i2... *
+>Cluster 483
+0	1184nt, >M1_S1__rnaviral__NODE_292_length_1184_cov_3.487225... *
+>Cluster 484
+0	1184nt, >M55_S6__trinity__TRINITY_DN16_c1_g1_i2... *
+>Cluster 485
+0	1183nt, >M55_S6__trinity__TRINITY_DN8560_c0_g3_i2... *
+>Cluster 486
+0	1057nt, >M55_S6__rnaviral__NODE_175_length_1057_cov_5.958333... at -/99.05%
+1	1183nt, >M57_S8__rnaviral__NODE_79_length_1183_cov_4.358025... *
+>Cluster 487
+0	1183nt, >M71_S19__rna__NODE_112_length_1183_cov_4.922399_g86_i0... *
+>Cluster 488
+0	1182nt, >M9_S16__rna__NODE_176_length_1182_cov_6.180936_g110_i0... *
+>Cluster 489
+0	1181nt, >M1_S1__rnaviral__NODE_293_length_1181_cov_6.913428... *
+>Cluster 490
+0	1181nt, >M55_S6__trinity__TRINITY_DN3442_c1_g4_i1... *
+>Cluster 491
+0	1180nt, >M2_S2__rnaviral__NODE_125_length_1180_cov_5.706454... *
+>Cluster 492
+0	1033nt, >M21_S29__megahit__k119_94... at +/95.93%
+1	1180nt, >M55_S6__trinity__TRINITY_DN542_c0_g2_i5... *
+>Cluster 493
+0	1179nt, >M9_S16__trinity__TRINITY_DN7414_c0_g1_i4... *
+>Cluster 494
+0	1178nt, >M21_S29__trinity__TRINITY_DN857_c0_g2_i13... *
+>Cluster 495
+0	1177nt, >M1_S1__rnaviral__NODE_296_length_1177_cov_23.054078... *
+>Cluster 496
+0	1177nt, >M7_S15__rna__NODE_111_length_1177_cov_2452.339539_g14_i10... *
+>Cluster 497
+0	1175nt, >M20_S25__megahit__k119_4458... *
+>Cluster 498
+0	1173nt, >M35_S31__trinity__TRINITY_DN447_c1_g1_i7... *
+>Cluster 499
+0	1172nt, >M20_S25__rna__NODE_245_length_1172_cov_145.707035_g109_i2... *
+1	1167nt, >M59_S10__rna__NODE_22_length_1167_cov_23.434705_g19_i0... at +/98.11%
+>Cluster 500
+0	1170nt, >M1_S1__megahit__k119_2622... *
+>Cluster 501
+0	1170nt, >M2_S2__trinity__TRINITY_DN962_c1_g1_i1... *
+>Cluster 502
+0	1168nt, >M56_S7__rnaviral__NODE_84_length_1168_cov_38.998213... *
+>Cluster 503
+0	1168nt, >M9_S16__megahit__k119_3007... *
+>Cluster 504
+0	1115nt, >M1_S1__rnaviral__NODE_349_length_1115_cov_12.354597... at -/95.61%
+1	1050nt, >M2_S2__rnaviral__NODE_182_length_1050_cov_5.198801... at -/100.00%
+2	1020nt, >M56_S7__rnaviral__NODE_133_length_1020_cov_3.746653... at +/99.71%
+3	1165nt, >M58_S9__rnaviral__NODE_91_length_1165_cov_4.284050... *
+>Cluster 505
+0	1164nt, >M1_S1__trinity__TRINITY_DN5879_c0_g1_i3... *
+>Cluster 506
+0	1164nt, >M1_S1__trinity__TRINITY_DN7869_c0_g1_i1... *
+>Cluster 507
+0	1163nt, >M1_S1__rnaviral__NODE_303_length_1163_cov_28.022442... *
+>Cluster 508
+0	1163nt, >M55_S6__rnaviral__NODE_123_length_1163_cov_17.060144... *
+>Cluster 509
+0	1162nt, >M57_S8__rna__NODE_149_length_1162_cov_1464.666667_g93_i0... *
+>Cluster 510
+0	1162nt, >M9_S16__rnaviral__NODE_87_length_1162_cov_3.395328... *
+>Cluster 511
+0	1159nt, >M1_S1__rnaviral__NODE_306_length_1159_cov_101.864865... *
+1	1004nt, >M55_S6__rnaviral__NODE_208_length_1004_cov_36.415707... at -/97.91%
+2	1088nt, >M71_S19__rna__NODE_125_length_1088_cov_30.438884_g98_i0... at -/96.14%
+>Cluster 512
+0	1156nt, >M20_S25__rnaviral__NODE_181_length_1156_cov_10.738934... *
+>Cluster 513
+0	1156nt, >M9_S16__trinity__TRINITY_DN4188_c0_g1_i1... *
+>Cluster 514
+0	1155nt, >M2_S2__trinity__TRINITY_DN248_c0_g1_i7... *
+>Cluster 515
+0	1153nt, >M56_S7__rnaviral__NODE_86_length_1153_cov_2.427536... *
+>Cluster 516
+0	1153nt, >M79_S28__trinity__TRINITY_DN4_c0_g1_i23... *
+>Cluster 517
+0	1152nt, >M1_S1__megahit__k119_3107... *
+>Cluster 518
+0	1152nt, >M1_S1__trinity__TRINITY_DN127_c0_g1_i1... *
+1	1146nt, >M55_S6__trinity__TRINITY_DN118_c0_g1_i2... at -/95.72%
+>Cluster 519
+0	1152nt, >M55_S6__megahit__k119_5462... *
+>Cluster 520
+0	1151nt, >M2_S2__trinity__TRINITY_DN879_c0_g2_i1... *
+1	1128nt, >M55_S6__rnaviral__NODE_137_length_1128_cov_6.234476... at +/99.65%
+>Cluster 521
+0	1151nt, >M79_S28__trinity__TRINITY_DN4_c0_g1_i20... *
+>Cluster 522
+0	1150nt, >M21_S29__rnaviral__NODE_97_length_1150_cov_2.603088... *
+>Cluster 523
+0	1150nt, >M2_S2__trinity__TRINITY_DN248_c0_g1_i10... *
+>Cluster 524
+0	1149nt, >M1_S1__trinity__TRINITY_DN1540_c1_g1_i13... *
+>Cluster 525
+0	1148nt, >M21_S29__rnaviral__NODE_98_length_1148_cov_2.706096... *
+>Cluster 526
+0	1146nt, >M1_S1__rnaviral__NODE_319_length_1146_cov_4.721057... *
+>Cluster 527
+0	1146nt, >M20_S25__rnaviral__NODE_185_length_1146_cov_2.443938... *
+>Cluster 528
+0	1146nt, >M20_S25__trinity__TRINITY_DN197_c0_g1_i2... *
+>Cluster 529
+0	1145nt, >M20_S25__megahit__k119_1694... *
+>Cluster 530
+0	1145nt, >M20_S25__trinity__TRINITY_DN76_c0_g1_i9... *
+>Cluster 531
+0	1144nt, >M1_S1__trinity__TRINITY_DN6154_c0_g1_i3... *
+>Cluster 532
+0	1143nt, >M35_S31__rna__NODE_80_length_1143_cov_5.106947_g52_i0... *
+>Cluster 533
+0	1143nt, >M9_S16__rnaviral__NODE_95_length_1143_cov_4.213894... *
+>Cluster 534
+0	1142nt, >M1_S1__trinity__TRINITY_DN2765_c0_g1_i1... *
+1	1069nt, >M2_S2__rnaviral__NODE_169_length_1069_cov_14.510784... at +/98.13%
+2	1068nt, >M57_S8__rnaviral__NODE_132_length_1068_cov_10.458292... at +/97.38%
+3	1064nt, >M71_S19__rnaviral__NODE_117_length_1064_cov_11.147783... at -/98.31%
+>Cluster 535
+0	1142nt, >M20_S25__rna__NODE_256_length_1142_cov_41.537969_g150_i0... *
+>Cluster 536
+0	1142nt, >M21_S29__rna__NODE_179_length_1142_cov_15.632205_g99_i0... *
+>Cluster 537
+0	1141nt, >M55_S6__rnaviral__NODE_132_length_1141_cov_8.078755... *
+>Cluster 538
+0	1140nt, >M1_S1__rna__NODE_351_length_1140_cov_18.901008_g271_i0... *
+1	1081nt, >M20_S25__rna__NODE_281_length_1081_cov_9.211240_g168_i0... at -/99.91%
+2	1000nt, >M55_S6__megahit__k119_2920... at +/99.70%
+>Cluster 539
+0	1140nt, >M20_S25__rnaviral__NODE_188_length_1140_cov_2.792851... *
+>Cluster 540
+0	1140nt, >M22_S30__rnaviral__NODE_40_length_1140_cov_10.740605... *
+>Cluster 541
+0	1139nt, >M20_S25__rnaviral__NODE_190_length_1139_cov_3.788991... *
+>Cluster 542
+0	1139nt, >M57_S8__rna__NODE_153_length_1139_cov_1673.454128_g0_i9... *
+>Cluster 543
+0	1138nt, >M1_S1__rna__NODE_355_length_1138_cov_13.256198_g275_i0... *
+>Cluster 544
+0	1137nt, >M1_S1__trinity__TRINITY_DN731_c0_g1_i3... *
+1	1051nt, >M57_S8__trinity__TRINITY_DN155_c0_g1_i2... at +/99.24%
+>Cluster 545
+0	1136nt, >M1_S1__rnaviral__NODE_330_length_1136_cov_6.705612... *
+>Cluster 546
+0	1136nt, >M35_S31__rnaviral__NODE_75_length_1136_cov_3.574057... *
+>Cluster 547
+0	1135nt, >M56_S7__rnaviral__NODE_91_length_1135_cov_15.557090... *
+>Cluster 548
+0	1134nt, >M1_S1__trinity__TRINITY_DN505_c0_g1_i13... *
+>Cluster 549
+0	1134nt, >M56_S7__rnaviral__NODE_94_length_1134_cov_5.321659... *
+>Cluster 550
+0	1133nt, >M22_S30__trinity__TRINITY_DN115_c0_g2_i7... *
+>Cluster 551
+0	1133nt, >M2_S2__rnaviral__NODE_140_length_1133_cov_2.046125... *
+>Cluster 552
+0	1132nt, >M1_S1__rnaviral__NODE_333_length_1132_cov_18.475531... *
+>Cluster 553
+0	1131nt, >M2_S2__trinity__TRINITY_DN6815_c0_g1_i5... *
+>Cluster 554
+0	1131nt, >M56_S7__rna__NODE_118_length_1131_cov_8.550832_g81_i0... *
+>Cluster 555
+0	1077nt, >M2_S2__trinity__TRINITY_DN44_c0_g1_i1... at -/99.91%
+1	1130nt, >M58_S9__megahit__k119_4980... *
+>Cluster 556
+0	1127nt, >M55_S6__rnaviral__NODE_138_length_1127_cov_13.833952... *
+>Cluster 557
+0	1127nt, >M58_S9__rnaviral__NODE_100_length_1127_cov_55.353432... *
+>Cluster 558
+0	1126nt, >M9_S16__trinity__TRINITY_DN117_c0_g1_i8... *
+>Cluster 559
+0	1126nt, >M9_S16__trinity__TRINITY_DN29_c1_g1_i1... *
+>Cluster 560
+0	1122nt, >M9_S16__rnaviral__NODE_104_length_1122_cov_2.699907... *
+>Cluster 561
+0	1121nt, >M1_S1__rnaviral__NODE_339_length_1121_cov_3.442164... *
+>Cluster 562
+0	1121nt, >M1_S1__trinity__TRINITY_DN894_c0_g1_i2... *
+>Cluster 563
+0	1121nt, >M1_S1__trinity__TRINITY_DN339_c0_g1_i1... *
+>Cluster 564
+0	1120nt, >M1_S1__rna__NODE_368_length_1120_cov_136.299720_g287_i0... *
+>Cluster 565
+0	1119nt, >M20_S25__trinity__TRINITY_DN197_c0_g1_i1... *
+>Cluster 566
+0	1119nt, >M22_S30__rna__NODE_101_length_1119_cov_184.253271_g20_i7... *
+>Cluster 567
+0	1119nt, >M35_S31__rnaviral__NODE_80_length_1119_cov_37.241121... *
+>Cluster 568
+0	1119nt, >M55_S6__trinity__TRINITY_DN289_c0_g1_i6... *
+>Cluster 569
+0	1119nt, >M56_S7__rnaviral__NODE_97_length_1119_cov_52.888785... *
+>Cluster 570
+0	1119nt, >M9_S16__rnaviral__NODE_107_length_1119_cov_3.428037... *
+>Cluster 571
+0	1118nt, >M11_S3__trinity__TRINITY_DN1_c0_g2_i3... *
+>Cluster 572
+0	1118nt, >M20_S25__rnaviral__NODE_201_length_1118_cov_20.289991... *
+>Cluster 573
+0	1117nt, >M1_S1__rna__NODE_374_length_1117_cov_11.810861_g292_i0... *
+>Cluster 574
+0	1117nt, >M21_S29__trinity__TRINITY_DN66_c0_g1_i8... *
+>Cluster 575
+0	1116nt, >M1_S1__rnaviral__NODE_347_length_1116_cov_12.583880... *
+>Cluster 576
+0	1115nt, >M1_S1__rnaviral__NODE_348_length_1115_cov_13.431520... *
+>Cluster 577
+0	1115nt, >M2_S2__rna__NODE_181_length_1115_cov_112.233583_g108_i1... *
+>Cluster 578
+0	1115nt, >M35_S31__trinity__TRINITY_DN827_c0_g1_i2... *
+>Cluster 579
+0	1114nt, >M22_S30__megahit__k119_832... *
+>Cluster 580
+0	1008nt, >M57_S8__rnaviral__NODE_158_length_1008_cov_4.810219... at +/98.02%
+1	1114nt, >M9_S16__trinity__TRINITY_DN7414_c0_g1_i2... *
+>Cluster 581
+0	1113nt, >M55_S6__megahit__k119_3122... *
+>Cluster 582
+0	1112nt, >M20_S25__rnaviral__NODE_205_length_1112_cov_2.870179... *
+>Cluster 583
+0	1040nt, >M20_S25__rnaviral__NODE_249_length_1040_cov_2.105954... at -/97.60%
+1	1109nt, >M21_S29__trinity__TRINITY_DN1895_c0_g1_i3... *
+>Cluster 584
+0	1108nt, >M57_S8__megahit__k119_3241... *
+1	1029nt, >M9_S16__trinity__TRINITY_DN92_c0_g1_i2... at -/99.90%
+>Cluster 585
+0	1108nt, >M57_S8__trinity__TRINITY_DN646_c0_g1_i2... *
+>Cluster 586
+0	1104nt, >M48_S5__trinity__TRINITY_DN28_c0_g1_i1... *
+>Cluster 587
+0	1103nt, >M20_S25__rnaviral__NODE_208_length_1103_cov_1.865275... *
+>Cluster 588
+0	1103nt, >M58_S9__rnaviral__NODE_107_length_1103_cov_15.886148... *
+>Cluster 589
+0	1102nt, >M57_S8__rna__NODE_177_length_1102_cov_3.664767_g113_i0... *
+>Cluster 590
+0	1100nt, >M1_S1__rnaviral__NODE_367_length_1100_cov_1.929591... *
+>Cluster 591
+0	1099nt, >M1_S1__trinity__TRINITY_DN1540_c1_g1_i38... *
+>Cluster 592
+0	1098nt, >M1_S1__rna__NODE_387_length_1098_cov_19.374643_g303_i0... *
+>Cluster 593
+0	1098nt, >M20_S25__megahit__k119_2416... *
+>Cluster 594
+0	1098nt, >M58_S9__rnaviral__NODE_111_length_1098_cov_5.375596... *
+>Cluster 595
+0	1097nt, >M58_S9__trinity__TRINITY_DN17353_c0_g1_i1... *
+>Cluster 596
+0	1096nt, >M20_S25__rnaviral__NODE_212_length_1096_cov_6.773639... *
+>Cluster 597
+0	1093nt, >M55_S6__trinity__TRINITY_DN20792_c0_g1_i1... *
+>Cluster 598
+0	1092nt, >M1_S1__rnaviral__NODE_376_length_1092_cov_6.479386... *
+>Cluster 599
+0	1092nt, >M35_S31__rnaviral__NODE_89_length_1092_cov_5.618408... *
+>Cluster 600
+0	1092nt, >M9_S16__rnaviral__NODE_110_length_1092_cov_3.590604... *
+>Cluster 601
+0	1092nt, >M9_S16__rna__NODE_217_length_1092_cov_2.694151_g144_i0... *
+>Cluster 602
+0	1091nt, >M20_S25__trinity__TRINITY_DN1220_c0_g1_i1... *
+>Cluster 603
+0	1090nt, >M58_S9__rnaviral__NODE_116_length_1090_cov_2.852065... *
+>Cluster 604
+0	1089nt, >M20_S25__trinity__TRINITY_DN542_c0_g1_i1... *
+>Cluster 605
+0	1089nt, >M55_S6__rna__NODE_175_length_1089_cov_2202.794231_g131_i0... *
+>Cluster 606
+0	1089nt, >M55_S6__megahit__k119_5522... *
+>Cluster 607
+0	1087nt, >M20_S25__trinity__TRINITY_DN675_c0_g1_i1... *
+>Cluster 608
+0	1086nt, >M1_S1__rna__NODE_395_length_1086_cov_6.908390_g310_i0... *
+>Cluster 609
+0	1086nt, >M1_S1__trinity__TRINITY_DN2087_c0_g1_i1... *
+>Cluster 610
+0	1086nt, >M71_S19__rnaviral__NODE_108_length_1086_cov_3.265188... *
+>Cluster 611
+0	1085nt, >M1_S1__rnaviral__NODE_383_length_1085_cov_13.911197... *
+>Cluster 612
+0	1085nt, >M20_S25__rnaviral__NODE_220_length_1085_cov_5.476834... *
+>Cluster 613
+0	1085nt, >M2_S2__rnaviral__NODE_163_length_1085_cov_2.944981... *
+>Cluster 614
+0	1085nt, >M7_S15__megahit__k119_970... *
+>Cluster 615
+0	1084nt, >M1_S1__rna__NODE_398_length_1084_cov_92.539130_g313_i0... *
+>Cluster 616
+0	1084nt, >M55_S6__megahit__k119_472... *
+>Cluster 617
+0	1083nt, >M1_S1__rnaviral__NODE_387_length_1083_cov_1.997099... *
+>Cluster 618
+0	1083nt, >M2_S2__rnaviral__NODE_164_length_1083_cov_2.441006... *
+>Cluster 619
+0	1082nt, >M20_S25__trinity__TRINITY_DN1146_c1_g1_i1... *
+>Cluster 620
+0	1081nt, >M35_S31__trinity__TRINITY_DN53_c0_g1_i1... *
+>Cluster 621
+0	1080nt, >M57_S8__rnaviral__NODE_127_length_1080_cov_2.070805... *
+>Cluster 622
+0	1080nt, >M9_S16__trinity__TRINITY_DN538_c0_g1_i4... *
+>Cluster 623
+0	1077nt, >M20_S25__rnaviral__NODE_226_length_1077_cov_1.514591... *
+>Cluster 624
+0	1077nt, >M2_S2__trinity__TRINITY_DN478_c0_g1_i2... *
+>Cluster 625
+0	1076nt, >M2_S2__rna__NODE_203_length_1076_cov_6.664070_g150_i0... *
+>Cluster 626
+0	1076nt, >M57_S8__trinity__TRINITY_DN1123_c0_g1_i3... *
+>Cluster 627
+0	1075nt, >M2_S2__rnaviral__NODE_167_length_1075_cov_2.885965... *
+1	1034nt, >M58_S9__rnaviral__NODE_135_length_1034_cov_2.711675... at -/99.03%
+>Cluster 628
+0	1072nt, >M2_S2__rnaviral__NODE_168_length_1072_cov_5.267840... *
+>Cluster 629
+0	1072nt, >M74_S21__rnaviral__NODE_46_length_1072_cov_16.696970... *
+>Cluster 630
+0	1069nt, >M2_S2__rnaviral__NODE_170_length_1069_cov_2.806863... *
+>Cluster 631
+0	1068nt, >M1_S1__rnaviral__NODE_399_length_1068_cov_8.105986... *
+>Cluster 632
+0	1068nt, >M2_S2__rnaviral__NODE_171_length_1068_cov_4.726202... *
+>Cluster 633
+0	1068nt, >M71_S19__trinity__TRINITY_DN1316_c0_g1_i1... *
+>Cluster 634
+0	1068nt, >M9_S16__megahit__k119_138... *
+>Cluster 635
+0	1067nt, >M1_S1__rnaviral__NODE_401_length_1067_cov_3.904715... *
+>Cluster 636
+0	1066nt, >M2_S2__rna__NODE_208_length_1066_cov_6.497542_g154_i0... *
+>Cluster 637
+0	1066nt, >M71_S19__trinity__TRINITY_DN9_c0_g1_i7... *
+>Cluster 638
+0	1065nt, >M1_S1__trinity__TRINITY_DN1247_c0_g1_i1... *
+>Cluster 639
+0	1065nt, >M22_S30__rna__NODE_105_length_1065_cov_2.907480_g87_i0... *
+>Cluster 640
+0	1065nt, >M57_S8__trinity__TRINITY_DN169_c0_g1_i1... *
+>Cluster 641
+0	1065nt, >M9_S16__rnaviral__NODE_119_length_1065_cov_61.376969... *
+>Cluster 642
+0	1064nt, >M56_S7__megahit__k119_3235... *
+>Cluster 643
+0	1061nt, >M1_S1__rnaviral__NODE_409_length_1061_cov_14.795455... *
+>Cluster 644
+0	1061nt, >M1_S1__trinity__TRINITY_DN175_c0_g1_i1... *
+1	1039nt, >M20_S25__trinity__TRINITY_DN284_c0_g1_i2... at -/96.82%
+>Cluster 645
+0	1061nt, >M55_S6__rna__NODE_188_length_1061_cov_7.674901_g101_i1... *
+>Cluster 646
+0	1059nt, >M7_S15__trinity__TRINITY_DN2105_c0_g1_i1... *
+>Cluster 647
+0	1059nt, >M9_S16__rna__NODE_235_length_1059_cov_6.688119_g161_i0... *
+>Cluster 648
+0	1058nt, >M58_S9__rnaviral__NODE_128_length_1058_cov_7.148662... *
+>Cluster 649
+0	1056nt, >M71_S19__rna__NODE_135_length_1056_cov_4.192651_g107_i0... *
+>Cluster 650
+0	1056nt, >M7_S15__rnaviral__NODE_38_length_1056_cov_22.595829... *
+>Cluster 651
+0	1055nt, >M1_S1__rnaviral__NODE_419_length_1055_cov_30.118290... *
+1	1008nt, >M72_S20__rna__NODE_94_length_1008_cov_7.175182_g53_i0... at +/100.00%
+>Cluster 652
+0	1055nt, >M35_S31__rnaviral__NODE_98_length_1055_cov_3.909543... *
+>Cluster 653
+0	1054nt, >M20_S25__rnaviral__NODE_236_length_1054_cov_12.085572... *
+>Cluster 654
+0	1054nt, >M72_S20__trinity__TRINITY_DN1884_c0_g1_i1... *
+>Cluster 655
+0	1053nt, >M1_S1__rnaviral__NODE_425_length_1053_cov_5.520916... *
+>Cluster 656
+0	1053nt, >M1_S1__trinity__TRINITY_DN878_c0_g1_i4... *
+>Cluster 657
+0	1053nt, >M1_S1__trinity__TRINITY_DN1417_c0_g1_i21... *
+>Cluster 658
+0	1052nt, >M1_S1__rnaviral__NODE_427_length_1052_cov_15.416750... *
+>Cluster 659
+0	1052nt, >M56_S7__rnaviral__NODE_116_length_1052_cov_6.211366... *
+>Cluster 660
+0	1052nt, >M57_S8__trinity__TRINITY_DN22262_c0_g1_i1... *
+>Cluster 661
+0	1052nt, >M9_S16__rnaviral__NODE_125_length_1052_cov_12.988036... *
+>Cluster 662
+0	1050nt, >M2_S2__trinity__TRINITY_DN869_c0_g1_i1... *
+>Cluster 663
+0	1048nt, >M56_S7__trinity__TRINITY_DN240_c0_g1_i1... *
+>Cluster 664
+0	1047nt, >M1_S1__trinity__TRINITY_DN1417_c0_g1_i8... *
+>Cluster 665
+0	1046nt, >M1_S1__rnaviral__NODE_435_length_1046_cov_1.833501... *
+>Cluster 666
+0	1045nt, >M1_S1__rnaviral__NODE_436_length_1045_cov_10.093373... *
+>Cluster 667
+0	1045nt, >M55_S6__trinity__TRINITY_DN808_c0_g1_i1... *
+>Cluster 668
+0	1045nt, >M71_S19__rna__NODE_140_length_1045_cov_4.018072_g111_i0... *
+>Cluster 669
+0	1044nt, >M1_S1__rnaviral__NODE_437_length_1044_cov_4.277387... *
+>Cluster 670
+0	1044nt, >M2_S2__trinity__TRINITY_DN8575_c0_g1_i1... *
+>Cluster 671
+0	1044nt, >M9_S16__rna__NODE_240_length_1044_cov_9.018090_g165_i0... *
+>Cluster 672
+0	1044nt, >M9_S16__trinity__TRINITY_DN18454_c0_g1_i5... *
+>Cluster 673
+0	1043nt, >M57_S8__trinity__TRINITY_DN531_c0_g1_i1... *
+>Cluster 674
+0	1041nt, >M1_S1__rnaviral__NODE_441_length_1041_cov_12.973790... *
+>Cluster 675
+0	1041nt, >M1_S1__trinity__TRINITY_DN15_c0_g1_i18... *
+>Cluster 676
+0	1041nt, >M21_S29__trinity__TRINITY_DN8_c0_g1_i51... *
+>Cluster 677
+0	1041nt, >M2_S2__rnaviral__NODE_188_length_1041_cov_19.111895... *
+>Cluster 678
+0	1040nt, >M20_S25__rnaviral__NODE_247_length_1040_cov_2.494450... *
+>Cluster 679
+0	1040nt, >M35_S31__rnaviral__NODE_103_length_1040_cov_11.658930... *
+1	1032nt, >M56_S7__rnaviral__NODE_126_length_1032_cov_12.240081... at +/99.32%
+2	1036nt, >M57_S8__rnaviral__NODE_139_length_1036_cov_12.052685... at +/97.49%
+>Cluster 680
+0	1040nt, >M55_S6__rnaviral__NODE_186_length_1040_cov_23.848638... *
+>Cluster 681
+0	1039nt, >M55_S6__trinity__TRINITY_DN184_c0_g1_i1... *
+>Cluster 682
+0	1039nt, >M71_S19__rnaviral__NODE_125_length_1039_cov_8.504040... *
+>Cluster 683
+0	1038nt, >M1_S1__megahit__k119_5535... *
+>Cluster 684
+0	1038nt, >M72_S20__rnaviral__NODE_58_length_1038_cov_2.417594... *
+>Cluster 685
+0	1037nt, >M1_S1__rnaviral__NODE_451_length_1037_cov_8.608300... *
+>Cluster 686
+0	1037nt, >M59_S10__trinity__TRINITY_DN185_c0_g1_i1... *
+>Cluster 687
+0	1036nt, >M1_S1__megahit__k119_7639... *
+>Cluster 688
+0	1036nt, >M9_S16__rnaviral__NODE_132_length_1036_cov_14.155015... *
+>Cluster 689
+0	1034nt, >M1_S1__trinity__TRINITY_DN5138_c0_g1_i1... *
+>Cluster 690
+0	1034nt, >M58_S9__trinity__TRINITY_DN3952_c0_g1_i1... *
+>Cluster 691
+0	1034nt, >M9_S16__trinity__TRINITY_DN184_c0_g1_i5... *
+>Cluster 692
+0	1033nt, >M1_S1__megahit__k119_5448... *
+>Cluster 693
+0	1033nt, >M1_S1__trinity__TRINITY_DN11071_c0_g1_i4... *
+>Cluster 694
+0	1032nt, >M1_S1__rnaviral__NODE_460_length_1032_cov_6.550356... *
+>Cluster 695
+0	1032nt, >M2_S2__trinity__TRINITY_DN20_c0_g1_i1... *
+>Cluster 696
+0	1030nt, >M74_S21__megahit__k119_1278... *
+>Cluster 697
+0	1029nt, >M58_S9__trinity__TRINITY_DN20_c0_g1_i1... *
+>Cluster 698
+0	1028nt, >M1_S1__trinity__TRINITY_DN2101_c0_g1_i5... *
+>Cluster 699
+0	1028nt, >M57_S8__trinity__TRINITY_DN312_c1_g1_i9... *
+>Cluster 700
+0	1028nt, >M71_S19__megahit__k119_1225... *
+>Cluster 701
+0	1027nt, >M57_S8__megahit__k119_625... *
+>Cluster 702
+0	1026nt, >M21_S29__rna__NODE_200_length_1026_cov_3.191402_g114_i0... *
+>Cluster 703
+0	1024nt, >M20_S25__rnaviral__NODE_260_length_1024_cov_3.036923... *
+>Cluster 704
+0	1022nt, >M57_S8__trinity__TRINITY_DN16617_c0_g1_i1... *
+>Cluster 705
+0	1022nt, >M9_S16__trinity__TRINITY_DN184_c0_g1_i9... *
+>Cluster 706
+0	1021nt, >M1_S1__megahit__k119_10348... *
+>Cluster 707
+0	1020nt, >M9_S16__rnaviral__NODE_139_length_1020_cov_2.935118... *
+>Cluster 708
+0	1019nt, >M1_S1__trinity__TRINITY_DN429_c0_g1_i3... *
+>Cluster 709
+0	1019nt, >M2_S2__trinity__TRINITY_DN604_c1_g1_i3... *
+>Cluster 710
+0	1018nt, >M57_S8__rna__NODE_212_length_1018_cov_9.657379_g141_i0... *
+>Cluster 711
+0	1017nt, >M1_S1__megahit__k119_7313... *
+>Cluster 712
+0	1017nt, >M20_S25__trinity__TRINITY_DN1444_c0_g1_i1... *
+>Cluster 713
+0	1017nt, >M55_S6__rnaviral__NODE_201_length_1017_cov_3.631198... *
+>Cluster 714
+0	1017nt, >M55_S6__megahit__k119_3980... *
+>Cluster 715
+0	1017nt, >M9_S16__rnaviral__NODE_141_length_1017_cov_1.088843... *
+>Cluster 716
+0	1015nt, >M2_S2__trinity__TRINITY_DN746_c1_g1_i4... *
+>Cluster 717
+0	1015nt, >M55_S6__rna__NODE_217_length_1015_cov_5.954451_g156_i1... *
+>Cluster 718
+0	1015nt, >M56_S7__megahit__k119_1673... *
+>Cluster 719
+0	1014nt, >M20_S25__rnaviral__NODE_268_length_1014_cov_3.967876... *
+>Cluster 720
+0	1014nt, >M72_S20__rnaviral__NODE_64_length_1014_cov_2.527461... *
+>Cluster 721
+0	1013nt, >M1_S1__rnaviral__NODE_500_length_1013_cov_5.234440... *
+>Cluster 722
+0	1013nt, >M2_S2__trinity__TRINITY_DN879_c0_g2_i2... *
+>Cluster 723
+0	1013nt, >M56_S7__trinity__TRINITY_DN471_c1_g1_i43... *
+>Cluster 724
+0	1013nt, >M9_S16__trinity__TRINITY_DN16620_c0_g1_i1... *
+>Cluster 725
+0	1011nt, >M1_S1__rnaviral__NODE_501_length_1011_cov_6.136175... *
+>Cluster 726
+0	1009nt, >M1_S1__trinity__TRINITY_DN2425_c0_g1_i85... *
+>Cluster 727
+0	1009nt, >M57_S8__rna__NODE_220_length_1009_cov_8.944792_g149_i0... *
+>Cluster 728
+0	1008nt, >M1_S1__rna__NODE_505_length_1008_cov_5284.201251_g3_i30... *
+>Cluster 729
+0	1008nt, >M2_S2__trinity__TRINITY_DN2229_c0_g1_i1... *
+>Cluster 730
+0	1008nt, >M58_S9__trinity__TRINITY_DN2227_c0_g1_i2... *
+>Cluster 731
+0	1008nt, >M71_S19__rna__NODE_149_length_1008_cov_7224.187696_g120_i0... *
+>Cluster 732
+0	1008nt, >M7_S15__trinity__TRINITY_DN160_c0_g1_i2... *
+>Cluster 733
+0	1007nt, >M1_S1__megahit__k119_1543... *
+>Cluster 734
+0	1007nt, >M58_S9__trinity__TRINITY_DN356_c0_g1_i4... *
+>Cluster 735
+0	1006nt, >M1_S1__trinity__TRINITY_DN21318_c0_g1_i1... *
+>Cluster 736
+0	1006nt, >M56_S7__trinity__TRINITY_DN3318_c0_g1_i20... *
+>Cluster 737
+0	1006nt, >M9_S16__trinity__TRINITY_DN235_c0_g1_i2... *
+>Cluster 738
+0	1005nt, >M1_S1__rnaviral__NODE_514_length_1005_cov_13.242678... *
+>Cluster 739
+0	1005nt, >M1_S1__rnaviral__NODE_517_length_1005_cov_7.421548... *
+>Cluster 740
+0	1005nt, >M1_S1__trinity__TRINITY_DN2629_c1_g1_i2... *
+>Cluster 741
+0	1005nt, >M20_S25__trinity__TRINITY_DN65_c0_g2_i2... *
+>Cluster 742
+0	1005nt, >M55_S6__rnaviral__NODE_207_length_1005_cov_8.013598... *
+>Cluster 743
+0	1005nt, >M9_S16__trinity__TRINITY_DN18454_c0_g1_i2... *
+>Cluster 744
+0	1004nt, >M7_S15__megahit__k119_1077... *
+>Cluster 745
+0	1003nt, >M1_S1__rnaviral__NODE_519_length_1003_cov_4.901468... *
+>Cluster 746
+0	1001nt, >M20_S25__rna__NODE_319_length_1001_cov_2075.288866_g201_i0... *
+>Cluster 747
+0	1000nt, >M2_S2__rnaviral__NODE_208_length_1000_cov_11.313354... *
