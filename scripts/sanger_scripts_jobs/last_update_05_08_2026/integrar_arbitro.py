@@ -14,6 +14,8 @@ Reglas (en este orden; EN_GENOMA = frac_en_genoma >= 0.5):
       nr celular_Artropodo, clase divergente    huesped        (homologia espuria: fagos, gigantes, retro)
       nr celular_Artropodo, resto               EVE_candidato  (no esta en la referencia; small RNA lo decide)
       nr otro celular                           celular_otro   (bacteria, hongo, planta, metazoo)
+      identificado con blastn < 90 % de identidad pariente   (bien cubierto pero otra especie:
+                                                               candidata a especie nueva)
       pariente_debil sin proteina (sin hit DIAMOND, nr no viral)
         y blastn con qcov < 30 %                evidencia_debil (solo un tramo corto de nt)
       resto                                     se mantiene
@@ -24,11 +26,12 @@ Reglas (en este orden; EN_GENOMA = frac_en_genoma >= 0.5):
       nr otro celular                           celular_otro
       nr sin_hit_nr                             oscura         (huesped si EN_GENOMA)
 
-es_virus = clase_final in {identificado, divergente, pariente_debil, viral_solo_nr}
+es_virus = clase_final in {identificado, pariente, divergente, pariente_debil, viral_solo_nr}
 
-nombre_virus (solo vOTUs virales): en "identificado", la especie de blastn; en el resto,
-"afin a <X>" con X el mejor hit de proteina en nr si es viral (la evidencia mas fuerte),
-y si no, el de blastn. Un hit de blastn sobre el 5 % de la vOTU no da nombre.
+nombre_virus (solo vOTUs virales): en "identificado" (>= 90 % nt), la especie de blastn;
+en el resto, "afin a <X>". X es la especie de blastn si su hit cubre >= 30 % de la vOTU;
+si no (hit corto o sin blastn), el mejor hit de proteina en nr. Un hit de blastn sobre
+el 5 % de la vOTU no da nombre, y un "Rhabdoviridae sp." al 36 % aa tampoco.
 grupo_virus: "fago" si cualquiera de los dos nombres es de fago; "artropodo" si no.
 
 Uso:
@@ -46,10 +49,11 @@ f_gen = sys.argv[4] if len(sys.argv) == 5 else None
 
 EN_GENOMA = 0.5
 QCOV_MIN = 30.0          # cobertura minima de blastn para nombrar sin apoyo de proteina
+ID_ESPECIE = 90.0        # identidad nt minima para dar nombre de especie
 COLS_ARB = ["veredicto", "nr_nombre", "nr_grupo", "nr_pident", "celular_nombre"]
 CONSERVAR = {"rRNA", "ADN_descartado"}
 VIRALES = {"identificado", "divergente", "pariente_debil"}
-ES_VIRUS = VIRALES | {"viral_solo_nr"}
+ES_VIRUS = VIRALES | {"viral_solo_nr", "pariente"}
 
 
 def leer(path):
@@ -95,6 +99,9 @@ def clase_final(r, ver, fg):
         qcov = num(r.get("bn_qcov"))
         if clase == "pariente_debil" and sin_proteina and (qcov is None or qcov < QCOV_MIN):
             return "evidencia_debil", ""
+        pid = num(r.get("bn_pident"))
+        if clase == "identificado" and pid is not None and pid < ID_ESPECIE:
+            return "pariente", ""
         return clase, ""
     if ver == "viral":
         return ("EVE_genoma" if en_gen else "viral_solo_nr"), ""
@@ -145,7 +152,9 @@ for r in tabla:
         if cf == "identificado":
             nombre = especie or nr_viral or v
         else:
-            nombre = "afín a " + (nr_viral or especie or v)
+            qcov = num(r.get("bn_qcov"))
+            nt_fiable = bool(especie) and qcov is not None and qcov >= QCOV_MIN
+            nombre = "afín a " + ((especie if nt_fiable else nr_viral) or especie or v)
         es_fago = any(re.search(r"phage|Leviviricetes|Caudoviricetes", x, re.I) for x in (especie, nr_viral))
         r2["nombre_virus"] = nombre
         r2["grupo_virus"] = "fago" if es_fago else "artropodo"
@@ -194,6 +203,12 @@ for g in ("artropodo", "fago"):
     print(f"\n== virus ({g}): {len(esp)} nombres, {sum(esp.values())} vOTUs ==")
     for e, n in esp.most_common():
         print(f"  {e[:45]:45s} {n:3d} vOTUs")
+
+par = [r for r in salida if r["clase_final"] == "pariente"]
+print(f"\n== pariente: bien cubiertas pero < {ID_ESPECIE:.0f} % nt, candidatas a especie nueva ({len(par)}) ==")
+for r in sorted(par, key=lambda r: num(r["bn_pident"]) or 0):
+    print(f"  {r['nombre_virus'][:38]:38s} nt={r['bn_pident']}%/{r['bn_qcov']}%  aa={r['dm_pident']}%  "
+          f"pools mapeo={r['n_muestras_mapeo']}")
 
 deb = [r for r in salida if r["clase_final"] == "evidencia_debil"]
 print(f"\n== evidencia_debil: solo un tramo corto de nt, sin proteina ({len(deb)}) ==")
