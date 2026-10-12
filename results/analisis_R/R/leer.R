@@ -102,20 +102,37 @@ leer_veredicto_contigs <- function() {
 
 # ---------------------------------------------------------------- derivadas
 
+# Nombre de cada vOTU viral para las figuras. Solo "identificado" lleva el nombre
+# de la especie tal cual; en pariente_debil y divergente el nombre es el del mejor
+# hit, no una identificacion, y se marca como "afin a". Asi una vOTU cuyo pariente
+# mas cercano es Oropouche virus no se lee como deteccion de OROV.
+nombre_virus <- function(votus) {
+  base <- coalesce(na_if(votus$especie, ""), na_if(votus$nr_nombre, ""), votus$votu)
+  if_else(votus$clase_final %in% c("pariente_debil", "divergente"), paste0("afín a ", base), base)
+}
+
+# Fagos (virus de la microbiota bacteriana) frente a virus de artropodos.
+grupo_virus <- function(nombre) {
+  if_else(grepl("phage|Leviviricetes|Caudoviricetes", nombre, ignore.case = TRUE),
+          "Fagos (microbiota)", "Virus de artrópodos")
+}
+
 # Presencia por especie y muestra: presente si alguna vOTU de esa especie
 # cubre >= 70 % de su longitud. La profundidad se normaliza por millon de
 # pares recortados (no por pares no-huesped: ver M36 y M74).
 presencia_especies <- function(votus, cob, lecturas, umbral = 70) {
   v <- votus |>
     filter(es_virus == "si") |>
-    mutate(especie_fig = coalesce(na_if(especie, ""), na_if(nr_nombre, ""), votu))
+    mutate(especie_fig = nombre_virus(pick(everything())),
+           grupo = grupo_virus(especie_fig))
   cob |>
-    inner_join(select(v, votu, especie_fig, familia), by = "votu") |>
+    inner_join(select(v, votu, especie_fig, grupo, familia), by = "votu") |>
     filter(pct_cubierto >= umbral) |>
     left_join(select(lecturas, muestra, trimmed_pairs), by = "muestra") |>
     mutate(prof_norm = profundidad / (trimmed_pairs / 1e6)) |>
-    group_by(especie_fig, familia, muestra) |>
-    summarise(prof_norm = max(prof_norm), n_votus = n(), .groups = "drop")
+    group_by(especie_fig, grupo, muestra) |>
+    summarise(familia = first(na.omit(na_if(familia, "")), default = NA_character_),
+              prof_norm = max(prof_norm), n_votus = n(), .groups = "drop")
 }
 
 # Tasa de infeccion individual a partir de pools del mismo tamano.
