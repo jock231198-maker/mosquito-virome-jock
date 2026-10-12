@@ -3,7 +3,7 @@ title: "MERIDA — viroma de *Aedes aegypti*: figuras"
 author: "Jose Carlos Marin Montesino"
 date: today
 params:
-  datos: "datos_v2"
+  datos: "datos_v3"
 format:
   html:
     embed-resources: true
@@ -196,7 +196,7 @@ p4
 # 5. Clasificación de las vOTUs
 
 ```{r fig-clases, eval = HAY_VOTUS, fig.height = 6.5}
-GRUPO <- c(identificado = "Virus", divergente = "Virus", pariente_debil = "Virus", viral_solo_nr = "Virus",
+GRUPO <- c(identificado = "Virus", pariente = "Virus", divergente = "Virus", pariente_debil = "Virus", viral_solo_nr = "Virus",
            EVE_genoma = "EVE", EVE_candidato = "EVE",
            huesped = "Huésped / celular", celular_otro = "Huésped / celular",
            rRNA = "Artefacto", ADN_descartado = "Artefacto",
@@ -205,7 +205,8 @@ GRUPO <- c(identificado = "Virus", divergente = "Virus", pariente_debil = "Virus
 col_grupo <- c("Virus" = PAL[["azul"]], "EVE" = PAL[["naranja"]], "Huésped / celular" = PAL[["aqua"]],
                "Artefacto" = GRIS, "Sin resolver" = PAL[["violeta"]])
 
-ETIQ_CLASE <- c(identificado = "Virus identificado", divergente = "Virus divergente",
+ETIQ_CLASE <- c(identificado = "Virus identificado (≥ 90 % nt)", pariente = "Pariente (posible especie nueva)",
+                divergente = "Virus divergente",
                 pariente_debil = "Pariente débil", viral_solo_nr = "Viral solo en nr",
                 EVE_genoma = "EVE en el genoma", EVE_candidato = "EVE candidato",
                 huesped = "Huésped", celular_otro = "Otro celular",
@@ -287,7 +288,7 @@ p6 <- ggplot(hm, aes(muestra, especie_fig, fill = prof_norm)) +
   labs(title = "Prevalencia de las especies virales por pool",
        subtitle = "Presente: ≥ 70 % del genoma cubierto a ≥ 1×. Pools ordenados por fecha de colecta; a la derecha, pools positivos",
        x = NULL, y = NULL,
-       caption = "«afín a X»: el mejor hit es X pero la identidad es baja (pariente débil o divergente); no es una identificación de X.") +
+       caption = "«afín a X»: pariente de X por debajo del 90 % de identidad nucleotídica; no es una detección de X.") +
   theme(panel.grid = element_blank(),
         strip.text.y.left = element_text(angle = 0, hjust = 1, size = 8, face = "bold", colour = TINTA_2),
         strip.placement = "outside",
