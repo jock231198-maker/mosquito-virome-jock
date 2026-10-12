@@ -170,7 +170,7 @@ votus <- leer_votus()
 gen   <- leer_tsv("genomad_virus_summary.tsv")
 etapas <- tibble(
   etapa = c("Contigs in the union", "Viral according to geNomad", "vOTUs (95% id, 85% cov.)",
-            "Viral vOTUs", "Viral species"),
+            "Viral vOTUs", "Viral taxa (species and -like)"),
   n = c(nrow(leer_contigs()), nrow(gen), nrow(votus),
         sum(votus$es_virus == "si"),
         votus |> filter(es_virus == "si") |>
@@ -236,7 +236,7 @@ p5a <- ggplot(cl, aes(n, etiqueta, fill = grupo)) +
 
 fam <- votus |>
   filter(es_virus == "si") |>
-  mutate(familia = coalesce(na_if(familia, ""), "unassigned family")) |>
+  mutate(familia = coalesce(familia_fig(pick(everything())), "unassigned family")) |>
   count(familia) |>
   mutate(familia = fct_relevel(fct_reorder(familia, n), "unassigned family"))
 
@@ -320,14 +320,18 @@ comp_l <- comp |> pivot_longer(c(mapeo, ensamblaje), names_to = "via", values_to
   mutate(via = factor(via, levels = c("ensamblaje", "mapeo"),
                       labels = c("Assembled in the pool", "Detected by read mapping")))
 
+# el punto de mapeo va debajo y mas grande: si coincide con el de ensamblaje,
+# se ven los dos (anillo azul con centro naranja)
+comp_l <- comp_l |> arrange(desc(via))
 p6b <- ggplot(comp_l, aes(pools, especie_fig)) +
   geom_segment(data = comp, aes(x = ensamblaje, xend = mapeo, y = especie_fig, yend = especie_fig),
                inherit.aes = FALSE, colour = REJILLA, linewidth = 1.6) +
-  geom_point(aes(colour = via), size = 2.6) +
+  geom_point(aes(colour = via, size = via)) +
+  scale_size_manual(values = c("Assembled in the pool" = 2.2, "Detected by read mapping" = 3.8), guide = "none") +
   scale_colour_manual(values = c("Assembled in the pool" = PAL[["naranja"]], "Detected by read mapping" = PAL[["azul"]])) +
   scale_x_continuous(limits = c(0, N_MUESTRAS), breaks = seq(0, N_MUESTRAS, 5)) +
-  labs(title = "Assembly underestimates prevalence",
-       subtitle = "Pools in which each species was assembled versus pools in which it is detected by read mapping",
+  labs(title = "Assembly versus read mapping",
+       subtitle = "Pools in which each virus was assembled versus pools in which it is detected by read mapping",
        x = paste0("pools (of ", N_MUESTRAS, ")"), y = NULL) +
   theme(panel.grid.major.y = element_blank())
 guardar(p6b, "06b_assembly_vs_mapping", alto = 110)
@@ -386,7 +390,25 @@ p7
 # 8. Non-viral composition (Kraken2 + Bracken, non-host reads)
 
 ```{r g-kraken, fig.height = 5.5}
-br <- leer_bracken()
+br_todo <- leer_bracken()
+# PlusPF no tiene genomas de insecto: el rRNA de mosquito que queda tras quitar el
+# huesped se asigna a Homo sapiens y a Plasmodium. Los virus se analizan con las
+# vOTUs, y aqui Kraken los asignaria al genoma mas cercano de su base (un
+# rhabdovirus de mosquito sale como "Vesiculovirus piry"). Se quitan los dos
+# grupos y se renormaliza lo que queda: bacterias y eucariotas.
+br_todo <- br_todo |>
+  mutate(tipo = case_when(name == "Homo sapiens" | grepl("^Plasmodium ", name) ~ "artefacto",
+                          grepl("virus|phage|viridae", name, ignore.case = TRUE) ~ "viral",
+                          TRUE ~ "microbiota"))
+excluido <- br_todo |>
+  group_by(muestra) |>
+  summarise(frac_fuera = sum(fraction_total_reads[tipo != "microbiota"]), .groups = "drop")
+br <- br_todo |>
+  filter(tipo == "microbiota") |>
+  group_by(muestra) |>
+  mutate(fraction_total_reads = fraction_total_reads / sum(fraction_total_reads)) |>
+  ungroup()
+
 TOP <- 7
 top <- br |>
   group_by(name) |>
@@ -409,11 +431,15 @@ p8 <- ggplot(kr, aes(frac, etiqueta, fill = taxon)) +
   geom_col(width = 0.72, colour = SUPERFICIE, linewidth = 0.25) +
   scale_fill_manual(values = col_tax) +
   scale_x_continuous(labels = label_percent(), expand = expansion(c(0, 0.02))) +
-  labs(title = "Taxonomic composition of non-host reads",
+  labs(title = "Bacterial and eukaryotic composition of non-host reads",
        subtitle = paste0("The ", TOP, " most abundant taxa on average; Bracken level ",
-                         paste(unique(br$taxonomy_lvl), collapse = "/")),
-       x = "fraction of classified reads", y = NULL,
-       caption = "PlusPF contains no insect genomes: residual mosquito reads may be assigned to the closest eukaryote.") +
+                         paste(unique(br$taxonomy_lvl), collapse = "/"), "; fractions re-normalised"),
+       x = "fraction of classified reads (excluding artefacts and viruses)", y = NULL,
+       caption = str_wrap(paste0(
+         "Removed before normalising: Homo sapiens and Plasmodium (residual mosquito rRNA assigned to the closest ",
+         "eukaryote, as PlusPF has no insect genomes) and viral taxa (analysed through the vOTUs; Kraken2 assigns them ",
+         "to the closest reference). They made up ", round(100 * min(excluido$frac_fuera)), "–",
+         round(100 * max(excluido$frac_fuera)), "% of the classified reads per pool."), width = 125)) +
   theme(panel.grid.major.y = element_blank()) +
   guides(fill = guide_legend(nrow = 3))
 guardar(p8, "08_kraken2", alto = 140)

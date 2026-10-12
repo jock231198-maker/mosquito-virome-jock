@@ -118,7 +118,7 @@ nombre_virus <- function(votus) {
     nr   <- suppressWarnings(as.numeric(votus$nr_pident))
     # la identidad tiene que ser la del hit que da el nombre: si el nombre viene
     # de nr, la de nr (Hattula totivirus 3: 45 % en nr, no el 30 % de DIAMOND)
-    del_nr <- !is.na(votus$nr_nombre) & base == paste0("afín a ", votus$nr_nombre)
+    del_nr <- nombre_por_nr(votus)
     pid  <- if_else(del_nr, coalesce(nr, dm), coalesce(dm, nr))
     # la tabla guarda "afin a X"; en las figuras, la convencion "X-like" y su identidad
     pariente <- startsWith(base, "afín a ")
@@ -138,6 +138,18 @@ como_like <- function(x) {
     grepl(" virus$", x)             ~ sub(" virus$", "-like virus", x),
     TRUE                            ~ paste0(x, "-like")
   )
+}
+
+# TRUE si el nombre de la vOTU es un "afin a X" con X tomado de nr (porque el hit
+# de blastn era demasiado corto). En esas vOTUs la familia de la tabla viene del
+# blastn corto y no es fiable: Kamiti River-like salia como Rhabdoviridae.
+nombre_por_nr <- function(votus) {
+  if (!"nombre_virus" %in% names(votus)) return(rep(FALSE, nrow(votus)))
+  !is.na(votus$nr_nombre) & coalesce(votus$nombre_virus, "") == paste0("afín a ", votus$nr_nombre)
+}
+
+familia_fig <- function(votus) {
+  if_else(nombre_por_nr(votus), NA_character_, na_if(votus$familia, ""))
 }
 
 GRUPOS_VIRUS <- c(artropodo = "Arthropod viruses", fago = "Phages (microbiota)")
