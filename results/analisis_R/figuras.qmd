@@ -168,7 +168,7 @@ etapas <- tibble(
   n = c(nrow(leer_contigs()), nrow(gen), nrow(votus),
         sum(votus$es_virus == "si"),
         votus |> filter(es_virus == "si") |>
-          mutate(e = coalesce(na_if(especie, ""), na_if(nr_nombre, ""), votu)) |> pull(e) |> n_distinct())
+          mutate(e = nombre_virus(pick(everything()))) |> pull(e) |> n_distinct())
 ) |>
   mutate(etapa = factor(etapa, levels = rev(etapa)))
 
@@ -265,24 +265,30 @@ pres <- presencia_especies(votus, cob, lecturas)
 orden_muestras <- meta |>
   arrange(is.na(fecha), fecha, muestra) |>
   pull(muestra)
-prev <- pres |> count(especie_fig, name = "pools") |> arrange(pools)
+prev <- pres |> count(especie_fig, grupo, name = "pools") |> arrange(pools)
 
 hm <- pres |>
   mutate(especie_fig = factor(especie_fig, levels = prev$especie_fig),
          muestra = factor(muestra, levels = orden_muestras))
+prev_f <- prev |> mutate(especie_fig = factor(especie_fig, levels = prev$especie_fig))
 
 p6 <- ggplot(hm, aes(muestra, especie_fig, fill = prof_norm)) +
   geom_tile(colour = SUPERFICIE, linewidth = 0.6) +
-  geom_text(data = prev, aes(x = Inf, y = especie_fig, label = paste0(pools, "/", N_MUESTRAS)),
+  geom_text(data = prev_f, aes(x = Inf, y = especie_fig, label = paste0(pools, "/", N_MUESTRAS)),
             inherit.aes = FALSE, hjust = -0.2, size = 2.7, colour = TINTA_2) +
+  facet_grid(rows = vars(grupo), scales = "free_y", space = "free_y", switch = "y",
+             labeller = as_labeller(c("Virus de artrópodos" = "Artrópodos", "Fagos (microbiota)" = "Fagos"))) +
   scale_fill_gradientn(colours = AZUL_SEQ, trans = "log10", labels = label_number(accuracy = 0.01),
                        name = "profundidad por millón de pares recortados") +
   scale_x_discrete(labels = etiqueta_muestra, drop = FALSE) +
   coord_cartesian(clip = "off") +
   labs(title = "Prevalencia de las especies virales por pool",
        subtitle = "Presente: ≥ 70 % del genoma cubierto a ≥ 1×. Pools ordenados por fecha de colecta; a la derecha, pools positivos",
-       x = NULL, y = NULL) +
+       x = NULL, y = NULL,
+       caption = "«afín a X»: el mejor hit es X pero la identidad es baja (pariente débil o divergente); no es una identificación de X.") +
   theme(panel.grid = element_blank(),
+        strip.text.y.left = element_text(angle = 0, hjust = 1, size = 8, face = "bold", colour = TINTA_2),
+        strip.placement = "outside",
         axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1, size = 7),
         legend.title = element_text(size = 8, colour = TINTA_2),
         plot.margin = margin(5, 40, 5, 5)) +
@@ -294,7 +300,7 @@ p6
 ```{r fig-asm-vs-mapeo, eval = HAY_VOTUS, fig.height = 5}
 asm <- votus |>
   filter(es_virus == "si") |>
-  mutate(especie_fig = coalesce(na_if(especie, ""), na_if(nr_nombre, ""), votu)) |>
+  mutate(especie_fig = nombre_virus(pick(everything()))) |>
   group_by(especie_fig) |>
   summarise(ensamblaje = max(n_muestras_asm), .groups = "drop")
 comp <- prev |> rename(mapeo = pools) |> inner_join(asm, by = "especie_fig") |>
@@ -319,6 +325,7 @@ p6b
 
 ```{r tabla-tasa, eval = HAY_VOTUS}
 prev |>
+  filter(grupo == "Virus de artrópodos") |>
   arrange(desc(pools)) |>
   rowwise() |>
   mutate(t = list(tasa_infeccion(pools, N_MUESTRAS, K_POOL))) |>
@@ -339,6 +346,7 @@ prev |>
 
 ```{r fig-riqueza, eval = HAY_VOTUS, fig.height = 4.2}
 riq <- pres |>
+  filter(grupo == "Virus de artrópodos") |>
   count(muestra, name = "especies") |>
   right_join(select(meta, muestra, fecha), by = "muestra") |>
   mutate(especies = coalesce(especies, 0L),
@@ -356,8 +364,8 @@ p7 <- ggplot(riq, aes(muestra, especies, fill = colecta)) +
   scale_fill_manual(values = col_fecha) +
   scale_x_discrete(labels = etiqueta_muestra) +
   scale_y_continuous(breaks = pretty_breaks(), expand = expansion(c(0, 0.05))) +
-  labs(title = "Especies virales detectadas por pool",
-       subtitle = "Color: fecha de colecta (2024)", x = NULL, y = "especies") +
+  labs(title = "Especies de virus de artrópodos detectadas por pool",
+       subtitle = "Color: fecha de colecta (2024). Sin fagos", x = NULL, y = "especies") +
   theme(panel.grid.major.x = element_blank(),
         axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1, size = 7))
 guardar(p7, "07_riqueza", alto = 95)
