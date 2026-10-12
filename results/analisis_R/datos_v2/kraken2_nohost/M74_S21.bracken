@@ -1,0 +1,83 @@
+name	taxonomy_id	taxonomy_lvl	kraken_assigned_reads	added_reads	new_est_reads	fraction_total_reads
+Homo sapiens	9606	S	2499433	5886909	8386342	0.99033
+Puccinia striiformis	27350	S	1204	2825	4029	0.00048
+Sporisorium graminicola	280036	S	655	1859	2514	0.00030
+Mycosarcoma maydis	5270	S	54	6	60	0.00001
+Kwoniella mangrovensis	463800	S	175	732	907	0.00011
+Kwoniella pini	453459	S	52	142	194	0.00002
+Kwoniella bestiolae	324769	S	48	113	161	0.00002
+Kwoniella europaea	1247712	S	31	61	92	0.00001
+Kwoniella botswanensis	1268659	S	16	83	99	0.00001
+Cryptococcus tetragattii	1859121	S	39	140	179	0.00002
+Cryptococcus depauperatus	5208	S	14	44	58	0.00001
+Vanrija pseudolonga	143232	S	173	549	722	0.00009
+Marasmius oreades	181124	S	20	53	73	0.00001
+Fusarium graminearum	5518	S	41	125	166	0.00002
+Fusarium poae	36050	S	28	111	139	0.00002
+Fusarium keratoplasticum	1328300	S	15	34	49	0.00001
+Fusarium fujikuroi	5127	S	11	3	14	0.00000
+Trichoderma atroviride	63577	S	40	68	108	0.00001
+Trichoderma asperellum	101201	S	24	68	92	0.00001
+Trichoderma breve	2034170	S	18	29	47	0.00001
+Ustilaginoidea virens	1159556	S	61	46	107	0.00001
+Colletotrichum higginsianum	80884	S	63	344	407	0.00005
+Podospora pseudopauciseta	2093780	S	15	29	44	0.00001
+Neurospora crassa	5141	S	15	18	33	0.00000
+Penicillium psychrofluorescens	3158075	S	13	58	71	0.00001
+Coccidioides posadasii	199306	S	63	423	486	0.00006
+Pyrenophora tritici-repentis	45151	S	26	103	129	0.00002
+Ascochyta rabiei	5454	S	11	17	28	0.00000
+Tetrapisispora phaffii	113608	S	545	487	1032	0.00012
+Kluyveromyces lactis	28985	S	44	80	124	0.00001
+Sugiyamaella lignohabitans	796027	S	106	346	452	0.00005
+Candidozyma auris	498019	S	17	65	82	0.00001
+Rhizophagus irregularis	588596	S	39	93	132	0.00002
+Plasmodium relictum	85471	S	25629	12080	37709	0.00445
+Plasmodium vivax	5855	S	177	87	264	0.00003
+Plasmodium cynomolgi	5827	S	31	6	37	0.00000
+Plasmodium vinckei	5860	S	49	11	60	0.00001
+Plasmodium chabaudi	5825	S	41	9	50	0.00001
+Plasmodium yoelii	5861	S	30	10	40	0.00000
+Babesia duncani	323732	S	80	70	150	0.00002
+Babesia bovis	5865	S	20	6	26	0.00000
+Theileria equi	5872	S	12	5	17	0.00000
+Toxoplasma gondii	5811	S	356	426	782	0.00009
+Besnoitia besnoiti	94643	S	18	1	19	0.00000
+Bremia lactucae	4779	S	219	248	467	0.00006
+Phaeodactylum tricornutum	2850	S	120	45	165	0.00002
+Bigelowiella natans	227086	S	34	24	58	0.00001
+Hemiselmis andersenii	464988	S	203	317	520	0.00006
+Cryptomonas paramaecium	2898	S	10	29	39	0.00000
+Guillardia theta	55529	S	133	758	891	0.00011
+Dictyostelium discoideum	44689	S	204	55	259	0.00003
+Giardia duodenalis	5741	S	30	0	30	0.00000
+Cyanidioschyzon merolae	45157	S	11	1	12	0.00000
+Stenotrophomonas maltophilia	40324	S	5050	6783	11833	0.00140
+Enterobacter cloacae	550	S	163	486	649	0.00008
+Escherichia coli	562	S	39	6119	6158	0.00073
+Klebsiella pneumoniae	573	S	17	506	523	0.00006
+Pantoea anthophila	470931	S	19	40	59	0.00001
+Pantoea stewartii	66269	S	14	689	703	0.00008
+Zymobacter sp. IVIA_5232.4 C2	3394855	S	33	699	732	0.00009
+Zymobacter palmae	33074	S	19	253	272	0.00003
+Halotalea alkalilenta	376489	S	77	263	340	0.00004
+Halomonas sp. JS92-SW72	2306583	S	23	556	579	0.00007
+Vibrio parahaemolyticus	670	S	116	63	179	0.00002
+Vibrio anguillarum	55601	S	56	24	80	0.00001
+Asaia bogorensis	91915	S	151	2181	2332	0.00028
+Candidatus Gromoviella agglomerans	2806609	S	585	92	677	0.00008
+Mesorhizobium japonicum	2066070	S	10	27	37	0.00000
+Wolbachia endosymbiont (group A) of Lypha dubia	3066146	S	16	41	57	0.00001
+Conchiformibius steedae	153493	S	12	14	26	0.00000
+Entomospira culicis	2719989	S	143	101	244	0.00003
+Entomospira nematocerorum	2719987	S	32	113	145	0.00002
+Entomospira entomophila	2719988	S	10	32	42	0.00000
+uncultured Acetobacteroides sp.	1760811	S	79	36	115	0.00001
+Streptomyces sp. NBC_00557	2975776	S	63	67	130	0.00002
+Streptomyces sp. T12	477697	S	12	15	27	0.00000
+Cutibacterium acnes	1747	S	24	104	128	0.00002
+Staphylococcus aureus	1280	S	18	514	532	0.00006
+Petrotoga mobilis	69499	S	16	1	17	0.00000
+Gylbovirus aagae	2955967	S	756	0	756	0.00009
+Betabaculovirus chofumiferanae	3051997	S	78	0	78	0.00001
+Gorganvirus isfahan	2560650	S	10	0	10	0.00000

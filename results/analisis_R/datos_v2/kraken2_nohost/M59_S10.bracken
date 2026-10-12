@@ -1,0 +1,46 @@
+name	taxonomy_id	taxonomy_lvl	kraken_assigned_reads	added_reads	new_est_reads	fraction_total_reads
+Homo sapiens	9606	S	1278981	120708	1399689	0.97468
+Pyrenophora tritici-repentis	45151	S	24	159	183	0.00013
+Alternaria dauci	48095	S	16	29	45	0.00003
+Ascochyta rabiei	5454	S	39	114	153	0.00011
+Cercospora beticola	122368	S	16	131	147	0.00010
+Botrytis cinerea	40559	S	13	12	25	0.00002
+Aspergillus chevalieri	182096	S	17	97	114	0.00008
+Puccinia striiformis	27350	S	197	48	245	0.00017
+Malassezia restricta	76775	S	103	144	247	0.00017
+Malassezia japonica	223818	S	10	14	24	0.00002
+Psilocybe cubensis	181762	S	25	21	46	0.00003
+Marasmius oreades	181124	S	15	27	42	0.00003
+Rhizoctonia solani	456999	S	25	13	38	0.00003
+Rhizophagus irregularis	588596	S	15	10	25	0.00002
+Plasmodium relictum	85471	S	24379	691	25070	0.01746
+Babesia bigemina	5866	S	184	43	227	0.00016
+Theileria equi	5872	S	12	0	12	0.00001
+Cryptosporidium parvum	5807	S	13	20	33	0.00002
+Bremia lactucae	4779	S	10	825	835	0.00058
+Stenotrophomonas maltophilia	40324	S	80	1299	1379	0.00096
+Acinetobacter baumannii	470	S	29	721	750	0.00052
+Halomonas sp. JS92-SW72	2306583	S	10	26	36	0.00003
+Vibrio anguillarum	55601	S	19	30	49	0.00003
+Acidovorax sp. BLS4	3273430	S	15	57	72	0.00005
+Entomospira culicis	2719989	S	219	145	364	0.00025
+Entomospira nematocerorum	2719987	S	16	52	68	0.00005
+uncultured Acetobacteroides sp.	1760811	S	62	16	78	0.00005
+Cutibacterium acnes	1747	S	283	305	588	0.00041
+Arachnia propionica	1750	S	19	10	29	0.00002
+Microlunatus sagamiharensis	546874	S	11	27	38	0.00003
+Corynebacterium tuberculostearicum	38304	S	12	126	138	0.00010
+Corynebacterium glucuronolyticum	39791	S	11	26	37	0.00003
+Corynebacterium marquesiae	2913503	S	10	113	123	0.00009
+Curtobacterium flaccumfaciens	2035	S	68	223	291	0.00020
+Rothia dentocariosa	2047	S	21	41	62	0.00004
+Streptomyces sp. T12	477697	S	112	139	251	0.00017
+Abiotrophia defectiva	46125	S	16	123	139	0.00010
+Staphylococcus epidermidis	1282	S	17	554	571	0.00040
+Staphylococcus hominis	1290	S	16	123	139	0.00010
+Staphylococcus pettenkoferi	170573	S	12	13	25	0.00002
+Clostridium botulinum	1491	S	15	16	31	0.00002
+Finegoldia magna	1260	S	28	53	81	0.00006
+Betabaculovirus chofumiferanae	3051997	S	3188	0	3188	0.00222
+Gylbovirus aagae	2955967	S	257	0	257	0.00018
+Thogotovirus sinuense	2956526	S	45	0	45	0.00003
