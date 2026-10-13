@@ -7,3 +7,4 @@
 *.bam
 *.fasta
 *.gz
+!results/analisis_R/datos_*/*.gz
