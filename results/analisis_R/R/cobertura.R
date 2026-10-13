@@ -18,6 +18,19 @@ tipo_votu <- function(votus) {
   )
 }
 
+# Nombre de las vOTUs EVE: no tienen nombre_virus (no son virus), asi que se
+# toma el del hit viral (blastn; si no, nr) y se marca como EVE. Si varias EVE
+# comparten nombre se numeran de la mas larga a la mas corta.
+nombre_eve <- function(votus) {
+  hit <- coalesce(na_if(votus$especie, ""), na_if(votus$nr_nombre, ""), "unnamed")
+  tibble(votu = votus$votu, hit = hit, longitud = votus$longitud) |>
+    group_by(hit) |>
+    mutate(n = n(), i = rank(-longitud, ties.method = "first")) |>
+    ungroup() |>
+    mutate(nombre = paste0("EVE · ", hit, if_else(n > 1, paste0(" #", i), ""))) |>
+    pull(nombre)
+}
+
 leer_perfiles <- function(dir = COBERTURA) {
   f <- file.path(dir, "perfiles_cobertura.tsv.gz")
   if (!file.exists(f)) stop("No existe ", f, call. = FALSE)

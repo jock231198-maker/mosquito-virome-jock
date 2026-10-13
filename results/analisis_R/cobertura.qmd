@@ -33,8 +33,10 @@ suppressPackageStartupMessages({
 })
 
 votus <- leer_votus() |>
-  mutate(nombre = nombre_virus(pick(everything())),
-         tipo   = tipo_votu(pick(everything())))
+  mutate(tipo = tipo_votu(pick(everything())))
+es_eve <- coalesce(votus$tipo == "EVE", FALSE)
+votus$nombre <- nombre_virus(votus)
+votus$nombre[es_eve] <- nombre_eve(votus[es_eve, ])
 cob <- leer_cobertura() |>
   inner_join(select(votus, votu, nombre, tipo, es_virus, clase_final), by = "votu") |>
   filter(!is.na(tipo))
@@ -145,11 +147,16 @@ pc3
 perf <- leer_perfiles() |>
   inner_join(select(votus, votu, nombre, tipo, longitud), by = "votu")
 presentes <- cob |> filter(pct_cubierto >= UMBRAL) |> distinct(votu, muestra)
-# una vOTU por nombre: la mas larga; solo los pools donde esta presente
-repr <- votus |>
-  filter(!is.na(tipo), votu %in% perf$votu) |>
+# una vOTU por nombre: la que esta presente en mas pools y, a igualdad, la de
+# mayor profundidad mediana (la mas larga no siempre es la representativa: la de
+# 15.5 kb de Aedes anphevirus recoge menos lecturas que las de 13 kb)
+repr <- cob |>
+  filter(pct_cubierto >= UMBRAL, votu %in% perf$votu) |>
+  group_by(nombre, votu) |>
+  summarise(pools = n(), prof = median(profundidad), .groups = "drop") |>
   group_by(nombre) |>
-  slice_max(longitud, n = 1, with_ties = FALSE) |>
+  arrange(desc(pools), desc(prof), .by_group = TRUE) |>
+  slice_head(n = 1) |>
   ungroup()
 perf_p <- perf |>
   semi_join(presentes, by = c("votu", "muestra")) |>
@@ -174,7 +181,7 @@ pc4 <- ggplot(pv, aes(pos_kb, profundidad + 0.1, group = muestra, colour = tipo)
   scale_y_log10(labels = label_number(accuracy = 1, big.mark = ",")) +
   scale_colour_manual(values = COL_TIPO, drop = TRUE) +
   labs(title = "Depth along the genome, one line per positive pool",
-       subtitle = paste0("Viruses present in at least 2 pools; longest vOTU of each; mean depth in windows of 50 bp"),
+       subtitle = "Viruses present in at least 2 pools; for each, the vOTU present in most pools; mean depth in windows of 50 bp",
        x = "position (kb)", y = "depth (×, log scale)") +
   theme(strip.text = element_text(size = 7.5), axis.text = element_text(size = 7))
 guardar_cob(pc4, "C4_profiles_viruses", alto = 230, ancho = 200)
@@ -197,7 +204,7 @@ pc5 <- ggplot(filter(pe, panel %in% top_eve), aes(pos_kb, profundidad + 0.1, gro
   facet_wrap(~ panel, scales = "free", ncol = 3, labeller = label_wrap_gen(38)) +
   scale_y_log10(labels = label_number(accuracy = 1, big.mark = ",")) +
   labs(title = "For comparison: depth along EVE vOTUs",
-       subtitle = "The EVEs present in most pools; names are those of the viral hit",
+       subtitle = "The EVEs present in most pools, named after their viral hit",
        x = "position (kb)", y = "depth (×, log scale)") +
   theme(strip.text = element_text(size = 7.5), axis.text = element_text(size = 7))
 guardar_cob(pc5, "C5_profiles_eves", alto = 150, ancho = 200)
