@@ -1,0 +1,5 @@
+# congelado: 2026-10-13 19:03:22  host: farm22-head1  lote: MERIDA  ventana: 50 pb
+# scripts: fffe2df updates in analisis_R
+archivo	origen	lineas	md5
+perfiles_cobertura.tsv.gz	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/qc_control/perfil_cobertura/perfiles_cobertura.tsv	69567	3e604e75fa7f24abcc3135cd1ad688d0
+votus_perfil.bed	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/qc_control/perfil_cobertura/votus_perfil.bed	76	0e9f533f0caf3c09dab3f517829b891a
