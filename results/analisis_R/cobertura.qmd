@@ -1,0 +1,220 @@
+---
+title: "MERIDA — viral genome coverage and depth"
+author: "Jose Carlos Marin Montesino"
+lang: en
+date: today
+params:
+  datos: "datos_v3"
+  cobertura: "datos_cobertura_v1"
+format:
+  html:
+    embed-resources: true
+    toc: true
+    toc-depth: 2
+    fig-width: 7.2
+    fig-height: 4.5
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r setup}
+DATOS     <- params$datos
+COBERTURA <- params$cobertura
+source("R/leer.R")
+source("R/tema.R")
+source("R/cobertura.R")
+suppressPackageStartupMessages({
+  library(forcats)
+  library(stringr)
+  library(patchwork)
+  library(knitr)
+})
+
+votus <- leer_votus() |>
+  mutate(nombre = nombre_virus(pick(everything())),
+         tipo   = tipo_votu(pick(everything())))
+cob <- leer_cobertura() |>
+  inner_join(select(votus, votu, nombre, tipo, es_virus, clase_final), by = "votu") |>
+  filter(!is.na(tipo))
+N_MUESTRAS <- n_distinct(leer_lecturas()$muestra)
+UMBRAL <- 70
+HAY_PERFILES <- hay_perfiles()
+```
+
+Data: **`r DATOS`**`r if (HAY_PERFILES) paste0(" and **", COBERTURA, "**") else ""` · viral vOTUs and EVEs only.
+Breadth is the percentage of a vOTU covered by at least one read; depth is the mean number of reads covering each position.
+
+# C1. Breadth versus depth
+
+```{r g-breadth-depth, fig.height = 4.6}
+pts <- cob |>
+  filter(pct_cubierto > 0) |>
+  mutate(tipo = factor(tipo, levels = TIPOS))
+# el recuento va en el titulo de cada panel para no tapar puntos
+resumen <- pts |>
+  group_by(tipo) |>
+  summarise(n = n(), presentes = sum(pct_cubierto >= UMBRAL), .groups = "drop")
+titulos <- setNames(paste0(resumen$tipo, "\n", resumen$presentes, " of ", resumen$n, " ≥ ", UMBRAL, "%"),
+                    resumen$tipo)
+
+pc1 <- ggplot(pts, aes(profundidad, pct_cubierto, colour = tipo)) +
+  geom_hline(yintercept = UMBRAL, linetype = "dashed", colour = TINTA_2, linewidth = 0.4) +
+  geom_point(size = 1.3, alpha = 0.55, stroke = 0) +
+  facet_wrap(~ tipo, nrow = 1, labeller = as_labeller(titulos)) +
+  scale_x_log10(labels = label_number(accuracy = 0.01, drop0trailing = TRUE, big.mark = ","),
+                expand = expansion(c(0.02, 0.05))) +
+  scale_y_continuous(limits = c(0, 100), breaks = seq(0, 100, 25), labels = function(x) paste0(x, "%")) +
+  scale_colour_manual(values = COL_TIPO, guide = "none") +
+  labs(title = "Genome breadth versus mean depth",
+       subtitle = paste0("Each point is one vOTU in one pool with any coverage. Dashed line: presence threshold (", UMBRAL, "%); panel titles: combinations above it"),
+       x = "mean depth (×, log scale)", y = "breadth (% of the vOTU covered)") +
+  theme(panel.spacing = unit(6, "mm"))
+guardar_cob(pc1, "C1_breadth_vs_depth", alto = 95, ancho = 200)
+pc1
+```
+
+# C2. Depth of each virus in its positive pools
+
+```{r g-depth-per-virus, fig.height = 6.5}
+pos <- cob |>
+  filter(es_virus == "si", pct_cubierto >= UMBRAL) |>
+  group_by(nombre, muestra) |>
+  summarise(profundidad = max(profundidad), amplitud = max(pct_cubierto), .groups = "drop")
+orden_v <- pos |>
+  group_by(nombre) |>
+  summarise(med = median(profundidad), amp = median(amplitud), pools = n(), .groups = "drop") |>
+  arrange(med)
+pos <- pos |> mutate(nombre = factor(nombre, levels = orden_v$nombre))
+etiq <- orden_v |> mutate(nombre = factor(nombre, levels = orden_v$nombre),
+                          texto = paste0(pools, "/", N_MUESTRAS, " · ", round(amp), "%"))
+
+pc2 <- ggplot(pos, aes(profundidad, nombre)) +
+  geom_point(colour = PAL[["azul"]], size = 1.8, alpha = 0.7, stroke = 0) +
+  geom_point(data = orden_v |> mutate(nombre = factor(nombre, levels = orden_v$nombre)),
+             aes(x = med, y = nombre), inherit.aes = FALSE,
+             shape = 124, size = 4.5, colour = TINTA) +
+  geom_text(data = etiq, aes(x = Inf, y = nombre, label = texto), inherit.aes = FALSE,
+            hjust = -0.1, size = 2.6, colour = TINTA_2) +
+  scale_x_log10(labels = label_number(accuracy = 0.1, drop0trailing = TRUE, big.mark = ",")) +
+  coord_cartesian(clip = "off") +
+  labs(title = "Mean depth of each virus in the pools where it is present",
+       subtitle = "One point per positive pool; vertical tick: median. Right: positive pools · median breadth",
+       x = "mean depth (×, log scale)", y = NULL) +
+  theme(panel.grid.major.y = element_blank(), plot.margin = margin(5, 60, 5, 5))
+guardar_cob(pc2, "C2_depth_per_virus", alto = 150, ancho = 200)
+pc2
+```
+
+# C3. Genome completeness (CheckV)
+
+```{r g-completeness, fig.height = 9}
+NIV_CV <- c("Complete", "High-quality", "Medium-quality", "Low-quality", "Not-determined")
+comp <- votus |>
+  filter(es_virus == "si") |>
+  mutate(completeness = suppressWarnings(as.numeric(completeness)),
+         calidad = factor(coalesce(na_if(checkv_quality, ""), "Not-determined"), levels = NIV_CV),
+         etiqueta = paste0(nombre, " · ", format(round(longitud / 1000, 1), nsmall = 1), " kb")) |>
+  arrange(coalesce(completeness, -1), longitud) |>
+  mutate(etiqueta = factor(etiqueta, levels = unique(etiqueta)))
+
+pc3 <- ggplot(comp, aes(coalesce(completeness, 0), etiqueta, fill = calidad)) +
+  geom_col(width = 0.65) +
+  geom_text(data = filter(comp, is.na(completeness)), aes(x = 1, label = "not determined"),
+            hjust = 0, size = 2.5, colour = TINTA_2) +
+  scale_fill_manual(values = setNames(c(rev(AZUL_ORD), GRIS), NIV_CV), drop = FALSE) +
+  scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 25), labels = function(x) paste0(x, "%"),
+                     expand = expansion(c(0, 0.02))) +
+  labs(title = "Estimated completeness of the viral vOTUs",
+       subtitle = "CheckV completeness of each vOTU (one row per vOTU, with its length)",
+       x = "completeness", y = NULL,
+       caption = str_wrap("CheckV cannot estimate completeness for many RNA viruses that lack close references; those rows are marked 'not determined'.", 120)) +
+  theme(panel.grid.major.y = element_blank(), axis.text.y = element_text(size = 7)) +
+  guides(fill = guide_legend(nrow = 1))
+guardar_cob(pc3, "C3_completeness", alto = 220, ancho = 200)
+pc3
+```
+
+# C4. Coverage along the genome
+
+```{r perfiles, eval = HAY_PERFILES}
+perf <- leer_perfiles() |>
+  inner_join(select(votus, votu, nombre, tipo, longitud), by = "votu")
+presentes <- cob |> filter(pct_cubierto >= UMBRAL) |> distinct(votu, muestra)
+# una vOTU por nombre: la mas larga; solo los pools donde esta presente
+repr <- votus |>
+  filter(!is.na(tipo), votu %in% perf$votu) |>
+  group_by(nombre) |>
+  slice_max(longitud, n = 1, with_ties = FALSE) |>
+  ungroup()
+perf_p <- perf |>
+  semi_join(presentes, by = c("votu", "muestra")) |>
+  filter(votu %in% repr$votu) |>
+  mutate(pos_kb = (inicio + fin) / 2000)
+n_pools <- perf_p |> distinct(nombre, muestra) |> count(nombre, name = "pools")
+```
+
+```{r g-profiles-virus, eval = HAY_PERFILES, fig.height = 9, results = "asis"}
+pv <- perf_p |>
+  filter(tipo != "EVE") |>
+  semi_join(filter(n_pools, pools >= 2), by = "nombre") |>
+  left_join(n_pools, by = "nombre") |>
+  mutate(panel = paste0(nombre, "  (", pools, " pools)"))
+
+if (nrow(pv) == 0) {
+  cat("No virus with a coverage profile in at least 2 pools.")
+} else {
+pc4 <- ggplot(pv, aes(pos_kb, profundidad + 0.1, group = muestra, colour = tipo)) +
+  geom_line(linewidth = 0.3, alpha = 0.6) +
+  facet_wrap(~ panel, scales = "free", ncol = 3, labeller = label_wrap_gen(38)) +
+  scale_y_log10(labels = label_number(accuracy = 1, big.mark = ",")) +
+  scale_colour_manual(values = COL_TIPO, drop = TRUE) +
+  labs(title = "Depth along the genome, one line per positive pool",
+       subtitle = paste0("Viruses present in at least 2 pools; longest vOTU of each; mean depth in windows of 50 bp"),
+       x = "position (kb)", y = "depth (×, log scale)") +
+  theme(strip.text = element_text(size = 7.5), axis.text = element_text(size = 7))
+guardar_cob(pc4, "C4_profiles_viruses", alto = 230, ancho = 200)
+print(pc4)
+}
+```
+
+```{r g-profiles-eve, eval = HAY_PERFILES, fig.height = 5.5, results = "asis"}
+pe <- perf_p |>
+  filter(tipo == "EVE") |>
+  left_join(n_pools, by = "nombre") |>
+  mutate(panel = paste0(nombre, "  (", pools, " pools)"))
+top_eve <- pe |> distinct(panel, pools) |> slice_max(pools, n = 9, with_ties = FALSE) |> pull(panel)
+
+if (length(top_eve) == 0) {
+  cat("No EVE vOTU reaches the presence threshold in any pool.")
+} else {
+pc5 <- ggplot(filter(pe, panel %in% top_eve), aes(pos_kb, profundidad + 0.1, group = muestra)) +
+  geom_line(linewidth = 0.3, alpha = 0.6, colour = COL_TIPO[["EVE"]]) +
+  facet_wrap(~ panel, scales = "free", ncol = 3, labeller = label_wrap_gen(38)) +
+  scale_y_log10(labels = label_number(accuracy = 1, big.mark = ",")) +
+  labs(title = "For comparison: depth along EVE vOTUs",
+       subtitle = "The EVEs present in most pools; names are those of the viral hit",
+       x = "position (kb)", y = "depth (×, log scale)") +
+  theme(strip.text = element_text(size = 7.5), axis.text = element_text(size = 7))
+guardar_cob(pc5, "C5_profiles_eves", alto = 150, ancho = 200)
+print(pc5)
+}
+```
+
+```{r table-uniformity, eval = HAY_PERFILES}
+uniformidad(perf_p) |>
+  left_join(distinct(perf_p, votu, nombre, tipo), by = "votu") |>
+  group_by(Type = tipo, Name = nombre) |>
+  summarise(Pools = n(),
+            `Median depth (×)` = round(median(prof_media), 1),
+            `Median CV` = round(median(cv, na.rm = TRUE), 2),
+            `Windows ≥ 1× (median)` = paste0(round(100 * median(frac_ventanas_1x)), "%"),
+            .groups = "drop") |>
+  arrange(Type, desc(Pools)) |>
+  kable(caption = "Evenness of coverage in the positive pools. A genome covered end to end has most windows at ≥ 1× and a moderate CV; patchy coverage (high CV, many empty windows) is what partial EVE transcripts or cross-mapped fragments look like.")
+```
+
+```{r sin-perfiles, eval = !HAY_PERFILES, results = "asis"}
+cat("*Coverage profiles not available yet: run `perfil_cobertura.sh` on the farm and freeze them as `", COBERTURA, "`.*", sep = "")
+```
