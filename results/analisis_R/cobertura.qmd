@@ -68,7 +68,7 @@ pc1 <- ggplot(pts, aes(profundidad, pct_cubierto, colour = tipo)) +
   scale_y_continuous(limits = c(0, 100), breaks = seq(0, 100, 25), labels = function(x) paste0(x, "%")) +
   scale_colour_manual(values = COL_TIPO, guide = "none") +
   labs(title = "Genome breadth versus mean depth",
-       subtitle = paste0("Each point is one vOTU in one pool with any coverage. Dashed line: presence threshold (", UMBRAL, "%); panel titles: combinations above it"),
+       subtitle = paste0("One point per vOTU and pool with any coverage. Dashed line: presence threshold (", UMBRAL, "%)"),
        x = "mean depth (×, log scale)", y = "breadth (% of the vOTU covered)") +
   theme(panel.spacing = unit(6, "mm"))
 guardar_cob(pc1, "C1_breadth_vs_depth", alto = 95, ancho = 200)
@@ -117,13 +117,16 @@ comp <- votus |>
          calidad = factor(coalesce(na_if(checkv_quality, ""), "Not-determined"), levels = NIV_CV),
          etiqueta = paste0(nombre, " · ", format(round(longitud / 1000, 1), nsmall = 1), " kb")) |>
   arrange(coalesce(completeness, -1), longitud) |>
-  mutate(etiqueta = factor(etiqueta, levels = unique(etiqueta)))
+  # una fila por vOTU: dos vOTUs pueden compartir nombre y longitud redondeada
+  mutate(fila = factor(votu, levels = votu))
 
-pc3 <- ggplot(comp, aes(coalesce(completeness, 0), etiqueta, fill = calidad)) +
+pc3 <- ggplot(comp, aes(coalesce(completeness, 0), fila, fill = calidad)) +
   geom_col(width = 0.65) +
   geom_text(data = filter(comp, is.na(completeness)), aes(x = 1, label = "not determined"),
             hjust = 0, size = 2.5, colour = TINTA_2) +
-  scale_fill_manual(values = setNames(c(rev(AZUL_ORD), GRIS), NIV_CV), drop = FALSE) +
+  scale_y_discrete(labels = setNames(comp$etiqueta, comp$votu)) +
+  scale_fill_manual(values = setNames(c(rev(AZUL_ORD), GRIS), NIV_CV),
+                    breaks = intersect(NIV_CV[-5], as.character(comp$calidad))) +
   scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 25), labels = function(x) paste0(x, "%"),
                      expand = expansion(c(0, 0.02))) +
   labs(title = "Estimated completeness of the viral vOTUs",
