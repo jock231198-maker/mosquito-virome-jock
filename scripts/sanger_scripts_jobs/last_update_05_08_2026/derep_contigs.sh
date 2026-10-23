@@ -59,6 +59,8 @@ THREADS="${LSB_DJOB_NUMPROC:-2}"
 DEREP_ID="${DEREP_ID:-0.95}"
 DEREP_COV="${DEREP_COV:-0.90}"
 CDHIT_MEM="${CDHIT_MEM:-4000}"
+DEREP_MINLEN="${DEREP_MINLEN:-1000}"
+filt="contigs_${DEREP_MINLEN}bp.fasta"
 
 idx="${LSB_JOBINDEX:?Este script debe enviarse como job array}"
 sample=$(sed -n "${idx}p" "$samples")
@@ -95,11 +97,11 @@ else
   shopt -s nullglob
   for d in "$SCRATCH"/spades "$SCRATCH"/spades_* "$SCRATCH"/megahit "$SCRATCH"/megahit_* \
            "$SCRATCH"/trinity "$SCRATCH"/trinity_*; do
-    [[ -s "$d/$sample/contigs_1000bp.fasta" ]] && dirs+=( "$d" )
+    [[ -s "$d/$sample/$filt" ]] && dirs+=( "$d" )
   done
   shopt -u nullglob
 fi
-(( ${#dirs[@]} )) || { echo "ERROR: no hay ningun ensamblaje con contigs_1000bp.fasta para $sample"; exit 1; }
+(( ${#dirs[@]} )) || { echo "ERROR: no hay ningun ensamblaje con $filt para $sample"; exit 1; }
 
 work="${TMPDIR:-/tmp}/derep_${sample}_${LSB_JOBID:-$$}"
 rm -rf "$work"; mkdir -p "$work"
@@ -109,6 +111,7 @@ echo "==========================================================="
 echo "derep $sample   (host: $(hostname))"
 echo "  identidad : $DEREP_ID     cobertura: $DEREP_COV"
 echo "  fuentes   : ${#dirs[@]}"
+echo "  min_len   : $DEREP_MINLEN bp ($filt)"
 echo "==========================================================="
 
 # --- Concatenar con el origen en la cabecera --------------------------------
@@ -118,7 +121,7 @@ echo "==========================================================="
 : > "$work/todos.fasta"
 declare -A aporte
 for d in "${dirs[@]}"; do
-  f="$d/$sample/contigs_1000bp.fasta"
+  f="$d/$sample/$filt"
   [[ -s "$f" ]] || continue
   tag=$(etiqueta "$d")
   n=$(grep -c '^>' "$f" || true)
@@ -154,7 +157,7 @@ n_despues=$(grep -c '^>' "$work/derep.fasta" || true)
 # --- Publicar ---------------------------------------------------------------
 stage="$work/publish"; mkdir -p "$stage"
 cp "$work/derep.fasta"       "$stage/contigs.fasta"
-cp "$work/derep.fasta"       "$stage/contigs_1000bp.fasta"   # ya venian filtrados
+cp "$work/derep.fasta"       "$stage/$filt"   # ya venian filtrados
 cp "$work/derep.fasta"       "$stage/${sample}_final.fasta"
 cp "$work/derep.fasta.clstr" "$stage/${sample}.clstr"
 
