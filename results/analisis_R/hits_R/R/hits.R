@@ -35,6 +35,13 @@ NOTAS <- c(
   "Hameenlinna phasivirus"     = "No protein hit in any database"
 )
 
+# Nombres corregidos por evidencia de proteina (arbitro nr): el hit nucleotidico
+# es un tramo corto compartido y el nombre de blastn engana. Se aplica a la
+# etiqueta mostrada; la columna "species" conserva el hit crudo.
+RENOMBRAR <- c(
+  "Oropouche virus" = "Culex mosquito virus 1-like"
+)
+
 GRUPOS <- c(
   candidato              = "RNA virus families (candidates)",
   ADN_u_otro             = "DNA virus families",
@@ -98,7 +105,7 @@ tabla_grupos <- function(d) {
 tabla_virus <- function(d) {
   d |>
     filter(grupo == "candidato", nivel != "debil") |>
-    mutate(virus = etiqueta(nombre, nivel)) |>
+    mutate(virus = coalesce(unname(RENOMBRAR[nombre]), etiqueta(nombre, nivel))) |>
     group_by(virus, nombre, familia) |>
     summarise(n_muestras  = n_distinct(muestra),
               n_contigs   = n(),
@@ -133,7 +140,7 @@ presentar_virus <- function(tv) {
 matriz_muestras <- function(d, tv) {
   d |>
     filter(grupo == "candidato", nivel != "debil") |>
-    mutate(virus = etiqueta(nombre, nivel)) |>
+    mutate(virus = coalesce(unname(RENOMBRAR[nombre]), etiqueta(nombre, nivel))) |>
     count(virus, muestra) |>
     mutate(muestra = factor(muestra, orden_muestras(d$muestra))) |>
     arrange(muestra) |>
@@ -149,7 +156,7 @@ COLORES_ESTADO <- c(Confirmed = "#2A9D8F", Unconfirmed = "#E9C46A", `Host-derive
 figura_heatmap <- function(d, tv) {
   m <- d |>
     filter(grupo == "candidato", nivel != "debil") |>
-    mutate(virus = etiqueta(nombre, nivel)) |>
+    mutate(virus = coalesce(unname(RENOMBRAR[nombre]), etiqueta(nombre, nivel))) |>
     count(virus, muestra) |>
     inner_join(select(tv, virus, estado), by = "virus")
   ord_v <- tv |> arrange(desc(estado), n_muestras, n_contigs) |> pull(virus)

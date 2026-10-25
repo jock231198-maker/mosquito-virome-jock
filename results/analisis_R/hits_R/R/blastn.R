@@ -11,8 +11,9 @@ source("R/hits.R")
 
 COLS_BLASTN <- c("contig", "accession", "pident", "aln_length", "qlen", "slen",
                  "evalue", "bitscore", "taxid", "species", "qcovs")
-QCOV_NOMBRE <- 30   # cobertura minima de la query para dar nombre (igual que integrar_arbitro.py)
-ID_ESPECIE  <- 90   # identidad nt minima para nombre de especie
+QCOV_NOMBRE  <- 30  # cobertura minima de la query para dar nombre (igual que integrar_arbitro.py)
+ID_ESPECIE   <- 90  # identidad nt minima para nombre de especie
+QCOV_ESPECIE <- 80  # y cobertura minima para nombre de especie (como conocido_nt en annotate_votus.sh)
 FAGO  <- c("Steitzviridae","Fiersviridae","Solspiviridae","Duinviridae","Kyanoviridae",
            "Straboviridae","Autographiviridae","Microviridae","Inoviridae")
 RETRO <- c("Retroviridae","Metaviridae","Belpaoviridae","Pseudoviridae")
@@ -76,10 +77,11 @@ tabla_blastn_mejor <- function(todos) {
   todos |>
     filter(hit_rank == 1) |>
     mutate(naming = case_when(qcovs < QCOV_NOMBRE ~ "short hit (< 30% cover): not named",
-                              pident >= ID_ESPECIE ~ "species",
+                              pident >= ID_ESPECIE & qcovs >= QCOV_ESPECIE ~ "species",
                               TRUE                 ~ "relative (-like)"),
            virus = case_when(qcovs < QCOV_NOMBRE ~ NA_character_,
-                             pident >= ID_ESPECIE ~ species,
+                             species %in% names(RENOMBRAR) ~ unname(RENOMBRAR[species]),
+                             naming == "species"  ~ species,
                              TRUE                 ~ etiqueta(species, "pariente"))) |>
     select(muestra, ensamblador, contig, contig_length = qlen, accession, species, virus,
            family, group, pident, qcovs, aln_length, slen, evalue, bitscore, taxid,
@@ -101,12 +103,16 @@ tabla_blastn_especies <- function(mejor) {
     group_by(species, family) |>
     summarise(n_samples = n_distinct(muestra), n_contigs = n(),
               n_genomad = sum(en_genomad),
-              max_pident = max(pident), median_pident = median(pident),
+              es_especie = any(naming == "species"),
+              max_pident = round(max(pident), 2), median_pident = round(median(pident), 2),
               max_qcovs = max(qcovs), max_contig_length = max(contig_length),
               best_accession = accession[which.max(bitscore)], .groups = "drop") |>
-    mutate(virus  = if_else(max_pident >= ID_ESPECIE, species, etiqueta(species, "pariente")),
+    mutate(virus  = case_when(species %in% names(RENOMBRAR) ~ unname(RENOMBRAR[species]),
+                              es_especie ~ species,
+                              TRUE       ~ etiqueta(species, "pariente")),
            status = estado_de(species, n_genomad),
            note   = coalesce(DERIVADO_HUESPED[species], NOTAS[species], "")) |>
+    select(-es_especie) |>
     relocate(virus, species, family, status) |>
     arrange(desc(n_samples), desc(n_contigs), desc(max_pident))
 }
@@ -132,7 +138,7 @@ figura_blastn_top <- function(mejor, esp, n_top = 20) {
     facet_grid(rows = vars(status), scales = "free_y", space = "free_y") +
     labs(x = NULL, y = NULL,
          title = sprintf("Top %d blastn hits in assembled contigs", nrow(top)),
-         subtitle = sprintf("RNA virus families, best hit per contig with >= %d%% query cover. Colour: best nt identity in the pool; number: contigs", QCOV_NOMBRE)) +
+         subtitle = sprintf("RNA virus families, best hit per contig with >= %d%% query cover. Species name only with >= %d%% nt id. over >= %d%% of the contig.\nColour: best nt identity in the pool; number: contigs", QCOV_NOMBRE, ID_ESPECIE, QCOV_ESPECIE)) +
     theme_minimal(base_size = 10) +
     theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),
           panel.grid = element_blank(), legend.position = "top",
