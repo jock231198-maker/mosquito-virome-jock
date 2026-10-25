@@ -127,7 +127,7 @@ figura_blastn_top <- function(mejor, esp, n_top = 20) {
     summarise(pid = max(pident), n = n(), .groups = "drop") |>
     left_join(select(top, species, virus, status), by = "species")
   todas <- orden_muestras(mejor$muestra)
-  m <- m |> mutate(virus = factor(virus, rev(top$virus)), muestra = factor(muestra, todas))
+  m <- m |> mutate(virus = factor(virus, unique(rev(top$virus))), muestra = factor(muestra, todas))
   ggplot(m, aes(muestra, virus, fill = pid)) +
     geom_tile(colour = "white", linewidth = 0.6) +
     geom_text(aes(label = n, colour = pid > 85), size = 2.5, show.legend = FALSE) +
