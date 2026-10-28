@@ -35,6 +35,13 @@ NOTAS <- c(
   "Hameenlinna phasivirus"     = "No protein hit in any database"
 )
 
+# Nombres corregidos por evidencia de proteina (arbitro nr): el hit nucleotidico
+# es un tramo corto compartido y el nombre de blastn engana. Se aplica a la
+# etiqueta mostrada; la columna "species" conserva el hit crudo.
+RENOMBRAR <- c(
+  "Oropouche virus" = "Culex mosquito virus 1-like"
+)
+
 GRUPOS <- c(
   candidato              = "RNA virus families (candidates)",
   ADN_u_otro             = "DNA virus families",
@@ -95,12 +102,26 @@ tabla_grupos <- function(d) {
 }
 
 # Por virus: solo familias de virus de ARN, sin los debiles.
+# Se agrupa por la etiqueta mostrada: si un renombrado (RENOMBRAR) coincide con
+# un virus que ya existe, o un mismo nombre trae dos familias, quedan en una fila.
+# La familia es la de los contigs no renombrados (el renombrado viene de un hit
+# nucleotidico enganoso, su familia tampoco vale).
 tabla_virus <- function(d) {
   d |>
     filter(grupo == "candidato", nivel != "debil") |>
-    mutate(virus = etiqueta(nombre, nivel)) |>
-    group_by(virus, nombre, familia) |>
-    summarise(n_muestras  = n_distinct(muestra),
+    mutate(renombrado = nombre %in% names(RENOMBRAR),
+           virus = coalesce(unname(RENOMBRAR[nombre]), etiqueta(nombre, nivel))) |>
+    group_by(virus) |>
+    summarise(# primero lo que usa los nombres de cada contig (luego "nombre" se resume)
+              huesped     = any(unique(nombre) %in% names(DERIVADO_HUESPED)),
+              sospechoso  = all(unique(nombre) %in% names(NOTAS)),
+              nota        = paste(na.omit(unique(c(DERIVADO_HUESPED[unique(nombre)],
+                                                   NOTAS[unique(nombre)]))), collapse = " / "),
+              nombres     = paste(sort(unique(nombre)), collapse = "; "),
+              nombre      = names(sort(table(nombre), decreasing = TRUE))[1],
+              familia     = { f <- familia[!renombrado]; if (!length(f)) f <- familia
+                              names(sort(table(f), decreasing = TRUE))[1] },
+              n_muestras  = n_distinct(muestra),
               n_contigs   = n(),
               n_genomad   = sum(en_genomad),
               n_ensamb    = n_distinct(ensamblador),
@@ -109,12 +130,12 @@ tabla_virus <- function(d) {
               max_pid_aa  = suppressWarnings(max(dm_pident, na.rm = TRUE)),
               .groups = "drop") |>
     mutate(across(c(max_pid_nt, max_pid_aa), ~ if_else(is.finite(.x), .x, NA_real_)),
-           estado = case_when(nombre %in% names(DERIVADO_HUESPED) ~ "Host-derived",
-                              nombre %in% names(NOTAS)            ~ "Unconfirmed",
-                              n_genomad > 0                       ~ "Confirmed",
-                              TRUE                                ~ "Unconfirmed"),
-           nota = coalesce(DERIVADO_HUESPED[nombre], NOTAS[nombre], ""),
+           estado = case_when(huesped        ~ "Host-derived",
+                              sospechoso     ~ "Unconfirmed",
+                              n_genomad > 0  ~ "Confirmed",
+                              TRUE           ~ "Unconfirmed"),
            estado = factor(estado, c("Confirmed", "Unconfirmed", "Host-derived"))) |>
+    select(-huesped, -sospechoso) |>
     arrange(estado, desc(n_muestras), desc(n_contigs))
 }
 
@@ -133,7 +154,7 @@ presentar_virus <- function(tv) {
 matriz_muestras <- function(d, tv) {
   d |>
     filter(grupo == "candidato", nivel != "debil") |>
-    mutate(virus = etiqueta(nombre, nivel)) |>
+    mutate(virus = coalesce(unname(RENOMBRAR[nombre]), etiqueta(nombre, nivel))) |>
     count(virus, muestra) |>
     mutate(muestra = factor(muestra, orden_muestras(d$muestra))) |>
     arrange(muestra) |>
@@ -149,7 +170,7 @@ COLORES_ESTADO <- c(Confirmed = "#2A9D8F", Unconfirmed = "#E9C46A", `Host-derive
 figura_heatmap <- function(d, tv) {
   m <- d |>
     filter(grupo == "candidato", nivel != "debil") |>
-    mutate(virus = etiqueta(nombre, nivel)) |>
+    mutate(virus = coalesce(unname(RENOMBRAR[nombre]), etiqueta(nombre, nivel))) |>
     count(virus, muestra) |>
     inner_join(select(tv, virus, estado), by = "virus")
   ord_v <- tv |> arrange(desc(estado), n_muestras, n_contigs) |> pull(virus)

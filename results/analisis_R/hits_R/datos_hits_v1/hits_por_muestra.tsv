@@ -1,0 +1,189 @@
+muestra	nombre	familia	nivel	n_contigs	n_en_genomad	max_long	max_bn_pident	max_bn_qcov
+M1_S1	Hattula partiti-like virus	Partitiviridae	pariente	9	0	3495	97.951	22
+M1_S1	Iflavirus sp.	Iflaviridae	pariente	5	0	1555	82.112	63
+M1_S1	Aedes anphevirus	Xinmoviridae	especie	4	4	15488	99.488	99
+M1_S1	Formosus virus	Rhabdoviridae	pariente	2	1	1752	70.862	53
+M1_S1	Verdadero virus	Partitiviridae	especie	2	2	1690	99.801	100
+M1_S1	Hulunbuir Totiv tick virus 2	Orthototiviridae	pariente	1	0	1193		
+M1_S1	Iflavirus sp.	Iflaviridae	especie	1	0	1446	99.450	50
+M1_S1	Kamiti River virus	Flaviviridae	pariente	1	0	2766	69.136	12
+M1_S1	Leksozero Aedes Stangrhavirus	Rhabdoviridae	pariente	1	0	1217		
+M1_S1	Liao ning virus	Sedoreoviridae	pariente	1	1	1047	81.171	60
+M1_S1	Lispiviridae sp.	Lispiviridae	pariente	1	1	1612		
+M1_S1	Mato partitivirus	Partitiviridae	pariente	1	0	1059	75.964	32
+M1_S1	Mos8Chu0 chuvirus	Chuviridae	pariente	1	1	1694	72.458	63
+M2_S2	Hattula partiti-like virus	Partitiviridae	pariente	4	0	1904	96.271	21
+M2_S2	Iflavirus sp.	Iflaviridae	pariente	4	0	2078	78.841	43
+M2_S2	Verdadero virus	Partitiviridae	especie	2	2	1797	99.823	98
+M2_S2	Aedes anphevirus	Xinmoviridae	especie	1	1	12906	99.396	99
+M2_S2	Aedes anphevirus	Xinmoviridae	pariente	1	1	1083	66.750	74
+M2_S2	Atrato virus	Orthototiviridae	pariente	1	1	1024		
+M2_S2	Chaq-like virus	Partitiviridae	especie	1	1	1511	99.645	93
+M2_S2	Formosus virus	Rhabdoviridae	pariente	1	1	2288	70.979	37
+M2_S2	Hameenlinna phasivirus	Phenuiviridae	especie	1	0	1037	91.093	35
+M2_S2	Hanko iflavirus 1	Iflaviridae	especie	1	0	1233	95.912	31
+M2_S2	Iflavirus sp.	Iflaviridae	especie	1	0	1103	96.301	66
+M2_S2	Kamiti River virus	Flaviviridae	pariente	1	0	1930	71.711	8
+M2_S2	Liao ning virus	Sedoreoviridae	pariente	1	1	1516	81.171	69
+M2_S2	Lispiviridae sp.	Lispiviridae	pariente	1	1	1085		
+M2_S2	Mos8Chu0 chuvirus	Chuviridae	pariente	1	1	1150	77.027	49
+M7_S15	Iflavirus sp.	Iflaviridae	pariente	9	0	2300	78.237	67
+M7_S15	Hattula partiti-like virus	Partitiviridae	pariente	6	0	3247	97.479	29
+M7_S15	Verdadero virus	Partitiviridae	especie	2	2	1702	99.823	100
+M7_S15	Aedes anphevirus	Xinmoviridae	especie	1	1	12912	99.449	99
+M7_S15	Chaq-like virus	Partitiviridae	especie	1	1	1424	99.646	99
+M7_S15	Hanko iflavirus 1	Iflaviridae	especie	1	0	1253	94.947	30
+M7_S15	Iflavirus sp.	Iflaviridae	especie	1	0	2423	99.587	30
+M9_S16	Iflavirus sp.	Iflaviridae	pariente	14	0	2222	84.375	54
+M9_S16	Hattula partiti-like virus	Partitiviridae	pariente	5	0	3063	97.479	24
+M9_S16	Tick-borne encephalitis virus	Flaviviridae	pariente	2	1	1065	76.401	31
+M9_S16	Verdadero virus	Partitiviridae	especie	2	2	1696	99.869	99
+M9_S16	Atrato virus	Orthototiviridae	pariente	1	1	1365		
+M9_S16	Chaq-like virus	Partitiviridae	especie	1	1	1431	99.505	99
+M9_S16	Formosus virus	Rhabdoviridae	pariente	1	0	1012	74.221	35
+M9_S16	Kamiti River virus	Flaviviridae	pariente	1	0	1658	71.053	9
+M9_S16	Mos8Chu0 chuvirus	Chuviridae	pariente	1	1	1498	73.702	61
+M11_S3	Hattula partiti-like virus	Partitiviridae	pariente	10	1	1896	97.479	29
+M11_S3	Iflavirus sp.	Iflaviridae	pariente	5	0	2029	82.020	72
+M11_S3	Aedes aegypti totivirus	Inseviridae	especie	3	3	4707	98.408	100
+M11_S3	Iflavirus sp.	Iflaviridae	especie	2	0	1419	99.450	64
+M11_S3	Verdadero virus	Partitiviridae	especie	2	2	1901	99.823	100
+M11_S3	Aedes anphevirus	Xinmoviridae	especie	1	1	12887	99.480	100
+M11_S3	Bole tick virus 4	Pestiviridae	pariente	1	0	1077	79.059	39
+M11_S3	Chaq-like virus	Partitiviridae	especie	1	1	1424	99.646	99
+M11_S3	Hanko iflavirus 1	Iflaviridae	especie	1	1	1118	96.034	32
+M11_S3	Plateau tick ixovirus	Phenuiviridae	pariente	1	0	1004	82.258	31
+M20_S25	Iflavirus sp.	Iflaviridae	pariente	9	0	2178	80.618	68
+M20_S25	Hattula partiti-like virus	Partitiviridae	pariente	2	0	2791	97.951	19
+M20_S25	Verdadero virus	Partitiviridae	especie	2	2	1879	99.801	90
+M20_S25	Aedes anphevirus	Xinmoviridae	especie	1	1	12882	99.379	100
+M20_S25	Bole tick virus 4	Pestiviridae	pariente	1	0	1011	79.059	42
+M20_S25	Chaq-like virus	Partitiviridae	especie	1	1	2003	99.715	70
+M20_S25	Culex mosquito virus 1	Nodaviridae	pariente	1	1	2161	97.468	5
+M20_S25	Culex-associated Tombus-like virus	Tombusviridae	pariente	1	1	2456	67.827	47
+M20_S25	Hanko iflavirus 1	Iflaviridae	especie	1	1	1175	94.681	32
+M20_S25	Tick-borne encephalitis virus	Flaviviridae	pariente	1	0	1012	76.401	33
+M21_S29	Hattula partiti-like virus	Partitiviridae	pariente	3	0	2466	97.759	29
+M21_S29	San Gabriel mononegavirus	Rhabdoviridae	especie	3	3	2713	97.126	100
+M21_S29	Aedes anphevirus	Xinmoviridae	especie	2	1	13129	99.590	98
+M21_S29	Iflavirus sp.	Iflaviridae	pariente	2	0	1767	79.494	48
+M21_S29	Verdadero virus	Partitiviridae	especie	2	2	1801	99.868	99
+M21_S29	Chaq-like virus	Partitiviridae	especie	1	1	1422	99.715	99
+M21_S29	Iflavirus sp.	Iflaviridae	especie	1	0	1651	98.626	44
+M22_S30	Hattula partiti-like virus	Partitiviridae	pariente	17	0	6653	97.479	28
+M22_S30	Aedes aegypti totivirus	Inseviridae	especie	3	3	3085	98.509	100
+M22_S30	Hanko iflavirus 1	Iflaviridae	especie	2	0	1101	96.677	31
+M22_S30	Verdadero virus	Partitiviridae	especie	2	2	1742	99.823	100
+M22_S30	Aedes anphevirus	Xinmoviridae	especie	1	1	12898	99.364	100
+M22_S30	Chaq-like virus	Partitiviridae	especie	1	1	1537	99.646	92
+M35_S31	Hattula partiti-like virus	Partitiviridae	pariente	3	0	7546	98.880	23
+M35_S31	Verdadero virus	Partitiviridae	especie	2	2	1677	99.934	100
+M35_S31	Aedes aegypti totivirus	Inseviridae	especie	1	1	1889	96.083	99
+M35_S31	Chaq-like virus	Partitiviridae	especie	1	1	1413	99.646	100
+M35_S31	Kamiti River virus	Flaviviridae	pariente	1	1	1396	71.053	11
+M35_S31	Panayarvi Aedes partiti-like virus 2	Partitiviridae	pariente	1	1	1081	78.344	93
+M35_S31	Rhabdoviridae sp.	Rhabdoviridae	pariente	1	1	1418	73.469	7
+M36_S17	Bole tick virus 4	Pestiviridae	pariente	2	0	1242	79.059	38
+M36_S17	Aedes aegypti totivirus	Inseviridae	especie	1	1	1053	95.726	100
+M36_S17	Chaq-like virus	Partitiviridae	especie	1	1	1188	99.579	100
+M48_S5	Hattula partiti-like virus	Partitiviridae	pariente	10	0	2673	97.479	28
+M48_S5	Iflavirus sp.	Iflaviridae	pariente	5	0	1823	84.358	70
+M48_S5	Aedes aegypti totivirus	Inseviridae	especie	3	3	4797	98.610	100
+M48_S5	Cell fusing agent virus	Flaviviridae	especie	2	2	6925	99.002	100
+M48_S5	Verdadero virus	Partitiviridae	especie	2	2	1702	99.823	99
+M48_S5	Aedes anphevirus	Xinmoviridae	especie	1	1	12902	99.364	99
+M48_S5	Chaq-like virus	Partitiviridae	especie	1	1	1478	99.646	99
+M48_S5	Iflavirus sp.	Iflaviridae	especie	1	0	1541	99.175	47
+M55_S6	Hattula partiti-like virus	Partitiviridae	pariente	7	1	5156	97.951	28
+M55_S6	Iflavirus sp.	Iflaviridae	pariente	7	0	2462	86.618	48
+M55_S6	Verdadero virus	Partitiviridae	especie	2	2	1672	99.868	100
+M55_S6	Aedes anphevirus	Xinmoviridae	especie	1	1	12897	99.450	100
+M55_S6	Bafoussam mosquito rhabdovirus	Rhabdoviridae	pariente	1	1	1126	70.872	64
+M55_S6	Chaq-like virus	Partitiviridae	especie	1	1	1413	99.646	100
+M55_S6	Iflavirus sp.	Iflaviridae	especie	1	0	1447	99.175	50
+M55_S6	Kamiti River virus	Flaviviridae	pariente	1	1	2390	69.136	13
+M56_S7	Hattula partiti-like virus	Partitiviridae	pariente	7	0	3618	97.479	29
+M56_S7	Iflavirus sp.	Iflaviridae	pariente	7	0	2059	80.032	50
+M56_S7	Phasivirus phasiense	Phenuiviridae	especie	4	4	2335	97.931	100
+M56_S7	Iflavirus sp.	Iflaviridae	especie	2	0	1450	99.175	55
+M56_S7	Verdadero virus	Partitiviridae	especie	2	2	1702	99.823	100
+M56_S7	Aedes flavivirus	Flaviviridae	pariente	1	0	1181		
+M56_S7	Bafoussam mosquito rhabdovirus	Rhabdoviridae	pariente	1	1	1054	69.136	31
+M56_S7	Chaq-like virus	Partitiviridae	especie	1	1	1425	99.647	99
+M56_S7	Formosus virus	Rhabdoviridae	pariente	1	0	1143	67.285	52
+M56_S7	Mos8Chu0 chuvirus	Chuviridae	pariente	1	0	1255	75.261	50
+M56_S7	Murri virus	Orthototiviridae	pariente	1	0	1394		
+M57_S8	Hattula partiti-like virus	Partitiviridae	pariente	5	0	3531	99.200	20
+M57_S8	Iflavirus sp.	Iflaviridae	pariente	5	0	1971	79.780	64
+M57_S8	Hanko iflavirus 1	Iflaviridae	especie	4	2	1392	96.034	45
+M57_S8	Formosus virus	Rhabdoviridae	pariente	2	2	4110	70.862	39
+M57_S8	Mos8Chu0 chuvirus	Chuviridae	pariente	2	1	1246	77.027	54
+M57_S8	Verdadero virus	Partitiviridae	especie	2	2	1703	99.738	99
+M57_S8	Bafoussam mosquito rhabdovirus	Rhabdoviridae	pariente	1	1	4012	66.909	33
+M57_S8	Chaq-like virus	Partitiviridae	especie	1	1	1435	99.647	99
+M57_S8	Iflavirus sp.	Iflaviridae	especie	1	0	1753	92.623	41
+M57_S8	Liao ning virus	Sedoreoviridae	pariente	1	1	1109	81.171	57
+M57_S8	Murri virus	Orthototiviridae	pariente	1	0	1907		
+M57_S8	Onega tick phlebovirus	Phenuiviridae	pariente	1	0	1025	78.635	33
+M57_S8	Panayarvi Aedes partiti-like virus 2	Partitiviridae	pariente	1	0	1047	78.025	92
+M58_S9	Hattula partiti-like virus	Partitiviridae	pariente	5	0	4529	97.479	28
+M58_S9	Iflavirus sp.	Iflaviridae	pariente	3	0	2002	78.760	59
+M58_S9	Bafoussam mosquito rhabdovirus	Rhabdoviridae	pariente	2	2	1330	71.811	61
+M58_S9	Verdadero virus	Partitiviridae	especie	2	2	1689	99.803	100
+M58_S9	Aedes flavivirus	Flaviviridae	pariente	1	0	2039		
+M58_S9	Chaq-like virus	Partitiviridae	especie	1	1	1432	99.576	99
+M58_S9	Formosus virus	Rhabdoviridae	pariente	1	1	1809	70.862	47
+M58_S9	Hanko iflavirus 1	Iflaviridae	especie	1	0	1104	96.034	32
+M58_S9	Iflavirus sp.	Iflaviridae	especie	1	0	1454	99.312	50
+M58_S9	Liao ning virus	Sedoreoviridae	pariente	1	1	1446	81.171	73
+M58_S9	Lispiviridae sp.	Lispiviridae	pariente	1	1	1100		
+M58_S9	Murri virus	Orthototiviridae	pariente	1	0	1864		
+M59_S10	Hattula partiti-like virus	Partitiviridae	pariente	6	0	2736	92.157	24
+M59_S10	Hanko iflavirus 1	Iflaviridae	especie	2	0	1173	96.034	31
+M59_S10	Verdadero virus	Partitiviridae	especie	2	2	1721	99.934	98
+M59_S10	Aedes anphevirus	Xinmoviridae	especie	1	1	1057	99.905	100
+M59_S10	Chaq-like virus	Partitiviridae	especie	1	1	1424	99.717	99
+M59_S10	Iflavirus sp.	Iflaviridae	pariente	1	0	2091	76.675	31
+M60_S11	Iflavirus sp.	Iflaviridae	pariente	4	0	1473	80.130	59
+M60_S11	Iflavirus sp.	Iflaviridae	especie	2	0	1624	99.662	50
+M60_S11	Verdadero virus	Partitiviridae	especie	2	2	1698	99.934	100
+M60_S11	Aedes anphevirus	Xinmoviridae	especie	1	1	12895	99.473	100
+M60_S11	Chaq-like virus	Partitiviridae	especie	1	1	1425	99.717	99
+M60_S11	Hanko iflavirus 1	Iflaviridae	especie	1	0	1062	96.034	33
+M60_S11	Hattula partiti-like virus	Partitiviridae	pariente	1	0	2482	97.479	14
+M62_S18	Hattula partiti-like virus	Partitiviridae	pariente	2	0	2785	97.479	29
+M62_S18	Verdadero virus	Partitiviridae	especie	2	2	1686	99.934	100
+M62_S18	Aedes anphevirus	Xinmoviridae	especie	1	1	12898	99.248	100
+M62_S18	Chaq-like virus	Partitiviridae	especie	1	1	1413	99.434	100
+M62_S18	Iflavirus sp.	Iflaviridae	pariente	1	0	2069	79.780	35
+M62_S18	Oropouche virus	Peribunyaviridae	especie	1	0	1429	98.276	36
+M71_S19	Hattula partiti-like virus	Partitiviridae	pariente	4	0	2238	97.479	24
+M71_S19	Iflavirus sp.	Iflaviridae	pariente	3	0	2432	79.780	37
+M71_S19	Bafoussam mosquito rhabdovirus	Rhabdoviridae	pariente	2	2	1774	66.901	61
+M71_S19	Verdadero virus	Partitiviridae	especie	2	2	1710	99.672	99
+M71_S19	Aedes flavivirus	Flaviviridae	pariente	1	1	1151		
+M71_S19	Bole tick virus 4	Pestiviridae	pariente	1	0	1336	79.059	31
+M71_S19	Chaq-like virus	Partitiviridae	especie	1	1	1433	99.647	99
+M71_S19	Hanko iflavirus 1	Iflaviridae	especie	1	1	1008	95.912	41
+M71_S19	Lispiviridae sp.	Lispiviridae	pariente	1	1	1244		
+M71_S19	Oropouche virus	Peribunyaviridae	especie	1	0	1110	98.844	32
+M72_S20	Iflavirus sp.	Iflaviridae	pariente	5	0	2445	79.917	72
+M72_S20	Cell fusing agent virus	Flaviviridae	especie	2	2	10680	97.896	100
+M72_S20	Hattula partiti-like virus	Partitiviridae	pariente	2	0	1618	97.479	23
+M72_S20	Iflavirus sp.	Iflaviridae	especie	2	0	1831	99.450	71
+M72_S20	Verdadero virus	Partitiviridae	especie	2	2	1705	99.934	99
+M72_S20	Aedes anphevirus	Xinmoviridae	especie	1	1	12888	99.542	100
+M72_S20	Bafoussam mosquito rhabdovirus	Rhabdoviridae	pariente	1	1	1441	66.387	49
+M72_S20	Bole tick virus 4	Pestiviridae	pariente	1	0	1116	80.267	33
+M72_S20	Chaq-like virus	Partitiviridae	especie	1	1	1436	99.717	99
+M72_S20	Kamiti River virus	Flaviviridae	pariente	1	0	1508	71.053	10
+M74_S21	Hattula partiti-like virus	Partitiviridae	pariente	5	0	2051	97.479	18
+M74_S21	Aedes anphevirus	Xinmoviridae	especie	4	2	5674	99.887	100
+M74_S21	Hanko iflavirus 1	Iflaviridae	especie	1	0	1060	95.860	30
+M74_S21	Iflavirus sp.	Iflaviridae	especie	1	0	1456	99.587	50
+M79_S28	Hattula partiti-like virus	Partitiviridae	pariente	17	0	4119	98.276	16
+M79_S28	Iflavirus sp.	Iflaviridae	pariente	5	0	1830	78.194	44
+M79_S28	Oropouche virus	Peribunyaviridae	especie	4	0	1153	98.276	34
+M79_S28	Iflavirus sp.	Iflaviridae	especie	2	0	1589	95.461	50
+M79_S28	Culex mosquito virus 1	Nodaviridae	pariente	1	1	1893	79.381	5
+M79_S28	Culex-associated Tombus-like virus	Tombusviridae	pariente	1	1	2415	67.684	48

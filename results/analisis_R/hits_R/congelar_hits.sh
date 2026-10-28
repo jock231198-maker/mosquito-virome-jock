@@ -5,7 +5,7 @@
 #
 # Se corre EN LA FARM, desde el clon del repo:
 #   bash results/analisis_R/congelar_hits.sh          # datos_hits_v1
-#   bash results/analisis_R/congelar_hits.sh v2
+#   bash results/analisis_R/congelar_hits.sh v2     # v2+ incluye blastn.tsv y annot_por_votu.tsv
 # Despues: git add/commit/push, y en el Mac: git pull && Rscript hits_tablas.R
 #
 # Origen: $RESULTS_DIR/union_annot/ (generado a partir de
@@ -29,6 +29,11 @@ DEST="$AQUI/datos_hits_$V"
 # --- comprobaciones: que sea la version de las tablas que esperamos -------------
 F=(hits_por_contig.tsv hits_por_muestra.tsv candidatos_por_virus.tsv)
 for f in "${F[@]}"; do [[ -s "$O/$f" ]] || { echo "ERROR: falta $O/$f"; exit 1; }; done
+# Resultados crudos (desde v2): blastn de los 6,004 contigs y la anotacion por contig
+FA=(blastn.tsv annot_por_votu.tsv)
+for f in "${FA[@]}"; do [[ -s "$A/$f" ]] || { echo "ERROR: falta $A/$f"; exit 1; }; done
+nc=$(head -1 "$A/blastn.tsv" | awk -F'\t' '{print NF}')
+[[ $nc -eq 11 ]] || { echo "ERROR: blastn.tsv tiene $nc columnas, se esperaban 11"; exit 1; }
 
 cab=$(head -1 "$O/hits_por_contig.tsv")
 for c in muestra contig nombre nivel familia realm grupo en_genomad bn_pident dm_pident; do
@@ -47,7 +52,7 @@ n_mu=$(tail -n +2 "$O/hits_por_contig.tsv" | cut -f1 | sort -u | wc -l)
 # --- copia + MANIFEST ------------------------------------------------------------
 TMPD="$DEST.tmp.$$"; trap 'rm -rf "$TMPD"' EXIT
 mkdir -p "$TMPD"
-cp "${F[@]/#/$O/}" "$TMPD/"
+cp "${F[@]/#/$O/}" "${FA[@]/#/$A/}" "$TMPD/"
 {
   echo "# datos_hits_$V — congelado $(date '+%F %T') por ${USER:-$(id -un)} en $(hostname)"
   echo "# origen: $O"
@@ -55,7 +60,7 @@ cp "${F[@]/#/$O/}" "$TMPD/"
   echo "# geNomad: $GS ($n_gen virales)"
   echo "# commit del repo: $(git -C "$RAIZ" rev-parse --short HEAD)"
   echo -e "# md5\tlineas\tfichero"
-  for f in "${F[@]}"; do echo -e "$(md5sum "$TMPD/$f" | cut -d' ' -f1)\t$(wc -l < "$TMPD/$f")\t$f"; done
+  for f in "${F[@]}" "${FA[@]}"; do echo -e "$(md5sum "$TMPD/$f" | cut -d' ' -f1)\t$(wc -l < "$TMPD/$f")\t$f"; done
 } > "$TMPD/MANIFEST.txt"
 mv "$TMPD" "$DEST"   # solo aparece datos_hits_vN si todo salio bien
 

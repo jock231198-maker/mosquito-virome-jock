@@ -1,0 +1,11 @@
+# datos_hits_v3 — congelado 2026-10-25 05:13:33 por jm79 en farm22-head1
+# origen: /lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/union_annot
+# anotacion: /lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/votu_annot/all_final_viraldb20260925/annot_por_votu.tsv (6004 contigs)
+# geNomad: /lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/genomad_all/all_final/all_final_summary/all_final_virus_summary.tsv (1144 virales)
+# commit del repo: 96a6398
+# md5	lineas	fichero
+89b0e9b0f42f527fbc00599b69247352	3108	hits_por_contig.tsv
+eaf1f27ba9e7a6f079cd7f8901e638e8	189	hits_por_muestra.tsv
+15ef12bc10516b3f92699ec059ad774a	33	candidatos_por_virus.tsv
+07ffd13ffd4ca37d76ca29619f0ee2d6	24409	blastn.tsv
+46fa02154c3e933d82adc5ff5185c81e	6005	annot_por_votu.tsv
