@@ -1,0 +1,21 @@
+virus	species	family	status	n_samples	n_contigs	n_genomad	max_pident	median_pident	max_qcovs	max_contig_length	best_accession	note
+Iflavirus sp.	Iflavirus sp.	Iflaviridae	Unconfirmed	19	113	0	99.66	79.07	72	2462	PZ206431	Ubiquitous, no geNomad support: rRNA pattern (cf. Hanko)
+Verdadero virus	Verdadero virus	Partitiviridae	Confirmed	19	38	38	99.93	99.8	100	1901	PV646269	
+Chaq-like virus	Chaq-like virus	Partitiviridae	Confirmed	19	19	19	99.72	99.65	100	2003	MT742176	
+Aedes anphevirus	Aedes anphevirus	Xinmoviridae	Confirmed	14	22	19	99.9	99.45	100	15488	MW435012	
+Hanko iflavirus 1-like	Hanko iflavirus 1	Iflaviridae	Host-derived	11	16	5	96.68	96.03	45	1392	ON949933	Host-derived: genome screen / rRNA
+Bafoussam mosquito rhabdovirus-like	Bafoussam mosquito rhabdovirus	Rhabdoviridae	Confirmed	6	8	8	71.81	66.9	64	4012	PP764659	
+Formosus virus-like	Formosus virus	Rhabdoviridae	Confirmed	6	7	4	74.22	70.86	53	2288	PV730233	
+Aedes aegypti totivirus	Aedes aegypti totivirus	Inseviridae	Confirmed	5	11	11	98.61	98.21	100	4797	MW434942	
+Bole tick virus 4-like	Bole tick virus 4	Pestiviridae	Unconfirmed	5	6	0	80.27	79.06	42	1336	PX481154	
+Mos8Chu0 chuvirus-like	Mos8Chu0 chuvirus	Chuviridae	Confirmed	5	6	4	77.03	75.13	63	1694	KX924631	
+Liao ning virus-like	Liao ning virus	Sedoreoviridae	Confirmed	4	4	4	81.17	81.17	73	1516	LC865711	
+Culex mosquito virus 1-like	Oropouche virus	Peribunyaviridae	Unconfirmed	3	6	0	98.84	98.28	36	1429	MT338561	Short nt hit; protein closest to Culex mosquito virus 1
+Cell fusing agent virus	Cell fusing agent virus	Flaviviridae	Confirmed	2	4	4	99	98.3	100	10680	LR694075	
+Tick-borne encephalitis virus-like	Tick-borne encephalitis virus	Flaviviridae	Host-derived	2	3	1	76.4	76.4	33	1065	PP473573	EVE in AaegL5 (genome screen)
+Panayarvi Aedes partiti-like virus 2 relative	Panayarvi Aedes partiti-like virus 2	Partitiviridae	Host-derived	2	2	1	78.34	78.18	93	1081	PX633674	EVE in AaegL5 (genome screen)
+Culex-associated Tombus-like virus relative	Culex-associated Tombus-like virus	Tombusviridae	Confirmed	2	2	2	67.83	67.76	48	2456	NC_040575	
+Phasivirus phasiense	Phasivirus phasiense	Phenuiviridae	Confirmed	1	4	4	97.93	97.55	100	2335	MH237598	
+San Gabriel mononegavirus	San Gabriel mononegavirus	Rhabdoviridae	Confirmed	1	3	3	97.13	96.28	100	2713	PQ295854	
+Hameenlinna phasivirus-like	Hameenlinna phasivirus	Phenuiviridae	Unconfirmed	1	1	0	91.09	91.09	35	1037	ON955140	No protein hit in any database
+Plateau tick ixovirus-like	Plateau tick ixovirus	Phenuiviridae	Unconfirmed	1	1	0	82.26	82.26	31	1004	PV690417	
