@@ -21,7 +21,8 @@
 #     veredicto_contigs.tsv árbitro de nr, un veredicto por contig (arbiter_nr.py)
 #     annot_viraldb.tsv     anotación con la base viral (blastn + DIAMOND, familia/realm)
 #     + MANIFEST de cada corrida, resumen_veredicto.txt y cruce_votus/ (si existe)
-#   A nr y a la base viral se les añade grupo/realm/familia/genero por hit (diamond_taxa.py).
+#   A nr y a la base viral se les añade grupo/realm/familia/genero por hit (diamond_taxa.py,
+#   autocontenido) y se verifica que esos grupos reproducen el veredicto del árbitro.
 # ---------------------------------------------------------------------------
 set -euo pipefail
 MODO="${1:-check}"
@@ -63,7 +64,7 @@ mal() { printf '  [MAL]   %s\n' "$*"; problemas=$((problemas + 1)); }
 TMPC="$(mktemp -d)"; trap 'rm -rf "$TMPC"' EXIT
 
 echo "== fuentes"
-for f in "$VER" "$ANN" "$NRD/MANIFEST.txt" "$TAXDUMP/nodes.dmp" "$SCRIPTS_DIR/viral_db_tools.py"; do
+for f in "$VER" "$ANN" "$NRD/MANIFEST.txt" "$TAXDUMP/nodes.dmp" "$TAXDUMP/names.dmp"; do
   [[ -s "$f" ]] && ok "$f" || mal "falta o vacío: $f"
 done
 for fila in "${HITS[@]}"; do read -r _ src _ _ _ <<< "$fila"; [[ -s "$src" ]] && ok "$src" || mal "falta: $src"; done
@@ -121,10 +122,10 @@ trap 'rm -rf "$TMPC" "$TMPD"' EXIT
 
 PY="${PYTHON:-python3}"
 echo "== taxonomía por hit ($TAXDUMP)"
-echo " viraldb"; "$PY" "$AQUI/diamond_taxa.py" --scripts-dir "$SCRIPTS_DIR" --taxdump "$TAXDUMP" \
+echo " viraldb"; "$PY" "$AQUI/diamond_taxa.py" --taxdump "$TAXDUMP" \
   --cols "$COLS_VIRALDB" --in "$R/diamond_TODOS_vcustom.tsv" --out "$TMPD/hits_viraldb.tsv.gz"
-echo " nr";      "$PY" "$AQUI/diamond_taxa.py" --scripts-dir "$SCRIPTS_DIR" --taxdump "$TAXDUMP" \
-  --cols "$COLS_NR" --in "$NRD/diamond.tsv" --out "$TMPD/hits_nr.tsv.gz"
+echo " nr";      "$PY" "$AQUI/diamond_taxa.py" --taxdump "$TAXDUMP" \
+  --cols "$COLS_NR" --in "$NRD/diamond.tsv" --out "$TMPD/hits_nr.tsv.gz" --verificar "$VER"
 echo " rvdb (sin taxid: solo cabecera)"
 { echo "$COLS_RVDB" | tr ' ' '\t'; cat "$R/diamond_TODOS_rvdb.tsv"; } | gzip -c > "$TMPD/hits_rvdb.tsv.gz"
 
