@@ -1,0 +1,25 @@
+virus	type	identity_class	family	realm	best_hit_names	pools	contigs	aa_id_median	aa_id_max	qcov_median	longest_contig_bp	total_bp	pool_list
+Verdadero virus	Virus	Known	Partitiviridae	Riboviria	Verdadero virus	19	38	99.8	100	92.4	1901	63016	M1_S1, M2_S2, M7_S15, M9_S16, M11_S3, M20_S25, M21_S29, M22_S30, M35_S31, M48_S5, M55_S6, M56_S7, M57_S8, M58_S9, M59_S10, M60_S11, M62_S18, M71_S19, M72_S20
+Chaq-like virus	Virus	Known	Partitiviridae	Riboviria	Chaq-like virus	19	19	100	100	61.3	2003	27667	M2_S2, M7_S15, M9_S16, M11_S3, M20_S25, M21_S29, M22_S30, M35_S31, M36_S17, M48_S5, M55_S6, M56_S7, M57_S8, M58_S9, M59_S10, M60_S11, M62_S18, M71_S19, M72_S20
+Guadeloupe mosquito virus	Virus	Known	Unassigned	Unassigned	Guadeloupe mosquito virus	15	30	99.7	100	57	3448	69432	M2_S2, M7_S15, M9_S16, M11_S3, M20_S25, M21_S29, M35_S31, M48_S5, M55_S6, M56_S7, M60_S11, M71_S19, M72_S20, M74_S21, M79_S28
+Aedes anphevirus	Virus	Known	Xinmoviridae	Riboviria	Aedes aegypti anphevirus; Aedes anphevirus	14	22	99.8	100	47.3	15488	216324	M1_S1, M2_S2, M7_S15, M11_S3, M20_S25, M21_S29, M22_S30, M48_S5, M55_S6, M59_S10, M60_S11, M62_S18, M72_S20, M74_S21
+Kamiti River virus-like	EVE candidate (pending AaegL5 screen)	Divergent	Flaviviridae	Riboviria	Kamiti River virus	6	6	50.3	50.7	29.1	2766	11648	M1_S1, M2_S2, M9_S16, M35_S31, M55_S6, M72_S20
+Aedes aegypti totivirus	Virus	Known	Inseviridae	Riboviria	Aedes aegypti totivirus	5	11	99	99.3	75	4797	25328	M11_S3, M22_S30, M35_S31, M36_S17, M48_S5
+Mos8Chu0 chuvirus-like	EVE candidate (pending AaegL5 screen)	Divergent	Chuviridae	Riboviria	Mos8Chu0 chuvirus	5	6	62.9	83.5	45.4	1694	8047	M1_S1, M2_S2, M9_S16, M56_S7, M57_S8
+Hattula totivirus 3-like	EVE candidate (pending AaegL5 screen)	Divergent	Orthototiviridae	Riboviria	Hattula totivirus 3	4	4	45.2	47.2	88	1907	6160	M2_S2, M9_S16, M57_S8, M58_S9
+Liao ning virus-like	EVE candidate (pending AaegL5 screen)	Related	Sedoreoviridae	Riboviria	Liao ning virus	4	4	84.5	84.5	41.6	1516	5118	M1_S1, M2_S2, M57_S8, M58_S9
+Aedes flavivirus-like	EVE candidate (pending AaegL5 screen)	Divergent	Flaviviridae	Riboviria	Aedes flavivirus	3	3	38.5	38.5	45.2	2039	4371	M56_S7, M58_S9, M71_S19
+Rhabdoviridae sp.	EVE candidate (pending AaegL5 screen)	Divergent	Rhabdoviridae	Riboviria	Rhabdoviridae sp.	3	3	36.2	36.2	61.1	1441	3917	M58_S9, M71_S19, M72_S20
+Novel nudivirus	Virus	Divergent	Nudiviridae	Duplodnaviria	Agrotis segetum granulovirus; Esparto virus; Kallithea virus; Oryctes rhinoceros nudivirus; Tomelloso virus; XiangYun nudi-like virus	2	23	40.8	62.5	30.8	15437	136732	M7_S15, M71_S19
+Usinis virus-like	Virus	Divergent	Unassigned	Riboviria	Usinis virus	2	7	49.2	68.7	92.6	2436	12840	M20_S25, M79_S28
+Aedes binegev-like virus 1	Virus	Known	Unassigned	Riboviria	Aedes binegev-like virus 1	2	4	99.4	99.8	63.5	2344	6411	M11_S3, M48_S5
+Cell fusing agent virus	Virus	Known	Flaviviridae	Riboviria	Cell fusing agent virus	2	4	98.9	99.4	96	10680	25257	M48_S5, M72_S20
+Netjeret virus	Virus	Known	Unassigned	Riboviria	Netjeret virus	2	4	99	99.7	79.2	1859	6418	M20_S25, M21_S29
+Culex mosquito virus 1-like	Virus	Divergent	Nodaviridae	Riboviria	Culex mosquito virus 1	2	2	45.3	45.3	55.5	2161	4054	M20_S25, M79_S28
+Culex-associated Tombus-like virus	Virus	Divergent	Tombusviridae	Riboviria	Culex-associated Tombus-like virus	2	2	57	57.1	63.7	2456	4871	M20_S25, M79_S28
+Phasivirus phasiense	Virus	Known	Phenuiviridae	Riboviria	Phasivirus phasiense	1	4	99	100	96.2	2335	6286	M56_S7
+San Gabriel mononegavirus	Virus	Known	Rhabdoviridae	Riboviria	San Gabriel mononegavirus	1	3	97.8	98.3	54.8	2713	6523	M21_S29
+Aedes aegypti virga-like virus	Virus	Known	Unassigned	Riboviria	Aedes aegypti virga-like virus	1	1	97.1	97.1	42.9	4338	4338	M11_S3
+Andhaxevirus faecihabitans-like	Bacteriophage	Divergent	Fiersviridae	Riboviria	Andhaxevirus faecihabitans	1	1	23.2	23.2	58	1733	1733	M48_S5
+Enontekio totivirus 5-like	EVE candidate (pending AaegL5 screen)	Divergent	Orthototiviridae	Riboviria	Enontekio totivirus 5	1	1	45.5	45.5	97.7	1394	1394	M56_S7
+ssRNA phage SRR7473382_2-like	Bacteriophage	Divergent	Fiersviridae	Riboviria	ssRNA phage SRR7473382_2	1	1	43.1	43.1	75.9	1806	1806	M48_S5

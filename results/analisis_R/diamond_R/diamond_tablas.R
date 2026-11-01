@@ -64,7 +64,9 @@ guardar <- function(p, nombre, ancho = 180, alto = 100) {
          device = if (capabilities("cairo")) cairo_pdf else "pdf")
   message("  ", png)
 }
-pie <- function(...) str_wrap(paste0(..., " Data: ", version_txt, "."), width = 150)
+# ancho del pie en caracteres: proporcional al ancho de la figura (las fuentes de
+# Linux/WSL son más anchas que las de Mac; 0.62 car/mm deja margen)
+pie <- function(..., ancho = 180) str_wrap(paste0(..., " Data: ", version_txt, "."), width = floor(ancho * 0.62))
 
 # =============================================================================
 # TABLAS
@@ -149,17 +151,17 @@ readme <- tibble(item = c(
   "Query", "Databases", "Arbiter", "Verdict classes", "Identity classes", "EVE candidate",
   "Bacteriophage", "Labels", "Corrections", "Counting", "Data version"),
   definition = c(
-  paste0("All three DIAMOND blastx runs used the same ", fmt(N), " contigs: the dereplicated union of 5 assemblers (rnaviralSPAdes, rnaSPAdes, metaviralSPAdes, MEGAHIT, Trinity), >= 1,000 bp, 22 pools."),
-  "Own viral DB (viral only, with taxonomy), RVDB v32.0 (viral only, no taxids) and nr (viral + cellular). See T1 for parameters; e-value cut-offs differ (1e-3 viral DBs, 1e-5 nr).",
-  "arbiter_nr.py on the nr hits: viral if the best viral bitscore is >= 1.1 x the best cellular bitscore; ambiguous if within 10%; otherwise cellular (group from NCBI taxonomy). Hits without taxid are ignored.",
-  "Viral, Arthropod, Other cellular (bacteria, other metazoa, fungi, plants, other eukaryotes, archaea), Ambiguous, No hit in nr.",
-  paste0("Median aa identity of the best viral nr hit per virus: Known >= ", UMBRAL_CONOCIDO, "%, Related ", UMBRAL_PARIENTE, "-", UMBRAL_CONOCIDO, "%, Divergent < ", UMBRAL_PARIENTE, "%."),
-  paste0("Virus in a family rich in endogenous viral elements of Ae. aegypti (", paste(FAMILIAS_EVE, collapse = ", "), ") with median aa identity < ", UMBRAL_EVE, "%. Not counted as a virus until screened against AaegL5."),
-  "Best viral hit is a phage: viral, but a virus of bacteria, not of the mosquito.",
-  "Species name when Known; 'X-like' otherwise. Hits that are the same virus are merged (AGRUPAR in R/diamond.R), e.g. the novel nudivirus.",
-  "Manual verdict corrections listed in T7.",
-  "Contigs are not viruses: one virus appears in several pools and assemblers. Use 'pools' for prevalence.",
-  version_txt))
+    paste0("All three DIAMOND blastx runs used the same ", fmt(N), " contigs: the dereplicated union of 5 assemblers (rnaviralSPAdes, rnaSPAdes, metaviralSPAdes, MEGAHIT, Trinity), >= 1,000 bp, 22 pools."),
+    "Own viral DB (viral only, with taxonomy), RVDB v32.0 (viral only, no taxids) and nr (viral + cellular). See T1 for parameters; e-value cut-offs differ (1e-3 viral DBs, 1e-5 nr).",
+    "arbiter_nr.py on the nr hits: viral if the best viral bitscore is >= 1.1 x the best cellular bitscore; ambiguous if within 10%; otherwise cellular (group from NCBI taxonomy). Hits without taxid are ignored.",
+    "Viral, Arthropod, Other cellular (bacteria, other metazoa, fungi, plants, other eukaryotes, archaea), Ambiguous, No hit in nr.",
+    paste0("Median aa identity of the best viral nr hit per virus: Known >= ", UMBRAL_CONOCIDO, "%, Related ", UMBRAL_PARIENTE, "-", UMBRAL_CONOCIDO, "%, Divergent < ", UMBRAL_PARIENTE, "%."),
+    paste0("Virus in a family rich in endogenous viral elements of Ae. aegypti (", paste(FAMILIAS_EVE, collapse = ", "), ") with median aa identity < ", UMBRAL_EVE, "%. Not counted as a virus until screened against AaegL5."),
+    "Best viral hit is a phage: viral, but a virus of bacteria, not of the mosquito.",
+    "Species name when Known; 'X-like' otherwise. Hits that are the same virus are merged (AGRUPAR in R/diamond.R), e.g. the novel nudivirus.",
+    "Manual verdict corrections listed in T7.",
+    "Contigs are not viruses: one virus appears in several pools and assemblers. Use 'pools' for prevalence.",
+    version_txt))
 if (requireNamespace("writexl", quietly = TRUE)) {
   writexl::write_xlsx(c(list(README = readme), tablas), file.path("tablas", "diamond_tables.xlsx"))
 } else message("  (sin writexl: solo TSV)")
@@ -265,13 +267,14 @@ p4 <- ggplot(d4, aes(muestra, fila, fill = pid)) +
                        labels = \(x) paste0(x, "%"), name = "best aa identity (nr)") +
   scale_x_discrete(drop = FALSE, position = "top") +
   labs(title = "Viruses found by DIAMOND against nr, per pool",
-       subtitle = paste0(fmt(nrow(cat4)), " viruses from ", fmt(sum(cat4$contigs)),
+       subtitle = paste0(sum(cat4$tipo == "Virus"), " viruses and ", sum(cat4$tipo != "Virus"),
+                         " EVE candidates from ", fmt(sum(cat4$contigs)),
                          " viral contigs; number in brackets = pools"),
        x = NULL, y = NULL,
        caption = pie("Known: median aa identity >= ", UMBRAL_CONOCIDO, "%; Related: ", UMBRAL_PARIENTE, "-",
                      UMBRAL_CONOCIDO, "%; Divergent: < ", UMBRAL_PARIENTE, "%. EVE candidate: family rich in ",
                      "endogenous viral elements of Ae. aegypti and < ", UMBRAL_EVE, "% aa; pending the AaegL5 screen. ",
-                     if (n_fagos) paste0(n_fagos, " bacteriophage(s) not shown. ") else "")) +
+                     if (n_fagos) paste0(n_fagos, " bacteriophage(s) not shown. ") else "", ancho = 190)) +
   theme(panel.grid = element_blank(),
         axis.text.x.top = element_text(angle = 90, vjust = 0.5, hjust = 0, size = 7),
         strip.placement = "outside", strip.text.y.left = element_text(angle = 0, hjust = 1, vjust = 1),
