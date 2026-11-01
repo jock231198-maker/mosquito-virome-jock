@@ -1,0 +1,19 @@
+fecha: 2026-10-08T09:58:17+01:00
+query: /lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/contig_annot/contigs_union_MERIDA.fasta
+base: /lustre/scratch126/tol/teams/lawniczak/users/jr46/databases/diamond_db/nr_tax.dmnd
+base_ls: -rw-rw-r-- 1 jr46 team222 373804710450 2026-10-06 17:25 /lustre/scratch126/tol/teams/lawniczak/users/jr46/databases/diamond_db/nr_tax.dmnd
+diamond: diamond version 2.2.6
+params: blastx --sensitive -e 1e-5 -k 25  -f 6 qseqid sseqid pident length qlen evalue bitscore staxids sscinames qcovhsp stitle
+taxdump: /lustre/scratch126/tol/teams/lawniczak/users/jm79/refs/viral_custom/20260925/taxonomy
+annot: /lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/contig_annot/contigs_union_MERIDA_viraldb20260925/annot_por_votu.tsv
+--- dbinfo
+diamond v2.2.6.186 (C) Max Planck Society for the Advancement of Science, Benjamin J. Buchfink, University of Tuebingen
+Documentation, support and updates available at http://www.diamondsearch.org
+Please cite: http://dx.doi.org/10.1038/s41592-021-01101-x Nature Methods (2021)
+
+          Database type  Diamond database
+Database format version  3
+          Diamond build  185
+              Sequences  707028945
+                Letters  272881947790
+  hits sin taxid: 8984 de 125489 (7.2%)

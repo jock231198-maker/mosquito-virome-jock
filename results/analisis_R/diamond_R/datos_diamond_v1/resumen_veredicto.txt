@@ -1,0 +1,59 @@
+vOTUs: 6004 | con hit en nr: 5203
+(viral si su bitscore >= 1.1 x el mejor celular; 'ambiguo' si estan a menos de eso)
+
+## veredicto nr
+  3504  celular_Artropodo
+   801  sin_hit_nr
+   628  celular_Bacteria
+   501  celular_Metazoo_otro
+   204  viral
+   171  celular_Hongo
+   163  celular_Planta
+    19  celular_Eucariota_otro
+    11  ambiguo
+     2  celular_Arquea
+
+## categoria (base viral) x veredicto (nr)
+                       celular_Artrop     sin_hit_nr celular_Bacter celular_Metazo          viral  celular_Hongo celular_Planta celular_Eucari        ambiguo celular_Arquea
+conocido_nt                         0              0              3              0            135              0              0              0              2              0
+pariente_nt                       641             36            605            447             45            165            161             17              5              2
+divergente_solo_aa                777              1              4             30             24              2              0              2              3              0
+sin_hit_viral                    2086            764             16             24              0              4              2              0              1              0
+
+## familia (base viral) x veredicto (nr), familias con >=3 vOTUs
+(sin familia)            celular_Artropodo=2344, sin_hit_nr=772, celular_Bacteria=139, celular_Metazoo_otro=131, viral=50, celular_Planta=33, celular_Hongo=17, ambiguo=4, celular_Arquea=1
+Nimaviridae              celular_Artropodo=327, celular_Metazoo_otro=238, celular_Hongo=119, celular_Bacteria=95, celular_Planta=74, celular_Eucariota_otro=15, ambiguo=2, sin_hit_nr=2
+Iflaviridae              celular_Bacteria=200, celular_Metazoo_otro=52, celular_Planta=35, celular_Artropodo=30, celular_Hongo=7, sin_hit_nr=2
+Mimiviridae              celular_Artropodo=196, celular_Planta=2, celular_Metazoo_otro=1
+Steitzviridae            celular_Bacteria=133, celular_Planta=13, celular_Metazoo_otro=9, celular_Artropodo=2
+Phycodnaviridae          celular_Artropodo=101
+Partitiviridae           viral=57, celular_Artropodo=24, celular_Bacteria=6, celular_Metazoo_otro=4, sin_hit_nr=2, celular_Hongo=2
+Poxviridae               celular_Artropodo=80, celular_Metazoo_otro=14
+Peribunyaviridae         celular_Artropodo=46, celular_Metazoo_otro=13, celular_Bacteria=2, celular_Hongo=2, celular_Planta=2, sin_hit_nr=1, viral=1, ambiguo=1
+Phenuiviridae            celular_Artropodo=22, celular_Bacteria=13, celular_Metazoo_otro=12, sin_hit_nr=5, viral=4, celular_Hongo=4, celular_Eucariota_otro=2, celular_Planta=1
+Flaviviridae             celular_Artropodo=29, viral=11, celular_Metazoo_otro=9, sin_hit_nr=7, celular_Hongo=2
+Nudiviridae              celular_Artropodo=33, viral=17, sin_hit_nr=3, ambiguo=1, celular_Metazoo_otro=1
+Polydnaviriformidae      celular_Artropodo=43
+Iridoviridae             celular_Artropodo=29, celular_Bacteria=4, celular_Eucariota_otro=2
+Baculoviridae            celular_Artropodo=27, celular_Bacteria=6, viral=1, celular_Hongo=1
+Schizomimiviridae        celular_Artropodo=27, sin_hit_nr=1, celular_Metazoo_otro=1
+Retroviridae             celular_Artropodo=27
+Chuviridae               celular_Hongo=16, viral=6, celular_Arquea=1, celular_Bacteria=1, celular_Artropodo=1
+Rhabdoviridae            celular_Artropodo=12, viral=9, ambiguo=2
+Xinmoviridae             viral=22
+Orpheoviridae            celular_Artropodo=20
+Marseilleviridae         celular_Artropodo=9, celular_Bacteria=3, celular_Metazoo_otro=2, celular_Planta=2, ambiguo=1
+Solspiviridae            celular_Bacteria=9, celular_Metazoo_otro=7
+Inseviridae              viral=11, sin_hit_nr=4
+Orthomyxoviridae         celular_Artropodo=11, celular_Metazoo_otro=2, sin_hit_nr=1
+Sedoreoviridae           celular_Artropodo=8, viral=4, celular_Hongo=1
+Ascoviridae              celular_Artropodo=12
+Orthoherpesviridae       celular_Artropodo=10
+Kyanoviridae             celular_Artropodo=9
+Pestiviridae             celular_Bacteria=8
+Nairoviridae             celular_Bacteria=5, celular_Metazoo_otro=2, celular_Artropodo=1
+Orthototiviridae         viral=5, celular_Artropodo=1
+Pithoviridae             celular_Artropodo=5
+Spinareoviridae          celular_Artropodo=2, celular_Metazoo_otro=2
+Lispiviridae             celular_Artropodo=4
+Autosignataviridae       celular_Bacteria=4

@@ -1,0 +1,2 @@
+/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/genomad_all/all_final/all_final_score_calibration/all_final_calibrated_aggregated_classification.tsv
+/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/genomad_all/all_final/all_final_aggregated_classification/all_final_aggregated_classification.tsv

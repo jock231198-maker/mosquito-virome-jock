@@ -1,0 +1,3 @@
+fecha: 2026-10-07T20:20:56+01:00
+query: /lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/contig_annot/contigs_union_MERIDA.fasta
+base: /lustre/scratch126/tol/teams/lawniczak/users/jm79/refs/viral_custom/20260925

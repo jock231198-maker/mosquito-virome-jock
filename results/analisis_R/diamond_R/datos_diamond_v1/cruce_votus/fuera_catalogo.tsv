@@ -1,0 +1,66 @@
+Peribunyaviridae	sin_hit_nr	M11_S3	1355			
+Nimaviridae	ambiguo	M1_S1	1309	45.3	Helicoverpa armigera	XP_021199986.2 uncharacterized protein LOC110383517 [He
+Flaviviridae	sin_hit_nr	M1_S1	1238			
+Rhabdoviridae	viral	M1_S1	1217	45.3	N/A	XP_029721530.1 uncharacterized protein LOC115262783 [Ae
+Nimaviridae	sin_hit_nr	M1_S1	1426			
+Flaviviridae	sin_hit_nr	M1_S1	1394			
+	viral	M20_S25	2436	49.2	Usinis virus	QRW42646.1 MAG: polymerase PB2 [Usinis virus]
+	viral	M20_S25	2219	56.4	Usinis virus	QRW42633.1 MAG: polymerase PA [Usinis virus]
+Phenuiviridae	sin_hit_nr	M20_S25	1518			
+	viral	M20_S25	1277	33.3	Usinis virus	QRW42707.1 MAG: hypothetical protein 2, partial [Usinis
+Nimaviridae	ambiguo	M20_S25	1625	32.5	Euphydryas editha	CAH2088764.1 unnamed protein product [Euphydryas editha
+Phenuiviridae	sin_hit_nr	M22_S30	1056			
+Iflaviridae	sin_hit_nr	M22_S30	1725			
+Phenuiviridae	sin_hit_nr	M22_S30	1387			
+Schizomimiviridae	sin_hit_nr	M35_S31	1229			
+Orthomyxoviridae	sin_hit_nr	M48_S5	1202			
+Flaviviridae	sin_hit_nr	M55_S6	1050			
+Orthototiviridae	viral	M56_S7	1394	45.5	Enontekio totivirus 5	UUV42207.1 MAG: putative capsid protein [Enontekio toti
+Flaviviridae	sin_hit_nr	M56_S7	1079			
+Phenuiviridae	sin_hit_nr	M56_S7	1005			
+Orthototiviridae	viral	M57_S8	1907	45.0	Hattula totivirus 3	UUV42260.1 MAG: putative capsid protein [Hattula totivi
+Nimaviridae	sin_hit_nr	M57_S8	1441			
+Orthototiviridae	viral	M58_S9	1864	45.1	Hattula totivirus 3	UUV42260.1 MAG: putative capsid protein [Hattula totivi
+Flaviviridae	sin_hit_nr	M58_S9	1507			
+	ambiguo	M60_S11	1455	45.8	Bacteroides ovatus ATCC 8483	EDO13931.1 hypothetical protein BACOVA_00321 [Bacteroid
+Nudiviridae	viral	M71_S19	13560	30.2	XiangYun nudi-like virus	UUG74139.1 MAG: DNA helicase [XiangYun nudi-like virus]
+	viral	M71_S19	8884	35.3	Kallithea virus	YP_009345924.1 ACH96131.1 dnapol B-like protein [Kallit
+Nudiviridae	ambiguo	M71_S19	6420	40.4	Oryctes rhinoceros nudivirus	WAQ80086.1 38K protein [Oryctes rhinoceros nudivirus]
+Nudiviridae	viral	M71_S19	6038	42.7	Tomelloso virus	YP_009553425.1 pif-1 [Tomelloso virus]
+Nudiviridae	viral	M71_S19	3853	54.1	Oryctes rhinoceros nudivirus	WAQ80024.1 pif-2 [Oryctes rhinoceros nudivirus]
+Nudiviridae	viral	M71_S19	2950	42.9	Tomelloso virus	YP_009553389.1 OrNV p47-like [Tomelloso virus]
+Nudiviridae	viral	M71_S19	2865	38.3	Oryctes rhinoceros nudivirus	YP_002321386.1 dnaint/rec [Oryctes rhinoceros nudivirus
+Nudiviridae	sin_hit_nr	M71_S19	2390			
+Nudiviridae	viral	M71_S19	1830	38.5	Oryctes rhinoceros nudivirus	WDA64460.1 GrBNV_gp13-like protein [Oryctes rhinoceros 
+	sin_hit_nr	M71_S19	1752			
+Flaviviridae	sin_hit_nr	M71_S19	1403			
+Nudiviridae	viral	M71_S19	1143	40.9	Tomelloso virus	YP_009553414.1 GrBNV gp19-like protein [Tomelloso virus
+Nudiviridae	viral	M71_S19	9502	44.6	Kallithea virus	YP_009345992.1 ACH96194.1 lef-8-like protein [Kallithea
+	sin_hit_nr	M71_S19	3967			
+Baculoviridae	viral	M71_S19	3679	21.7	Agrotis segetum granulovirus	YP_009513034.1 hypothetical protein AsGV004 [Agrotis se
+	sin_hit_nr	M71_S19	2771			
+Nudiviridae	viral	M71_S19	15437	33.2	Kallithea virus	YP_009345947.1 ACH96238.1 dnahel 2-like protein [Kallit
+Mesyanzhinovviridae	viral	M71_S19	9911	34.2	Oryctes rhinoceros nudivirus	YP_002321368.1 patatin-like phospholipase-like protein 
+	sin_hit_nr	M71_S19	3800			
+Nudiviridae	viral	M71_S19	1951	43.3	Tomelloso virus	YP_009553453.1 odv-e56 [Tomelloso virus]
+Nudiviridae	viral	M71_S19	8723	46.8	Esparto virus	YP_009551755.1 vlf-1 [Esparto virus]
+Nudiviridae	viral	M71_S19	1301	31.8	Tomelloso virus	YP_009553411.1 GrBNV gp23-like protein [Tomelloso virus
+	ambiguo	M71_S19	13529	40.4	Oryctes rhinoceros nudivirus	WAQ80086.1 38K protein [Oryctes rhinoceros nudivirus]
+	viral	M71_S19	7046	62.5	Tomelloso virus	YP_009553427.1 Ac68-like protein [Tomelloso virus]
+	sin_hit_nr	M71_S19	2815			
+	viral	M71_S19	6901	62.5	Tomelloso virus	YP_009553427.1 Ac68-like protein [Tomelloso virus]
+	viral	M71_S19	8099	62.5	Tomelloso virus	YP_009553427.1 Ac68-like protein [Tomelloso virus]
+	sin_hit_nr	M71_S19	2960			
+	sin_hit_nr	M71_S19	6826			
+Nudiviridae	sin_hit_nr	M71_S19	3562			
+Nudiviridae	sin_hit_nr	M71_S19	3612			
+Nudiviridae	viral	M71_S19	7577	40.6	Oryctes rhinoceros nudivirus	QKE59588.1 p74 protein [Oryctes rhinoceros nudivirus]
+Nudiviridae	viral	M71_S19	10852	40.8	Oryctes rhinoceros nudivirus	YP_002321429.1 GrBNV_gp35-like protein [Oryctes rhinoce
+Nudiviridae	viral	M71_S19	2425	28.4	Oryctes rhinoceros nudivirus	DBA13059.1 TPA: ODV-E66 protein [Oryctes rhinoceros nud
+Peribunyaviridae	ambiguo	M74_S21	4190	100	Klebsiella pneumoniae	RFC15271.1 hypothetical protein DDJ63_30005, partial [K
+Mesyanzhinovviridae	sin_hit_nr	M7_S15	1537			
+Nudiviridae	viral	M7_S15	1195	43.4	Tomelloso virus	YP_009553453.1 odv-e56 [Tomelloso virus]
+Nudiviridae	viral	M7_S15	1010	39.9	Kallithea virus	YP_009345943.1 ACH96243.1 Ac92-like protein [Kallithea 
+Marseilleviridae	ambiguo	M7_S15	3999	45.8	Bacteroides ovatus ATCC 8483	EDO13931.1 hypothetical protein BACOVA_00321 [Bacteroid
+Flaviviridae	sin_hit_nr	M9_S16	1063			
+Rhabdoviridae	ambiguo	M9_S16	1012	95.7	Aedes aegypti	XP_021698129.1 uncharacterized protein LOC110676031 [Ae

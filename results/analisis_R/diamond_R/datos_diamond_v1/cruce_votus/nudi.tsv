@@ -1,0 +1,61 @@
+M71_S19__metaviral__NODE_1_length_15437_cov_5.739844_cutoff_5_type_linears	15437	viral	33.2	Kallithea virus
+M71_S19__rnaviral__NODE_2_length_13560_cov_22.951891	13560	viral	30.2	XiangYun nudi-like virus
+M71_S19__megahit__k119_1543	13529	ambiguo	40.4	Oryctes rhinoceros nudivirus
+M71_S19__trinity__TRINITY_DN188_c0_g6_i1	10852	viral	40.8	Oryctes rhinoceros nudivirus
+M71_S19__megahit__k119_1985	9911	viral	34.2	Oryctes rhinoceros nudivirus
+M71_S19__rna__NODE_2_length_9502_cov_19.337459_g1_i0	9502	viral	44.6	Kallithea virus
+M71_S19__rnaviral__NODE_5_length_8884_cov_20.755291	8884	viral	35.3	Kallithea virus
+M71_S19__megahit__k119_1300	8723	viral	46.8	Esparto virus
+M71_S19__trinity__TRINITY_DN33_c0_g1_i14	8099	viral	62.5	Tomelloso virus
+M71_S19__trinity__TRINITY_DN188_c0_g2_i1	7577	viral	40.6	Oryctes rhinoceros nudivirus
+M71_S19__trinity__TRINITY_DN33_c0_g1_i1	7046	viral	62.5	Tomelloso virus
+M71_S19__trinity__TRINITY_DN33_c0_g1_i13	6901	viral	62.5	Tomelloso virus
+M71_S19__trinity__TRINITY_DN38_c0_g1_i6	6733	celular_Artropodo	35.5	N/A
+M71_S19__trinity__TRINITY_DN38_c0_g1_i10	6675	celular_Artropodo	35.5	N/A
+M71_S19__trinity__TRINITY_DN38_c0_g1_i8	6530	celular_Artropodo	35.5	N/A
+M71_S19__rnaviral__NODE_9_length_6420_cov_19.620782	6420	ambiguo	40.4	Oryctes rhinoceros nudivirus
+M71_S19__rnaviral__NODE_11_length_6038_cov_10.673401	6038	viral	42.7	Tomelloso virus
+M71_S19__rnaviral__NODE_13_length_5016_cov_12.848198	5016	celular_Artropodo	32.4	Anopheles bellator
+M71_S19__rnaviral__NODE_15_length_3853_cov_13.603838	3853	viral	54.1	Oryctes rhinoceros nudivirus
+M71_S19__trinity__TRINITY_DN33_c0_g2_i3	3612	sin_hit_nr		
+M71_S19__trinity__TRINITY_DN33_c0_g2_i2	3562	sin_hit_nr		
+M71_S19__rnaviral__NODE_21_length_2950_cov_10.515340	2950	viral	42.9	Tomelloso virus
+M71_S19__rnaviral__NODE_22_length_2865_cov_9.877486	2865	viral	38.3	Oryctes rhinoceros nudivirus
+M71_S19__trinity__TRINITY_DN188_c2_g1_i1	2425	viral	28.4	Oryctes rhinoceros nudivirus
+M71_S19__rnaviral__NODE_26_length_2390_cov_18.066638	2390	sin_hit_nr		
+M1_S1__trinity__TRINITY_DN453_c0_g1_i6	2153	celular_Artropodo	99.2	Aedes aegypti
+M71_S19__megahit__k119_1156	1951	viral	43.3	Tomelloso virus
+M71_S19__rnaviral__NODE_41_length_1830_cov_9.838855	1830	viral	38.5	Oryctes rhinoceros nudivirus
+M1_S1__megahit__k119_11136	1623	celular_Artropodo	96.3	Aedes aegypti
+M1_S1__trinity__TRINITY_DN453_c0_g1_i4	1612	celular_Artropodo	99.1	Aedes aegypti
+M1_S1__rnaviral__NODE_83_length_1601_cov_10.275773	1601	celular_Artropodo	79.5	Aedes aegypti
+M55_S6__trinity__TRINITY_DN12815_c0_g1_i2	1568	celular_Artropodo	99.2	Aedes aegypti
+M58_S9__rnaviral__NODE_30_length_1565_cov_11.620053	1565	celular_Artropodo	99.8	Aedes aegypti
+M57_S8__rnaviral__NODE_40_length_1524_cov_12.364746	1524	celular_Artropodo	97.4	Aedes aegypti
+M1_S1__rnaviral__NODE_103_length_1510_cov_4.255989	1510	celular_Artropodo	99.8	Aedes aegypti
+M2_S2__trinity__TRINITY_DN260_c0_g1_i3	1505	celular_Artropodo	99.2	Aedes aegypti
+M71_S19__trinity__TRINITY_DN310_c0_g1_i1	1497	celular_Metazoo_otro	26.4	Mercenaria mercenaria
+M72_S20__rnaviral__NODE_20_length_1479_cov_6.261538	1479	celular_Artropodo	100	Aedes aegypti
+M71_S19__rnaviral__NODE_57_length_1452_cov_8.220955	1452	celular_Artropodo	100	Aedes aegypti
+M35_S31__rnaviral__NODE_38_length_1438_cov_7.365731	1438	celular_Artropodo	93.2	N/A
+M62_S18__rna__NODE_37_length_1361_cov_5.454268_g22_i0	1361	celular_Artropodo	100	Aedes aegypti
+M1_S1__rnaviral__NODE_183_length_1316_cov_9.921073	1316	celular_Artropodo	100	Aedes aegypti
+M71_S19__megahit__k119_440	1301	viral	31.8	Tomelloso virus
+M1_S1__rnaviral__NODE_212_length_1282_cov_25.900243	1282	celular_Artropodo	100	Aedes aegypti
+M57_S8__trinity__TRINITY_DN372_c0_g1_i1	1242	celular_Artropodo	96.8	Aedes aegypti
+M56_S7__megahit__k119_3359	1217	celular_Artropodo	100	Aedes aegypti
+M7_S15__rnaviral__NODE_34_length_1195_cov_3.256545	1195	viral	43.4	Tomelloso virus
+M58_S9__rnaviral__NODE_85_length_1176_cov_3.297249	1176	celular_Artropodo	100	Aedes aegypti
+M1_S1__trinity__TRINITY_DN708_c0_g1_i1	1159	celular_Artropodo	97.5	Aedes aegypti
+M9_S16__rnaviral__NODE_88_length_1159_cov_3.445946	1159	celular_Artropodo	99.7	Aedes aegypti
+M55_S6__rnaviral__NODE_127_length_1149_cov_8.106364	1149	celular_Artropodo	97.7	Aedes aegypti
+M71_S19__rnaviral__NODE_94_length_1143_cov_11.755027	1143	viral	40.9	Tomelloso virus
+M56_S7__rnaviral__NODE_93_length_1134_cov_29.859908	1134	celular_Artropodo	100	Aedes aegypti
+M58_S9__trinity__TRINITY_DN6399_c0_g2_i2	1106	celular_Artropodo	94.2	Aedes aegypti
+M9_S16__trinity__TRINITY_DN538_c0_g1_i4	1080	celular_Artropodo	70.3	Aedes aegypti
+M56_S7__rnaviral__NODE_108_length_1078_cov_10.634597	1078	celular_Artropodo	100	Aedes aegypti
+M9_S16__megahit__k119_138	1068	celular_Artropodo	99.7	Aedes aegypti
+M9_S16__rnaviral__NODE_125_length_1052_cov_12.988036	1052	celular_Artropodo	99.7	Aedes aegypti
+M57_S8__rna__NODE_194_length_1045_cov_5.538153_g125_i0	1045	celular_Artropodo	100	Aedes aegypti
+M56_S7__rna__NODE_144_length_1031_cov_11.442974_g104_i0	1031	celular_Artropodo	100	Aedes aegypti
+M7_S15__rnaviral__NODE_42_length_1010_cov_2.629553	1010	viral	39.9	Kallithea virus
