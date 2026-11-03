@@ -24,7 +24,8 @@
 #   nucleotidica sobre >=85 % de la secuencia MAS CORTA. En CD-HIT-EST:
 #     -c 0.95   identidad
 #     -aS 0.85  cobertura de la secuencia corta (la que se agrupa)
-#     -G 0      identidad local, sobre el alineamiento (no sobre toda la corta)
+#     -G 1      identidad global sobre toda la secuencia corta (default de CD-HIT).
+#               Verificado 2026-11-03: -G 1 reproduce las 748 (IDENTICO); -G 0 da 645
 #     -n 10     palabra de 10 (exige -c >= 0.95; si bajas -c, baja -n)
 #     -d 0      nombre completo en el .clstr (si no, lo corta a 20 caracteres)
 #     -M 0      sin tope de RAM interno (el tope lo pone LSF)
@@ -34,7 +35,7 @@
 # Variables (exportar antes para cambiar):
 #   VIRAL_FA      entrada; por defecto el *_virus.fna de geNomad sobre la union
 #   VOTU_TAG      version = carpeta de salida; por defecto <lote>_cdhit95_85
-#   CDHIT_C CDHIT_AS CDHIT_G CDHIT_N   parametros (0.95 0.85 0 10)
+#   CDHIT_C CDHIT_AS CDHIT_G CDHIT_N   parametros (0.95 0.85 1 10)
 #   CDHIT_EXTRA   flags extra de cd-hit-est, tal cual
 #   ENV_CDHIT     entorno con cd-hit-est (por defecto viraldb)
 #   REF_INDEX     indice en uso con el que comparar (refs/votu_index/votus)
@@ -67,7 +68,7 @@ VOTU_TAG="${VOTU_TAG:-${LOTE}_cdhit95_85}"
 OUT="$REFS_DIR/votu_catalog/$VOTU_TAG"
 CDHIT_C="${CDHIT_C:-0.95}"
 CDHIT_AS="${CDHIT_AS:-0.85}"
-CDHIT_G="${CDHIT_G:-0}"
+CDHIT_G="${CDHIT_G:-1}"
 CDHIT_N="${CDHIT_N:-10}"
 CDHIT_EXTRA="${CDHIT_EXTRA:-}"
 ENV_CDHIT="${ENV_CDHIT:-viraldb}"
