@@ -42,6 +42,9 @@
 #   ENV_VCLUST     entorno con vclust (vclust_1.3.1)
 #   CDHIT_CLSTR    .clstr de las 748 vOTUs de v1 (por defecto se busca)
 #   MMSEQS_TSV     opcional: <prefijo>_cluster.tsv de mmseqs (rep<TAB>miembro)
+#   REF_NAME       nombre de la particion de referencia en 'comparar' (v1_cdhit)
+#   COMP_DIR       carpeta de 'comparar' ($OUT/comparar); cambiala para comparar
+#                  contra otra referencia sin pisar la anterior
 #   EXPECT_IN      1144      EXPECT_V1   748
 #   FORCE=1        rehacer aunque ya exista MANIFEST
 #
@@ -53,7 +56,7 @@
 #   votus_<algo>.fa                    representantes
 #   MANIFEST.txt                       versiones, comandos, md5, conteos (al final)
 #   comparar/                          resumen.txt, contig_votu_comparacion.tsv,
-#                                      discordantes_<algo>.tsv, reps_v1_perdidos_<algo>.txt
+#                                      discordantes_<algo>.tsv, reps_<ref>_perdidos_<algo>.txt
 # No construye indice bowtie2: eso se hace cuando se elija el catalogo v2.
 # ---------------------------------------------------------------------------
 set -uo pipefail
@@ -76,6 +79,8 @@ VC_ALGOS="${VC_ALGOS:-cd-hit leiden}"
 VC_EXTRA_ALIGN="${VC_EXTRA_ALIGN:-}"
 ENV_VCLUST="${ENV_VCLUST:-vclust_1.3.1}"
 MMSEQS_TSV="${MMSEQS_TSV:-}"
+REF_NAME="${REF_NAME:-v1_cdhit}"
+COMP_DIR="${COMP_DIR:-$OUT/comparar}"
 EXPECT_IN="${EXPECT_IN:-1144}"
 EXPECT_V1="${EXPECT_V1:-748}"
 FORCE="${FORCE:-0}"
@@ -281,8 +286,9 @@ comparar)
   [[ -s "$OUT/MANIFEST.txt" ]] || die "no hay corrida completa en $OUT (corre 'run')"
   cl=$(find_clstr)
   [[ -n "$cl" && -s "$cl" ]] || die "no encuentro el .clstr de v1; exporta CDHIT_CLSTR=<ruta>"
-  d="$OUT/comparar"; mkdir -p "$d"
-  parts=("v1_cdhit=clstr:$cl")
+  d="$COMP_DIR"; mkdir -p "$d"
+  echo "referencia: $REF_NAME = $cl"
+  parts=("$REF_NAME=clstr:$cl")
   for algo in $VC_ALGOS; do
     [[ -s "$OUT/votu_miembros_${algo}.tsv" ]] && parts+=("vclust_${algo}=miembros:$OUT/votu_miembros_${algo}.tsv")
   done
@@ -397,7 +403,7 @@ for n in names[1:]:
     print("   vOTUs de %s que juntan varias de %s  %d" % (n, ref, merge))
     print("   representantes de %s que siguen siendolo  %d de %d" % (ref, shared_reps, len(gref)))
     lost = sorted(reps_ref - set(g))
-    with open(os.path.join(outd, "reps_v1_perdidos_%s.txt" % n), "w") as f:
+    with open(os.path.join(outd, "reps_%s_perdidos_%s.txt" % (ref, n)), "w") as f:
         for r in lost: f.write("%s\t%d\t%s\n" % (r, L.get(r, 0), P[n][r]))
     disc = [k for k in sorted(common)
             if len({P[n][x] for x in gref[P[ref][k]]}) > 1 or len({P[ref][x] for x in g[P[n][k]]}) > 1]
