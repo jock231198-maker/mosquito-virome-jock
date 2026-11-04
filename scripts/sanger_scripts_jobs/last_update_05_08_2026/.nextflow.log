@@ -1,0 +1,92 @@
+nov-03 13:28:32.814 [main] DEBUG nextflow.cli.Launcher - $> nextflow run hello
+nov-03 13:28:32.854 [main] DEBUG nextflow.cli.CmdRun - N E X T F L O W  ~  version 26.10.5
+nov-03 13:28:32.884 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/Users/JK/.nextflow/plugins; core-plugins: nf-agent-pi@0.6.0,nf-agent@0.2.0,nf-amazon@3.12.1,nf-azure@1.24.3,nf-cloudcache@0.6.2,nf-codecommit@0.6.1,nf-console@1.3.1,nf-google@1.29.1,nf-k8s@1.6.2,nf-seqera@0.26.2,nf-tower@1.32.2,nf-wave@1.22.5
+nov-03 13:28:32.900 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+nov-03 13:28:32.900 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+nov-03 13:28:32.902 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.14.1 in 'deployment' mode
+nov-03 13:28:32.913 [main] DEBUG nextflow.util.RetryConfig - Missing nextflow session - using default retry config
+nov-03 13:28:33.002 [main] DEBUG nextflow.plugin.PluginUpdater - Using plugin repository: HttpPluginRepository [registry]; url=https://registry.nextflow.io/api
+nov-03 13:28:33.005 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+nov-03 13:28:33.012 [main] DEBUG nextflow.scm.ProviderConfig - Using SCM config path: /Users/JK/.nextflow/scm
+nov-03 13:28:33.019 [main] DEBUG nextflow.scm.AssetManager - Listing projects in folder: /Users/JK/.nextflow/assets
+nov-03 13:28:33.022 [main] DEBUG nextflow.scm.AssetManager - Selecting multi-revision strategy
+nov-03 13:28:33.044 [main] DEBUG nextflow.scm.RepositoryFactory - Found Git repository result: [RepositoryFactory]
+nov-03 13:28:33.049 [main] INFO  nextflow.cli.CmdRun - Pulling nextflow-io/hello ...
+nov-03 13:28:33.050 [main] DEBUG nextflow.scm.RepositoryProvider - Request [credentials -:-] -> https://api.github.com/repos/nextflow-io/hello/contents/nextflow.config
+nov-03 13:28:33.595 [main] DEBUG nextflow.config.ConfigParserFactory - Using config parser v2
+nov-03 13:28:33.750 [main] DEBUG nextflow.scm.RepositoryProvider - Request [credentials -:-] -> https://api.github.com/repos/nextflow-io/hello/contents/main.nf
+nov-03 13:28:33.956 [main] DEBUG nextflow.scm.RepositoryProvider - Request [credentials -:-] -> https://api.github.com/repos/nextflow-io/hello
+nov-03 13:28:34.216 [main] DEBUG n.s.MultiRevisionRepositoryStrategy - Pulling bare repo for nextflow-io/hello -- Using remote clone url: https://github.com/nextflow-io/hello.git
+nov-03 13:28:54.031 [main] DEBUG n.s.MultiRevisionRepositoryStrategy - Fetching (updating) bare repo for nextflow-io/hello [revision: master]
+nov-03 13:29:06.014 [main] DEBUG n.s.MultiRevisionRepositoryStrategy - Pulling nextflow-io/hello -- Using remote clone url: /Users/JK/.nextflow/assets/.repos/nextflow-io/hello/bare
+nov-03 13:29:06.054 [main] DEBUG n.s.MultiRevisionRepositoryStrategy - Fetch update on shared clone: nextflow-io/hello [revision: master]: refs/heads/master <- refs/heads/master => NEW (old=0000000000000000000000000000000000000000, new=3c2cdc9823c2b4636e5e3e73e223878099ff5dc9)
+nov-03 13:29:06.054 [main] DEBUG n.s.MultiRevisionRepositoryStrategy - Fetch update on shared clone: nextflow-io/hello [revision: master]: refs/tags/v1.1 <- refs/tags/v1.1 => NEW (old=0000000000000000000000000000000000000000, new=3b355db864462d5f1b959d1084b4aad4d061fba3)
+nov-03 13:29:06.054 [main] DEBUG n.s.MultiRevisionRepositoryStrategy - Fetch update on shared clone: nextflow-io/hello [revision: master]: refs/tags/v1.2 <- refs/tags/v1.2 => NEW (old=0000000000000000000000000000000000000000, new=1b420d060d3fad67027154ac48e3bdea06f058da)
+nov-03 13:29:06.054 [main] DEBUG n.s.MultiRevisionRepositoryStrategy - Fetch update on shared clone: nextflow-io/hello [revision: master]: refs/tags/v1.3 <- refs/tags/v1.3 => NEW (old=0000000000000000000000000000000000000000, new=2ce0b0e2943449188092a0e25102f0dadc70cb0a)
+nov-03 13:29:06.067 [main] INFO  nextflow.cli.CmdRun -  downloaded from https://github.com/nextflow-io/hello.git
+nov-03 13:29:06.078 [main] DEBUG nextflow.config.ConfigCmdAdapter - Found config base: /Users/JK/.nextflow/assets/.repos/nextflow-io/hello/clones/3c2cdc9823c2b4636e5e3e73e223878099ff5dc9/nextflow.config
+nov-03 13:29:06.080 [main] DEBUG nextflow.config.ConfigCmdAdapter - Parsing config file: /Users/JK/.nextflow/assets/.repos/nextflow-io/hello/clones/3c2cdc9823c2b4636e5e3e73e223878099ff5dc9/nextflow.config
+nov-03 13:29:06.081 [main] DEBUG nextflow.config.ConfigParserFactory - Using config parser v2
+nov-03 13:29:06.084 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+nov-03 13:29:06.095 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+nov-03 13:29:06.095 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+nov-03 13:29:06.098 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /Users/JK/.nextflow/secrets/store.json
+nov-03 13:29:06.099 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [LocalSecretsProvider] - activable => LocalSecretsProvider
+nov-03 13:29:06.100 [main] DEBUG nextflow.cli.CmdRun - Launching `https://github.com/nextflow-io/hello` [evil_murdock] - revision: 3c2cdc9823 [master]
+nov-03 13:29:06.160 [main] DEBUG nextflow.Session - Session UUID: 610a4fd7-8929-4e1a-8562-443bfed3e6df
+nov-03 13:29:06.160 [main] DEBUG nextflow.Session - Run name: evil_murdock
+nov-03 13:29:06.161 [main] DEBUG nextflow.Session - Executor pool size: 8
+nov-03 13:29:06.165 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+nov-03 13:29:06.167 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=24; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+nov-03 13:29:06.184 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 26.10.5 build 14654
+  Created: 02-11-2026 17:37 UTC (11:37 CDT)
+  System: Mac OS X 15.7.4
+  Runtime: Groovy 4.0.33 on OpenJDK 64-Bit Server VM 25.0.2+10-LTS
+  Encoding: UTF-8 (UTF-8)
+  Process: 18275@iMac-de-LEVE.local [127.0.0.1]
+  CPUs: 8 - Mem: 24 GB (370.9 MB) - Swap: 0 (0)
+nov-03 13:29:06.189 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+nov-03 13:29:06.200 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 9; maxThreads: 1000
+nov-03 13:29:06.231 [main] DEBUG nextflow.Session - Work-dir: /Users/JK/Desktop/git/mosquito-virome-jock/scripts/sanger_scripts_jobs/last_update_05_08_2026/work [Mac OS X]
+nov-03 13:29:06.231 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /Users/JK/.nextflow/assets/.repos/nextflow-io/hello/clones/3c2cdc9823c2b4636e5e3e73e223878099ff5dc9/bin
+nov-03 13:29:06.239 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[K8sExecutor]
+nov-03 13:29:06.243 [main] DEBUG nextflow.Session - Observer factory (v2): LinObserverFactory
+nov-03 13:29:06.243 [main] DEBUG nextflow.Session - Observer factory (v2): DefaultObserverFactory
+nov-03 13:29:06.255 [main] DEBUG nextflow.Session - Session start
+nov-03 13:29:06.257 [main] DEBUG nextflow.script.ScriptLoaderFactory - Using script parser v2
+nov-03 13:29:06.390 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+nov-03 13:29:06.439 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+nov-03 13:29:06.439 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+nov-03 13:29:06.441 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+nov-03 13:29:06.444 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=8; memory=24 GB; capacity=8; pollInterval=100ms; dumpInterval=5m
+nov-03 13:29:06.447 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
+nov-03 13:29:06.461 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'sayHello': maxForks=0; fair=false; array=0
+nov-03 13:29:06.492 [main] DEBUG nextflow.Session - Process names: sayHello
+nov-03 13:29:06.493 [main] DEBUG nextflow.Session - Igniting dataflow network (2)
+nov-03 13:29:06.493 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > sayHello
+nov-03 13:29:06.494 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Main: /Users/JK/.nextflow/assets/.repos/nextflow-io/hello/clones/3c2cdc9823c2b4636e5e3e73e223878099ff5dc9/main.nf
+nov-03 13:29:06.494 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+nov-03 13:29:06.494 [main] DEBUG nextflow.Session - Session await
+nov-03 13:29:06.560 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+nov-03 13:29:06.561 [Task submitter] INFO  nextflow.Session - [d7/8e2c79] Submitted process > sayHello (4)
+nov-03 13:29:06.567 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+nov-03 13:29:06.567 [Task submitter] INFO  nextflow.Session - [17/d7a56c] Submitted process > sayHello (1)
+nov-03 13:29:06.572 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+nov-03 13:29:06.573 [Task submitter] INFO  nextflow.Session - [a9/753800] Submitted process > sayHello (2)
+nov-03 13:29:06.576 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+nov-03 13:29:06.576 [Task submitter] INFO  nextflow.Session - [d9/fb0b62] Submitted process > sayHello (3)
+nov-03 13:29:06.582 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 4; name: sayHello (4); status: COMPLETED; exit: 0; error: -; workDir: /Users/JK/Desktop/git/mosquito-virome-jock/scripts/sanger_scripts_jobs/last_update_05_08_2026/work/d7/8e2c797f4e3f38d5164fb54a028d7b]
+nov-03 13:29:06.583 [Task monitor] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'TaskFinalizer' minSize=10; maxSize=24; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+nov-03 13:29:06.588 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: sayHello (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/JK/Desktop/git/mosquito-virome-jock/scripts/sanger_scripts_jobs/last_update_05_08_2026/work/17/d7a56c1e64e786e5bca52abdcc56a0]
+nov-03 13:29:06.590 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 2; name: sayHello (2); status: COMPLETED; exit: 0; error: -; workDir: /Users/JK/Desktop/git/mosquito-virome-jock/scripts/sanger_scripts_jobs/last_update_05_08_2026/work/a9/753800e86e7b12d4f884d5746e7e12]
+nov-03 13:29:06.595 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 3; name: sayHello (3); status: COMPLETED; exit: 0; error: -; workDir: /Users/JK/Desktop/git/mosquito-virome-jock/scripts/sanger_scripts_jobs/last_update_05_08_2026/work/d9/fb0b62e461073c857e54ea13bb514c]
+nov-03 13:29:06.598 [main] DEBUG nextflow.Session - Session await > all processes finished
+nov-03 13:29:06.696 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local) - terminating tasks monitor poll loop
+nov-03 13:29:06.696 [main] DEBUG nextflow.Session - Session await > all barriers passed
+nov-03 13:29:06.698 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'TaskFinalizer' shutdown completed (hard=false)
+nov-03 13:29:06.700 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=4; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=22ms; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=4; peakCpus=4; peakMemory=0; ]
+nov-03 13:29:06.905 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
+nov-03 13:29:06.913 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'FileTransfer' shutdown completed (hard=false)
+nov-03 13:29:06.913 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye
