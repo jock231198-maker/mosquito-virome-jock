@@ -26,6 +26,7 @@
 #     -aS 0.85  cobertura de la secuencia corta (la que se agrupa)
 #     -G 1      identidad global sobre toda la secuencia corta (default de CD-HIT).
 #               Verificado 2026-11-03: -G 1 reproduce las 748 (IDENTICO); -G 0 da 645
+#     -g 1      cada miembro va al representante MAS parecido (no al primero)
 #     -n 10     palabra de 10 (exige -c >= 0.95; si bajas -c, baja -n)
 #     -d 0      nombre completo en el .clstr (si no, lo corta a 20 caracteres)
 #     -M 0      sin tope de RAM interno (el tope lo pone LSF)
@@ -70,6 +71,7 @@ CDHIT_C="${CDHIT_C:-0.95}"
 CDHIT_AS="${CDHIT_AS:-0.85}"
 CDHIT_G="${CDHIT_G:-1}"
 CDHIT_N="${CDHIT_N:-10}"
+CDHIT_ACC="${CDHIT_ACC:-1}"   # -g 1: miembro al cluster mas parecido (HANDOFF_downstream_11sep.md:232)
 CDHIT_EXTRA="${CDHIT_EXTRA:-}"
 ENV_CDHIT="${ENV_CDHIT:-viraldb}"
 REF_INDEX="${REF_INDEX:-$REFS_DIR/votu_index/votus}"
@@ -138,7 +140,7 @@ resumen() {
 cdhit_cmd() {
   # shellcheck disable=SC2206   # CDHIT_EXTRA se parte en palabras a proposito
   CDHIT=(cd-hit-est -i "$VIRAL_FA" -o votus.fa.tmp -c "$CDHIT_C" -aS "$CDHIT_AS"
-         -G "$CDHIT_G" -n "$CDHIT_N" -d 0 -M 0 -T "$THREADS" $CDHIT_EXTRA)
+         -G "$CDHIT_G" -g "$CDHIT_ACC" -n "$CDHIT_N" -d 0 -M 0 -T "$THREADS" $CDHIT_EXTRA)
 }
 
 # ---------------------------------------------------------------------------

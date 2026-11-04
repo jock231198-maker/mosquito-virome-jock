@@ -30,11 +30,11 @@ RD = sys.argv[1] if len(sys.argv) > 1 else os.environ.get("RESULTS_DIR", "")
 if not RD:
     sys.exit("ERROR: pasa RESULTS_DIR como argumento o expórtalo")
 
-QC     = os.path.join(RD, "qc_control")
+QC     = os.environ.get("QC_DIR", os.path.join(RD, "qc_control"))
 MASTER = os.path.join(QC, "votus_master.tsv")
 COVER  = os.path.join(QC, "votu_coverage.tsv")
 UNION  = os.path.join(QC, "contigs_union.tsv.cov")
-ANNOT  = os.path.join(RD, "votu_annot", "votus_viraldb20260925", "annot_por_votu.tsv")
+ANNOT  = os.environ.get("ANNOT", os.path.join(RD, "votu_annot", "votus_viraldb20260925", "annot_por_votu.tsv"))
 
 COV_MIN   = 70.0     # % del genoma cubierto para contar como presente
 RRNA_PROF = 500.0    # profundidad media por mapeo
