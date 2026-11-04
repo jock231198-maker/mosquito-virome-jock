@@ -42,7 +42,7 @@ UNION_DIR="${UNION_DIR:-$SCRATCH/union}"
 VDB="${VDB:-$REFS_DIR/viral_custom/20260925}"
 ENV_VIRALDB="${ENV_VIRALDB:-viraldb}"
 
-BASE="$RESULTS_DIR/contig_annot"
+BASE="${CONTIG_ANNOT_DIR:-$RESULTS_DIR/contig_annot}"
 FA="$BASE/contigs_union_MERIDA.fasta"
 ANN_OUT="$BASE/contigs_union_MERIDA_viraldb$(basename "$VDB")"
 OUT="$BASE/contigs_union_MERIDA_${TAG}"
