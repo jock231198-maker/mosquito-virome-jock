@@ -31,9 +31,9 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/config.sh"
 
 # --- Entornos conda ---------------------------------------------------------
-# ENV_BOWTIE2 ya trae samtools (segun config.sh). ENV_BLAST hay que confirmarlo:
-# ajusta aqui o en config.sh si blastn vive en otro entorno.
-ENV_BLAST="${ENV_BLAST:-${ENV_VIRALDB:-viraldb}}"
+# ENV_BOWTIE2 ya trae samtools (segun config.sh).
+# blastn vive en blast_2.17.0 (tambien existe en viraldb; se prefiere el dedicado).
+ENV_BLAST="${ENV_BLAST:-blast_2.17.0}"
 
 # --- Salidas propias de este chequeo ---------------------------------------
 ISV_DIR="${REFS_DIR}/isv_sanity"
@@ -51,9 +51,15 @@ READS_UNMAPPED_DIR="${READS_UNMAPPED_DIR:-${SCRATCH}/unmapped_fastq}"
 READS_TRIMMED_DIR="${READS_TRIMMED_DIR:-${SCRATCH}/trimmed/${RESULT_FROM}}"
 SAMPLES_FILE="${SAMPLES_FILE:-${ISV_DIR}/samples.txt}"
 
-# Contigs a interrogar -- PENDIENTE: confirmar rutas reales del set _min500
-CONTIGS_UNION="${CONTIGS_UNION:-}"
-CONTIGS_VOTU="${CONTIGS_VOTU:-}"
+# --- Sets de contigs a interrogar: "etiqueta:ruta" ---------------------------
+# Correr min500 y min1000 juntos es barato y responde si bajar el umbral
+# recupera virus que el set de >=1000 bp perdia.
+CONTIG_SETS=(
+  "union_min500:${RESULTS_DIR}/contig_annot_min500/contigs_union_MERIDA.fasta"
+  "union_min1000:${RESULTS_DIR}/contig_annot/contigs_union_MERIDA.fasta"
+)
+# Catalogo de vOTUs min500: define CONTIGS_VOTU para incluirlo.
+[[ -n "${CONTIGS_VOTU:-}" ]] && CONTIG_SETS+=("votu_min500:${CONTIGS_VOTU}")
 
 # Tu propio anfevirus completo (auto-referencia). Vacio = omitir.
 OWN_ANPHE_FASTA="${OWN_ANPHE_FASTA:-}"
@@ -76,9 +82,12 @@ die()  { printf '%s[ERROR]%s %s\n' "${RED}" "${RST}" "$*" >&2; exit 1; }
 # ---------------------------------------------------------------------------
 MANIFEST="${ISV_DIR}/refs_manifest.tsv"
 write_manifest() {
+  # Columnas: etiqueta <TAB> consulta Entrez (o acc:ACC1,ACC2) <TAB> n esperado
+  # UNA sola cepa representativa por virus. Varias cepas casi identicas en el
+  # mismo indice colapsan el MAPQ y reparten los conteos entre ellas.
   cat > "${MANIFEST}" <<'EOF'
 PCLV	"Phasi Charoen-like virus"[Organism] AND srcdb_refseq[PROP]	3
-HTV	"Humaita-Tubiacanga virus"[Organism] AND complete[Title]	0
+HTV	acc:PENDIENTE	4
 AeAV	"Aedes anphevirus"[Organism] AND srcdb_refseq[PROP]	1
 CFAV	"Cell fusing agent virus"[Organism] AND srcdb_refseq[PROP]	1
 NEGCTRL	"Tobacco mosaic virus"[Organism] AND srcdb_refseq[PROP]	1
@@ -115,7 +124,7 @@ read_pair() {
 cmd_samples() {
   local d; d="$(reads_dir)"
   [[ -d "$d" ]] || die "no existe ${d}"
-  find "$d" -maxdepth 1 -name '*_R1.fastq.gz' -o -maxdepth 1 -name '*_R1.fq.gz' \
+  find "$d" -maxdepth 1 \( -name '*_R1.fastq.gz' -o -name '*_R1.fq.gz' \) \
     | xargs -r -n1 basename \
     | sed -E 's/_(unmapped|trimmed)?_?R1\.f(ast)?q\.gz$//' \
     | sort -u > "${SAMPLES_FILE}"
@@ -167,16 +176,17 @@ cmd_check() {
   [[ -d "${rdir}" ]] && printf '  OK    %s (READ_SET=%s)\n' "${rdir}" "${READ_SET}" \
                      || { printf '  %sFALTA%s %s\n' "${RED}" "${RST}" "${rdir}"; fail=1; }
 
-  log "Contigs:"
-  for f in "${CONTIGS_UNION}" "${CONTIGS_VOTU}"; do
-    if [[ -z "$f" ]]; then
-      printf '  %ssin definir%s -- exporta CONTIGS_UNION / CONTIGS_VOTU\n' "${YLW}" "${RST}"
-    elif [[ -s "$f" ]]; then
-      printf '  OK    %s (%s seqs)\n' "$f" "$(grep -c '^>' "$f")"
+  log "Sets de contigs:"
+  for pair in "${CONTIG_SETS[@]}"; do
+    local tag="${pair%%:*}" f="${pair#*:}"
+    if [[ -s "$f" ]]; then
+      printf '  OK    %-14s %s seqs  %s\n' "${tag}" "$(grep -c '^>' "$f")" "$f"
     else
-      printf '  %sFALTA%s %s\n' "${RED}" "${RST}" "$f"; fail=1
+      printf '  %sFALTA%s %-14s %s\n' "${RED}" "${RST}" "${tag}" "$f"; fail=1
     fi
   done
+  [[ -z "${CONTIGS_VOTU:-}" ]] \
+    && printf '  %svOTUs min500 sin definir%s -- exporta CONTIGS_VOTU para incluirlas\n' "${YLW}" "${RST}"
 
   log "Muestras:"
   if [[ -s "${SAMPLES_FILE}" ]]; then
@@ -206,13 +216,17 @@ cmd_check() {
 # ---------------------------------------------------------------------------
 EUTILS="https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
 
-ncbi_fetch() {   # $1 = consulta Entrez -> FASTA a stdout
+ncbi_fetch() {   # $1 = consulta Entrez, o "acc:ACC1,ACC2,..." -> FASTA a stdout
   local q="$1" ids
-  ids=$(curl -sf --max-time 60 -G "${EUTILS}/esearch.fcgi" \
-          --data-urlencode "db=nuccore" \
-          --data-urlencode "term=${q}" \
-          --data-urlencode "retmax=20" \
-        | grep -o '<Id>[0-9]*</Id>' | sed 's/<[^>]*>//g' | paste -sd,)
+  if [[ "${q}" == acc:* ]]; then
+    ids="${q#acc:}"
+  else
+    ids=$(curl -sf --max-time 60 -G "${EUTILS}/esearch.fcgi" \
+            --data-urlencode "db=nuccore" \
+            --data-urlencode "term=${q}" \
+            --data-urlencode "retmax=20" \
+          | grep -o '<Id>[0-9]*</Id>' | sed 's/<[^>]*>//g' | paste -sd,)
+  fi
   [[ -z "${ids}" ]] && return 1
   sleep 1   # cortesia con NCBI
   curl -sf --max-time 120 -G "${EUTILS}/efetch.fcgi" \
@@ -241,6 +255,11 @@ cmd_refs() {
     fi
     [[ "${nexp}" -gt 0 && "${n}" -ne "${nexp}" ]] \
       && warn "${label}: esperaba ${nexp} secuencias, bajaron ${n}. Verifica antes de confiar."
+    if [[ "${n}" -gt 4 ]]; then
+      warn "${label}: ${n} secuencias es demasiado para una referencia representativa."
+      warn "  Cepas casi identicas en el mismo indice -> multimapeo, MAPQ 0, conteos repartidos."
+      warn "  Elige UN aislado y fijalo en el MANIFEST como:  ${label}<TAB>acc:ACC1,ACC2,...<TAB>N"
+    fi
     awk -v L="${label}" '
       /^>/ { acc=$1; sub(/^>/,"",acc); sub(/\..*$/,"",acc);
              desc=$0; sub(/^>[^ ]+ */,"",desc);
@@ -348,7 +367,7 @@ cmd_contigs() {
   [[ -s "${ISV_DIR}/isv_refs_blastdb.nin" ]] || die "blastdb ausente; corre '$0 refs'"
   local fmt='6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore qlen slen qcovs'
 
-  for pair in "union:${CONTIGS_UNION}" "votu:${CONTIGS_VOTU}"; do
+  for pair in "${CONTIG_SETS[@]}"; do
     local tag="${pair%%:*}" fa="${pair#*:}"
     [[ -n "${fa}" && -s "${fa}" ]] || { warn "omito ${tag}: ruta vacia o inexistente"; continue; }
     log "blastn dc-megablast: ${tag} -> referencias"
@@ -376,6 +395,17 @@ cmd_contigs() {
     rm -f "${BLAST_DIR}/.${tag}_refcov.tmp"
     log "  -> ${BLAST_DIR}/${tag}_refcov.tsv"
   done
+
+  # Comparacion directa de umbrales, si ambos sets corrieron
+  if [[ -s "${BLAST_DIR}/union_min500_refcov.tsv" && -s "${BLAST_DIR}/union_min1000_refcov.tsv" ]]; then
+    log "min500 vs min1000 (fraccion de cada referencia reconstruida):"
+    join -t $'\t' -a1 -a2 -e '0.0000' -o '0,1.4,2.4' \
+         <(tail -n +2 "${BLAST_DIR}/union_min500_refcov.tsv" | sort) \
+         <(tail -n +2 "${BLAST_DIR}/union_min1000_refcov.tsv" | sort) \
+      | awk -F'\t' 'BEGIN{printf "  %-30s %10s %10s\n","ref","min500","min1000"}
+                    {printf "  %-30s %10s %10s\n",$1,$2,$3}' \
+      | tee "${BLAST_DIR}/umbral_min500_vs_min1000.txt"
+  fi
 }
 
 # ---------------------------------------------------------------------------
