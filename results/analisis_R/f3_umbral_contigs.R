@@ -24,6 +24,24 @@ DIR_DAT <- "datos"
 DIR_FIG <- "figuras"
 dir.create(DIR_FIG, showWarnings = FALSE, recursive = TRUE)
 
+# El dispositivo PNG por defecto de macOS no dibuja >=, em-dash ni x multiplicacion:
+# los sustituye por ASCII (avisos "mbcsToSbcs"). ragg si los dibuja.
+# El PDF via cairo_pdf va bien en cualquier caso.
+guardar <- function(nombre, plot, w, h) {
+  png_out <- file.path(DIR_FIG, paste0(nombre, ".png"))
+  if (requireNamespace("ragg", quietly = TRUE)) {
+    ggsave(png_out, plot, width = w, height = h, dpi = 300, bg = "white",
+           device = ragg::agg_png)
+  } else {
+    ggsave(png_out, plot, width = w, height = h, dpi = 300, bg = "white")
+    message("AVISO: ragg no instalado. El PNG sustituye los simbolos por ASCII.\n",
+            "       install.packages(\"ragg\") lo arregla. El PDF ya esta bien.")
+  }
+  ggsave(file.path(DIR_FIG, paste0(nombre, ".pdf")), plot,
+         width = w, height = h, device = cairo_pdf)
+  message("escrito: ", DIR_FIG, "/", nombre, ".png / .pdf")
+}
+
 # ----------------------------------------------------------------- lectura
 NIVELES <- tribble(
   ~archivo,                    ~nivel,                                ~umbral,
@@ -106,12 +124,7 @@ f3 <- ggplot(dat, aes(x = pct, y = referencia, fill = serie)) +
     legend.key.size    = unit(11, "pt")
   )
 
-ggsave(file.path(DIR_FIG, "F3_umbral_contigs.png"), f3,
-       width = 8.6, height = 4.6, dpi = 300, bg = "white")
-ggsave(file.path(DIR_FIG, "F3_umbral_contigs.pdf"), f3,
-       width = 8.6, height = 4.6, device = cairo_pdf)
-
-message("escrito: ", DIR_FIG, "/F3_umbral_contigs.png / .pdf")
+guardar("F3_umbral_contigs", f3, 8.6, 4.6)
 
 # ------------------------------------------------- la tabla, para el texto
 dat |>
