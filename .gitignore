@@ -9,3 +9,5 @@
 *.gz
 !results/analisis_R/datos_*/*.gz
 .DS_Store
+*:Zone.Identifier
+__pycache__/
