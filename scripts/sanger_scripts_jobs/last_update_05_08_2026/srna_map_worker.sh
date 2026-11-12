@@ -279,12 +279,23 @@ printf 'de esas, tambien en AaegL5: %d lecturas (%.1f%%)\n' \
 # por nombre de lectura, con lo que "lectura unica" (una sola vOTU) es exacto.
 export LC_ALL=C          # sort y join tienen que coincidir en la colacion
 longitudes="$W/longitudes.tsv"
-zcat "$OUT/sam/$lib.viral.sam.gz" \
-  | awk -F'\t' '/^@SQ/ { sn = ""; ln = ""
-                         for (i = 2; i <= NF; i++) { if ($i ~ /^SN:/) sn = substr($i, 4)
-                                                     if ($i ~ /^LN:/) ln = substr($i, 4) }
-                         if (sn != "") print sn "\t" ln; next }
-                !/^@/ { exit }' > "$longitudes"
+# Las longitudes salen del INDICE, no del encabezado del SAM.
+# Antes esto leia el @SQ del SAM y cortaba con `exit` en la primera alineacion:
+# eso cierra la tuberia mientras zcat sigue escribiendo, zcat recibe SIGPIPE y
+# con `set -o pipefail` el script muere con 141. Pasaba solo con SAM grandes
+# (con uno de tres lineas zcat acaba antes de que awk salga), asi que no lo
+# cazaron las pruebas con datos simulados; lo cazo M72, con 838 MB de SAM.
+bowtie-inspect -s "$BT1_VIRAL" \
+  | awk -F'\t' '$1 ~ /^Sequence-/ {print $2 "\t" $3}' > "$longitudes"
+if [[ ! -s "$longitudes" ]]; then
+  # respaldo: el @SQ del SAM, recorriendolo entero (sin `exit`, sin SIGPIPE)
+  zcat "$OUT/sam/$lib.viral.sam.gz" \
+    | awk -F'\t' '/^@SQ/ { sn = ""; ln = ""
+                           for (i = 2; i <= NF; i++) { if ($i ~ /^SN:/) sn = substr($i, 4)
+                                                       if ($i ~ /^LN:/) ln = substr($i, 4) }
+                           if (sn != "") print sn "\t" ln }' > "$longitudes"
+fi
+[[ -s "$longitudes" ]] || { echo "ERROR: no consigo las longitudes de las vOTUs"; exit 1; }
 
 zcat "$OUT/sam/$lib.viral.sam.gz" \
   | awk -F'\t' '!/^@/ { h = (int($2 / 16) % 2) ? "-" : "+"
