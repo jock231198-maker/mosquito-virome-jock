@@ -1,429 +1,207 @@
 #!/bin/bash
 # ---------------------------------------------------------------------------
-# votu_vclust.sh — vOTUs con Vclust (ANI y AF reales, MIUViG) y comparacion con CD-HIT
+# assembly_megahit.sh — ensamblaje con MEGAHIT (una muestra por elemento)
 #
-# Paso 1 de la metodologia v2. Agrupa los mismos 1,144 contigs virales de geNomad
-# que dieron las 748 vOTUs de CD-HIT-EST, pero midiendo ANI y fraccion alineada
-# (AF) por alineamiento (Zielezinski et al. 2025, Nat Methods), y compara las
-# dos particiones contig a contig. NO toca nada de v1: ni refs/votu_index/, ni
-# la carpeta de CD-HIT, ni datos_v3.
+# Mismo contrato de salida que assembly_spades.sh, para que geNomad, CheckV,
+# DIAMOND, QUAST y check_step.sh funcionen sin tocar nada:
 #
-# Uso:
-#   ./votu_vclust.sh check      # entradas, vclust, referencia CD-HIT, bsub listo  (login)
-#   ./votu_vclust.sh run        # prefilter + align + cluster (cd-hit y leiden)     (job)
-#   ./votu_vclust.sh comparar   # Vclust vs CD-HIT (y MMseqs2 si se da)             (login)
+#   $SCRATCH/megahit/<sample>/contigs.fasta          <- quast, read_accounting
+#   $SCRATCH/megahit/<sample>/contigs_1000bp.fasta   <- diamond
+#   $SCRATCH/megahit/<sample>/<sample>_final.fasta   <- genomad, checkv
+#   $SCRATCH/megahit/<sample>/megahit.log, options.json
+#   $RESULTS_DIR/assembly_stats_megahit/<sample>_assembly.tsv
 #
-# Envio (LSF copia el entorno exportado):
-#   bsub -J votuvc -o "$LOGS_DIR/votuvc.%J.log" -e "$LOGS_DIR/votuvc.%J.err" \
-#        -q normal -n 4 -M 8000 -R "select[mem>8000] rusage[mem=8000] span[hosts=1]" \
-#        "$SCRIPTS_DIR/votu_vclust.sh run"
-#   (estimacion para ~1,100 contigs de 1-15 kb: minutos. Medir con bhist -l)
+# TRES MANIAS DE MEGAHIT QUE ESTE SCRIPT RESUELVE
 #
-# Instalacion (una vez; solo conda-forge/bioconda, el proxy bloquea 'defaults'):
-#   conda create -n vclust_1.3.1 -c conda-forge -c bioconda vclust=1.3.1 -y
-#   (alternativa: pip install vclust==1.3.1 dentro de un entorno propio)
+# 1. Se NIEGA a arrancar si el directorio de salida ya existe. No hay bandera
+#    equivalente a un "sobrescribe y calla" fiable entre versiones, asi que se
+#    le da un subdirectorio que garantizamos inexistente.
 #
-# DEFINICION DE vOTU (MIUViG, Roux et al. 2019)
-#   >=95 % de ANI sobre >=85 % de la secuencia MAS CORTA.
-#     vclust prefilter --min-ident 0.95   descarta pares que no pueden llegar al 95 %
-#     vclust align                        ANI y AF por pares (ani.tsv, ambas direcciones)
-#     vclust cluster --metric ani --ani 0.95 --qcov 0.85
-#   En ani.tsv cada par aparece dos veces; en la fila cuya query es la secuencia
-#   corta, qcov es justo la AF de la corta. Representante = el contig mas largo
-#   del grupo (empates: ID menor), igual que CD-HIT.
-#   Algoritmos: cd-hit (voraz de mayor a menor, comparable con v1) y leiden.
+# 2. La bandera -m, si le pasas un numero entre 0 y 1, lo interpreta como
+#    FRACCION DE LA RAM TOTAL DE LA MAQUINA. En un nodo compartido de LSF eso es
+#    una trampa: MEGAHIT ve los 500 GB del nodo, pide el 90%, y LSF lo mata por
+#    pasarse del -M. Aqui SIEMPRE se le pasan bytes absolutos.
 #
-# Variables (exportar antes para cambiar):
-#   VIRAL_FA       entrada; por defecto el *_virus.fna de geNomad sobre la union
-#   VOTU_TAG       carpeta de salida; por defecto <lote>_vclust_ani95_af85
-#   VC_IDENT VC_ANI VC_QCOV   0.95 0.95 0.85
-#   VC_ALGOS       algoritmos de clustering ("cd-hit leiden")
-#   VC_EXTRA_ALIGN flags extra de 'vclust align', tal cual
-#   ENV_VCLUST     entorno con vclust (vclust_1.3.1)
-#   CDHIT_CLSTR    .clstr de las 748 vOTUs de v1 (por defecto se busca)
-#   MMSEQS_TSV     opcional: <prefijo>_cluster.tsv de mmseqs (rep<TAB>miembro)
-#   EXPECT_IN      1144      EXPECT_V1   748
-#   FORCE=1        rehacer aunque ya exista MANIFEST
+# 3. Las cabeceras NO son las de SPAdes:
+#       SPAdes   >NODE_1_length_12898_cov_47.312
+#       MEGAHIT  >k141_0 flag=1 multi=2.0000 len=335
+#    contig_tables.sh parsea el formato de SPAdes y con esto devolveria una
+#    tabla vacia. El worker escribe ademas contigs_table.tsv ya parseado.
+#    'multi' es la multiplicidad del k-mer, el analogo de la cobertura.
 #
-# SALIDA ($REFS_DIR/votu_catalog/$VOTU_TAG/):
-#   fltr.txt, ani.tsv, ani.ids.tsv     prefiltro, ANI/AF por pares, IDs y longitudes
-#   clusters_<algo>.tsv                salida cruda de 'vclust cluster'
-#   votu_miembros_<algo>.tsv           un contig por fila: vOTU (= representante),
-#                                      longitud, es_representante, n_contigs
-#   votus_<algo>.fa                    representantes
-#   MANIFEST.txt                       versiones, comandos, md5, conteos (al final)
-#   comparar/                          resumen.txt, contig_votu_comparacion.tsv,
-#                                      discordantes_<algo>.tsv, reps_v1_perdidos_<algo>.txt
-# No construye indice bowtie2: eso se hace cuando se elija el catalogo v2.
+# Todo el ensamblaje ocurre en el disco LOCAL del nodo y solo se publica el
+# resultado a Lustre. MEGAHIT genera muchos ficheros intermedios y Lustre es
+# lento para eso, ademas de que gastan inodes de la cuota.
+#
+# Variables de entorno:
+#   MEGAHIT_PRESET   ""|meta-sensitive|meta-large          ("")
+#   MEGAHIT_MEM      tope de memoria en GB (bytes absolutos) (16)
+#   MEGAHIT_MINLEN   --min-contig-len                        (200)
+#   MIN_LEN          longitud del filtro posterior           (1000)
+#   KEEP_INTERMEDIATE 1 para conservar intermediate_contigs/ (0)
+#
+# OJO: MEGAHIT_MEM por debajo del -M del bsub, igual que con SPAdes.
+#
+# Prep + envio:
+#   source .../config.sh
+#   ls "$SCRATCH/unmapped_fastq"/*_unmapped_R1.fastq.gz | xargs -n1 basename \
+#     | sed 's/_unmapped_R1.fastq.gz//' | sort > "$SCRATCH/asm_samples.txt"
+#   N=$(wc -l < "$SCRATCH/asm_samples.txt")
+#
+#   bsub -J "megahit[1-$N]%6" \
+#        -o "$LOGS_DIR/megahit.%J.%I.log" -e "$LOGS_DIR/megahit.%J.%I.err" \
+#        -q normal -n 4 -M 20000 \
+#        -R "select[mem>20000] rusage[mem=20000] span[hosts=1]" \
+#        "$SCRIPTS_DIR/assembly_megahit.sh $SCRATCH/asm_samples.txt $SCRATCH/unmapped_fastq"
 # ---------------------------------------------------------------------------
-set -uo pipefail
+set -euo pipefail
+SECONDS=0
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SELF="$SCRIPT_DIR/$(basename "${BASH_SOURCE[0]}")"
 source "$SCRIPT_DIR/config.sh"
 
-cmd="${1:-ayuda}"
-THREADS="${LSB_DJOB_NUMPROC:-2}"
-LOTE="${RESULT_FROM:-MERIDA}"
+samples="${1:?Uso: assembly_megahit.sh <samples.txt> <input_dir> [preset] [outbase]}"
+indir="${2:?Falta input_dir}"
+preset="${3:-${MEGAHIT_PRESET:-}}"
+outbase="${4:-$SCRATCH/megahit}"
 
-VIRAL_FA="${VIRAL_FA:-$RESULTS_DIR/genomad_all/all_final/all_final_summary/all_final_virus.fna}"
-VOTU_TAG="${VOTU_TAG:-${LOTE}_vclust_ani95_af85}"
-OUT="$REFS_DIR/votu_catalog/$VOTU_TAG"
-VC_IDENT="${VC_IDENT:-0.95}"
-VC_ANI="${VC_ANI:-0.95}"
-VC_QCOV="${VC_QCOV:-0.85}"
-VC_ALGOS="${VC_ALGOS:-cd-hit leiden}"
-VC_EXTRA_ALIGN="${VC_EXTRA_ALIGN:-}"
-ENV_VCLUST="${ENV_VCLUST:-vclust_1.3.1}"
-MMSEQS_TSV="${MMSEQS_TSV:-}"
-EXPECT_IN="${EXPECT_IN:-1144}"
-EXPECT_V1="${EXPECT_V1:-748}"
-FORCE="${FORCE:-0}"
+THREADS="${LSB_DJOB_NUMPROC:-4}"
+MEGAHIT_MEM="${MEGAHIT_MEM:-16}"          # GB
+MEGAHIT_MINLEN="${MEGAHIT_MINLEN:-200}"
+MIN_LEN="${MIN_LEN:-1000}"
+KEEP_INTERMEDIATE="${KEEP_INTERMEDIATE:-0}"
 
-# --- helpers ----------------------------------------------------------------
-die()  { echo "ERROR: $*" >&2; exit 1; }
-ok()   { echo "  [ok] $*"; }
-warn() { echo "  [!!] $*"; }
-nseq() { awk '/^>/{n++} END{print n+0}' "$1" 2>/dev/null || echo 0; }
-md5()  { md5sum < "$1" | cut -c1-12; }
-ids()  { grep '^>' "$1" | sed 's/^>//; s/[[:space:]].*//'; }
+idx="${LSB_JOBINDEX:?Este script debe enviarse como job array}"
+sample=$(sed -n "${idx}p" "$samples")
+[[ -n "$sample" ]] || { echo "ERROR: linea $idx vacia en $samples"; exit 1; }
 
-# .clstr de v1: el que diga CDHIT_CLSTR, o el primero que exista
-find_clstr() {
-  if [[ -n "${CDHIT_CLSTR:-}" ]]; then echo "$CDHIT_CLSTR"; return; fi
-  local c
-  for c in "$RESULTS_DIR/qc_control/votus.clstr" \
-           "$REFS_DIR/votu_catalog/${LOTE}_cdhit95_85/votus.fa.clstr" \
-           "$REFS_DIR/votu_index/votus.clstr"; do
-    [[ -s "$c" ]] && { echo "$c"; return; }
-  done
-  echo ""
-}
-n_clstr() { grep -c '^>Cluster' "$1" 2>/dev/null || echo 0; }
+R1="$indir/${sample}_unmapped_R1.fastq.gz"
+R2="$indir/${sample}_unmapped_R2.fastq.gz"
+[[ -f "$R1" && -f "$R2" ]] || { echo "ERROR: faltan R1/R2 para $sample en $indir"; exit 1; }
 
-# id<TAB>longitud a partir del FASTA (primera palabra de la cabecera)
-lens() {
-  awk '/^>/{if (id != "") print id "\t" L; id = substr($1, 2); L = 0; next}
-       {L += length($0)}
-       END{if (id != "") print id "\t" L}' "$1"
-}
+final_dir="$outbase/$sample"
+statsdir="${ASM_STATS_DIR:-$RESULTS_DIR/assembly_stats_megahit}"
+mkdir -p "$outbase" "$statsdir"
 
-# clusters_<algo>.tsv (object<TAB>cluster) + longitudes -> votu_miembros
-# representante = el mas largo; empate -> ID menor (orden C)
-miembros() {
-  awk -F'\t' -v OFS='\t' '
-    NR == FNR { L[$1] = $2; next }
-    FNR == 1 && $2 !~ /^-?[0-9]+$/ { next }      # cabecera object/cluster
-    {
-      c = $2; m[c] = m[c] (m[c] == "" ? "" : SUBSEP) $1; n[c]++
-      if (!(c in rep) || L[$1] > L[rep[c]] || (L[$1] == L[rep[c]] && $1 < rep[c])) rep[c] = $1
-    }
-    END {
-      print "votu", "contig", "longitud", "es_representante", "n_contigs"
-      for (c in m) { k = split(m[c], a, SUBSEP)
-        for (i = 1; i <= k; i++) print rep[c], a[i], L[a[i]], (a[i] == rep[c] ? "si" : "no"), n[c] }
-    }' "$1" "$2" | { IFS= read -r h; echo "$h"; LC_ALL=C sort -t$'\t' -k1,1 -k4,4r -k2,2; }
-}
+# --- Idempotencia -----------------------------------------------------------
+if [[ -s "$final_dir/contigs.fasta" ]]; then
+  echo "Ya existe $final_dir/contigs.fasta ($(grep -c '^>' "$final_dir/contigs.fasta" || true) contigs). No se rehace."
+  echo "Para rehacerlo:  rm -rf $final_dir"
+  exit 0
+fi
 
-# extrae del FASTA las secuencias cuyos IDs estan en un fichero
-extrae() {
-  awk 'NR == FNR { w[$1] = 1; next }
-       /^>/ { keep = (substr($1, 2) in w) }
-       keep' "$1" "$2"
-}
+# --- Trabajo en disco local del nodo ----------------------------------------
+work="${TMPDIR:-/tmp}/megahit_${sample}_${LSB_JOBID:-$$}"
+rm -rf "$work"; mkdir -p "$work"
+cleanup() { rm -rf "$work"; }
+trap cleanup EXIT
 
-# ---------------------------------------------------------------------------
-case "$cmd" in
+# MEGAHIT exige que este directorio NO exista. No lo creamos.
+mh_out="$work/out"
 
-check)
-  echo "== votu_vclust.sh check   $(date '+%F %T')  $(hostname)   lote: $LOTE"
-  [[ "$LOTE" == MERIDA ]] || warn "el lote activo no es MERIDA (source env_lote.sh MERIDA)"
-  echo
-  echo "-- entrada: $VIRAL_FA"
-  if [[ -s "$VIRAL_FA" ]]; then
-    n=$(nseq "$VIRAL_FA")
-    if (( n == EXPECT_IN )); then ok "$n secuencias"; else warn "$n secuencias (esperadas $EXPECT_IN)"; fi
-    dup=$(ids "$VIRAL_FA" | sort | uniq -d | head -3 | tr '\n' ' ')
-    [[ -z "$dup" ]] && ok "IDs unicos" || warn "IDs repetidos: $dup"
-    echo "       ejemplo de cabecera: $(grep -m1 '^>' "$VIRAL_FA" | cut -c1-80)"
-  else
-    warn "no existe. Candidatos:"
-    find "$RESULTS_DIR" -maxdepth 4 -name '*_virus.fna' 2>/dev/null | sed 's/^/         /'
-    echo "       exporta VIRAL_FA=<ruta>"
-  fi
-  echo
-  echo "-- vclust ($ENV_VCLUST)"
-  ( activate_env "$ENV_VCLUST" >/dev/null 2>&1
-    if command -v vclust >/dev/null; then
-      ok "vclust $(vclust --version 2>&1 | tail -1)"
-      for f in "--min-ident" "--qcov" "--algorithm"; do
-        vclust prefilter -h 2>&1 | grep -q -- "$f" || vclust cluster -h 2>&1 | grep -q -- "$f" \
-          && ok "opcion $f presente" || warn "opcion $f no aparece en la ayuda"
-      done
-    else
-      warn "vclust no esta en '$ENV_VCLUST'. Instalar:"
-      echo "         conda create -n vclust_1.3.1 -c conda-forge -c bioconda vclust=1.3.1 -y"
-    fi )
-  echo
-  cl=$(find_clstr)
-  echo "-- referencia v1 (CD-HIT): ${cl:-no encontrada}"
-  if [[ -n "$cl" && -s "$cl" ]]; then
-    nc=$(n_clstr "$cl")
-    (( nc == EXPECT_V1 )) && ok "$nc grupos" || warn "$nc grupos (esperados $EXPECT_V1)"
-  else
-    warn "sin .clstr: 'comparar' no podra hacer la comparacion contig a contig. Candidatos:"
-    find "$RESULTS_DIR" "$REFS_DIR" -maxdepth 4 -name '*.clstr' 2>/dev/null | grep -i votu | sed 's/^/         /'
-    echo "       exporta CDHIT_CLSTR=<ruta>"
-  fi
-  [[ -n "$MMSEQS_TSV" ]] && { [[ -s "$MMSEQS_TSV" ]] && ok "MMSEQS_TSV: $MMSEQS_TSV" || warn "no existe MMSEQS_TSV=$MMSEQS_TSV"; }
-  echo
-  echo "-- salida: $OUT"
-  if [[ -s "$OUT/MANIFEST.txt" ]]; then
-    ok "ya hecho. 'run' no hara nada sin FORCE=1"
-  else
-    echo "       (vacia: lista para 'run')"
-  fi
-  echo
-  echo "-- parametros: prefilter --min-ident $VC_IDENT | cluster --metric ani --ani $VC_ANI --qcov $VC_QCOV | algoritmos: $VC_ALGOS"
-  echo
-  echo "-- envio:"
-  cat <<EOF
-  bsub -J votuvc -o "$LOGS_DIR/votuvc.%J.log" -e "$LOGS_DIR/votuvc.%J.err" \\
-       -q normal -n 4 -M 8000 -R "select[mem>8000] rusage[mem=8000] span[hosts=1]" \\
-       "$SELF run"
-EOF
-  ;;
+activate_env "$ENV_MEGAHIT"
+command -v megahit >/dev/null || { echo "ERROR: megahit no esta en el PATH"; exit 1; }
 
-run)
-  SECONDS=0
-  echo "votu_vclust.sh run — $(date '+%F %T') en $(hostname), $THREADS hilos, lote $LOTE"
-  [[ -s "$VIRAL_FA" ]] || die "no existe VIRAL_FA=$VIRAL_FA (corre 'check')"
-  if [[ -s "$OUT/MANIFEST.txt" && "$FORCE" != 1 ]]; then
-    echo "Ya existe $OUT/MANIFEST.txt; nada que hacer (FORCE=1 para rehacer)."
-    exit 0
-  fi
-  mkdir -p "$OUT" && cd "$OUT" || die "no puedo usar $OUT"
-  rm -f MANIFEST.txt
+# --- Preset -----------------------------------------------------------------
+# Sin preset: k de 21 a 141 en pasos de 12. Es el defecto y va bien.
+# meta-sensitive: paso de 10, mas k-mers, mas lento pero mejor con cobertura baja
+#                 -- que es justo el caso de S17-S21.
+# meta-large:     pensado para metagenomas de suelo, complejos. Aqui sobra.
+pre=()
+[[ -n "$preset" ]] && pre=( --presets "$preset" )
 
-  n_in=$(nseq "$VIRAL_FA")
-  dup=$(ids "$VIRAL_FA" | sort | uniq -d | head -3 | tr '\n' ' ')
-  [[ -z "$dup" ]] || die "IDs repetidos en la entrada: $dup"
-  echo "entrada: $n_in contigs ($VIRAL_FA)"
-  lens "$VIRAL_FA" > .lens.tsv
+echo "==========================================================="
+echo "MEGAHIT $sample   (host: $(hostname))"
+echo "  preset  : ${preset:-<defecto: k 21-141 paso 12>}"
+echo "  hilos   : $THREADS      memoria: ${MEGAHIT_MEM} GB"
+echo "  entrada : $R1"
+echo "  trabajo : $work   (disco local)"
+megahit --version
+echo "==========================================================="
 
-  activate_env "$ENV_VCLUST"
-  command -v vclust >/dev/null || die "vclust no esta en '$ENV_VCLUST' (ver 'check')"
-  VC_VER=$(vclust --version 2>&1 | tail -1)
+# -m en BYTES absolutos. Ver la mania #2 de la cabecera.
+mem_bytes=$(( MEGAHIT_MEM * 1000 * 1000 * 1000 ))
 
-  # --- 1. prefiltro y alineamiento (una vez) --------------------------------
-  PRE=(vclust prefilter -i "$VIRAL_FA" -o fltr.txt.tmp --min-ident "$VC_IDENT" -t "$THREADS")
-  echo "+ ${PRE[*]}"
-  "${PRE[@]}" > prefilter.log 2>&1 || { tail -20 prefilter.log; die "fallo vclust prefilter"; }
-  mv fltr.txt.tmp fltr.txt
-  # shellcheck disable=SC2206
-  ALN=(vclust align -i "$VIRAL_FA" -o ani.tsv --filter fltr.txt -t "$THREADS" $VC_EXTRA_ALIGN)
-  echo "+ ${ALN[*]}"
-  "${ALN[@]}" > align.log 2>&1 || { tail -20 align.log; die "fallo vclust align"; }
-  [[ -s ani.ids.tsv ]] || die "vclust align no genero ani.ids.tsv"
-  n_pairs=$(( $(wc -l < ani.tsv) - 1 ))
-  n_ids=$(( $(wc -l < ani.ids.tsv) - 1 ))
-  echo "alineamiento: $n_pairs filas (pares en ambas direcciones); $n_ids secuencias en ani.ids.tsv"
+megahit \
+    -1 "$R1" -2 "$R2" \
+    -o "$mh_out" \
+    ${pre[@]+"${pre[@]}"} \
+    -t "$THREADS" \
+    -m "$mem_bytes" \
+    --min-contig-len "$MEGAHIT_MINLEN"
 
-  # --- 2. clustering por algoritmo -----------------------------------------
-  resumen_algos=""
-  CLU_CMDS=()
-  for algo in $VC_ALGOS; do
-    CLU=(vclust cluster -i ani.tsv -o "clusters_${algo}.tsv.tmp" --ids ani.ids.tsv
-         --algorithm "$algo" --metric ani --ani "$VC_ANI" --qcov "$VC_QCOV")
-    echo "+ ${CLU[*]}"
-    "${CLU[@]}" > "cluster_${algo}.log" 2>&1 || { tail -20 "cluster_${algo}.log"; die "fallo vclust cluster ($algo)"; }
-    mv "clusters_${algo}.tsv.tmp" "clusters_${algo}.tsv"
-    CLU_CMDS+=("${CLU[*]}")
+# --- Normalizar el nombre ---------------------------------------------------
+[[ -s "$mh_out/final.contigs.fa" ]] || {
+  echo "ERROR: MEGAHIT no dejo final.contigs.fa en $mh_out"; ls -la "$mh_out" || true; exit 1; }
 
-    miembros .lens.tsv "clusters_${algo}.tsv" > "votu_miembros_${algo}.tsv"
-    n_mem=$(( $(wc -l < "votu_miembros_${algo}.tsv") - 1 ))
-    (( n_mem == n_in )) || die "$algo: votu_miembros tiene $n_mem contigs y la entrada $n_in"
-    awk -F'\t' 'NR > 1 && $4 == "si" {print $2}' "votu_miembros_${algo}.tsv" > .reps
-    extrae .reps "$VIRAL_FA" > "votus_${algo}.fa"
-    n_out=$(nseq "votus_${algo}.fa")
-    n_reps=$(wc -l < .reps)
-    (( n_out == n_reps )) || die "$algo: $n_reps representantes pero solo $n_out en el FASTA (los IDs de vclust no coinciden con las cabeceras)"
-    read -r n_single n_max <<< "$(awk -F'\t' 'NR > 1 && $4 == "si" {if ($5 == 1) s++; if ($5 > m) m = $5} END{print s+0, m+0}' "votu_miembros_${algo}.tsv")"
-    echo "$algo: $n_in contigs -> $n_out vOTUs ($n_single singletons; mayor = $n_max contigs)"
-    resumen_algos+="  $algo: $n_out vOTUs (votus_${algo}.fa md5 $(md5 "votus_${algo}.fa")); $n_single singletons; mayor = $n_max contigs"$'\n'
-  done
-  rm -f .reps .lens.tsv
+stage="$work/publish"
+mkdir -p "$stage"
+cp "$mh_out/final.contigs.fa" "$stage/contigs.fasta"
+[[ -f "$mh_out/log" ]]           && cp "$mh_out/log" "$stage/megahit.log"
+[[ -f "$mh_out/options.json" ]]  && cp "$mh_out/options.json" "$stage/options.json"
+if [[ "$KEEP_INTERMEDIATE" == "1" && -d "$mh_out/intermediate_contigs" ]]; then
+  cp -r "$mh_out/intermediate_contigs" "$stage/"
+fi
 
-  # --- 3. MANIFEST (ultimo: su existencia marca el paso como completo) ------
-  {
-    echo "paso:        vOTUs con Vclust (votu_vclust.sh run)"
-    echo "fecha:       $(date -Iseconds)"
-    echo "host/job:    $(hostname) / ${LSB_JOBID:-local}, $THREADS hilos"
-    echo "script:      $SELF (md5 $(md5 "$SELF"))"
-    echo "lote:        $LOTE"
-    echo "vclust:      $VC_VER ($ENV_VCLUST)"
-    echo "prefilter:   ${PRE[*]}"
-    echo "align:       ${ALN[*]}"
-    for c in "${CLU_CMDS[@]}"; do echo "cluster:     $c"; done
-    echo "criterio:    vOTU = ANI >= $VC_ANI sobre AF >= $VC_QCOV de la secuencia corta (MIUViG); representante = el mas largo"
-    echo "entrada:     $VIRAL_FA ($n_in secuencias, md5 $(md5 "$VIRAL_FA"))"
-    echo "pares:       $n_pairs filas en ani.tsv"
-    echo "vOTUs:"
-    printf '%s' "$resumen_algos"
-  } > MANIFEST.txt
-  echo
-  cat MANIFEST.txt
-  echo
-  echo "Done ($((SECONDS/60)) min). Siguiente: ./votu_vclust.sh comparar"
-  ;;
+n_all=$(grep -c '^>' "$stage/contigs.fasta" || true)
+(( n_all > 0 )) || { echo "ERROR: contigs.fasta vacio"; exit 1; }
 
-comparar)
-  [[ -s "$OUT/MANIFEST.txt" ]] || die "no hay corrida completa en $OUT (corre 'run')"
-  cl=$(find_clstr)
-  [[ -n "$cl" && -s "$cl" ]] || die "no encuentro el .clstr de v1; exporta CDHIT_CLSTR=<ruta>"
-  d="$OUT/comparar"; mkdir -p "$d"
-  parts=("v1_cdhit=clstr:$cl")
-  for algo in $VC_ALGOS; do
-    [[ -s "$OUT/votu_miembros_${algo}.tsv" ]] && parts+=("vclust_${algo}=miembros:$OUT/votu_miembros_${algo}.tsv")
-  done
-  [[ -n "$MMSEQS_TSV" && -s "$MMSEQS_TSV" ]] && parts+=("mmseqs=pares:$MMSEQS_TSV")
+# --- Filtro por longitud ----------------------------------------------------
+filt="$stage/contigs_${MIN_LEN}bp.fasta"
+if command -v seqkit >/dev/null 2>&1; then
+  seqkit seq -m "$MIN_LEN" "$stage/contigs.fasta" > "$filt"
+else
+  awk -v L="$MIN_LEN" '
+    /^>/ { if (h != "" && length(s) >= L) print h ORS s; h=$0; s=""; next }
+         { s = s $0 }
+    END  { if (h != "" && length(s) >= L) print h ORS s }' \
+    "$stage/contigs.fasta" > "$filt"
+fi
+n_filt=$(grep -c '^>' "$filt" || true)
 
-  python3 - "$OUT/ani.tsv" "$OUT/ani.ids.tsv" "$d" "${parts[@]}" <<'PY' | tee "$d/resumen.txt"
-import sys, os, csv
-from collections import defaultdict
-ani_tsv, ids_tsv, outd, *specs = sys.argv[1:]
+cp "$filt" "$stage/${sample}_final.fasta"
 
-def read_tsv(p):
-    with open(p) as f:
-        return list(csv.reader(f, delimiter="\t"))
+# --- Tabla de contigs, formato MEGAHIT --------------------------------------
+# >k141_1234 flag=1 multi=47.3120 len=12898
+# Se emite con las MISMAS columnas que contig_tables.sh produce para SPAdes,
+# para poder comparar ensambladores sin reescribir nada aguas abajo.
+{
+  printf 'sample\tnode\tlength_bp\tcoverage\n'
+  awk -v s="$sample" '/^>/ {
+      node=""; len=""; mul=""
+      n = split(substr($0,2), f, /[ \t]+/)
+      node = f[1]
+      for (i = 2; i <= n; i++) {
+        if (f[i] ~ /^len=/)   { len = substr(f[i], 5) }
+        if (f[i] ~ /^multi=/) { mul = substr(f[i], 7) }
+      }
+      if (len != "") print s "\t" node "\t" len "\t" mul
+    }' "$stage/contigs.fasta"
+} > "$stage/contigs_table.tsv"
 
-# longitudes (ani.ids.tsv: id seq_len no_parts)
-L = {r[0]: int(r[1]) for r in read_tsv(ids_tsv)[1:]}
+# --- Publicar de forma atomica ----------------------------------------------
+rm -rf "$final_dir"
+mkdir -p "$(dirname "$final_dir")"
+mv "$stage" "$final_dir"
 
-def part_clstr(p):
-    m, rep, cur, members = {}, {}, None, []
-    def flush():
-        if not members: return
-        r = next((x for x, star in members if star), members[0][0])
-        for x, _ in members: m[x] = r
-    for line in open(p):
-        if line.startswith(">Cluster"):
-            flush(); members = []; continue
-        if ">" in line:
-            x = line.split(">", 1)[1].split("...", 1)[0].split()[0]
-            members.append((x, line.rstrip().endswith("*")))
-    flush()
-    return m
+# --- Estadisticas -----------------------------------------------------------
+# El maximo se calcula DENTRO de awk. Con 'sort -rn | head -1' y set -o pipefail,
+# head cierra la tuberia, sort recibe SIGPIPE y el script muere justo despues de
+# haber publicado -- que es exactamente como se perdio un TSV con SPAdes.
+longest=$(awk '/^>/{if(l>m)m=l; l=0; next}{l+=length($0)}END{if(l>m)m=l; print m+0}' \
+          "$final_dir/contigs.fasta")
+total_bp=$(awk '!/^>/{t+=length($0)}END{print t+0}' "$final_dir/contigs.fasta")
 
-def part_miembros(p):
-    rows = read_tsv(p)
-    h = rows[0]; iv, ic = h.index("votu"), h.index("contig")
-    return {r[ic]: r[iv] for r in rows[1:]}
+printf 'sample\tassembler\tmode\tcontigs_total\tcontigs_ge%s\ttotal_bp\tlongest_bp\n' "$MIN_LEN" \
+  > "$statsdir/${sample}_assembly.tsv"
+printf '%s\tmegahit\t%s\t%s\t%s\t%s\t%s\n' \
+  "$sample" "${preset:-default}" "$n_all" "$n_filt" "$total_bp" "$longest" \
+  >> "$statsdir/${sample}_assembly.tsv"
 
-def part_pares(p):          # mmseqs _cluster.tsv: rep<TAB>member
-    return {r[1]: r[0] for r in read_tsv(p) if len(r) >= 2}
-
-readers = {"clstr": part_clstr, "miembros": part_miembros, "pares": part_pares}
-P = {}
-for s in specs:
-    name, rest = s.split("=", 1)
-    fmt, path = rest.split(":", 1)
-    P[name] = readers[fmt](path)
-
-names = list(P)
-ref = names[0]
-common = set(P[ref])
-for n in names[1:]:
-    common &= set(P[n])
-
-def comb2(k): return k * (k - 1) // 2
-
-def ari(a, b, keys):
-    cont = defaultdict(int); ca = defaultdict(int); cb = defaultdict(int)
-    for k in keys:
-        cont[(a[k], b[k])] += 1; ca[a[k]] += 1; cb[b[k]] += 1
-    s_ij = sum(comb2(v) for v in cont.values())
-    s_a = sum(comb2(v) for v in ca.values()); s_b = sum(comb2(v) for v in cb.values())
-    n2 = comb2(len(keys))
-    exp = s_a * s_b / n2 if n2 else 0
-    mx = (s_a + s_b) / 2
-    return 1.0 if mx == exp else (s_ij - exp) / (mx - exp)
-
-def groups(p, keys):
-    g = defaultdict(set)
-    for k in keys: g[p[k]].add(k)
-    return g
-
-print("== Comparacion de particiones (contigs en comun: %d)" % len(common))
-for n in names:
-    extra = set(P[n]) - common
-    if extra:
-        print("  [!!] %s tiene %d contigs que no estan en todas las particiones (se ignoran)" % (n, len(extra)))
-print()
-print("%-16s %8s %8s %11s %8s" % ("particion", "contigs", "vOTUs", "singletons", "mayor"))
-for n in names:
-    g = groups(P[n], common)
-    sizes = [len(v) for v in g.values()]
-    print("%-16s %8d %8d %11d %8d" % (n, len(common), len(g), sum(1 for x in sizes if x == 1), max(sizes)))
-print()
-
-# ANI/AF entre pares (fila con query = la secuencia corta; si empatan, la mejor)
-pair = {}
-with open(ani_tsv) as f:
-    rd = csv.reader(f, delimiter="\t"); h = next(rd)
-    iq, ir, ia, ic = h.index("query"), h.index("reference"), h.index("ani"), h.index("qcov")
-    for r in rd:
-        q, t = r[iq], r[ir]
-        if L.get(q, 0) > L.get(t, 0): continue
-        key = frozenset((q, t)); val = (float(r[ia]), float(r[ic]))
-        if key not in pair or val > pair[key]: pair[key] = val
-def af(a, b):
-    if a == b: return ("1.000", "1.000")
-    v = pair.get(frozenset((a, b)))
-    return ("%.3f" % v[0], "%.3f" % v[1]) if v else ("<pref", "<pref")
-
-gref = groups(P[ref], common)
-reps_ref = set(gref)
-for n in names[1:]:
-    g = groups(P[n], common)
-    same = sum(1 for s in map(frozenset, gref.values()) if s in set(map(frozenset, g.values())))
-    split = sum(1 for s in gref.values() if len({P[n][k] for k in s}) > 1)
-    merge = sum(1 for s in g.values() if len({P[ref][k] for k in s}) > 1)
-    shared_reps = len(reps_ref & set(g))
-    print("-- %s frente a %s" % (n, ref))
-    print("   ARI                                  %.4f" % ari(P[ref], P[n], common))
-    print("   vOTUs identicas (mismos contigs)     %d de %d" % (same, len(gref)))
-    print("   vOTUs de %s partidas en varias     %d" % (ref, split))
-    print("   vOTUs de %s que juntan varias de %s  %d" % (n, ref, merge))
-    print("   representantes de %s que siguen siendolo  %d de %d" % (ref, shared_reps, len(gref)))
-    lost = sorted(reps_ref - set(g))
-    with open(os.path.join(outd, "reps_v1_perdidos_%s.txt" % n), "w") as f:
-        for r in lost: f.write("%s\t%d\t%s\n" % (r, L.get(r, 0), P[n][r]))
-    disc = [k for k in sorted(common)
-            if len({P[n][x] for x in gref[P[ref][k]]}) > 1 or len({P[ref][x] for x in g[P[n][k]]}) > 1]
-    with open(os.path.join(outd, "discordantes_%s.tsv" % n), "w") as f:
-        f.write("contig\tlongitud\tvotu_%s\tvotu_%s\tani_a_rep_%s\taf_a_rep_%s\tani_a_rep_%s\taf_a_rep_%s\n"
-                % (ref, n, ref, ref, n, n))
-        for k in disc:
-            a1, f1 = af(k, P[ref][k]); a2, f2 = af(k, P[n][k])
-            f.write("\t".join([k, str(L.get(k, 0)), P[ref][k], P[n][k], a1, f1, a2, f2]) + "\n")
-    print("   contigs en vOTUs discordantes        %d  (discordantes_%s.tsv)" % (len(disc), n))
-    print()
-
-with open(os.path.join(outd, "contig_votu_comparacion.tsv"), "w") as f:
-    f.write("contig\tlongitud\t" + "\t".join("votu_" + n for n in names) + "\n")
-    for k in sorted(common):
-        f.write("\t".join([k, str(L.get(k, 0))] + [P[n][k] for n in names]) + "\n")
-print("Tablas en " + outd)
-print("ani/af '<pref' = el par no paso el prefiltro o no hubo alineamiento")
-PY
-  ;;
-
-ayuda|-h|--help)
-  awk 'NR > 2 && /^# -{10}/ {exit} NR > 2 {sub(/^# ?/, ""); print}' "$SELF"
-  ;;
-
-*)
-  echo "subcomando desconocido: $cmd (check | run | comparar | ayuda)"; exit 2
-  ;;
-esac
+echo
+echo "  contigs totales   : $n_all"
+echo "  contigs >=${MIN_LEN} bp : $n_filt"
+echo "  bases totales     : $total_bp"
+echo "  contig mas largo  : $longest bp"
+echo "  salida            : $final_dir"
+echo "Done: $sample  ($((SECONDS/3600))h $((SECONDS%3600/60))m $((SECONDS%60))s)"
