@@ -63,9 +63,9 @@ export SRNA_PI_MIN=24 SRNA_PI_MAX=35
 
 # --- Referencias bowtie1 (las construye srna_build_refs.sh) -----------------
 export SRNA_REFS="$REFS_DIR/srna"
-export BT1_GENOME="$SRNA_REFS/bt1_genome/AaegL5"
-export BT1_RRNA="$SRNA_REFS/bt1_rrna/rrna"
-export BT1_VIRAL="$SRNA_REFS/bt1_viral/viral_targets"
+export BT1_GENOME="${BT1_GENOME:-$SRNA_REFS/bt1_genome/AaegL5}"
+export BT1_RRNA="${BT1_RRNA:-$SRNA_REFS/bt1_rrna/rrna}"
+export BT1_VIRAL="${BT1_VIRAL:-$SRNA_REFS/bt1_viral_min500/viral_targets}"
 
 # --- Entorno conda: uno solo para todo small RNA ----------------------------
 #   conda create -n srna -c conda-forge -c bioconda \
