@@ -96,9 +96,11 @@ build() {      # build <fasta> <prefijo>
 case "$cmd" in
   check)
     activate_env "$ENV_SRNA" >/dev/null 2>&1 || echo "  !! no se activa el entorno $ENV_SRNA"
-    for t in cutadapt bowtie bowtie-build samtools seqkit python3; do
+    for t in cutadapt bowtie bowtie-build samtools python3; do
       printf '  %-13s %s\n' "$t" "$(command -v "$t" >/dev/null && "$t" --version 2>&1 | head -1 || echo 'NO ESTA')"
     done
+    # seqkit no acepta --version, es 'seqkit version'
+    printf '  %-13s %s\n' seqkit "$(command -v seqkit >/dev/null && seqkit version 2>&1 | head -1 || echo 'NO ESTA')"
     echo
     for p in "$BT1_GENOME" "$BT1_RRNA" "$BT1_VIRAL"; do
       if idx_ok "$p"; then echo "  [ok ] $p"; else echo "  [ -- ] $p"; fi
@@ -136,6 +138,16 @@ case "$cmd" in
 
   viral)
     [[ -s "$VOTUS_FA" ]] || { echo "ERROR: no existe $VOTUS_FA"; exit 1; }
+    # GUARDIA: el nombre del directorio del indice no puede mentir sobre su contenido.
+    # Sin esto, un BT1_VIRAL=...bt1_viral_min500 con el VOTUS_FA por defecto (las 748
+    # vOTUs del corte >=1 kb) construiria el catalogo equivocado en silencio.
+    if [[ "$BT1_VIRAL" == *min500* && "$VOTUS_FA" != *min500* ]]; then
+      echo "ERROR: BT1_VIRAL apunta a min500 pero VOTUS_FA no:"
+      echo "  BT1_VIRAL = $BT1_VIRAL"
+      echo "  VOTUS_FA  = $VOTUS_FA"
+      echo "  exporta VOTUS_FA=\$REFS_DIR/votu_catalog/MERIDA_cdhit95_85_G1g1_min500/votus.fa"
+      exit 1
+    fi
     activate_env "$ENV_SRNA"
     # el FASTA vive junto a SU indice: cambiar BT1_VIRAL cambia de catalogo sin
     # pisar el anterior (ver la cabecera)
