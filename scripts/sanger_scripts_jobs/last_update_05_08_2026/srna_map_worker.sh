@@ -89,25 +89,36 @@ formato_fa() {   # colapsado_x | colapsado_espacio | expandido
 }
 
 # FASTA 18-35 con el peso en el nombre: >r<i>_x<w>.  Imprime a stdout;
-# los totales (entradas y peso) van al fichero que se pasa como $2.
+# los totales (entradas y peso) van al fichero $2 y el histograma de longitudes
+# de TODAS las lecturas (no solo 18-35) al fichero $3.
+#
+# El histograma completo sale gratis aqui, porque el awk recorre cada lectura de
+# todos modos, y es el QC de libreria que el plan pide en su aviso 1: el modo
+# dice si la libreria esta dominada por fragmentos de rRNA/tRNA (el caso de
+# S17-S21, con el rRNA disparado ya en el RNA largo) y cuanto se tira por debajo
+# de 18 nt. Sin esto habria que releer los 26 ficheros aparte.
 extraer_18_35() {
-  local f="$1" tot="$2"
+  local f="$1" tot="$2" hist="${3:-/dev/null}"
   if [[ "$f" == *.fastq.gz || "$f" == *.fq.gz ]]; then
-    zcat "$f" | awk -v OUT="$tot" '
-      NR % 4 == 2 { L = length($0)
+    zcat "$f" | awk -v OUT="$tot" -v HIST="$hist" '
+      NR % 4 == 2 { L = length($0); h[L]++; tot++
                     if (L >= 18 && L <= 35) { k++; w++; print ">r" k "_x1"; print $0 } }
-      END { printf "entradas\t%d\npeso\t%d\n", k, w > OUT }'
+      END { printf "entradas\t%d\npeso\t%d\ntodas\t%d\n", k, w, tot > OUT
+            printf "longitud_nt\tlecturas\n" > HIST
+            for (L = 1; L <= 100; L++) if (L in h) printf "%d\t%d\n", L, h[L] > HIST }'
   else
     local modo; modo=$(formato_fa "$f")
-    zcat "$f" | awk -v modo="$modo" -v OUT="$tot" '
+    zcat "$f" | awk -v modo="$modo" -v OUT="$tot" -v HIST="$hist" '
       /^>/ { n = 1
              if (modo == "colapsado_x")            { if (match($0, /_x[0-9]+$/)) n = substr($0, RSTART + 2) + 0 }
              else if (modo == "colapsado_espacio") { n = $NF + 0 }
              if (n < 1) n = 1
              next }
-      { L = length($0)
+      { L = length($0); h[L] += n; tot += n
         if (L >= 18 && L <= 35) { k++; w += n; print ">r" k "_x" n; print $0 } }
-      END { printf "entradas\t%d\npeso\t%d\n", k, w > OUT }'
+      END { printf "entradas\t%d\npeso\t%d\ntodas\t%d\n", k, w, tot > OUT
+            printf "longitud_nt\tlecturas\n" > HIST
+            for (L = 1; L <= 100; L++) if (L in h) printf "%d\t%d\n", L, h[L] > HIST }'
   fi
 }
 
@@ -138,12 +149,12 @@ if [[ "$cmd" == check ]]; then
     fi
   done
   echo
-  echo "   OJO: el nivel B esta anclado al catalogo de 5,899 vOTUs (corte >=500 bp)."
+  echo "   Nivel B anclado al catalogo de 5,899 vOTUs (corte >=500 bp): ese es ya el"
+  echo "   valor por defecto de BT1_VIRAL en srna_env.sh (bt1_viral_min500/)."
   echo "   El indice viral se construye con:"
   echo "     export VOTUS_FA=\$REFS_DIR/votu_catalog/MERIDA_cdhit95_85_G1g1_min500/votus.fa"
   echo "     export VIRAL_EXTRA=\$SRNA_REFS/fasta/AEFE1.fa"
-  echo "     export BT1_VIRAL=\$SRNA_REFS/bt1_viral_min500/viral_targets"
-  echo "     \"\$S/srna_build_refs.sh\" viral       # en bt1_viral_min500, NO pisa el de 1 kb"
+  echo "     \"\$S/srna_build_refs.sh\" viral"
   echo
   echo "-- lecturas ($SRNA_READS_SRC)"
   if [[ -s "$LISTA" ]]; then
@@ -165,11 +176,12 @@ if [[ "$cmd" == check ]]; then
     echo "       awk -F'\\t' 'NR>1 {print \$1}' \"\$SRNA_SHEET\" > $SCRATCH/nivelB_libs.txt"
   fi
   echo
-  echo "-- AEFE1 (control positivo de perfil EVE)"
+  echo "-- EVE de control (control positivo de perfil EVE)"
   if [[ -s "$BT1_VIRAL.1.ebwt" || -s "$BT1_VIRAL.1.ebwtl" ]]; then
-    bowtie-inspect -n "$BT1_VIRAL" 2>/dev/null | grep -i -q aefe1 \
-      && echo "  ok: AEFE1 esta en el indice viral" \
-      || echo "  !! AEFE1 NO esta en el indice: sin control positivo no se puede calibrar la clase EVE"
+    ctrl="${EVE_CTRL:-EVE_CFAV_AaegL5_chr1_469224864_469225891}"
+    bowtie-inspect -n "$BT1_VIRAL" 2>/dev/null | grep -q -F "$ctrl" \
+      && echo "  ok: $ctrl esta en el indice viral" \
+      || echo "  !! $ctrl NO esta en el indice: sin control positivo no se calibra la clase EVE"
   else
     echo "  (sin indice viral todavia)"
   fi
@@ -199,10 +211,19 @@ W="$WORK/$lib"
 mkdir -p "$W"
 
 # --- 1. 18-35 nt ------------------------------------------------------------
-extraer_18_35 "$f" "$W/tot_18_35.tsv" > "$W/in.fa"
+extraer_18_35 "$f" "$W/tot_18_35.tsv" "$OUT/particion/$lib.lenhist.tsv" > "$W/in.fa"
 n_entradas=$(awk -F'\t' '$1 == "entradas" {print $2}' "$W/tot_18_35.tsv")
 n_18_35=$(awk -F'\t' '$1 == "peso" {print $2}' "$W/tot_18_35.tsv")
+n_todas=$(awk -F'\t' '$1 == "todas" {print $2}' "$W/tot_18_35.tsv")
 echo "18-35 nt: $n_18_35 lecturas en $n_entradas secuencias unicas"
+awk -F'\t' -v tot="$n_todas" 'NR > 1 {
+    n[$1] = $2; if ($2 > mx) { mx = $2; modo = $1 }
+    if ($1 < 18) corto += $2; else if ($1 > 35) largo += $2
+  } END {
+    printf "longitudes: modo %d nt · <18 nt %.1f%% · >35 nt %.1f%% (de %d lecturas)\n",
+           modo, 100 * corto / tot, 100 * largo / tot, tot
+    if (modo < 20 || modo > 30) print "  !! MODO_RARO: el modo cae fuera de 20-30 nt (rRNA/tRNA?)"
+  }' "$OUT/particion/$lib.lenhist.tsv"
 (( n_18_35 > 0 )) || { echo "ERROR: ninguna lectura de 18-35 nt en $lib"; exit 1; }
 
 # --- 2. rRNA fuera; el resto es el denominador de RPM -----------------------
@@ -242,6 +263,7 @@ printf 'de esas, tambien en AaegL5: %d lecturas (%.1f%%)\n' \
 
 # --- 5. particion (se conserva: es el denominador y el QC de la libreria) ---
 { printf 'libreria\tmetrica\tvalor\n'
+  printf '%s\tlecturas_todas\t%d\n'        "$lib" "$n_todas"
   printf '%s\tlecturas_18_35\t%d\n'        "$lib" "$n_18_35"
   printf '%s\tsecuencias_unicas\t%d\n'     "$lib" "$n_entradas"
   printf '%s\trrna\t%d\n'                  "$lib" "$n_rrna"

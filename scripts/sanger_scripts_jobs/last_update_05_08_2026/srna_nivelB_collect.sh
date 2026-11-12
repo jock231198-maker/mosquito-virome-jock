@@ -7,10 +7,13 @@
 #
 # 1. Comprueba que estan todas las librerias (y dice que indices relanzar).
 # 2. Junta las metricas por muestra en una tabla y la clasifica.
-# 3. CALIBRACION con AEFE1: el control positivo de perfil EVE. Si AEFE1 no sale
-#    EVE_NIRVS en la mayoria de las librerias, los umbrales de la clase EVE
-#    estan mal y NO se interpreta nada mas (la leccion de dup_unmapped.sh:
-#    primero una muestra de valor conocido).
+# 3. CALIBRACION con el EVE de control. Si no sale EVE_NIRVS en la mayoria de las
+#    librerias, los umbrales de la clase EVE estan mal y NO se interpreta nada mas
+#    (la leccion de dup_unmapped.sh: primero una muestra de valor conocido).
+#    El control es EVE_CFAV_AaegL5_chr1_469224864_469225891: el locus derivado de
+#    CFAV extraido del propio AaegL5 (ver PLAN_nivelB_fase2.md §6). Al ser genoma
+#    por construccion, su frac_en_genoma TIENE que salir 1.00; si sale por debajo,
+#    el fallo esta en el paso 4 del worker, no en la biologia.
 # 4. Cruza con el RNA largo (small frente a largo, §4d del plan) usando la
 #    cobertura por vOTU que ya existe.
 # 5. Escribe RESUMEN.txt y las tablas que consumen las figuras.
@@ -26,7 +29,7 @@
 #   VOTUS_RRNA  GFF de barrnap          ($R/rrna_min500/votus_rrna.gff)
 #   VOTUS_GEN   cribado AaegL5          ($R/cribado_min500/votus_en_genoma.tsv)
 #   TABLA       tabla final de la rama, si ya existe (opcional)
-#   AEFE1_ID    nombre de la secuencia de AEFE1 en el indice (por defecto AEFE1)
+#   EVE_CTRL    nombre de la secuencia del EVE de control en el indice viral
 #
 # SALIDA  $RESULTS_DIR/nivelB/
 #   nivelB_metricas.tsv      todas las muestras juntas
@@ -57,7 +60,7 @@ COV_LARGO="${COV_LARGO:-$QC_MIN500/cov/votu_coverage.tsv}"
 VOTUS_RRNA="${VOTUS_RRNA:-$R/rrna_min500/votus_rrna.gff}"
 VOTUS_GEN="${VOTUS_GEN:-$R/cribado_min500/votus_en_genoma.tsv}"
 TABLA="${TABLA:-$QC_MIN500/TABLA_FINAL_votus_arb.tsv}"
-AEFE1_ID="${AEFE1_ID:-AEFE1}"
+EVE_CTRL="${EVE_CTRL:-EVE_CFAV_AaegL5_chr1_469224864_469225891}"
 LISTA="${SRNA_LIBS_FILE:-$SCRATCH/nivelB_libs.txt}"
 
 OUT="$RESULTS_DIR/nivelB"
@@ -112,23 +115,31 @@ python3 "$SCRIPT_DIR/srna_clasificar.py" "$OUT/nivelB_metricas.tsv" \
   --salida "$OUT/nivelB_clases.tsv" --consenso "$OUT/nivelB_consenso.tsv" \
   --rrna "$rrna_txt" --en-genoma "$gen_txt"
 
-# --------------------------------------------------------------- 3. calibracion AEFE1
-cal=$(awk -F'\t' -v id="$AEFE1_ID" '
-  NR == 1 { for (i = 1; i <= NF; i++) { if ($i == "votu") cv = i; if ($i == "clase") cc = i }; next }
-  $cv == id { n++; if ($cc == "EVE_NIRVS") e++ }
-  END { printf "%d\t%d", n + 0, e + 0 }' "$OUT/nivelB_clases.tsv")
-n_ae=${cal%%$'\t'*}; e_ae=${cal##*$'\t'}
-if (( n_ae == 0 )); then
-  cal_txt="SIN CALIBRAR — AEFE1 ('$AEFE1_ID') no tiene lecturas en ninguna libreria.
-  Comprueba que esta en el indice viral (VIRAL_EXTRA) y que el ID coincide."
-elif (( e_ae * 2 >= n_ae )); then
-  cal_txt="PASA — AEFE1 sale EVE_NIRVS en $e_ae de $n_ae librerias."
+# --------------------------------------------------------------- 3. calibracion del EVE de control
+cal=$(awk -F'\t' -v id="$EVE_CTRL" '
+  NR == 1 { for (i = 1; i <= NF; i++) { if ($i == "votu") cv = i; if ($i == "clase") cc = i
+                                        if ($i == "frac_en_genoma") cg = i }; next }
+  $cv == id { n++; if ($cc == "EVE_NIRVS") e++; if (cg && $cg + 0 < 0.99) mal++ }
+  END { printf "%d\t%d\t%d", n + 0, e + 0, mal + 0 }' "$OUT/nivelB_clases.tsv")
+IFS=$'\t' read -r n_ev e_ev mal_ev <<< "$cal"
+if (( n_ev == 0 )); then
+  cal_txt="SIN CALIBRAR — el EVE de control ('$EVE_CTRL') no tiene lecturas en ninguna
+  libreria. Comprueba que esta en el indice viral (VIRAL_EXTRA) y que el ID coincide."
+elif (( e_ev * 2 >= n_ev )); then
+  cal_txt="PASA — el EVE de control sale EVE_NIRVS en $e_ev de $n_ev librerias."
 else
-  cal_txt="NO PASA — AEFE1 sale EVE_NIRVS en solo $e_ae de $n_ae librerias.
+  cal_txt="NO PASA — el EVE de control sale EVE_NIRVS en solo $e_ev de $n_ev librerias.
   Los umbrales de la clase EVE estan mal calibrados: NO interpretar el resto
   hasta revisarlos (mira sus filas en nivelB_clases.tsv y el motivo)."
 fi
-echo; echo "calibracion AEFE1: ${cal_txt%%$'\n'*}"
+# El control ES genoma: frac_en_genoma por debajo de 1.00 delata el paso 4 del worker
+if (( n_ev > 0 && mal_ev > 0 )); then
+  cal_txt="$cal_txt
+  !! en $mal_ev de $n_ev librerias el control tiene frac_en_genoma < 1.00, y por
+  construccion deberia ser 1.00 (la referencia es un trozo de AaegL5). Revisa el
+  mapeo contra el genoma del worker antes de leer esa columna en el resto."
+fi
+echo; echo "calibracion del EVE de control: ${cal_txt%%$'\n'*}"
 
 # --------------------------------------------------------------- 4. matriz y small vs largo
 python3 - "$OUT/nivelB_metricas.tsv" "$OUT/nivelB_rpm_matriz.tsv" <<'PY'
@@ -198,6 +209,23 @@ fi
   awk -F'\t' '$2 == "lecturas_18_35" {t[$1] = $3} $2 == "rrna" {r[$1] = $3}
        END {for (l in t) printf "  %-6s %5.1f %%\n", l, 100 * r[l] / t[l]}' \
     "$OUT"/particion/*.particion.tsv | sort
+  echo
+  echo "PERFIL DE LONGITUDES por libreria (todas las lecturas, antes del filtro 18-35)"
+  echo "  esperado en mosquito entero: pico de miRNA en 22 nt y joroba de piRNA en 25-29"
+  for h in "$OUT"/particion/*.lenhist.tsv; do
+    [[ -s "$h" ]] || continue
+    l=$(basename "$h" .lenhist.tsv)
+    awk -F'\t' -v l="$l" '
+      NR > 1 { t += $2; if ($2 > mx) { mx = $2; modo = $1 }
+               if ($1 < 18) c += $2; else if ($1 <= 23) si += $2
+               else if ($1 <= 35) pi += $2; else g += $2 }
+      END { if (t > 0) printf "  %-6s modo %2d nt   <18 %5.1f %%   18-23 %5.1f %%   24-35 %5.1f %%   >35 %4.1f %%%s\n", \
+                   l, modo, 100*c/t, 100*si/t, 100*pi/t, 100*g/t, \
+                   (modo < 20 || modo > 30 ? "   !! MODO_RARO" : "") }' "$h"
+  done
+  echo
+  echo "  MODO_RARO = modo fuera de 20-30 nt: libreria dominada por fragmentos de rRNA/tRNA."
+  echo "  Es un aviso, no una exclusion, pero se cita al interpretar esa libreria."
   echo
   echo "CONSENSO por vOTU"
   awk -F'\t' 'NR > 1 {n[$10]++} END {for (c in n) printf "  %-24s %5d\n", c, n[c]}' \
