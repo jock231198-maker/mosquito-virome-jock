@@ -59,18 +59,40 @@ TMP="$(mktemp -d)"; trap 'rm -rf "$TMP"' EXIT
 # el primero cuyas cabeceras lleven multi=.
 build_lookup() {
   local out="$1"; : > "$out"
-  local n=0 sinfa=0
+  local n=0 sinfa=0 total=0
   for d in "$MEGAHIT_DIR"/*/; do
     [[ -d "$d" ]] || continue
-    local m fa=""
+    total=$((total+1))
+    local m
     m="$(basename "$d")"
-    for cand in "${MEGAHIT_FA:-}" "${m}_final.fasta" "contigs.fasta" "final.contigs.fa"; do
+
+    # Fuente preferida: contigs_table.tsv, que ya trae la cobertura parseada
+    # (sample node length_bp coverage) sobre el conjunto COMPLETO de contigs.
+    if [[ -z "${MEGAHIT_FA:-}" && -s "$d/contigs_table.tsv" ]]; then
+      awk -F'\t' -v s="$m" 'BEGIN{OFS="\t"} NR>1 && $4 != "" {
+        print s, "megahit__" $2, $4 }' "$d/contigs_table.tsv" >> "$out"
+      n=$((n+1)); continue
+    fi
+
+    # Alternativa: parsear multi= de las cabeceras.
+    # contigs.fasta va PRIMERO porque es el conjunto completo; los demas son
+    # subconjuntos filtrados (<muestra>_final.fasta y contigs_1000bp.fasta son
+    # el corte de 1 kb, contigs_500bp.fasta el de 500 pb) y dejarian fuera
+    # contigs que si estan en la union.
+    #
+    # OJO: nada de 'head ... | grep -q' aqui. grep -q cierra la tuberia al
+    # primer acierto, head muere con SIGPIPE y pipefail propaga 141, de modo
+    # que un acierto se lee como fallo, de forma intermitente. grep -m1 sobre
+    # el fichero, sin tuberia, no tiene ese problema y tambien para pronto.
+    local fa=""
+    for cand in "${MEGAHIT_FA:-}" "contigs.fasta" "final.contigs.fa" \
+                "contigs_500bp.fasta" "${m}_final.fasta" "contigs_1000bp.fasta"; do
       [[ -n "$cand" && -s "$d/$cand" ]] || continue
-      if head -400 "$d/$cand" | grep -q '^>.*multi='; then fa="$d/$cand"; break; fi
+      if grep -qm1 '^>.*multi=' "$d/$cand"; then fa="$d/$cand"; break; fi
     done
     if [[ -z "$fa" ]]; then
       sinfa=$((sinfa+1))
-      echo "  aviso: en $d no hay fasta con cabeceras multi=" >&2
+      echo "  aviso: en $d no hay contigs_table.tsv ni fasta con multi=" >&2
       continue
     fi
     grep '^>' "$fa" | awk -v s="$m" 'BEGIN{OFS="\t"}
@@ -79,9 +101,19 @@ build_lookup() {
         if (multi != "") print s, "megahit__" id, multi }' >> "$out"
     n=$((n+1))
   done
-  echo "  muestras de megahit leidas: $n   sin fasta valido: $sinfa" >&2
-  echo "  contigs con multi=:         $(wc -l < "$out")" >&2
-  [[ $n -gt 0 ]] || { echo "  ERROR: ninguna muestra aporto multi=" >&2; return 1; }
+  echo "  muestras de megahit: $n de $total con multi=   (sin fasta valido: $sinfa)" >&2
+  echo "  contigs con multi=:  $(wc -l < "$out")" >&2
+  # Guarda: con la mayoria de las muestras sin multi= la tabla saldria con
+  # cov_fix vacio en casi todo megahit, que es peor que no escribirla.
+  if (( total > 0 && n * 2 < total )); then
+    echo >&2
+    echo "  ERROR: solo $n de $total muestras aportaron multi=." >&2
+    echo "  No se escribe nada. Averigua que fichero de megahit lleva las" >&2
+    echo "  cabeceras con multi= y pasalo en MEGAHIT_FA, o usa FORCE=1 para" >&2
+    echo "  escribir de todos modos con cov_fix vacio en megahit." >&2
+    [[ "${FORCE:-0}" == "1" ]] || return 1
+    echo "  FORCE=1: se continua de todos modos." >&2
+  fi
 }
 
 # --- parser: de (nombre_completo, longitud) a las 6 columnas ----------------
