@@ -58,12 +58,35 @@ for f in leer(MASTER):
 print(f"vOTUs en votus_master: {len(master)}")
 
 # ---- 2. cobertura de ensamblaje (para marcar rRNA) ---------------------------
-cov_asm = {}
+# La clave tiene que ser el nombre completo del contig en la union
+# (muestra__ensamblador__contig), que es como se llaman las vOTUs. Indexar por
+# la columna 'contig' a secas no acierta nunca, y ademas colisiona: megahit
+# repite k119_N entre muestras.
+with open(UNION) as _fh:
+    _cab = _fh.readline().rstrip("\n").split("\t")
+_ix = {c: i for i, c in enumerate(_cab)}
+I_COV = _ix.get("cov_fix", 5)
+I_CTG = _ix.get("contig", 2)
+I_MUE = _ix.get("muestra")
+I_ASM = _ix.get("ensamblador", _ix.get("asm"))
+
+def _nombre_union(f):
+    n = f[I_CTG]
+    if n.count("__") >= 2:
+        return n
+    pre = [f[i] for i in (I_MUE, I_ASM) if i is not None and i < len(f)]
+    return "__".join(pre + [n])
+
+cov_asm, _colis = {}, 0
 for f in leer(UNION):
-    if len(f) < 6: continue
-    try: cov_asm[f[2]] = float(f[5])      # col6 = cov_fix
-    except ValueError: pass
-print(f"contigs con cobertura de ensamblaje: {len(cov_asm)}")
+    if len(f) <= max(I_COV, I_CTG): continue
+    try: cov = float(f[I_COV])
+    except ValueError: continue
+    k = _nombre_union(f)
+    if k in cov_asm: _colis += 1
+    cov_asm[k] = cov
+print(f"contigs con cobertura de ensamblaje: {len(cov_asm)}"
+      + (f"  [AVISO: {_colis} claves repetidas]" if _colis else ""))
 
 # ---- 3. amplitud por mapeo ---------------------------------------------------
 # votu_coverage.tsv no tiene cabecera: muestra, votu, long, cubiertas, %cub, prof

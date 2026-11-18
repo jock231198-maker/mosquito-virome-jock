@@ -37,6 +37,43 @@ grupo_virus: "fago" si cualquiera de los dos nombres es de fago; "artropodo" si 
 Uso:
   python3 integrar_arbitro.py TABLA_FINAL_votus.tsv veredicto_por_votu.tsv SALIDA.tsv [votus_en_genoma.tsv]
 """
+
+# --- nomenclatura -------------------------------------------------------------
+# Dos nombres de NCBI para el mismo virus. Verificado el 17 nov 2026: cada contig
+# sale al ~99 % contra las dos referencias y las dos bases los intercambian
+# contig a contig (RESUMEN_min500.md 5.3). Se canoniza para no partir la especie.
+SINONIMOS = {
+    "Aedes aegypti toti-like virus": "Palmetto toti-like virus",
+}
+
+import re  # el bloque de nomenclatura va antes de los imports del fichero
+_RANGO     = re.compile(r"\bsp\.?$")
+_HOSPEDERO = re.compile(r"^(Aedes|Anopheles|Culex|Toxorhynchites|Drosophila|Culicidae)\b", re.I)
+_VIRAL_PAL = re.compile(r"virus|phage|viriform|viridae|virales|virinae|like", re.I)
+
+def nombre_util(x):
+    """Un nombre de referencia solo sirve si nombra un virus concreto.
+
+    Descarta rangos taxonomicos (Rhabdoviridae sp., Caudoviricetes sp.), el
+    marcador N/A, y las entradas de nr que nombran al hospedero en vez de a un
+    virus (Aedes albopictus, Toxorhynchites rutilus...), que son entradas
+    contaminadas de la base.
+    """
+    x = (x or "").strip()
+    if not x or x.upper() == "N/A":
+        return False
+    if _RANGO.search(x):
+        return False
+    if _HOSPEDERO.match(x) and not _VIRAL_PAL.search(x):
+        return False
+    return True
+
+def canonizar(nombre):
+    pre = "af\u00edn a "
+    base = nombre[len(pre):] if nombre.startswith(pre) else nombre
+    base = SINONIMOS.get(base, base)
+    return (pre + base) if nombre.startswith(pre) else base
+
 import csv
 import re
 import sys
@@ -97,9 +134,13 @@ def clase_final(r, ver, fg):
             return "celular_otro", "si"
         sin_proteina = num(r.get("dm_pident")) is None and ver != "viral"
         qcov = num(r.get("bn_qcov"))
-        if clase == "pariente_debil" and sin_proteina and (qcov is None or qcov < QCOV_MIN):
-            return "evidencia_debil", ""
         pid = num(r.get("bn_pident"))
+        # Sin proteina, un acierto de blastn por debajo de ID_ESPECIE no sostiene
+        # un nombre por muy bien que cubra: asi entraban "afin a dengue virus
+        # type 3" al 68.7 % de identidad sobre el 32 % del contig.
+        if clase == "pariente_debil" and sin_proteina and (
+                qcov is None or qcov < QCOV_MIN or pid is None or pid < ID_ESPECIE):
+            return "evidencia_debil", ""
         if clase == "identificado" and pid is not None and pid < ID_ESPECIE:
             return "pariente", ""
         return clase, ""
@@ -150,11 +191,20 @@ for r in tabla:
         especie = (r.get("especie") or "").strip()
         nr_viral = (a["nr_nombre"] or "").strip() if ver == "viral" else ""
         if cf == "identificado":
-            nombre = especie or nr_viral or v
+            # nr tiene taxonomia y la base propia no, asi que gana cuando nombra
+            # un virus concreto con identidad al menos igual. Sin ese filtro nr
+            # degrada especies a rangos (Rhabdoviridae sp.) y llega a nombrar al
+            # hospedero (Aedes albopictus): ver RESUMEN_min500.md 5.3.
+            nr_pid, bn_pid = num(a.get("nr_pident")), num(r.get("bn_pident"))
+            gana_nr = (nombre_util(nr_viral) and nr_pid is not None
+                       and (bn_pid is None or nr_pid >= bn_pid))
+            nombre = nr_viral if gana_nr else (especie or nr_viral or v)
         else:
             qcov = num(r.get("bn_qcov"))
             nt_fiable = bool(especie) and qcov is not None and qcov >= QCOV_MIN
-            nombre = "afín a " + ((especie if nt_fiable else nr_viral) or especie or v)
+            orden = [especie, nr_viral] if nt_fiable else [nr_viral, especie]
+            nombre = "af\u00edn a " + next((x for x in orden if nombre_util(x)), v)
+        nombre = canonizar(nombre)
         es_fago = any(re.search(r"phage|Leviviricetes|Caudoviricetes", x, re.I) for x in (especie, nr_viral))
         r2["nombre_virus"] = nombre
         r2["grupo_virus"] = "fago" if es_fago else "artropodo"
