@@ -1,0 +1,40 @@
+name	taxonomy_id	taxonomy_lvl	kraken_assigned_reads	added_reads	new_est_reads	fraction_total_reads
+Homo sapiens	9606	S	146596	283592	430188	0.77084
+Alternaria dauci	48095	S	24	59	83	0.00015
+Pyrenophora tritici-repentis	45151	S	11	92	103	0.00018
+Ascochyta rabiei	5454	S	10	54	64	0.00011
+Sugiyamaella lignohabitans	796027	S	19	75	94	0.00017
+Puccinia striiformis	27350	S	211	333	544	0.00097
+Kwoniella mangrovensis	463800	S	10	39	49	0.00009
+Marasmius oreades	181124	S	10	96	106	0.00019
+Plasmodium relictum	85471	S	17810	6860	24670	0.04421
+Babesia bigemina	5866	S	10	9	19	0.00003
+Toxoplasma gondii	5811	S	71	68	139	0.00025
+Guillardia theta	55529	S	335	1468	1803	0.00323
+Hemiselmis andersenii	464988	S	14	16	30	0.00005
+Asaia sp. BMEF1	3155932	S	1567	12545	14112	0.02529
+Asaia prunellae	610245	S	1365	5044	6409	0.01148
+Asaia bogorensis	91915	S	1297	5317	6614	0.01185
+Asaia lannensis	415421	S	32	1765	1797	0.00322
+Wolbachia endosymbiont (group A) of Lypha dubia	3066146	S	18	22	40	0.00007
+Serratia marcescens	615	S	73	4057	4130	0.00740
+Serratia sp. FDAARGOS_506	2420306	S	39	305	344	0.00062
+Enterobacter hormaechei	158836	S	15	2655	2670	0.00478
+Klebsiella pneumoniae	573	S	32	5272	5304	0.00950
+Escherichia coli	562	S	116	12440	12556	0.02250
+Salmonella enterica	28901	S	19	21689	21708	0.03890
+Halotalea alkalilenta	376489	S	36	542	578	0.00104
+Stenotrophomonas maltophilia	40324	S	135	1648	1783	0.00319
+uncultured Acetobacteroides sp.	1760811	S	60	32	92	0.00016
+Entomospira culicis	2719989	S	65	53	118	0.00021
+Curtobacterium flaccumfaciens	2035	S	33	278	311	0.00056
+Cutibacterium acnes	1747	S	15	56	71	0.00013
+Streptomyces sp. T12	477697	S	12	56	68	0.00012
+Spiroplasma endosymbiont of Diplazon laetatorius	3066322	S	11	538	549	0.00098
+Brevibacillus choshinensis	54911	S	32	35	67	0.00012
+Geminocystis herdmanii	669359	S	19	22	41	0.00007
+Gylbovirus aagae	2955967	S	16916	0	16916	0.03031
+Orthoflavivirus iunctionis	3703353	S	912	0	912	0.00163
+Wenzhou sobemo-like virus 4	1923660	S	14	0	14	0.00003
+Betabaculovirus chofumiferanae	3051997	S	2894	0	2894	0.00519
+Gorganvirus isfahan	2560650	S	53	19	72	0.00013

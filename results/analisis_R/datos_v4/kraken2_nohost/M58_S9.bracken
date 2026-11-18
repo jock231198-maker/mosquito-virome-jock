@@ -1,0 +1,60 @@
+name	taxonomy_id	taxonomy_lvl	kraken_assigned_reads	added_reads	new_est_reads	fraction_total_reads
+Homo sapiens	9606	S	107074	229898	336972	0.85094
+Aspergillus luchuensis	1069201	S	13	78	91	0.00023
+Aspergillus oryzae	5062	S	11	100	111	0.00028
+Aspergillus chevalieri	182096	S	25	257	282	0.00071
+Purpureocillium takamizusanense	2060973	S	20	130	150	0.00038
+Ustilaginoidea virens	1159556	S	10	34	44	0.00011
+Pyricularia oryzae	318829	S	15	3	18	0.00005
+Botrytis cinerea	40559	S	22	68	90	0.00023
+Ascochyta rabiei	5454	S	57	299	356	0.00090
+Sugiyamaella lignohabitans	796027	S	53	284	337	0.00085
+Yarrowia lipolytica	4952	S	16	2	18	0.00005
+Psilocybe cubensis	181762	S	29	33	62	0.00016
+Marasmius oreades	181124	S	26	110	136	0.00034
+Rhizoctonia solani	456999	S	17	15	32	0.00008
+Kwoniella mangrovensis	463800	S	24	105	129	0.00033
+Kwoniella dendrophila	4975	S	10	33	43	0.00011
+Cutaneotrichosporon cavernicola	279322	S	12	23	35	0.00009
+Puccinia striiformis	27350	S	142	235	377	0.00095
+Sporisorium graminicola	280036	S	22	70	92	0.00023
+Malassezia restricta	76775	S	16	111	127	0.00032
+Encephalitozoon hellem	27973	S	43	728	771	0.00195
+Rhizophagus irregularis	588596	S	55	696	751	0.00190
+Plasmodium relictum	85471	S	17120	7483	24603	0.06213
+Babesia bigemina	5866	S	136	111	247	0.00062
+Theileria equi	5872	S	25	2	27	0.00007
+Toxoplasma gondii	5811	S	336	425	761	0.00192
+Cryptosporidium parvum	5807	S	57	13	70	0.00018
+Bremia lactucae	4779	S	13	1430	1443	0.00364
+Phaeodactylum tricornutum	2850	S	10	194	204	0.00052
+Guillardia theta	55529	S	1484	7233	8717	0.02201
+Escherichia coli	562	S	295	11657	11952	0.03018
+Enterobacter cancerogenus	69218	S	74	216	290	0.00073
+Pistricoccus aurantiacus	1883414	S	69	201	270	0.00068
+Entomomonas moraniae	2213226	S	79	139	218	0.00055
+Orbus wheelerorum	3074111	S	23	37	60	0.00015
+Orbus mooreae	3074107	S	20	48	68	0.00017
+Zophobihabitans entericus	1635327	S	12	12	24	0.00006
+Utexia brackfieldae	3074108	S	10	12	22	0.00006
+Stenotrophomonas maltophilia	40324	S	65	439	504	0.00127
+Vibrio anguillarum	55601	S	27	19	46	0.00012
+Motilimonas cestriensis	2742685	S	11	5	16	0.00004
+Asaia bogorensis	91915	S	66	287	353	0.00089
+Asaia sp. BMEF1	3155932	S	27	221	248	0.00063
+Asaia prunellae	610245	S	25	98	123	0.00031
+Acetobacter orientalis	146474	S	16	163	179	0.00045
+Wolbachia endosymbiont of Dirofilaria (Dirofilaria) immitis	1812115	S	45	4	49	0.00012
+Wolbachia endosymbiont (group A) of Lypha dubia	3066146	S	20	61	81	0.00020
+Brevundimonas sp. KH_060	3465236	S	30	64	94	0.00024
+Entomospira culicis	2719989	S	812	611	1423	0.00359
+Entomospira entomophila	2719988	S	105	359	464	0.00117
+Entomospira nematocerorum	2719987	S	85	324	409	0.00103
+uncultured Acetobacteroides sp.	1760811	S	85	39	124	0.00031
+Sulfidibacter corallicola	2818388	S	19	0	19	0.00005
+Curtobacterium flaccumfaciens	2035	S	22	302	324	0.00082
+Agrococcus jejuensis	399736	S	12	37	49	0.00012
+Cutibacterium acnes	1747	S	20	67	87	0.00022
+Betabaculovirus chofumiferanae	3051997	S	1343	0	1343	0.00339
+Harbinvirus semele	2734052	S	27	1	28	0.00007
+Alphamesonivirus cavallyense	1312874	S	10	0	10	0.00003

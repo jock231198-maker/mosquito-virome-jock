@@ -1,0 +1,67 @@
+name	taxonomy_id	taxonomy_lvl	kraken_assigned_reads	added_reads	new_est_reads	fraction_total_reads
+Homo sapiens	9606	S	720854	1455173	2176027	0.95756
+Purpureocillium takamizusanense	2060973	S	17	59	76	0.00003
+Ustilaginoidea virens	1159556	S	13	24	37	0.00002
+Colletotrichum higginsianum	80884	S	14	172	186	0.00008
+Botrytis cinerea	40559	S	55	150	205	0.00009
+Aspergillus chevalieri	182096	S	22	160	182	0.00008
+Coccidioides posadasii	199306	S	16	203	219	0.00010
+Ascochyta rabiei	5454	S	55	227	282	0.00012
+Kluyveromyces lactis	28985	S	11	98	109	0.00005
+Sugiyamaella lignohabitans	796027	S	30	169	199	0.00009
+Yarrowia lipolytica	4952	S	24	3	27	0.00001
+Malassezia restricta	76775	S	272	1105	1377	0.00061
+Malassezia japonica	223818	S	10	35	45	0.00002
+Kwoniella mangrovensis	463800	S	39	131	170	0.00007
+Kwoniella dendrophila	4975	S	22	47	69	0.00003
+Vanrija pseudolonga	143232	S	33	71	104	0.00005
+Marasmius oreades	181124	S	14	20	34	0.00001
+Puccinia striiformis	27350	S	155	192	347	0.00015
+Plasmodium relictum	85471	S	18513	7473	25986	0.01144
+Plasmodium vivax	5855	S	26	17	43	0.00002
+Babesia duncani	323732	S	22	17	39	0.00002
+Toxoplasma gondii	5811	S	65	70	135	0.00006
+Bremia lactucae	4779	S	44	1273	1317	0.00058
+Phaeodactylum tricornutum	2850	S	18	104	122	0.00005
+Hemiselmis andersenii	464988	S	29	40	69	0.00003
+Guillardia theta	55529	S	15	74	89	0.00004
+Dictyostelium discoideum	44689	S	51	11	62	0.00003
+Giardia duodenalis	5741	S	10	0	10	0.00000
+Pantoea dispersa	59814	S	46	4698	4744	0.00209
+Pseudescherichia vulneris	566	S	65	354	419	0.00018
+Escherichia coli	562	S	36	9413	9449	0.00416
+Enterobacter ludwigii	299767	S	11	131	142	0.00006
+Klebsiella pneumoniae	573	S	16	1616	1632	0.00072
+Salmonella enterica	28901	S	11	13000	13011	0.00573
+Zymobacter palmae	33074	S	59	687	746	0.00033
+Halomonas sp. JS92-SW72	2306583	S	31	233	264	0.00012
+Halotalea alkalilenta	376489	S	20	27	47	0.00002
+Stenotrophomonas maltophilia	40324	S	765	6090	6855	0.00302
+Xanthomonas albilineans	29447	S	13	2	15	0.00001
+Vibrio anguillarum	55601	S	29	28	57	0.00003
+Vibrio parahaemolyticus	670	S	27	39	66	0.00003
+Wolbachia endosymbiont of Dirofilaria (Dirofilaria) immitis	1812115	S	31	4	35	0.00002
+Wolbachia endosymbiont (group A) of Lypha dubia	3066146	S	16	56	72	0.00003
+Parasphingorhabdus cellanae	2806553	S	10	25	35	0.00002
+Brevundimonas sp. KH_060	3465236	S	37	107	144	0.00006
+Acidovorax sp. BLS4	3273430	S	21	247	268	0.00012
+Cloacibacterium caeni	2004710	S	11	202	213	0.00009
+uncultured Acetobacteroides sp.	1760811	S	63	38	101	0.00004
+Ignavibacterium sp.	2651167	S	12	2	14	0.00001
+Sulfidibacter corallicola	2818388	S	13	0	13	0.00001
+Cutibacterium acnes	1747	S	639	707	1346	0.00059
+Cutibacterium granulosum	33011	S	78	854	932	0.00041
+Cutibacterium avidum	33010	S	12	211	223	0.00010
+Corynebacterium sp. SCR221107	3017361	S	21	181	202	0.00009
+Lawsonella clevelandensis	1528099	S	11	17	28	0.00001
+Curtobacterium flaccumfaciens	2035	S	44	151	195	0.00009
+Agrococcus jejuensis	399736	S	10	7	17	0.00001
+Rothia dentocariosa	2047	S	15	30	45	0.00002
+Streptomyces sp. T12	477697	S	104	136	240	0.00011
+Staphylococcus epidermidis	1282	S	24	85	109	0.00005
+Staphylococcus aureus	1280	S	12	424	436	0.00019
+Anaerococcus octavius	54007	S	26	118	144	0.00006
+Gylbovirus aagae	2955967	S	20926	0	20926	0.00921
+Betabaculovirus chofumiferanae	3051997	S	1625	0	1625	0.00072
+Gorganvirus isfahan	2560650	S	40	15	55	0.00002
+Harbinvirus semele	2734052	S	10	0	10	0.00000

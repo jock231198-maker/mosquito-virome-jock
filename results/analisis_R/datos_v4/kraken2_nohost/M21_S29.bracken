@@ -1,0 +1,93 @@
+name	taxonomy_id	taxonomy_lvl	kraken_assigned_reads	added_reads	new_est_reads	fraction_total_reads
+Zymobacter palmae	33074	S	903	25141	26044	0.05333
+Zymobacter sp. IVIA_5232.4 C2	3394855	S	415	17924	18339	0.03755
+Halotalea alkalilenta	376489	S	1853	13127	14980	0.03067
+Halomonas sp. JS92-SW72	2306583	S	106	5653	5759	0.01179
+Halomonas garicola	1690008	S	182	2578	2760	0.00565
+Halomonas chromatireducens	507626	S	33	450	483	0.00099
+Pistricoccus aurantiacus	1883414	S	420	3087	3507	0.00718
+Kushneria phosphatilytica	657387	S	108	422	530	0.00109
+Enterobacter hormaechei	158836	S	15	1318	1333	0.00273
+Enterobacter ludwigii	299767	S	15	327	342	0.00070
+Escherichia coli	562	S	261	35292	35553	0.07280
+Klebsiella pneumoniae	573	S	115	10915	11030	0.02259
+Salmonella enterica	28901	S	28	20391	20419	0.04181
+Siccibacter colletis	1505757	S	10	6	16	0.00003
+Pantoea sp. GABEPS69	3028805	S	91	266	357	0.00073
+Pantoea sp. Z09	2886821	S	48	87	135	0.00028
+Pantoea septica	472695	S	59	158	217	0.00044
+Pantoea stewartii	66269	S	12	163	175	0.00036
+Erwinia sp. LJJL01	3391839	S	134	471	605	0.00124
+Erwinia sp. JUb26	2485126	S	24	26	50	0.00010
+Erwinia pyrifoliae	79967	S	13	13	26	0.00005
+Morganella morganii	582	S	30	338	368	0.00075
+Acinetobacter sp. ESL0695	2983215	S	138	31	169	0.00035
+Acinetobacter schindleri	108981	S	97	157	254	0.00052
+Acinetobacter baylyi	202950	S	96	49944	50040	0.10246
+Acinetobacter baumannii	470	S	17	164	181	0.00037
+Acinetobacter indicus	756892	S	14	38	52	0.00011
+Pseudomonas fulva	47880	S	15	1699	1714	0.00351
+Pseudomonas fluorescens	294	S	12	258	270	0.00055
+Stenotrophomonas maltophilia	40324	S	775	3651	4426	0.00906
+Xanthomonas albilineans	29447	S	10	5	15	0.00003
+Teredinibacter turnerae	2426	S	403	24	427	0.00087
+Vibrio anguillarum	55601	S	182	126	308	0.00063
+Motilimonas cestriensis	2742685	S	47	11	58	0.00012
+Hydrocarboniphaga sp.	2033016	S	27	6	33	0.00007
+Candidatus Portiera aleyrodidarum	91844	S	12	1	13	0.00003
+Wolbachia pipientis	955	S	2868	36021	38889	0.07963
+Wolbachia endosymbiont of Aedes albopictus	167957	S	17	269	286	0.00059
+Asaia bogorensis	91915	S	238	993	1231	0.00252
+Asaia sp. BMEF1	3155932	S	126	1000	1126	0.00231
+Asaia prunellae	610245	S	46	174	220	0.00045
+Gluconobacter japonicus	376620	S	174	1428	1602	0.00328
+Sphingomonas sp. DBB INV C78	3349434	S	48	64	112	0.00023
+Acidovorax sp. BLS4	3273430	S	210	1674	1884	0.00386
+Massilia sp. NP310	2861282	S	37	63	100	0.00020
+Conchiformibius steedae	153493	S	65	34	99	0.00020
+Sphingobacterium thalpophilum	259	S	31	322	353	0.00072
+Sphingobacterium sp. KH_072	3465268	S	13	98	111	0.00023
+Sphingobacterium mizutaii	1010	S	10	28	38	0.00008
+uncultured Acetobacteroides sp.	1760811	S	140	52	192	0.00039
+Entomospira culicis	2719989	S	838	360	1198	0.00245
+Entomospira nematocerorum	2719987	S	78	169	247	0.00051
+Streptomyces sp. T12	477697	S	495	434	929	0.00190
+Streptomyces sp. NBC_01012	2903717	S	29	15	44	0.00009
+Streptomyces vilmorinianum	3051092	S	13	10	23	0.00005
+Curtobacterium flaccumfaciens	2035	S	14	84	98	0.00020
+Cutibacterium acnes	1747	S	23	50	73	0.00015
+Nocardioides marmotae	2663857	S	22	42	64	0.00013
+Actinomycetospora sp. CA-084318	3239892	S	11	29	40	0.00008
+Solwaraspora sp. WMMD791	3016086	S	43	18	61	0.00012
+Bacillus cereus	1396	S	25	286	311	0.00064
+Clostridium botulinum	1491	S	18	18	36	0.00007
+Geminocystis herdmanii	669359	S	21	21	42	0.00009
+Plasmodium relictum	85471	S	44995	22480	67475	0.13816
+Babesia bigemina	5866	S	354	307	661	0.00135
+Theileria equi	5872	S	141	9	150	0.00031
+Toxoplasma gondii	5811	S	116	453	569	0.00117
+Cryptosporidium parvum	5807	S	133	49	182	0.00037
+Bremia lactucae	4779	S	15	4739	4754	0.00973
+Homo sapiens	9606	S	16246	44243	60489	0.12386
+Psilocybe cubensis	181762	S	155	360	515	0.00105
+Marasmius oreades	181124	S	96	509	605	0.00124
+Rhizoctonia solani	456999	S	30	52	82	0.00017
+Cutaneotrichosporon cavernicola	279322	S	10	40	50	0.00010
+Sporisorium graminicola	280036	S	61	169	230	0.00047
+Puccinia striiformis	27350	S	98	245	343	0.00070
+Aspergillus luchuensis	1069201	S	21	80	101	0.00021
+Aspergillus oryzae	5062	S	11	77	88	0.00018
+Aspergillus chevalieri	182096	S	52	343	395	0.00081
+Aspergillus fumigatus	746128	S	16	33	49	0.00010
+Akanthomyces muscarius	2231603	S	13	73	86	0.00018
+Pyricularia oryzae	318829	S	26	10	36	0.00007
+Ascochyta rabiei	5454	S	43	173	216	0.00044
+Pyrenophora tritici-repentis	45151	S	13	127	140	0.00029
+Sugiyamaella lignohabitans	796027	S	25	141	166	0.00034
+Encephalitozoon hellem	27973	S	54	836	890	0.00182
+Vairimorpha necatrix	6039	S	14	19	33	0.00007
+Rhizophagus irregularis	588596	S	118	722	840	0.00172
+Guillardia theta	55529	S	732	3768	4500	0.00921
+Vesiculovirus piry	1972575	S	77249	0	77249	0.15818
+Gylbovirus aagae	2955967	S	13749	0	13749	0.02815
+Betabaculovirus chofumiferanae	3051997	S	3286	0	3286	0.00673

@@ -1,0 +1,146 @@
+name	taxonomy_id	taxonomy_lvl	kraken_assigned_reads	added_reads	new_est_reads	fraction_total_reads
+Homo sapiens	9606	S	902801	2140028	3042829	0.93884
+Zymoseptoria tritici	1047171	S	95	268	363	0.00011
+Cercospora beticola	122368	S	32	357	389	0.00012
+Fulvia fulva	5499	S	11	44	55	0.00002
+Ascochyta rabiei	5454	S	129	473	602	0.00019
+Pyrenophora tritici-repentis	45151	S	21	167	188	0.00006
+Alternaria dauci	48095	S	11	24	35	0.00001
+Fusarium graminearum	5518	S	22	126	148	0.00005
+Fusarium poae	36050	S	13	96	109	0.00003
+Fusarium fujikuroi	5127	S	12	17	29	0.00001
+Purpureocillium takamizusanense	2060973	S	52	114	166	0.00005
+Ustilaginoidea virens	1159556	S	36	44	80	0.00002
+Trichoderma atroviride	63577	S	18	51	69	0.00002
+Colletotrichum higginsianum	80884	S	28	236	264	0.00008
+Pyricularia oryzae	318829	S	16	10	26	0.00001
+Botrytis cinerea	40559	S	126	357	483	0.00015
+Aspergillus luchuensis	1069201	S	39	116	155	0.00005
+Aspergillus oryzae	5062	S	25	146	171	0.00005
+Aspergillus chevalieri	182096	S	24	127	151	0.00005
+Aspergillus fumigatus	746128	S	15	26	41	0.00001
+Aspergillus puulaauensis	1220207	S	10	21	31	0.00001
+Penicillium digitatum	36651	S	22	57	79	0.00002
+Talaromyces marneffei	37727	S	41	150	191	0.00006
+Coccidioides posadasii	199306	S	49	562	611	0.00019
+Kluyveromyces lactis	28985	S	33	416	449	0.00014
+Sugiyamaella lignohabitans	796027	S	110	508	618	0.00019
+Yarrowia lipolytica	4952	S	38	4	42	0.00001
+Yamadazyma tenuis	2315449	S	30	176	206	0.00006
+Candidozyma auris	498019	S	12	58	70	0.00002
+Kwoniella mangrovensis	463800	S	79	316	395	0.00012
+Kwoniella dendrophila	4975	S	43	127	170	0.00005
+Kwoniella bestiolae	324769	S	12	25	37	0.00001
+Kwoniella botswanensis	1268659	S	10	50	60	0.00002
+Vanrija pseudolonga	143232	S	53	147	200	0.00006
+Cutaneotrichosporon cavernicola	279322	S	17	31	48	0.00001
+Marasmius oreades	181124	S	36	61	97	0.00003
+Psilocybe cubensis	181762	S	19	13	32	0.00001
+Rhizoctonia solani	456999	S	13	9	22	0.00001
+Puccinia striiformis	27350	S	382	621	1003	0.00031
+Malassezia restricta	76775	S	62	463	525	0.00016
+Malassezia japonica	223818	S	22	149	171	0.00005
+Sporisorium graminicola	280036	S	52	187	239	0.00007
+Encephalitozoon hellem	27973	S	18	274	292	0.00009
+Rhizophagus irregularis	588596	S	18	39	57	0.00002
+Plasmodium relictum	85471	S	41565	19065	60630	0.01871
+Plasmodium vivax	5855	S	62	35	97	0.00003
+Plasmodium cynomolgi	5827	S	10	2	12	0.00000
+Plasmodium vinckei	5860	S	10	3	13	0.00000
+Babesia duncani	323732	S	18	14	32	0.00001
+Babesia bovis	5865	S	17	5	22	0.00001
+Babesia bigemina	5866	S	10	12	22	0.00001
+Theileria equi	5872	S	20	6	26	0.00001
+Toxoplasma gondii	5811	S	267	309	576	0.00018
+Besnoitia besnoiti	94643	S	12	1	13	0.00000
+Bremia lactucae	4779	S	114	2298	2412	0.00074
+Phaeodactylum tricornutum	2850	S	35	136	171	0.00005
+Thalassiosira pseudonana	35128	S	30	104	134	0.00004
+Bigelowiella natans	227086	S	13	9	22	0.00001
+Guillardia theta	55529	S	558	3063	3621	0.00112
+Hemiselmis andersenii	464988	S	47	70	117	0.00004
+Cryptomonas paramaecium	2898	S	12	34	46	0.00001
+Leishmania sp. Ghana 2012 LV757	2803181	S	34	88	122	0.00004
+Trypanosoma brucei	5691	S	11	0	11	0.00000
+Dictyostelium discoideum	44689	S	89	24	113	0.00003
+Giardia duodenalis	5741	S	24	0	24	0.00001
+Spironucleus salmonicida	348837	S	10	0	10	0.00000
+Cyanidioschyzon merolae	45157	S	11	1	12	0.00000
+Spiroplasma clarkii	2139	S	4373	14495	18868	0.00582
+Spiroplasma apis	2137	S	575	2325	2900	0.00089
+Spiroplasma endosymbiont of Diplazon laetatorius	3066322	S	191	4024	4215	0.00130
+Spiroplasma endosymbiont of Crioceris asparagi	3066286	S	51	155	206	0.00006
+Spiroplasma endosymbiont of Atherix ibis	3066291	S	10	245	255	0.00008
+Spiroplasma taiwanense	2145	S	205	1162	1367	0.00042
+Spiroplasma helicoides	216938	S	77	973	1050	0.00032
+Spiroplasma gladiatoris	2143	S	32	529	561	0.00017
+Spiroplasma floricola	216937	S	30	694	724	0.00022
+Streptomyces cyaneochromogenes	2496836	S	322	449	771	0.00024
+Streptomyces sp. T12	477697	S	51	105	156	0.00005
+Streptomyces sp. BR1	1592323	S	14	26	40	0.00001
+Kocuria palustris	71999	S	33	238	271	0.00008
+Curtobacterium flaccumfaciens	2035	S	16	125	141	0.00004
+Cutibacterium acnes	1747	S	93	224	317	0.00010
+Actinomycetospora sp. CA-084318	3239892	S	21	84	105	0.00003
+Actinomycetospora sp. ABD4_176	3477717	S	12	108	120	0.00004
+Amycolatopsis sp. NBC_01480	2903562	S	16	48	64	0.00002
+Thermobispora bispora	2006	S	23	28	51	0.00002
+Nakamurella multipartita	53461	S	12	19	31	0.00001
+Enterococcus alishanensis	1303817	S	202	551	753	0.00023
+Priestia koreensis	284581	S	14	30	44	0.00001
+Priestia filamentosa	1402861	S	14	15	29	0.00001
+Staphylococcus aureus	1280	S	16	15363	15379	0.00475
+Geminocystis herdmanii	669359	S	14	60	74	0.00002
+Leptolyngbya sp. 7M	2812896	S	13	55	68	0.00002
+Morganella morganii	582	S	1660	4922	6582	0.00203
+Escherichia coli	562	S	140	13907	14047	0.00433
+Klebsiella pneumoniae	573	S	13	4606	4619	0.00143
+Pantoea dispersa	59814	S	10	91	101	0.00003
+Erwinia sp. LJJL01	3391839	S	14	95	109	0.00003
+Orbus wheelerorum	3074111	S	152	277	429	0.00013
+Orbus mooreae	3074107	S	78	202	280	0.00009
+Zophobihabitans entericus	1635327	S	63	71	134	0.00004
+Frischella perrara	1267021	S	17	120	137	0.00004
+Utexia brackfieldae	3074108	S	15	20	35	0.00001
+Stenotrophomonas maltophilia	40324	S	907	7094	8001	0.00247
+Stenotrophomonas sp. LM091	1904944	S	16	18	34	0.00001
+Xanthomonas albilineans	29447	S	18	4	22	0.00001
+Pistricoccus aurantiacus	1883414	S	82	134	216	0.00007
+Halomonas sp. JS92-SW72	2306583	S	17	137	154	0.00005
+Acinetobacter pittii	48296	S	20	170	190	0.00006
+Acinetobacter baumannii	470	S	11	249	260	0.00008
+Vibrio anguillarum	55601	S	46	52	98	0.00003
+Vibrio parahaemolyticus	670	S	30	48	78	0.00002
+Photobacterium sp. GJ3	2829502	S	10	2	12	0.00000
+Allochromatium vinosum	1049	S	33	5	38	0.00001
+Wenzhouxiangella sp. AB-CW3	2771012	S	15	0	15	0.00000
+Motilimonas cestriensis	2742685	S	16	5	21	0.00001
+Agaribacterium sp. ZY112	3233574	S	14	1	15	0.00000
+Asaia bogorensis	91915	S	115	528	643	0.00020
+Asaia prunellae	610245	S	38	151	189	0.00006
+Asaia lannensis	415421	S	32	859	891	0.00027
+Asaia sp. BMEF1	3155932	S	29	271	300	0.00009
+Acetobacter vaccinii	2592655	S	28	122	150	0.00005
+Neokomagataea tanensis	661191	S	15	28	43	0.00001
+Bradyrhizobium sp. ORS 278	114615	S	11	155	166	0.00005
+Parasphingorhabdus cellanae	2806553	S	27	97	124	0.00004
+Wolbachia endosymbiont (group A) of Lypha dubia	3066146	S	81	83	164	0.00005
+Wolbachia endosymbiont of Dirofilaria (Dirofilaria) immitis	1812115	S	14	0	14	0.00000
+Brevundimonas sp. KH_060	3465236	S	28	60	88	0.00003
+Alphaproteobacteria bacterium endosymbiont of Tiliacea citrago	3077944	S	20	1	21	0.00001
+Acidovorax sp. BLS4	3273430	S	12	256	268	0.00008
+Entomospira culicis	2719989	S	2244	1180	3424	0.00106
+Entomospira nematocerorum	2719987	S	93	246	339	0.00010
+Entomospira entomophila	2719988	S	62	146	208	0.00006
+Borreliella burgdorferi	139	S	21	7	28	0.00001
+Apibacter raozihei	2500547	S	1100	365	1465	0.00045
+uncultured Acetobacteroides sp.	1760811	S	192	112	304	0.00009
+Pseudocnuella soli	2502779	S	11	12	23	0.00001
+Ignavibacterium sp.	2651167	S	32	2	34	0.00001
+Sulfidibacter corallicola	2818388	S	21	0	21	0.00001
+Truepera radiovictrix	332249	S	15	2	17	0.00001
+Gylbovirus aagae	2955967	S	21270	0	21270	0.00656
+Orthoflavivirus iunctionis	3703353	S	10	0	10	0.00000
+Betabaculovirus chofumiferanae	3051997	S	5656	0	5656	0.00175
+Gorganvirus isfahan	2560650	S	267	421	688	0.00021
+Pandoravirus macleodensis	2107707	S	11	0	11	0.00000

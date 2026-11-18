@@ -1,0 +1,47 @@
+nombre_virus	grupo	vOTUs	n_mapeo	n_asm	prof_max	clase_final	muestras_mapeo
+afín a Hattula totivirus 3	artropodo	3	20	6	7.6	divergente,viral_solo_nr	M11_S3,M1_S1,M20_S25,M21_S29,M22_S30,M2_S2,M35_S31,M55_S6,M56_S7,M57_S8,M58_S9,M59_S10,M60_S11,M62_S18,M71_S19,M72_S20,M74_S21,M79_S28,M7_S15,M9_S16
+Verdadero virus	artropodo	5	19	19	5958.8	identificado	M11_S3,M1_S1,M20_S25,M21_S29,M22_S30,M2_S2,M35_S31,M48_S5,M55_S6,M56_S7,M57_S8,M58_S9,M59_S10,M60_S11,M62_S18,M71_S19,M72_S20,M7_S15,M9_S16
+Chaq-like virus	artropodo	2	19	16	3791.9	identificado	M11_S3,M20_S25,M21_S29,M22_S30,M2_S2,M35_S31,M36_S17,M48_S5,M55_S6,M56_S7,M57_S8,M58_S9,M59_S10,M60_S11,M62_S18,M71_S19,M72_S20,M7_S15,M9_S16
+Guadeloupe mosquito virus	artropodo	6	15	15	3870.6	identificado	M11_S3,M20_S25,M21_S29,M2_S2,M35_S31,M48_S5,M55_S6,M56_S7,M60_S11,M71_S19,M72_S20,M74_S21,M79_S28,M7_S15,M9_S16
+afín a Parramatta River virus	artropodo	1	15	1	6.3	pariente_debil	M11_S3,M1_S1,M20_S25,M2_S2,M35_S31,M55_S6,M56_S7,M57_S8,M58_S9,M60_S11,M71_S19,M72_S20,M74_S21,M79_S28,M9_S16
+afín a Liao ning virus	artropodo	1	14	10	8.0	pariente	M1_S1,M20_S25,M2_S2,M35_S31,M55_S6,M56_S7,M57_S8,M58_S9,M60_S11,M71_S19,M72_S20,M74_S21,M7_S15,M9_S16
+Aedes anphevirus	artropodo	4	13	13	159.0	identificado	M11_S3,M1_S1,M20_S25,M21_S29,M22_S30,M2_S2,M48_S5,M55_S6,M60_S11,M62_S18,M72_S20,M74_S21,M7_S15
+afín a Bafoussam mosquito rhabdovirus	artropodo	2	13	6	77.7	pariente,pariente_debil	M1_S1,M20_S25,M2_S2,M35_S31,M55_S6,M56_S7,M57_S8,M58_S9,M59_S10,M71_S19,M72_S20,M74_S21,M9_S16
+afín a Pedras lispivirus	artropodo	1	13	1	7.0	divergente	M1_S1,M22_S30,M2_S2,M35_S31,M55_S6,M56_S7,M57_S8,M58_S9,M59_S10,M60_S11,M71_S19,M74_S21,M9_S16
+afín a Atrato Rhabdo-like virus 2	artropodo	1	12	3	3.4	divergente	M1_S1,M20_S25,M2_S2,M35_S31,M55_S6,M56_S7,M57_S8,M58_S9,M71_S19,M72_S20,M74_S21,M9_S16
+afín a Mos8Chu0 chuvirus	artropodo	5	11	4	5.2	pariente	M1_S1,M20_S25,M2_S2,M35_S31,M55_S6,M56_S7,M57_S8,M58_S9,M71_S19,M72_S20,M9_S16
+afín a Atrato Retro-like virus	artropodo	2	11	1	3.8	divergente	M1_S1,M20_S25,M21_S29,M2_S2,M35_S31,M55_S6,M56_S7,M57_S8,M58_S9,M72_S20,M9_S16
+afín a Kamiti River virus	artropodo	1	10	4	4.3	pariente_debil	M1_S1,M2_S2,M35_S31,M55_S6,M56_S7,M57_S8,M58_S9,M71_S19,M72_S20,M9_S16
+afín a Leksozero Aedes Stangrhavirus	artropodo	2	10	1	26.8	divergente	M11_S3,M1_S1,M21_S29,M35_S31,M55_S6,M56_S7,M57_S8,M58_S9,M71_S19,M72_S20
+afín a Formosus virus	artropodo	1	9	3	4.6	divergente	M1_S1,M2_S2,M35_S31,M55_S6,M56_S7,M57_S8,M59_S10,M71_S19,M9_S16
+afín a Aedes anphevirus	artropodo	1	9	2	3.9	pariente	M1_S1,M2_S2,M35_S31,M55_S6,M56_S7,M57_S8,M58_S9,M71_S19,M9_S16
+afín a Enontekio iflavirus	artropodo	1	9	1	4142.3	pariente_debil	M1_S1,M2_S2,M35_S31,M55_S6,M56_S7,M57_S8,M58_S9,M71_S19,M7_S15
+afín a Australian Anopheles totivirus	artropodo	2	7	2	4.1	pariente,pariente_debil	M1_S1,M2_S2,M35_S31,M56_S7,M57_S8,M71_S19,M9_S16
+afín a Aedes aegypti anphevirus	artropodo	1	7	1	6.0	divergente	M1_S1,M2_S2,M35_S31,M57_S8,M58_S9,M72_S20,M9_S16
+afín a Grenada mosquito rhabdovirus 1	artropodo	1	6	1	2.3	divergente	M2_S2,M55_S6,M56_S7,M57_S8,M71_S19,M9_S16
+afín a Ohlsdorf virus	artropodo	1	6	1	23.3	divergente	M2_S2,M57_S8,M58_S9,M71_S19,M74_S21,M9_S16
+Aedes aegypti totivirus	artropodo	3	5	6	37.2	identificado	M11_S3,M22_S30,M35_S31,M36_S17,M48_S5
+Palmetto toti-like virus	artropodo	7	4	4	8.9	identificado	M11_S3,M20_S25,M22_S30,M35_S31
+afín a Curionopolis stangrhavirus 2	artropodo	1	4	1	2.6	divergente	M2_S2,M35_S31,M71_S19,M9_S16
+afín a Gurupi chuvirus-like 1	artropodo	1	4	1	3.5	pariente	M1_S1,M57_S8,M58_S9,M71_S19
+afín a Culex mosquito virus 1	artropodo	2	3	3	1136.3	pariente_debil	M20_S25,M79_S28,M7_S15
+afín a Culex-associated Tombus-like virus	artropodo	1	3	3	585.0	pariente_debil	M20_S25,M79_S28,M7_S15
+Cell fusing agent virus	artropodo	2	2	3	145.7	identificado	M48_S5,M72_S20
+Aedes binegev-like virus 1	artropodo	8	2	2	20.0	identificado	M11_S3,M48_S5
+Netjeret virus	artropodo	2	2	2	62.1	identificado	M20_S25,M21_S29
+afín a Usinis virus	artropodo	5	2	2	40.5	divergente,pariente	M20_S25,M79_S28
+Arthas virus	artropodo	1	2	1	55.6	identificado	M71_S19,M7_S15
+afín a Aedes aegypti To virus 2	artropodo	1	2	1	3.7	divergente	M1_S1,M2_S2
+Grenada mosquito rhabdovirus 1	artropodo	1	1	1	3.1	identificado	M60_S11
+High Island virus	artropodo	1	1	1	5.3	identificado	M20_S25
+Phasivirus phasiense	artropodo	7	1	1	15.6	identificado	M56_S7
+San Gabriel mononegavirus	artropodo	8	1	1	6.6	identificado	M21_S29
+Sinu virus	artropodo	1	1	1	3.2	identificado	M59_S10
+afín a Andhaxevirus faecihabitans	fago	1	1	1	16.9	divergente	M48_S5
+afín a Downy mildew lesion associated ormycovirus 6	artropodo	2	1	1	6.0	divergente	M9_S16
+afín a Enontekio merhavirus	artropodo	1	1	1	4.3	pariente_debil	M35_S31
+afín a Escherichia phage 2H10	fago	1	1	1	5.2	pariente	M62_S18
+afín a Merida virus	artropodo	1	1	1	5.1	pariente_debil	M35_S31
+afín a Mopeia rhabdovirus	artropodo	1	1	1	5.2	pariente_debil	M35_S31
+afín a Tartas insect-associated virus	artropodo	2	1	1	4.7	divergente,pariente	M60_S11
+afín a ssRNA phage SRR7473382_2	fago	1	1	1	13.8	pariente_debil	M48_S5

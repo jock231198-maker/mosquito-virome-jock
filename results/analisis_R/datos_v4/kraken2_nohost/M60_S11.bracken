@@ -1,0 +1,68 @@
+name	taxonomy_id	taxonomy_lvl	kraken_assigned_reads	added_reads	new_est_reads	fraction_total_reads
+Homo sapiens	9606	S	120717	67730	188447	0.74678
+Alternaria dauci	48095	S	17	87	104	0.00041
+Ascochyta rabiei	5454	S	29	279	308	0.00122
+Zymoseptoria tritici	1047171	S	12	65	77	0.00031
+Aspergillus chevalieri	182096	S	18	166	184	0.00073
+Pyricularia oryzae	318829	S	15	38	53	0.00021
+Botrytis cinerea	40559	S	16	39	55	0.00022
+Sugiyamaella lignohabitans	796027	S	63	209	272	0.00108
+Puccinia striiformis	27350	S	261	258	519	0.00206
+Sporisorium graminicola	280036	S	111	141	252	0.00100
+Malassezia restricta	76775	S	44	150	194	0.00077
+Psilocybe cubensis	181762	S	19	33	52	0.00021
+Marasmius oreades	181124	S	11	140	151	0.00060
+Rhizoctonia solani	456999	S	15	14	29	0.00011
+Encephalitozoon hellem	27973	S	17	408	425	0.00168
+Plasmodium relictum	85471	S	22184	3581	25765	0.10210
+Babesia bigemina	5866	S	75	33	108	0.00043
+Theileria equi	5872	S	29	1	30	0.00012
+Toxoplasma gondii	5811	S	38	73	111	0.00044
+Cryptosporidium parvum	5807	S	49	9	58	0.00023
+Bremia lactucae	4779	S	13	3421	3434	0.01361
+Guillardia theta	55529	S	235	287	522	0.00207
+Cyanidioschyzon merolae	45157	S	28	0	28	0.00011
+Zymobacter palmae	33074	S	10	614	624	0.00247
+Halotalea alkalilenta	376489	S	68	189	257	0.00102
+Pistricoccus aurantiacus	1883414	S	66	176	242	0.00096
+Halomonas sp. JS92-SW72	2306583	S	14	207	221	0.00088
+Morganella morganii	582	S	162	516	678	0.00269
+Escherichia coli	562	S	75	7124	7199	0.02853
+Stenotrophomonas maltophilia	40324	S	75	907	982	0.00389
+Xanthomonas boreopolis	86183	S	14	42	56	0.00022
+Rheinheimera sp. MM224	3019969	S	12	37	49	0.00019
+Rheinheimera sp. F8	1763998	S	10	5	15	0.00006
+Rheinheimera mangrovi	2498451	S	21	58	79	0.00031
+Motilimonas cestriensis	2742685	S	13	9	22	0.00009
+Vibrio anguillarum	55601	S	98	116	214	0.00085
+Wolbachia pipientis	955	S	130	1543	1673	0.00663
+Asaia bogorensis	91915	S	21	217	238	0.00094
+Candidatus Gromoviella agglomerans	2806609	S	55	4	59	0.00023
+Acidovorax sp. BLS4	3273430	S	34	152	186	0.00074
+Entomospira culicis	2719989	S	618	432	1050	0.00416
+Entomospira nematocerorum	2719987	S	52	184	236	0.00094
+Entomospira entomophila	2719988	S	48	152	200	0.00079
+uncultured Acetobacteroides sp.	1760811	S	478	68	546	0.00216
+Capnocytophaga sputigena	1019	S	10	171	181	0.00072
+Planktothricoides raciborskii	132608	S	59	0	59	0.00023
+Geminocystis herdmanii	669359	S	20	88	108	0.00043
+Stanieria cyanosphaera	102116	S	50	209	259	0.00103
+Desertifilum tharense	1185873	S	36	251	287	0.00114
+Crinalium epipsammum	241425	S	26	266	292	0.00116
+Cutibacterium acnes	1747	S	181	306	487	0.00193
+Lawsonella clevelandensis	1528099	S	11	14	25	0.00010
+Curtobacterium flaccumfaciens	2035	S	22	122	144	0.00057
+Streptomyces sp. T12	477697	S	79	109	188	0.00075
+Streptomyces sp. BPTC-684	3043734	S	16	30	46	0.00018
+Streptococcus gordonii	1302	S	15	175	190	0.00075
+Staphylococcus pettenkoferi	170573	S	10	36	46	0.00018
+Staphylococcus hominis	1290	S	10	119	129	0.00051
+Anaerococcus prevotii	33034	S	12	36	48	0.00019
+Finegoldia magna	1260	S	15	30	45	0.00018
+Gylbovirus aagae	2955967	S	10426	0	10426	0.04132
+Vesiculovirus piry	1972575	S	189	0	189	0.00075
+Phasivirus phasiense	3052631	S	14	0	14	0.00006
+Thogotovirus sinuense	2956526	S	13	0	13	0.00005
+Hubei virga-like virus 2	1923335	S	12	0	12	0.00005
+Betabaculovirus chofumiferanae	3051997	S	3071	0	3071	0.01217
+Gorganvirus isfahan	2560650	S	20	37	57	0.00023

@@ -1,0 +1,86 @@
+name	taxonomy_id	taxonomy_lvl	kraken_assigned_reads	added_reads	new_est_reads	fraction_total_reads
+Homo sapiens	9606	S	748029	1691468	2439497	0.93159
+Fusarium graminearum	5518	S	14	117	131	0.00005
+Ustilaginoidea virens	1159556	S	32	64	96	0.00004
+Trichoderma atroviride	63577	S	11	51	62	0.00002
+Colletotrichum higginsianum	80884	S	14	167	181	0.00007
+Botrytis cinerea	40559	S	234	699	933	0.00036
+Aspergillus luchuensis	1069201	S	14	53	67	0.00003
+Aspergillus oryzae	5062	S	12	93	105	0.00004
+Aspergillus chevalieri	182096	S	22	146	168	0.00006
+Coccidioides posadasii	199306	S	20	742	762	0.00029
+Ascochyta rabiei	5454	S	109	412	521	0.00020
+Alternaria dauci	48095	S	10	24	34	0.00001
+Zymoseptoria tritici	1047171	S	10	54	64	0.00002
+Pichia kudriavzevii	4909	S	70	138	208	0.00008
+Lodderomyces beijingensis	1775926	S	10	91	101	0.00004
+Sugiyamaella lignohabitans	796027	S	82	390	472	0.00018
+Yarrowia lipolytica	4952	S	29	3	32	0.00001
+Kluyveromyces lactis	28985	S	13	99	112	0.00004
+Kwoniella mangrovensis	463800	S	42	205	247	0.00009
+Kwoniella pini	453459	S	11	31	42	0.00002
+Cryptococcus tetragattii	1859121	S	17	66	83	0.00003
+Vanrija pseudolonga	143232	S	39	120	159	0.00006
+Cutaneotrichosporon cavernicola	279322	S	12	23	35	0.00001
+Psilocybe cubensis	181762	S	55	57	112	0.00004
+Marasmius oreades	181124	S	39	176	215	0.00008
+Rhizoctonia solani	456999	S	32	25	57	0.00002
+Puccinia striiformis	27350	S	317	539	856	0.00033
+Mycosarcoma maydis	5270	S	20	4	24	0.00001
+Sporisorium graminicola	280036	S	18	85	103	0.00004
+Malassezia restricta	76775	S	13	128	141	0.00005
+Encephalitozoon hellem	27973	S	62	906	968	0.00037
+Rhizophagus irregularis	588596	S	26	410	436	0.00017
+Plasmodium relictum	85471	S	32596	14485	47081	0.01798
+Plasmodium vivax	5855	S	27	15	42	0.00002
+Plasmodium vinckei	5860	S	11	5	16	0.00001
+Babesia bigemina	5866	S	60	56	116	0.00004
+Babesia duncani	323732	S	26	12	38	0.00001
+Theileria equi	5872	S	15	3	18	0.00001
+Toxoplasma gondii	5811	S	463	522	985	0.00038
+Cryptosporidium parvum	5807	S	11	2	13	0.00000
+Bremia lactucae	4779	S	47	1873	1920	0.00073
+Phaeodactylum tricornutum	2850	S	33	236	269	0.00010
+Bigelowiella natans	227086	S	12	8	20	0.00001
+Guillardia theta	55529	S	2051	10648	12699	0.00485
+Hemiselmis andersenii	464988	S	43	60	103	0.00004
+Dictyostelium discoideum	44689	S	56	14	70	0.00003
+Giardia duodenalis	5741	S	11	0	11	0.00000
+Providencia rettgeri	587	S	14	11766	11780	0.00450
+Morganella morganii	582	S	244	1315	1559	0.00060
+Escherichia coli	562	S	1102	59286	60388	0.02306
+Kosakonia sp. SMBL-WEM22	2725560	S	95	365	460	0.00018
+Enterobacter ludwigii	299767	S	13	133	146	0.00006
+Enterobacter sp. T2	2707174	S	19	2952	2971	0.00113
+Klebsiella pneumoniae	573	S	20	2393	2413	0.00092
+Salmonella enterica	28901	S	11	10348	10359	0.00396
+Zymobacter sp. IVIA_5232.4 C2	3394855	S	16	383	399	0.00015
+Zymobacter palmae	33074	S	10	159	169	0.00006
+Halotalea alkalilenta	376489	S	48	140	188	0.00007
+Halomonas sp. JS92-SW72	2306583	S	20	337	357	0.00014
+Pistricoccus aurantiacus	1883414	S	10	27	37	0.00001
+Stenotrophomonas maltophilia	40324	S	663	4201	4864	0.00186
+Entomomonas moraniae	2213226	S	278	194	472	0.00018
+Vibrio parahaemolyticus	670	S	45	75	120	0.00005
+Vibrio anguillarum	55601	S	24	25	49	0.00002
+Commensalibacter melissae	2070537	S	460	292	752	0.00029
+Neokomagataea tanensis	661191	S	158	396	554	0.00021
+Acetobacter orientalis	146474	S	10	242	252	0.00010
+Oecophyllibacter saccharovorans	2558360	S	100	83	183	0.00007
+Brevundimonas sp. Br13	3446078	S	439	4524	4963	0.00190
+Brevundimonas sp. KH_060	3465236	S	45	19	64	0.00002
+Bradyrhizobium sp. STM 3562	578924	S	11	29	40	0.00002
+Wolbachia endosymbiont (group A) of Lypha dubia	3066146	S	18	10	28	0.00001
+Acidovorax sp. BLS4	3273430	S	14	231	245	0.00009
+uncultured Acetobacteroides sp.	1760811	S	118	56	174	0.00007
+Ignavibacterium sp.	2651167	S	12	1	13	0.00000
+Entomospira culicis	2719989	S	11	23	34	0.00001
+Curtobacterium flaccumfaciens	2035	S	27	341	368	0.00014
+Cutibacterium acnes	1747	S	41	150	191	0.00007
+Streptomyces sp. T12	477697	S	49	248	297	0.00011
+Lacticaseibacillus paracasei	1597	S	10	219	229	0.00009
+Geminocystis herdmanii	669359	S	17	18	35	0.00001
+Betabaculovirus chofumiferanae	3051997	S	2966	0	2966	0.00113
+Alphamesonivirus cavallyense	1312874	S	15	0	15	0.00001
+Orthoflavivirus iunctionis	3703353	S	14	0	14	0.00001
+Harbinvirus semele	2734052	S	12	0	12	0.00000

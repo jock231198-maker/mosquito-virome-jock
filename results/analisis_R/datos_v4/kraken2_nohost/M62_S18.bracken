@@ -1,0 +1,46 @@
+name	taxonomy_id	taxonomy_lvl	kraken_assigned_reads	added_reads	new_est_reads	fraction_total_reads
+Homo sapiens	9606	S	404526	1270135	1674661	0.98482
+Trichoderma atroviride	63577	S	36	65	101	0.00006
+Ustilaginoidea virens	1159556	S	12	10	22	0.00001
+Colletotrichum higginsianum	80884	S	28	169	197	0.00012
+Pyricularia oryzae	318829	S	15	0	15	0.00001
+Botrytis cinerea	40559	S	15	51	66	0.00004
+Aspergillus oryzae	5062	S	13	55	68	0.00004
+Aspergillus luchuensis	1069201	S	10	24	34	0.00002
+Coccidioides posadasii	199306	S	29	211	240	0.00014
+Ascochyta rabiei	5454	S	17	37	54	0.00003
+Sugiyamaella lignohabitans	796027	S	87	396	483	0.00028
+Kluyveromyces lactis	28985	S	19	80	99	0.00006
+Malassezia restricta	76775	S	13	285	298	0.00018
+Mycosarcoma maydis	5270	S	12	9	21	0.00001
+Kwoniella mangrovensis	463800	S	42	253	295	0.00017
+Kwoniella pini	453459	S	13	44	57	0.00003
+Vanrija pseudolonga	143232	S	30	111	141	0.00008
+Marasmius oreades	181124	S	10	23	33	0.00002
+Puccinia striiformis	27350	S	96	219	315	0.00019
+Plasmodium relictum	85471	S	3395	2055	5450	0.00320
+Plasmodium vivax	5855	S	23	13	36	0.00002
+Babesia duncani	323732	S	10	21	31	0.00002
+Toxoplasma gondii	5811	S	67	103	170	0.00010
+Bremia lactucae	4779	S	68	65	133	0.00008
+Phaeodactylum tricornutum	2850	S	35	7	42	0.00002
+Dictyostelium discoideum	44689	S	80	29	109	0.00006
+Hemiselmis andersenii	464988	S	50	102	152	0.00009
+Guillardia theta	55529	S	17	127	144	0.00008
+Proteus mirabilis	584	S	904	6014	6918	0.00407
+Tatumella ptyseos	82987	S	19	38	57	0.00003
+Escherichia coli	562	S	11	649	660	0.00039
+Stenotrophomonas maltophilia	40324	S	1417	4049	5466	0.00321
+Halotalea alkalilenta	376489	S	23	425	448	0.00026
+Vibrio parahaemolyticus	670	S	20	26	46	0.00003
+Vibrio anguillarum	55601	S	13	12	25	0.00001
+Entomospira culicis	2719989	S	943	345	1288	0.00076
+Entomospira nematocerorum	2719987	S	16	30	46	0.00003
+Arboribacterium acericorticis	2562437	S	15	0	15	0.00001
+Curtobacterium flaccumfaciens	2035	S	20	98	118	0.00007
+Cutibacterium acnes	1747	S	52	68	120	0.00007
+Streptomyces sp. NBC_00557	2975776	S	30	51	81	0.00005
+Streptomyces sp. T12	477697	S	21	38	59	0.00003
+Gylbovirus aagae	2955967	S	1436	0	1436	0.00084
+Betabaculovirus chofumiferanae	3051997	S	175	0	175	0.00010
+Gorganvirus isfahan	2560650	S	24	8	32	0.00002

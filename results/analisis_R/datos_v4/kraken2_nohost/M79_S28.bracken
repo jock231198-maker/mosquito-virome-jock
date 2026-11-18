@@ -1,0 +1,66 @@
+name	taxonomy_id	taxonomy_lvl	kraken_assigned_reads	added_reads	new_est_reads	fraction_total_reads
+Plasmodium relictum	85471	S	35995	9307	45302	0.29896
+Plasmodium knowlesi	5850	S	29	3	32	0.00021
+Babesia bigemina	5866	S	123	56	179	0.00118
+Theileria equi	5872	S	64	4	68	0.00045
+Cryptosporidium parvum	5807	S	88	47	135	0.00089
+Toxoplasma gondii	5811	S	12	81	93	0.00061
+Bremia lactucae	4779	S	16	5865	5881	0.03881
+Homo sapiens	9606	S	24288	29298	53586	0.35363
+Botrytis cinerea	40559	S	17	43	60	0.00040
+Ascochyta rabiei	5454	S	44	245	289	0.00191
+Cercospora beticola	122368	S	12	158	170	0.00112
+Zymoseptoria tritici	1047171	S	11	39	50	0.00033
+Malassezia restricta	76775	S	199	398	597	0.00394
+Puccinia striiformis	27350	S	127	102	229	0.00151
+Marasmius oreades	181124	S	14	36	50	0.00033
+Psilocybe cubensis	181762	S	10	14	24	0.00016
+Rhizoctonia solani	456999	S	12	14	26	0.00017
+Rhizophagus irregularis	588596	S	35	19	54	0.00036
+Citrobacter cronae	1748967	S	11	478	489	0.00323
+Klebsiella pneumoniae	573	S	48	5451	5499	0.03629
+Enterobacter cloacae	550	S	11	93	104	0.00069
+Escherichia coli	562	S	39	8827	8866	0.05851
+Salmonella enterica	28901	S	14	11024	11038	0.07284
+Pantoea eucrina	472693	S	58	506	564	0.00372
+Acinetobacter soli	487316	S	61	621	682	0.00450
+Acinetobacter courvalinii	280147	S	13	71	84	0.00055
+Stenotrophomonas maltophilia	40324	S	454	3731	4185	0.02762
+Halomonas sp. JS92-SW72	2306583	S	138	57	195	0.00129
+Vibrio anguillarum	55601	S	48	27	75	0.00049
+Vibrio parahaemolyticus	670	S	42	37	79	0.00052
+Acetobacter ghanensis	431306	S	171	1500	1671	0.01103
+Acetobacter okinawensis	1076594	S	51	333	384	0.00253
+Acetobacter indonesiensis	104101	S	13	140	153	0.00101
+Asaia bogorensis	91915	S	73	488	561	0.00370
+Asaia lannensis	415421	S	46	1482	1528	0.01008
+Asaia prunellae	610245	S	14	80	94	0.00062
+Wolbachia endosymbiont (group A) of Lypha dubia	3066146	S	21	108	129	0.00085
+Anaplasma platys	949	S	18	16	34	0.00022
+Acidovorax sp. BLS4	3273430	S	124	466	590	0.00389
+Chryseobacterium gleum	250	S	23	928	951	0.00628
+Chryseobacterium joostei	112234	S	12	193	205	0.00135
+Elizabethkingia anophelis	1117645	S	69	743	812	0.00536
+uncultured Acetobacteroides sp.	1760811	S	194	41	235	0.00155
+Rhizosphaericola mali	2545455	S	26	12	38	0.00025
+Entomospira culicis	2719989	S	581	320	901	0.00595
+Entomospira nematocerorum	2719987	S	83	228	311	0.00205
+Entomospira entomophila	2719988	S	32	79	111	0.00073
+Cutibacterium acnes	1747	S	229	313	542	0.00358
+Streptomyces sp. T12	477697	S	302	256	558	0.00368
+Streptomyces sp. BR1	1592323	S	10	8	18	0.00012
+Streptomyces cyaneochromogenes	2496836	S	18	11	29	0.00019
+Corynebacterium tuberculostearicum	38304	S	24	191	215	0.00142
+Lawsonella clevelandensis	1528099	S	10	30	40	0.00026
+Kocuria rosea	1275	S	13	136	149	0.00098
+Curtobacterium flaccumfaciens	2035	S	18	79	97	0.00064
+Agrococcus jejuensis	399736	S	15	14	29	0.00019
+Weissella confusa	1583	S	10	80	90	0.00059
+Staphylococcus hominis	1290	S	23	174	197	0.00130
+Staphylococcus auricularis	29379	S	19	31	50	0.00033
+Staphylococcus pettenkoferi	170573	S	17	40	57	0.00038
+Staphylococcus epidermidis	1282	S	11	96	107	0.00071
+Finegoldia magna	1260	S	13	77	90	0.00059
+Betabaculovirus chofumiferanae	3051997	S	1637	0	1637	0.01080
+Vesiculovirus piry	1972575	S	192	0	192	0.00127
+Gylbovirus aagae	2955967	S	10	0	10	0.00007

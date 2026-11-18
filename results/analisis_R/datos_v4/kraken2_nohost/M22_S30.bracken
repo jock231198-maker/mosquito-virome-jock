@@ -1,0 +1,32 @@
+name	taxonomy_id	taxonomy_lvl	kraken_assigned_reads	added_reads	new_est_reads	fraction_total_reads
+Plasmodium relictum	85471	S	100418	53863	154281	0.25733
+Babesia bigemina	5866	S	13	142	155	0.00026
+Toxoplasma gondii	5811	S	19	34	53	0.00009
+Homo sapiens	9606	S	109402	305397	414799	0.69187
+Aspergillus chevalieri	182096	S	10	160	170	0.00028
+Sugiyamaella lignohabitans	796027	S	10	81	91	0.00015
+Psilocybe cubensis	181762	S	18	47	65	0.00011
+Rhizoctonia solani	456999	S	11	19	30	0.00005
+Malassezia restricta	76775	S	10	127	137	0.00023
+Puccinia striiformis	27350	S	53	123	176	0.00029
+Dictyostelium discoideum	44689	S	12	3	15	0.00003
+Zymobacter sp. IVIA_5232.4 C2	3394855	S	143	6064	6207	0.01035
+Zymobacter palmae	33074	S	82	2307	2389	0.00398
+Halotalea alkalilenta	376489	S	464	5608	6072	0.01013
+Halomonas chromatireducens	507626	S	141	1775	1916	0.00320
+Halomonas garicola	1690008	S	15	220	235	0.00039
+Kushneria phosphatilytica	657387	S	14	70	84	0.00014
+Stenotrophomonas maltophilia	40324	S	68	4399	4467	0.00745
+Vibrio anguillarum	55601	S	45	918	963	0.00161
+Teredinibacter turnerae	2426	S	29	32	61	0.00010
+Asaia bogorensis	91915	S	16	192	208	0.00035
+Entomospira culicis	2719989	S	621	357	978	0.00163
+Entomospira nematocerorum	2719987	S	58	155	213	0.00036
+Entomospira entomophila	2719988	S	26	62	88	0.00015
+uncultured Acetobacteroides sp.	1760811	S	70	39	109	0.00018
+Cutibacterium acnes	1747	S	24	66	90	0.00015
+Curtobacterium flaccumfaciens	2035	S	11	99	110	0.00018
+Streptomyces sp. T12	477697	S	49	156	205	0.00034
+Geminocystis herdmanii	669359	S	16	29	45	0.00008
+Gylbovirus aagae	2955967	S	3919	0	3919	0.00654
+Betabaculovirus chofumiferanae	3051997	S	1192	0	1192	0.00199

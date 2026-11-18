@@ -1,0 +1,60 @@
+name	taxonomy_id	taxonomy_lvl	kraken_assigned_reads	added_reads	new_est_reads	fraction_total_reads
+Homo sapiens	9606	S	1380770	2850613	4231383	0.98910
+Fusarium graminearum	5518	S	17	73	90	0.00002
+Trichoderma atroviride	63577	S	30	59	89	0.00002
+Ustilaginoidea virens	1159556	S	29	29	58	0.00001
+Colletotrichum higginsianum	80884	S	37	236	273	0.00006
+Botrytis cinerea	40559	S	24	57	81	0.00002
+Coccidioides posadasii	199306	S	39	231	270	0.00006
+Ascochyta rabiei	5454	S	46	79	125	0.00003
+Pyrenophora tritici-repentis	45151	S	19	90	109	0.00003
+Kluyveromyces lactis	28985	S	38	124	162	0.00004
+Sugiyamaella lignohabitans	796027	S	65	282	347	0.00008
+Yarrowia lipolytica	4952	S	24	2	26	0.00001
+Kwoniella mangrovensis	463800	S	68	355	423	0.00010
+Kwoniella bestiolae	324769	S	16	45	61	0.00001
+Kwoniella europaea	1247712	S	11	30	41	0.00001
+Kwoniella pini	453459	S	10	30	40	0.00001
+Cryptococcus tetragattii	1859121	S	15	62	77	0.00002
+Vanrija pseudolonga	143232	S	53	154	207	0.00005
+Marasmius oreades	181124	S	10	18	28	0.00001
+Puccinia striiformis	27350	S	212	366	578	0.00014
+Mycosarcoma maydis	5270	S	14	9	23	0.00001
+Malassezia restricta	76775	S	17	258	275	0.00006
+Rhizophagus irregularis	588596	S	18	13	31	0.00001
+Plasmodium relictum	85471	S	23036	9235	32271	0.00754
+Plasmodium vivax	5855	S	61	36	97	0.00002
+Plasmodium cynomolgi	5827	S	13	4	17	0.00000
+Plasmodium vinckei	5860	S	22	6	28	0.00001
+Plasmodium chabaudi	5825	S	13	4	17	0.00000
+Plasmodium yoelii	5861	S	13	5	18	0.00000
+Babesia duncani	323732	S	46	31	77	0.00002
+Babesia bovis	5865	S	16	3	19	0.00000
+Babesia bigemina	5866	S	15	16	31	0.00001
+Toxoplasma gondii	5811	S	124	140	264	0.00006
+Besnoitia besnoiti	94643	S	11	1	12	0.00000
+Bremia lactucae	4779	S	96	1178	1274	0.00030
+Phaeodactylum tricornutum	2850	S	48	118	166	0.00004
+Bigelowiella natans	227086	S	12	7	19	0.00000
+Dictyostelium discoideum	44689	S	112	26	138	0.00003
+Hemiselmis andersenii	464988	S	58	79	137	0.00003
+Guillardia theta	55529	S	20	99	119	0.00003
+Giardia duodenalis	5741	S	12	0	12	0.00000
+Stenotrophomonas maltophilia	40324	S	1742	2888	4630	0.00108
+Zymobacter palmae	33074	S	12	220	232	0.00005
+Halotalea alkalilenta	376489	S	27	65	92	0.00002
+Halomonas sp. JS92-SW72	2306583	S	17	243	260	0.00006
+Klebsiella pneumoniae	573	S	10	766	776	0.00018
+Vibrio parahaemolyticus	670	S	56	40	96	0.00002
+Vibrio anguillarum	55601	S	25	14	39	0.00001
+Wolbachia endosymbiont (group A) of Lypha dubia	3066146	S	20	54	74	0.00002
+Entomospira culicis	2719989	S	621	250	871	0.00020
+Entomospira nematocerorum	2719987	S	11	23	34	0.00001
+uncultured Acetobacteroides sp.	1760811	S	69	38	107	0.00003
+Streptomyces sp. NBC_00557	2975776	S	72	95	167	0.00004
+Streptomyces sp. T12	477697	S	19	32	51	0.00001
+Cutibacterium acnes	1747	S	86	88	174	0.00004
+Curtobacterium flaccumfaciens	2035	S	15	53	68	0.00002
+Streptosporangium subroseum	106412	S	12	15	27	0.00001
+Betabaculovirus chofumiferanae	3051997	S	687	0	687	0.00016
+Gorganvirus isfahan	2560650	S	36	47	83	0.00002
