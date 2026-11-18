@@ -28,6 +28,10 @@ USO
 
   Con --esperadas puede comprobar la cobertura contra la tabla final:
     ... --esperadas $RESULTS_DIR/qc_control_min500/TABLA_FINAL_votus.tsv
+
+  Con --solo restringe la salida a las vOTUs del catalogo, para no arrastrar
+  las de la rama de 1 kb que ya no son representantes a 500 pb:
+    ... --solo $RESULTS_DIR/qc_control_min500/votus_master.tsv
 """
 import csv
 import sys
@@ -54,6 +58,15 @@ def main():
     if "--esperadas" in args:
         i = args.index("--esperadas")
         esperadas = args[i + 1]
+        del args[i:i + 2]
+
+    # --solo TABLA: deja fuera lo que no este en el catalogo. Sin esto la fusion
+    # arrastra las 748 vOTUs de la rama de 1 kb enteras, y 13 de ellas dejaron de
+    # ser representantes al reagrupar a 500 pb (RESUMEN_min500.md 7.12).
+    solo = None
+    if "--solo" in args:
+        i = args.index("--solo")
+        solo = args[i + 1]
         del args[i:i + 2]
 
     if len(args) < 2:
@@ -92,6 +105,20 @@ def main():
             procedencia[vid] = path
             nuevas += 1
         print(f"  {nuevas:>6} vOTUs de {path}")
+
+    if solo:
+        _, filas_c = leer(solo)
+        catalogo = {(f.get(COL_ID) or "").strip() for f in filas_c}
+        catalogo.discard("")
+        fuera = sorted(set(fusion) - catalogo)
+        for vid in fuera:
+            del fusion[vid]
+        print(f"\n  --solo {solo}: {len(catalogo)} en el catalogo, "
+              f"{len(fuera)} descartadas de la fusion")
+        for v in fuera[:5]:
+            print(f"      {v}")
+        if len(fuera) > 5:
+            print(f"      ... y {len(fuera) - 5} mas")
 
     with open(salida, "w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=[COL_ID] + COLS_ARB, delimiter="\t",

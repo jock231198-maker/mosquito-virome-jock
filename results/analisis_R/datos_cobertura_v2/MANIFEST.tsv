@@ -1,0 +1,5 @@
+# congelado: 2026-11-18 20:47:51  host: farm22-head1  lote: MERIDA  rama: min500  ventana: 50 pb
+# scripts: 5f58a94 fifs last version over datos_v4 run
+archivo	origen	lineas	md5
+perfiles_cobertura.tsv.gz	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/qc_control_min500/perfil_cobertura/perfiles_cobertura.tsv	137636	17b1b957c86d46f5d4521f25301b80d1
+votus_perfil.bed	/lustre/scratch126/tol/teams/lawniczak/users/jm79/results/MERIDA/qc_control_min500/perfil_cobertura/votus_perfil.bed	333	11cdaebf48dee8edee7feae16ff97062

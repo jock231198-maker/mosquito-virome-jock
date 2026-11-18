@@ -19,8 +19,20 @@ export LC_ALL=C
 [[ "${RESULT_FROM:-}" == "MERIDA" ]] || { echo "ERROR: lote activo '${RESULT_FROM:-?}', no MERIDA (usa jkv)"; exit 1; }
 
 W=50
-TABLA="$RESULTS_DIR/qc_control/TABLA_FINAL_votus_arb.tsv"
-BASE="$RESULTS_DIR/qc_control/perfil_cobertura"
+
+# RAMA vacia  = catalogo de >=1 kb. Por defecto, igual que antes.
+# RAMA=min500 = catalogo de >=500 pb. Aqui el sufijo si es uniforme: tabla
+# final, salida y BAM del mapeo llevan todos _min500.
+RAMA="${RAMA:-}"
+case "$RAMA" in
+  ""|min500) ;;
+  *) echo "ERROR: RAMA='$RAMA' no reconocida (vacia = 1 kb, o 'min500')"; exit 1 ;;
+esac
+SUF=""; [[ -n "$RAMA" ]] && SUF="_$RAMA"
+
+TABLA="$RESULTS_DIR/qc_control$SUF/TABLA_FINAL_votus_arb.tsv"
+BASE="$RESULTS_DIR/qc_control$SUF/perfil_cobertura"
+BAMDIR="$SCRATCH/mapped_votus$SUF/votus"
 BED="$BASE/votus_perfil.bed"
 OUT="$BASE/por_muestra"
 LISTA="$SCRATCH/asm_samples.txt"
@@ -44,8 +56,10 @@ lanzar)
        -o "$LOGS_DIR/perfil.%J.%I.log" -e "$LOGS_DIR/perfil.%J.%I.err" \
        -q normal -n 4 -M 16000 \
        -R "select[mem>16000] rusage[mem=16000] span[hosts=1]" \
-       "$SCRIPT_DIR/perfil_cobertura_worker.sh $LISTA $BED $OUT $W"
-  echo "cuando termine (bjobs -J perfil):  bash $0 recoger v1"
+       "$SCRIPT_DIR/perfil_cobertura_worker.sh $LISTA $BED $OUT $W $BAMDIR"
+  echo "BAM:  $BAMDIR"
+  SUG="v1"; [[ -n "$RAMA" ]] && SUG="v2"
+  echo "cuando termine (bjobs -J perfil):  ${RAMA:+RAMA=$RAMA }bash $0 recoger $SUG"
   ;;
 
 recoger)
@@ -68,7 +82,7 @@ recoger)
   gzip -c "$todo" > "$DEST/perfiles_cobertura.tsv.gz"
   cp "$BED" "$DEST/votus_perfil.bed"
   {
-    echo "# congelado: $(date '+%F %T')  host: $(hostname)  lote: $RESULT_FROM  ventana: $W pb"
+    echo "# congelado: $(date '+%F %T')  host: $(hostname)  lote: $RESULT_FROM  rama: ${RAMA:-1kb}  ventana: $W pb"
     echo "# scripts: $(git -C "$SCRIPT_DIR" log -1 --format='%h %s' 2>/dev/null)"
     printf 'archivo\torigen\tlineas\tmd5\n'
     printf 'perfiles_cobertura.tsv.gz\t%s\t%s\t%s\n' "$todo" "$(wc -l < "$todo")" "$(md5sum "$DEST/perfiles_cobertura.tsv.gz" | cut -d' ' -f1)"

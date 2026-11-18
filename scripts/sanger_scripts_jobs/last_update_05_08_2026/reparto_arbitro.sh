@@ -30,6 +30,11 @@ reparto() {   # $1 = columna a agrupar, $2 = titulo
   awk -F'\t' -v COL="$1" -v TIT="$2" '
     NR == 1 {
       for (i = 1; i <= NF; i++) h[$i] = i
+        # alias: TABLA_FINAL_votus_arb.tsv llama a estas columnas de otra
+        # forma (categoria, familia, nr_veredicto). Asi el reparto corre
+        # directo sobre ella, sin renombrar la cabecera antes.
+        if (!("veredicto" in h) && ("nr_veredicto" in h)) h["veredicto"] = h["nr_veredicto"]
+        if (!(COL in h)) sub(/_viral$/, "", COL)
       if (!(COL in h)) { printf("  (el fichero no tiene columna %s)\n", COL); exit 0 }
       if (!("veredicto" in h)) { print "  (el fichero no tiene columna veredicto)"; exit 0 }
       next
@@ -62,6 +67,11 @@ reparto() {   # $1 = columna a agrupar, $2 = titulo
   local tmp; tmp="$(mktemp)"
   awk -F'\t' -v COL="$1" '
     NR == 1 { for (i = 1; i <= NF; i++) h[$i] = i
+      # alias: TABLA_FINAL_votus_arb.tsv llama a estas columnas de otra
+      # forma (categoria, familia, nr_veredicto). Asi el reparto corre
+      # directo sobre ella, sin renombrar la cabecera antes.
+      if (!("veredicto" in h) && ("nr_veredicto" in h)) h["veredicto"] = h["nr_veredicto"]
+      if (!(COL in h)) sub(/_viral$/, "", COL)
               if (!(COL in h) || !("veredicto" in h)) exit 0; next }
     { g = $(h[COL]); v = $(h["veredicto"])
       if (g == "" || g == "NA") g = "(vacio)"

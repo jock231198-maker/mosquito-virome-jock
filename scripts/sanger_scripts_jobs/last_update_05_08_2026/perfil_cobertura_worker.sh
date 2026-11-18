@@ -7,7 +7,7 @@
 # resume en ventanas de W pb para que el fichero sea pequeno.
 #
 # Uso (lo lanza perfil_cobertura.sh):
-#   perfil_cobertura_worker.sh <lista_muestras> <bed> <dir_salida> [ventana_pb]
+#   perfil_cobertura_worker.sh <lista_muestras> <bed> <dir_salida> [ventana_pb] [dir_bam]
 #
 # Salida: <dir_salida>/<muestra>.perfil.tsv, sin cabecera:
 #   muestra  votu  inicio  fin  profundidad_media
@@ -27,7 +27,11 @@ W="${4:-50}"
 sample="$(sed -n "${LSB_JOBINDEX}p" "$lista")"
 [[ -n "$sample" ]] || { echo "ERROR: indice $LSB_JOBINDEX fuera de rango en $lista"; exit 1; }
 
-bam="$SCRATCH/mapped_votus/votus/${sample}.bam"
+# El directorio de BAM llega como 5o argumento y no por entorno: depender de
+# que LSF propague una variable al array es pedir un fallo silencioso, y la
+# rama de 500 pb mapea contra otro catalogo.
+bamdir="${5:-$SCRATCH/mapped_votus/votus}"
+bam="$bamdir/${sample}.bam"
 out="$outdir/${sample}.perfil.tsv"
 mkdir -p "$outdir"
 
