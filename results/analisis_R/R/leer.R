@@ -10,10 +10,15 @@ suppressPackageStartupMessages({
 
 if (!exists("DATOS")) DATOS <- "datos_v1"
 
+# Un congelado puede guardar comprimido un fichero grande (datos_v4 comprime
+# veredicto_contigs, votu_coverage y contigs_union: 27 MB -> 11 MB). read_tsv
+# abre .gz directamente, asi que basta con resolver el nombre aqui y ninguna
+# figura se entera de que version esta comprimida.
 ruta_datos <- function(f) {
   r <- file.path(DATOS, f)
-  if (!file.exists(r)) stop("No existe ", r, call. = FALSE)
-  r
+  if (file.exists(r))                return(r)
+  if (file.exists(paste0(r, ".gz"))) return(paste0(r, ".gz"))
+  stop("No existe ", r, " (ni .gz)", call. = FALSE)
 }
 
 comprobar <- function(d, cols, f) {
@@ -27,7 +32,10 @@ leer_tsv <- function(f, cols = NULL, ...) {
   if (!is.null(cols)) comprobar(d, cols, f) else d
 }
 
-existe <- function(f) file.exists(file.path(DATOS, f))
+existe <- function(f) {
+  r <- file.path(DATOS, f)
+  file.exists(r) || file.exists(paste0(r, ".gz"))
+}
 
 # "M11_S3" -> "M11"
 etiqueta_muestra <- function(x) sub("_S[0-9]+$", "", x)
@@ -149,7 +157,12 @@ nombre_por_nr <- function(votus) {
   if (!"nombre_virus" %in% names(votus)) return(rep(FALSE, nrow(votus)))
   nr  <- coalesce(votus$nr_nombre, "")
   esp <- coalesce(votus$especie, "")
-  nr != "" & coalesce(votus$nombre_virus, "") == paste0("afín a ", nr) & esp != nr
+  nv  <- coalesce(votus$nombre_virus, "")
+  # Desde el 18 nov integrar_arbitro.py deja que nr gane el nombre tambien
+  # en "identificado", y ahi va sin el prefijo "afín a" (caso Grenada
+  # mosquito rhabdovirus 1). Hay que contemplar las dos formas o la familia
+  # del blastn contradice al nombre sin que se note.
+  nr != "" & esp != nr & (nv == paste0("afín a ", nr) | nv == nr)
 }
 
 familia_fig <- function(votus) {
