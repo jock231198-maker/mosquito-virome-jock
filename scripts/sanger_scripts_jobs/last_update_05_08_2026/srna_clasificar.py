@@ -111,21 +111,24 @@ def clasificar(r, a, en_rrna):
         return "virus_mas_piRNA", f"z10 {num(z):.1f}; " + "; ".join(falla)
 
     # --- EVE / NIRVS
-    falla_eve = []
+    # frac_pi y confinamiento: DATO, no puerta. El control falla los dos en
+    # 26/26 y su frac_pi va 0.46-0.87 sobre la MISMA referencia: miden la
+    # libreria, no el elemento. Ver PLAN_nivelB_fase2.md 6.
+    falla_eve, nota_eve = [], []
     if frac_pi < a.pi_min:
-        falla_eve.append(f"piRNA {frac_pi:.2f} < {a.pi_min}")
+        (falla_eve if a.pi_obligatorio else nota_eve).append(f"piRNA {frac_pi:.2f} < {a.pi_min}")
     if not una_hebra:
         falla_eve.append(f"no es de una hebra (polaridad {pol:.2f})")
     if pico21:
         falla_eve.append("tiene pico de 21 nt")
     if not (frac_cub <= a.tramo_cubierto and span <= a.tramo_span):
-        falla_eve.append(f"no confinado (cubre {frac_cub:.2f}, span {span:.2f})")
+        (falla_eve if a.tramo_obligatorio else nota_eve).append(f"no confinado (cubre {frac_cub:.2f}, span {span:.2f})")
     if frac_gen < a.eve_genoma:
         falla_eve.append(f"solo {frac_gen:.2f} de las lecturas en AaegL5")
     if not falla_eve:
-        return "EVE_NIRVS", "ok"
+        return "EVE_NIRVS", ("ok" if not nota_eve else "ok | nota EVE: " + "; ".join(nota_eve))
 
-    return "ambiguo", "replica: " + "; ".join(falla) + " | EVE: " + "; ".join(falla_eve)
+    return "ambiguo", "replica: " + "; ".join(falla) + " | EVE: " + "; ".join(falla_eve) + (" | nota EVE: " + "; ".join(nota_eve) if nota_eve else "")
 
 
 def main():
@@ -141,6 +144,8 @@ def main():
     ap.add_argument("--hebra-min", type=float, default=0.10, help="replica: siRNA por hebra, minimo")
     ap.add_argument("--hebra-max", type=float, default=0.90, help="replica: siRNA por hebra, maximo")
     ap.add_argument("--pi-min", type=float, default=0.80, help="EVE: fraccion de piRNA")
+    ap.add_argument("--pi-obligatorio", action="store_true", help="EVE: exigir --pi-min en la puerta (por defecto no)")
+    ap.add_argument("--tramo-obligatorio", action="store_true", help="EVE: exigir confinamiento en la puerta (por defecto no)")
     ap.add_argument("--eve-hebra", type=float, default=0.80, help="EVE: fraccion de una hebra")
     ap.add_argument("--eve-genoma", type=float, default=0.50, help="EVE: fraccion de lecturas en AaegL5")
     ap.add_argument("--tramo-cubierto", type=float, default=0.30)
