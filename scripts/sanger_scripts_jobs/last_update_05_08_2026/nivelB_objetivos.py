@@ -52,11 +52,30 @@ FRAC_CORTE = 0.50
 
 
 def motivo_de(r):
-    """Un motivo por vOTU, en orden de prioridad: el primero que encaje."""
-    txt = " ".join((r.get(c) or "") for c in ("nombre_virus", "especie", "nr_nombre"))
+    """Un motivo por vOTU, en orden de prioridad: el primero que encaje.
+
+    PUERTA DE ENTRADA, y es lo que hace que la lista signifique algo: solo
+    entran las vOTUs INTERPRETABLES (es_virus, EVE_genoma, EVE_candidato) mas
+    las de evidencia_debil. Sin esa puerta, los motivos por nombre arrastran
+    vOTUs de huesped, oscura, rRNA y celular_otro cuya columna `especie` lleva
+    el nombre de un virus por un acierto debil de blastn: 52 de mas en la
+    primera corrida, y 66 "especie_nueva" cuando las que lo son son 6.
+
+    evidencia_debil entra a proposito: son las 21 que el suelo de identidad
+    degrado el 18 nov (RESUMEN_min500.md 5.6b), diez de ellas con nombre de
+    dengue. Ya se descartaron por secuencia; el perfil de ARN pequeno es la
+    confirmacion independiente y sale gratis.
+    """
     cf = (r.get("clase_final") or "").strip()
     es_virus = (r.get("es_virus") or "").strip().lower() in ("si", "sí", "1", "true")
+    interpretable = es_virus or cf in ("EVE_genoma", "EVE_candidato")
+
+    if not interpretable and cf != "evidencia_debil":
+        return ""
+
     nombre = (r.get("nombre_virus") or "").strip()
+    nr = (r.get("nr_nombre") or "").strip()
+    txt = " ".join((r.get(c) or "") for c in ("nombre_virus", "especie", "nr_nombre"))
 
     if "Phasivirus" in txt:
         return "PCLV"
@@ -64,8 +83,14 @@ def motivo_de(r):
         return "HTV"
     if "Cell fusing agent" in txt:
         return "CFAV"
-    if any(n in txt for n in NUEVAS):
+    # Exacto y no subcadena: "es" esta especie, no "la menciona". Y solo en
+    # es_virus: en la lista de EVE hay cinco entradas cuyo nr_nombre es
+    # "High Island virus", y son EVE emparentados con la especie nueva, no la
+    # especie. Esas caen a EVE_genoma, que es lo que son.
+    if es_virus and (nr in NUEVAS or nombre in NUEVAS):
         return "especie_nueva"
+    if cf == "evidencia_debil":
+        return "revisar_evidencia_debil"
     if cf == "pariente":
         return "pariente_especie_nueva"
     if es_virus and nombre.startswith("af"):      # "afín a X" = los "-like"
