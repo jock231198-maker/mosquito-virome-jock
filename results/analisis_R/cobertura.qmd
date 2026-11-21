@@ -4,8 +4,8 @@ author: "Jose Carlos Marin Montesino"
 lang: en
 date: today
 params:
-  datos: "datos_v3"
-  cobertura: "datos_cobertura_v1"
+  datos: "datos_v4"
+  cobertura: "datos_cobertura_v2"
 format:
   html:
     embed-resources: true
