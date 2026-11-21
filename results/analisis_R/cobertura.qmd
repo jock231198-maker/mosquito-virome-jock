@@ -212,6 +212,66 @@ print(pc5)
 }
 ```
 
+## PCLV and its EVE
+
+```{r g-pclv-vs-eve, eval = HAY_PERFILES, fig.height = 3.6, results = "asis"}
+# Las dos vOTUs del §5.4b de RESUMEN_min500.md: mismo nombre_virus en la tabla
+# final, comportamiento opuesto en los tres ejes.
+#   - PCLV:  1 pool (M56_S7),  5-16x,  frac_en_genoma 0.000
+#   - EVE:  21 pools,          1,115x, frac_en_genoma 0.714
+# Y un cuarto eje, del ARN pequeno (RESULTADO_nivelB_fase2.md 3.4):
+#   PCLV bajo_umbral (rpm 0.25-6.8) frente a EVE_NIRVS en 26 de 26 (rpm 1,531).
+#
+# Los ids van explicitos a proposito: es una figura concreta, no un top-N, y si
+# el catalogo se vuelve a congelar con otros ids el chunk avisa en vez de
+# dibujar otra cosa.
+IDS6 <- c(
+  "M56_S7__rnaviral__NODE_4_length_2335_cov_7.678915" =
+    "PCLV segment — Phasivirus phasiense (2,335 bp)",
+  "M1_S1__megahit__k119_9737" =
+    "EVE of Phasivirus in AaegL5 (771 bp)"
+)
+
+p6d <- perf |>
+  filter(votu %in% names(IDS6)) |>
+  mutate(pos_kb = (inicio + fin) / 2000)
+
+faltan <- setdiff(names(IDS6), unique(p6d$votu))
+
+if (length(faltan) > 0) {
+  cat("**C6 not drawn.** No coverage profile in `", COBERTURA, "` for: ",
+      paste0("`", faltan, "`", collapse = ", "), "\n", sep = "")
+} else {
+etq6 <- p6d |>
+  filter(profundidad > 0) |>
+  distinct(votu, muestra) |>
+  count(votu, name = "pools") |>
+  mutate(panel = paste0(IDS6[votu], "  ·  ", pools, " pools")) |>
+  arrange(match(votu, names(IDS6)))
+
+p6d <- p6d |>
+  left_join(etq6, by = "votu") |>
+  mutate(panel = factor(panel, levels = etq6$panel))
+
+pc6 <- ggplot(p6d, aes(pos_kb, profundidad + 0.1, group = muestra, colour = tipo)) +
+  geom_line(linewidth = 0.35, alpha = 0.7) +
+  # free_x porque los contigs miden distinto; el eje Y COMPARTIDO es el punto de
+  # la figura: la diferencia de profundidad es el resultado.
+  facet_wrap(~ panel, ncol = 2, scales = "free_x", labeller = label_wrap_gen(44)) +
+  scale_y_log10(labels = label_number(accuracy = 1, big.mark = ",")) +
+  scale_colour_manual(values = COL_TIPO, drop = TRUE) +
+  labs(title = "Same virus name, two different things",
+       subtitle = paste("One line per positive pool, shared depth axis.",
+                        "The virus is a single-pool detection; the EVE is in the",
+                        "genome of every mosquito, so any library covers it."),
+       x = "position (kb)", y = "depth (×, log scale)") +
+  theme(strip.text = element_text(size = 7.5), axis.text = element_text(size = 7),
+        legend.position = "none")
+guardar_cob(pc6, "C6_pclv_vs_eve", alto = 100, ancho = 200)
+print(pc6)
+}
+```
+
 ```{r table-uniformity, eval = HAY_PERFILES}
 uniformidad(perf_p) |>
   left_join(distinct(perf_p, votu, nombre, tipo), by = "votu") |>
