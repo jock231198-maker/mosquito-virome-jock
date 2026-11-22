@@ -165,26 +165,55 @@ perf_p <- perf |>
 n_pools <- perf_p |> distinct(nombre, muestra) |> count(nombre, name = "pools")
 ```
 
-```{r g-profiles-virus, eval = HAY_PERFILES, fig.height = 9, results = "asis"}
+```{r g-profiles-virus, eval = HAY_PERFILES, fig.height = 8.5, results = "asis"}
+# Cuantos paneles caben. Con el catalogo de 500 bp hay ~43 virus con perfil en
+# >= 2 pools: en 3 columnas son 15 filas, y a 230 mm de alto el area de dibujo
+# colapsa a cero -- no se ve ni una sola linea de datos, solo titulos y ejes.
+# C5 ya tenia tope (slice_max n = 9); C4 no lo tenia.
+# Si cambias N_C4, ajusta tambien fig.height de arriba (~1.6 in por fila).
+N_C4 <- 15
+
 pv <- perf_p |>
   filter(tipo != "EVE") |>
   semi_join(filter(n_pools, pools >= 2), by = "nombre") |>
   left_join(n_pools, by = "nombre") |>
   mutate(panel = paste0(nombre, "  (", pools, " pools)"))
 
+n_virus <- dplyr::n_distinct(pv$panel)
+
+# Los N_C4 presentes en mas pools, y los paneles ORDENADOS por prevalencia en
+# vez de alfabeticamente: lo primero que ve el lector es lo mas extendido.
+top_v <- pv |>
+  distinct(panel, pools) |>
+  slice_max(pools, n = N_C4, with_ties = FALSE) |>
+  arrange(desc(pools))
+
+pv <- pv |>
+  filter(panel %in% top_v$panel) |>
+  mutate(panel = factor(panel, levels = top_v$panel))
+
 if (nrow(pv) == 0) {
   cat("No virus with a coverage profile in at least 2 pools.")
 } else {
 pc4 <- ggplot(pv, aes(pos_kb, profundidad + 0.1, group = muestra, colour = tipo)) +
   geom_line(linewidth = 0.3, alpha = 0.6) +
-  facet_wrap(~ panel, scales = "free", ncol = 3, labeller = label_wrap_gen(38)) +
-  scale_y_log10(labels = label_number(accuracy = 1, big.mark = ",")) +
+  facet_wrap(~ panel, scales = "free", ncol = 3, labeller = label_wrap_gen(32)) +
+  # Breaks explicitos: con los automaticos cae un tick en 0.1 -- el
+  # desplazamiento que evita log(0) -- y `accuracy = 1` lo redondea a "0",
+  # que en un eje logaritmico no tiene sentido.
+  scale_y_log10(breaks = 10^(0:5),
+                labels = label_number(accuracy = 1, big.mark = ",")) +
   scale_colour_manual(values = COL_TIPO, drop = TRUE) +
   labs(title = "Depth along the genome, one line per positive pool",
-       subtitle = "Viruses present in at least 2 pools; for each, the vOTU present in most pools; mean depth in windows of 50 bp",
+       subtitle = paste0("The ", nrow(top_v), " of ", n_virus,
+                         " viruses present in most pools; for each, the vOTU present in most pools.\n",
+                         "Mean depth in windows of 50 bp. The rest are in the prevalence figure and in the tables."),
        x = "position (kb)", y = "depth (×, log scale)") +
-  theme(strip.text = element_text(size = 7.5), axis.text = element_text(size = 7))
-guardar_cob(pc4, "C4_profiles_viruses", alto = 230, ancho = 200)
+  theme(strip.text = element_text(size = 7), axis.text = element_text(size = 6.5))
+# El alto sale del numero de filas en vez de ser fijo: 45 mm por fila mas el
+# espacio del titulo. Con 230 mm fijos y 15 filas cada panel se quedaba en nada.
+guardar_cob(pc4, "C4_profiles_viruses",
+            alto = 45 * ceiling(nrow(top_v) / 3) + 25, ancho = 200)
 print(pc4)
 }
 ```
@@ -201,10 +230,11 @@ if (length(top_eve) == 0) {
 } else {
 pc5 <- ggplot(filter(pe, panel %in% top_eve), aes(pos_kb, profundidad + 0.1, group = muestra)) +
   geom_line(linewidth = 0.3, alpha = 0.6, colour = COL_TIPO[["EVE"]]) +
-  facet_wrap(~ panel, scales = "free", ncol = 3, labeller = label_wrap_gen(38)) +
-  scale_y_log10(labels = label_number(accuracy = 1, big.mark = ",")) +
+  facet_wrap(~ panel, scales = "free", ncol = 3, labeller = label_wrap_gen(30)) +
+    scale_y_log10(breaks = 10^(0:5), labels = label_number(accuracy = 1, big.mark = ",")) +
   labs(title = "For comparison: depth along EVE vOTUs",
        subtitle = "The EVEs present in most pools, named after their viral hit",
+              caption = "Endogenous elements in the AaegL5 genome, named after their closest viral hit. None of these is a detection of the named virus.",
        x = "position (kb)", y = "depth (×, log scale)") +
   theme(strip.text = element_text(size = 7.5), axis.text = element_text(size = 7))
 guardar_cob(pc5, "C5_profiles_eves", alto = 150, ancho = 200)
@@ -227,26 +257,33 @@ print(pc5)
 # dibujar otra cosa.
 IDS6 <- c(
   "M56_S7__rnaviral__NODE_4_length_2335_cov_7.678915" =
-    "PCLV segment — Phasivirus phasiense (2,335 bp)",
+    "PCLV — Phasivirus phasiense (2,335 bp)",
   "M1_S1__megahit__k119_9737" =
     "EVE of Phasivirus in AaegL5 (771 bp)"
 )
 
+# `presentes` es el criterio de presencia del documento: >= 70% del genoma
+# cubierto a >= 1x. El mismo que usan C4, C5 y 06_prevalence. Sin el, el
+# recuento de pools cuenta cualquier lectura suelta: daba "2 pools" para PCLV
+# (la tabla final dice n_mapeo = 1) y dibujaba una linea de ruido pegada al
+# suelo que se comia medio panel.
 p6d <- perf |>
   filter(votu %in% names(IDS6)) |>
+  semi_join(presentes, by = c("votu", "muestra")) |>
   mutate(pos_kb = (inicio + fin) / 2000)
 
 faltan <- setdiff(names(IDS6), unique(p6d$votu))
 
 if (length(faltan) > 0) {
-  cat("**C6 not drawn.** No coverage profile in `", COBERTURA, "` for: ",
+  cat("**C6 not drawn.** No pool passes the presence threshold in `",
+      COBERTURA, "` for: ",
       paste0("`", faltan, "`", collapse = ", "), "\n", sep = "")
 } else {
 etq6 <- p6d |>
-  filter(profundidad > 0) |>
   distinct(votu, muestra) |>
   count(votu, name = "pools") |>
-  mutate(panel = paste0(IDS6[votu], "  ·  ", pools, " pools")) |>
+  mutate(panel = paste0(IDS6[votu], "  ·  ", pools,
+                        ifelse(pools == 1, " pool", " pools"))) |>
   arrange(match(votu, names(IDS6)))
 
 p6d <- p6d |>
@@ -257,13 +294,15 @@ pc6 <- ggplot(p6d, aes(pos_kb, profundidad + 0.1, group = muestra, colour = tipo
   geom_line(linewidth = 0.35, alpha = 0.7) +
   # free_x porque los contigs miden distinto; el eje Y COMPARTIDO es el punto de
   # la figura: la diferencia de profundidad es el resultado.
-  facet_wrap(~ panel, ncol = 2, scales = "free_x", labeller = label_wrap_gen(44)) +
+  facet_wrap(~ panel, ncol = 2, scales = "free_x", labeller = label_wrap_gen(50)) +
   scale_y_log10(labels = label_number(accuracy = 1, big.mark = ",")) +
   scale_colour_manual(values = COL_TIPO, drop = TRUE) +
   labs(title = "Same virus name, two different things",
-       subtitle = paste("One line per positive pool, shared depth axis.",
-                        "The virus is a single-pool detection; the EVE is in the",
-                        "genome of every mosquito, so any library covers it."),
+       # El salto de linea va explicito: ggplot no ajusta el subtitulo al ancho
+       # y a 200 mm se cortaba.
+       subtitle = paste0("One line per positive pool, shared depth axis.\n",
+                         "The virus is a single-pool detection; the EVE is in ",
+                         "the genome of every mosquito, so any library covers it."),
        x = "position (kb)", y = "depth (×, log scale)") +
   theme(strip.text = element_text(size = 7.5), axis.text = element_text(size = 7),
         legend.position = "none")
