@@ -133,6 +133,7 @@ p2
 
 ```{r g-checkv, fig.height = 4}
 NIVELES_CV <- c("Complete", "High-quality", "Medium-quality", "Low-quality", "Not-determined")
+BUENAS_CV  <- c("Complete", "High-quality", "Medium-quality")
 cv <- leer_checkv() |>
   mutate(ens = factor(ENSAMBLADORES[ensamblador], levels = ENSAMBLADORES),
          calidad = factor(checkv_quality, levels = NIVELES_CV)) |>
@@ -140,18 +141,46 @@ cv <- leer_checkv() |>
 
 col_cv <- setNames(c(rev(AZUL_ORD), GRIS), NIVELES_CV)
 
-p3 <- ggplot(cv, aes(n, fct_rev(ens), fill = calidad)) +
+# Lo comun a los dos paneles. `drop = FALSE` en el eje Y para que los dos
+# muestren los cinco ensambladores aunque alguno no tenga contigs buenos:
+# patchwork necesita las mismas filas para alinearlos.
+base_cv <- list(
+  scale_fill_manual(values = col_cv, drop = FALSE),
+  scale_x_continuous(expand = expansion(c(0, 0.15))),
+  scale_y_discrete(drop = FALSE),
+  labs(y = NULL, x = "contigs"),
+  guides(fill = guide_legend(nrow = 1)),
+  theme(panel.grid.major.y = element_blank())
+)
+
+p3a <- ggplot(cv, aes(n, fct_rev(ens), fill = calidad)) +
   geom_col(width = 0.65, colour = SUPERFICIE, linewidth = 0.25) +
-  scale_fill_manual(values = col_cv, drop = FALSE) +
-  scale_x_continuous(expand = expansion(c(0, 0.05))) +
-  labs(title = "CheckV quality of viral contigs (geNomad)",
-       subtitle = paste0(format(sum(cv$n), big.mark = ","), " contigs; ",
-                         round(100 * sum(cv$n[cv$calidad == "Not-determined"], na.rm = TRUE) / sum(cv$n)),
-                         "% not determined (fragments without reference genes)"),
-       x = "contigs", y = NULL) +
-  theme(panel.grid.major.y = element_blank()) +
-  guides(fill = guide_legend(nrow = 1))
-guardar(p3, "03_checkv", alto = 85)
+  base_cv +
+  labs(subtitle = "All contigs")
+
+# Panel derecho: los 3 Complete, 13 High y 21 Medium sobre 8,752 contigs son
+# sub-pixel en el panel izquierdo -- el lector solo ve gris y la figura no dice
+# lo que tiene que decir. Low-quality tambien se queda fuera porque son ~490 y
+# volveria a aplastar a los otros tres.
+cv_b  <- cv |> filter(calidad %in% BUENAS_CV)
+tot_b <- cv_b |> group_by(ens) |> summarise(n = sum(n), .groups = "drop")
+
+p3b <- ggplot(cv_b, aes(n, fct_rev(ens), fill = calidad)) +
+  geom_col(width = 0.65, colour = SUPERFICIE, linewidth = 0.25) +
+  geom_text(data = tot_b, aes(x = n, y = fct_rev(ens), label = n),
+            inherit.aes = FALSE, hjust = -0.35, size = 2.8, colour = TINTA) +
+  base_cv +
+  guides(fill = "none") +
+  labs(subtitle = paste0("The ", sum(cv_b$n), " best-quality contigs"))
+
+p3 <- (p3a | p3b) + plot_layout(guides = "collect", widths = c(1.7, 1)) +
+  plot_annotation(
+    title = "CheckV quality of viral contigs (geNomad)",
+    subtitle = paste0(format(sum(cv$n), big.mark = ","), " contigs; ",
+                      round(100 * sum(cv$n[cv$calidad == "Not-determined"], na.rm = TRUE) / sum(cv$n)),
+                      "% not determined (fragments without reference genes)")) &
+  theme(legend.position = "top")
+guardar(p3, "03_checkv", alto = 85, ancho = 200)
 p3
 ```
 
@@ -228,9 +257,16 @@ cl <- votus |>
 
 p5a <- ggplot(cl, aes(n, etiqueta, fill = grupo)) +
   geom_col(width = 0.65) +
-  geom_text(aes(label = n), hjust = -0.2, size = 2.8, colour = TINTA) +
+  # Separador de millares, como en 04_funnel. `trim` evita que format() rellene
+  # con espacios hasta el ancho del numero mas largo y desplace las etiquetas
+  # cortas.
+  geom_text(aes(label = format(n, big.mark = ",", trim = TRUE)),
+            hjust = -0.2, size = 2.8, colour = TINTA) +
   scale_fill_manual(values = col_grupo, drop = FALSE) +
-  scale_x_continuous(expand = expansion(c(0, 0.12))) +
+  # 0.12 no daba para la etiqueta de `huesped` (3,595, la barra mas larga): el
+  # texto se salia del panel y patchwork lo recortaba a "359". Con el separador
+  # el texto es aun mas largo, asi que 0.22.
+  scale_x_continuous(expand = expansion(c(0, 0.22))) +
   labs(x = "vOTUs", y = NULL) +
   theme(panel.grid.major.y = element_blank())
 
@@ -248,7 +284,7 @@ p5b <- ggplot(fam, aes(n, familia)) +
   theme(panel.grid.major.y = element_blank())
 
 p5 <- (p5a | p5b) + plot_layout(guides = "collect", widths = c(1.1, 1)) +
-  plot_annotation(title = paste0("Classification of the ", nrow(votus), " vOTUs"),
+  plot_annotation(title = paste0("Classification of the ", format(nrow(votus), big.mark = ","), " vOTUs"),
                   subtitle = "Left: final class after the nr arbiter and the AaegL5 screen. Right: families of the viral vOTUs (phages included)") &
   theme(legend.position = "top")
 guardar(p5, "05_classification", alto = 120, ancho = 200)
@@ -269,7 +305,7 @@ votus |>
 
 # 6. Prevalence and infection rate
 
-```{r g-prevalence, eval = HAY_VOTUS, fig.height = 5.5}
+```{r g-prevalence, eval = HAY_VOTUS, fig.height = 10}
 cob <- leer_cobertura()
 pres <- presencia_especies(votus, cob, lecturas)
 
@@ -304,7 +340,7 @@ p6 <- ggplot(hm, aes(muestra, especie_fig, fill = prof_norm)) +
         legend.title = element_text(size = 8, colour = TINTA_2),
         plot.margin = margin(5, 40, 5, 5)) +
   guides(fill = guide_colourbar(title.position = "top", barwidth = unit(55, "mm"), barheight = unit(3, "mm")))
-guardar(p6, "06_prevalence", alto = 120, ancho = 200)
+guardar(p6, "06_prevalence", alto = 230, ancho = 200)
 p6
 ```
 
