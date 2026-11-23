@@ -69,7 +69,7 @@ len  <- len  |> left_join(frac_pi, by = "muestra") |>
 par  <- par  |> rename(muestra = libreria) |>
   mutate(muestra = factor(muestra, levels = orden))
 
-col_tramo <- setNames(c(GRIS, PAL[["azul"]], PAL[["naranja"]], GRIS), TRAMOS)
+col_tramo <- setNames(c(GRIS, PAL[["azul"]], PAL[["naranja"]], TINTA_2), TRAMOS)
 
 eje_lib <- list(
   scale_x_discrete(limits = orden),
