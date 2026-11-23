@@ -1,5 +1,5 @@
 ---
-title: "MERIDA — small RNA: the provider's own analysis"
+title: "MERIDA — small RNA: de novo virome analysis (smallRNA-Metavir)"
 author: "Jose Carlos Marin Montesino"
 lang: en
 date: today
@@ -133,9 +133,8 @@ pC <- ggplot(ctg, aes(lib, n, fill = clase)) +
 pP1 <- (pA / pB / pC) +
   plot_annotation(
     title = "small RNA libraries, as processed by smallRNA-Metavir",
-    subtitle = paste0("The provider's own pipeline: no host filter, bacterial filter, ",
-                      "generic mosquito viral reference.\nLibraries ordered by their ",
-                      "piRNA fraction."),
+    subtitle = paste0("No host filter, bacterial filter, generic mosquito viral ",
+                      "reference.\nLibraries ordered by their piRNA fraction."),
     caption = paste0("Host reads are not reported: the pipeline applies no host ",
                      "filter. Contigs are the CAP3 merge of three size ranges; ",
                      "'viral' means a BLASTN or DIAMOND hit."))
@@ -143,7 +142,7 @@ guardar_prov(pP1, "P1_proveedor_panorama", alto = 215)
 pP1
 ```
 
-## P2 · The provider's taxonomy
+## P2 · Taxonomy from the small RNA
 
 ```{r g-prov-taxonomia, fig.height = 8}
 # Deteccion por referencia. `presente_70` aplica el MISMO criterio que el
@@ -170,15 +169,17 @@ pP2 <- ggplot(det, aes(lib, virus, fill = pct_cobertura_max)) +
                        name = "genome covered") +
   scale_x_discrete(limits = orden) +
   coord_cartesian(clip = "off") +
-  labs(title = "Viruses detected by the small RNA, on the provider's own reference set",
+  labs(title = "Viruses detected by the small RNA, on the smallRNA-Metavir reference set",
        subtitle = paste0("Present: ≥ 70 % of the genome covered — the same criterion ",
                          "as the transcriptome.\nA dot marks a replicating profile ",
                          "(≥ half of that virus's references classified 'viral')."),
               x = NULL, y = NULL,
        caption = str_wrap(paste0(
-         "Independent of the vOTU catalogue: the provider maps against a ",
-         "generic mosquito viral reference set. Two references are flagged ",
-         "by the provider as artefacts (≈50 % coverage in every library)."),
+         "Independent of the vOTU catalogue: smallRNA-Metavir maps against a ",
+         "generic mosquito viral reference set and infers replicating-vs-endogenous ",
+         "from the small RNA profile alone, which is what the dots show. It applies ",
+         "no host filter and no screen against AaegL5, so it cannot say whether a ",
+         "sequence also sits in the mosquito genome."),
          width = 120)) +
   theme(panel.grid = element_blank(),
         axis.text.y = element_text(size = 6.5),
@@ -243,11 +244,11 @@ pDb <- ggplot(sinh, aes(long_contig, fill = clase)) +
 pP3 <- (pDa / pDb) +
   plot_annotation(
     title = paste0(nrow(sinh), " assembled contigs with no similarity in any database"),
-    subtitle = paste0("Classified by the provider's model from their small RNA ",
+    subtitle = paste0("Classified by the pipeline's model from the small RNA ",
                       "profile alone, with no reference.\nThese are the de novo ",
                       "discovery candidates."),
     caption = str_wrap(paste0(
-      "A hit means BLASTN or DIAMOND against the provider's databases. ",
+      "A hit means BLASTN or DIAMOND against the smallRNA-Metavir databases. ",
       "No hit is not evidence of novelty on its own: short contigs from ",
       "divergent or poorly sampled lineages look the same as artefacts."),
       width = 120))
