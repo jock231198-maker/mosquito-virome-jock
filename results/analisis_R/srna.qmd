@@ -1,0 +1,176 @@
+---
+title: "MERIDA — small RNA libraries (level B)"
+author: "Jose Carlos Marin Montesino"
+lang: en
+date: today
+params:
+  datos: "datos_srna_b_v1"
+format:
+  html:
+    embed-resources: true
+    toc: true
+    toc-depth: 2
+    fig-width: 7.2
+    fig-height: 4.5
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r setup}
+DATOS <- params$datos
+source("R/tema.R")
+suppressPackageStartupMessages({
+  library(readr); library(dplyr); library(tidyr); library(ggplot2)
+  library(scales); library(forcats); library(patchwork)
+})
+
+# Salvado propio: estas figuras viven en su propia carpeta y no dependen de
+# guardar()/guardar_cob(), que estan atados a los datos del RNA largo.
+guardar_srna <- function(p, nombre, alto, ancho = 200) {
+  dir.create("figuras_srna", showWarnings = FALSE)
+  for (ext in c("png", "pdf"))
+    ggsave(file.path("figuras_srna", paste0(nombre, ".", ext)), p,
+           width = ancho, height = alto, units = "mm", dpi = 300)
+}
+
+len <- read_tsv(file.path(DATOS, "lenhist_todas.tsv"), show_col_types = FALSE)
+par <- read_tsv(file.path(DATOS, "particion_todas.tsv"), show_col_types = FALSE) |>
+  pivot_wider(names_from = metrica, values_from = valor)
+
+stopifnot(n_distinct(len$muestra) == nrow(par))
+
+# Tramos. El 18-35 es la ventana que analiza el nivel B; dentro, 18-23 es
+# siRNA y 24-35 piRNA.
+TRAMOS <- c("< 18 nt", "18–23 nt (siRNA)", "24–35 nt (piRNA)", "> 35 nt")
+comp <- len |>
+  mutate(tramo = factor(case_when(longitud_nt <  18 ~ TRAMOS[1],
+                                  longitud_nt <= 23 ~ TRAMOS[2],
+                                  longitud_nt <= 35 ~ TRAMOS[3],
+                                  TRUE              ~ TRAMOS[4]), levels = TRAMOS)) |>
+  group_by(muestra, tramo) |>
+  summarise(n = sum(lecturas), .groups = "drop_last") |>
+  mutate(frac = n / sum(n)) |>
+  ungroup()
+
+# Orden de las librerias: por fraccion de piRNA. Asi la heterogeneidad se lee
+# como un gradiente en los cuatro paneles en vez de como ruido alfabetico.
+orden <- comp |>
+  filter(tramo == TRAMOS[3]) |>
+  arrange(frac) |>
+  pull(muestra)
+
+frac_pi <- comp |> filter(tramo == TRAMOS[3]) |> select(muestra, frac_pi = frac)
+
+comp <- comp |> mutate(muestra = factor(muestra, levels = orden))
+len  <- len  |> left_join(frac_pi, by = "muestra") |>
+  mutate(muestra = factor(muestra, levels = orden))
+par  <- par  |> rename(muestra = libreria) |>
+  mutate(muestra = factor(muestra, levels = orden))
+
+col_tramo <- setNames(c(GRIS, PAL[["azul"]], PAL[["naranja"]], GRIS), TRAMOS)
+
+eje_lib <- list(
+  scale_x_discrete(limits = orden),
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1, size = 6),
+        panel.grid.major.x = element_blank())
+)
+```
+
+## Library profiles
+
+```{r g-srna-librerias, fig.height = 7}
+# --- A. perfil de longitudes, normalizado a fraccion de cada libreria
+tot  <- len |> group_by(muestra) |> summarise(n = sum(lecturas), .groups = "drop")
+lenf <- len |> left_join(tot, by = "muestra") |> mutate(f = lecturas / n)
+
+pA <- ggplot(lenf, aes(longitud_nt, f, group = muestra, colour = frac_pi)) +
+  annotate("rect", xmin = 17.5, xmax = 23.5, ymin = -Inf, ymax = Inf,
+           fill = PAL[["azul"]], alpha = 0.07) +
+  annotate("rect", xmin = 23.5, xmax = 35.5, ymin = -Inf, ymax = Inf,
+           fill = PAL[["naranja"]], alpha = 0.07) +
+  geom_line(linewidth = 0.4, alpha = 0.8) +
+  scale_colour_gradient(low = PAL[["azul"]], high = PAL[["naranja"]],
+                        labels = label_percent(accuracy = 1),
+                        name = "24–35 nt") +
+  scale_y_continuous(labels = label_percent(accuracy = 1),
+                     expand = expansion(c(0, 0.05))) +
+  scale_x_continuous(breaks = seq(10, 45, 5)) +
+  labs(subtitle = "A · Length profile, one line per library",
+       x = "read length (nt)", y = "of the library's reads") +
+  theme(legend.position = "right",
+        legend.key.width = unit(3, "mm"), legend.key.height = unit(12, "mm"))
+
+# --- B. composicion por tramos
+pB <- ggplot(comp, aes(muestra, frac, fill = tramo)) +
+  geom_col(width = 0.78, colour = SUPERFICIE, linewidth = 0.2) +
+  scale_fill_manual(values = col_tramo) +
+  scale_y_continuous(labels = label_percent(), expand = expansion(c(0, 0.02))) +
+  eje_lib +
+  labs(subtitle = "B · Composition by size class",
+       x = NULL, y = "of all reads", fill = NULL) +
+  theme(legend.position = "top") +
+  guides(fill = guide_legend(nrow = 1, override.aes = list(colour = NA)))
+
+# --- C. rRNA retirado, sobre las lecturas de 18-35
+pC <- ggplot(par, aes(muestra, rrna / lecturas_18_35)) +
+  geom_col(width = 0.78, fill = GRIS) +
+  scale_y_continuous(labels = label_percent(accuracy = 1),
+                     expand = expansion(c(0, 0.05))) +
+  eje_lib +
+  labs(subtitle = "C · rRNA removed, of the 18–35 nt reads",
+       x = NULL, y = NULL)
+
+# --- D. lecturas que mapean al catalogo, separando las que tambien caen en
+# AaegL5. Es la contraparte en LECTURAS de que el catalogo es ~87 % huesped,
+# medida por una via distinta de la clasificacion de vOTUs.
+DEST <- c("Also maps to AaegL5", "Catalogue only")
+hit <- par |>
+  transmute(muestra,
+            `Also maps to AaegL5` = viral_en_genoma / denominador_rpm,
+            `Catalogue only` = (con_hit_viral - viral_en_genoma) / denominador_rpm) |>
+  pivot_longer(-muestra, names_to = "destino", values_to = "frac") |>
+  mutate(destino = factor(destino, levels = DEST))
+
+pD <- ggplot(hit, aes(muestra, frac, fill = destino)) +
+  geom_col(width = 0.78, colour = SUPERFICIE, linewidth = 0.2) +
+  scale_fill_manual(values = setNames(c(PAL[["aqua"]], PAL[["azul"]]), DEST)) +
+  scale_y_continuous(labels = label_percent(accuracy = 1),
+                     expand = expansion(c(0, 0.05))) +
+  eje_lib +
+  labs(subtitle = "D · Reads mapping to the vOTU catalogue",
+       x = NULL, y = "of the RPM denominator", fill = NULL) +
+  theme(legend.position = "top") +
+  guides(fill = guide_legend(nrow = 1, override.aes = list(colour = NA)))
+
+ps <- (pA / pB / pC / pD) +
+  plot_annotation(
+    title = paste0("Small RNA libraries (", nrow(par), ")"),
+    subtitle = paste0("Libraries ordered by their piRNA fraction. ",
+                      "The RPM denominator is the 18–35 nt reads after removing rRNA."),
+    caption = paste0("A: all reads, before the 18–35 nt filter. ",
+                     "D: reads with a hit in the vOTU catalogue, split by whether ",
+                     "they also map to the AaegL5 reference genome."))
+guardar_srna(ps, "S1_librerias", alto = 240)
+ps
+```
+
+## Summary table
+
+```{r tabla-srna}
+comp |>
+  select(muestra, tramo, frac) |>
+  pivot_wider(names_from = tramo, values_from = frac) |>
+  left_join(transmute(par, muestra,
+                      `rRNA` = rrna / lecturas_18_35,
+                      `To catalogue` = con_hit_viral / denominador_rpm,
+                      `Of those, in AaegL5` = viral_en_genoma / con_hit_viral),
+            by = "muestra") |>
+  left_join(transmute(par, muestra, `Reads (M)` = round(lecturas_todas / 1e6, 1)),
+            by = "muestra") |>
+  arrange(muestra) |>
+  mutate(across(where(is.numeric) & !matches("Reads"),
+                ~ paste0(round(100 * .x, 1), " %"))) |>
+  knitr::kable()
+```
