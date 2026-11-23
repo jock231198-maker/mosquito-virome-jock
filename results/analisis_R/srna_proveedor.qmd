@@ -1,0 +1,253 @@
+---
+title: "MERIDA — small RNA: the provider's own analysis"
+author: "Jose Carlos Marin Montesino"
+lang: en
+date: today
+params:
+  datos: "datos_srna_v1"
+format:
+  html:
+    embed-resources: true
+    toc: true
+    toc-depth: 2
+    fig-width: 7.2
+    fig-height: 4.5
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r setup-prov}
+DATOS <- params$datos
+source("R/tema.R")
+suppressPackageStartupMessages({
+  library(readr); library(dplyr); library(tidyr); library(ggplot2)
+  library(scales); library(forcats); library(patchwork); library(knitr)
+})
+
+guardar_prov <- function(p, nombre, alto, ancho = 200) {
+  dir.create("figuras_srna", showWarnings = FALSE)
+  for (ext in c("png", "pdf"))
+    ggsave(file.path("figuras_srna", paste0(nombre, ".", ext)), p,
+           width = ancho, height = alto, units = "mm", dpi = 300)
+}
+lee <- function(f) read_tsv(file.path(DATOS, f), show_col_types = FALSE)
+
+mu   <- lee("srna_muestras.tsv")
+pres <- lee("srna_presencia_virus_largo.tsv")
+esp  <- lee("srna_especies.tsv")
+sinh <- lee("srna_contigs_sin_hit.tsv")
+
+# Orden de librerias: por la fraccion de piRNA que mide EL PROVEEDOR, no la
+# nuestra. Son ventanas distintas (24-30 frente a 24-35), asi que el orden
+# deberia parecerse al de S1 pero no tiene por que ser identico.
+orden <- mu |> arrange(pct_pirna_24_30) |> pull(lib)
+pon <- function(d) mutate(d, lib = factor(lib, levels = orden))
+mu <- pon(mu); pres <- pon(pres); esp <- pon(esp); sinh <- pon(sinh)
+
+# Las 4 librerias sin pareja en el transcriptoma (M41, M45, M61, M78) entran
+# igual: la taxonomia del proveedor no depende del emparejamiento.
+extras <- mu |> filter(pareada != "si") |> pull(lib) |> as.character()
+
+eje_lib <- list(
+  scale_x_discrete(limits = orden),
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1, size = 6),
+        panel.grid.major.x = element_blank())
+)
+```
+
+Libraries: `r nrow(mu)`. Unpaired (no transcriptome pool): `r paste(extras, collapse = ", ")`.
+
+## P1 · Overview per library
+
+```{r g-prov-panorama, fig.height = 7}
+# --- A. lecturas: crudas, y de esas las que llegan a 18-35 nt
+lec <- mu |>
+  transmute(lib, Raw = reads_crudas, `18–35 nt` = reads_18_35) |>
+  pivot_longer(-lib, names_to = "etapa", values_to = "n") |>
+  mutate(etapa = factor(etapa, levels = c("Raw", "18–35 nt")))
+
+pA <- ggplot(lec, aes(lib, n / 1e6, fill = etapa)) +
+  geom_col(position = "identity", width = 0.78,
+           colour = SUPERFICIE, linewidth = 0.2) +
+  scale_fill_manual(values = c(Raw = GRIS, `18–35 nt` = PAL[["azul"]])) +
+  scale_y_continuous(expand = expansion(c(0, 0.05))) +
+  eje_lib +
+  labs(subtitle = "A · Reads", x = NULL, y = "million reads", fill = NULL) +
+  theme(legend.position = "top") +
+  guides(fill = guide_legend(nrow = 1, override.aes = list(colour = NA)))
+
+# --- B. composicion siRNA / piRNA SEGUN EL PROVEEDOR.
+# Es una medida independiente de la de S1, calculada sobre otras ventanas
+# (20-23 y 24-30 frente a 18-23 y 24-35) y por otro pipeline.
+TR <- c("20–23 nt (siRNA)", "24–30 nt (piRNA)", "other")
+comp <- mu |>
+  transmute(lib,
+            `20–23 nt (siRNA)` = pct_sirna_20_23 / 100,
+            `24–30 nt (piRNA)` = pct_pirna_24_30 / 100,
+            other = 1 - (pct_sirna_20_23 + pct_pirna_24_30) / 100) |>
+  pivot_longer(-lib, names_to = "tramo", values_to = "frac") |>
+  mutate(tramo = factor(tramo, levels = TR))
+
+pB <- ggplot(comp, aes(lib, frac, fill = tramo)) +
+  geom_col(width = 0.78, colour = SUPERFICIE, linewidth = 0.2) +
+  scale_fill_manual(values = setNames(c(PAL[["azul"]], PAL[["naranja"]], GRIS), TR)) +
+  scale_y_continuous(labels = label_percent(), expand = expansion(c(0, 0.02))) +
+  eje_lib +
+  labs(subtitle = "B · Size composition, as measured by the provider",
+       x = NULL, y = "of the 18–35 nt reads", fill = NULL) +
+  theme(legend.position = "top") +
+  guides(fill = guide_legend(nrow = 1, override.aes = list(colour = NA)))
+
+# --- C. contigs ensamblados y como se reparten
+CT <- c("Viral (hit)", "No hit", "Non-viral")
+ctg <- mu |>
+  transmute(lib, `Viral (hit)` = contigs_virales, `No hit` = contigs_sin_hit,
+            `Non-viral` = contigs_no_virales) |>
+  pivot_longer(-lib, names_to = "clase", values_to = "n") |>
+  mutate(clase = factor(clase, levels = CT))
+
+pC <- ggplot(ctg, aes(lib, n, fill = clase)) +
+  geom_col(width = 0.78, colour = SUPERFICIE, linewidth = 0.2) +
+  scale_fill_manual(values = setNames(c(PAL[["azul"]], PAL[["violeta"]], GRIS), CT)) +
+  scale_y_continuous(expand = expansion(c(0, 0.05))) +
+  eje_lib +
+  labs(subtitle = "C · Assembled contigs (≥ 200 nt)",
+       x = NULL, y = "contigs", fill = NULL) +
+  theme(legend.position = "top") +
+  guides(fill = guide_legend(nrow = 1, override.aes = list(colour = NA)))
+
+pP1 <- (pA / pB / pC) +
+  plot_annotation(
+    title = "small RNA libraries, as processed by smallRNA-Metavir",
+    subtitle = paste0("The provider's own pipeline: no host filter, bacterial filter, ",
+                      "generic mosquito viral reference.\nLibraries ordered by their ",
+                      "piRNA fraction."),
+    caption = paste0("Host reads are not reported: the pipeline applies no host ",
+                     "filter. Contigs are the CAP3 merge of three size ranges; ",
+                     "'viral' means a BLASTN or DIAMOND hit."))
+guardar_prov(pP1, "P1_proveedor_panorama", alto = 215)
+pP1
+```
+
+## P2 · The provider's taxonomy
+
+```{r g-prov-taxonomia, fig.height = 8}
+# Deteccion por referencia. `presente_70` aplica el MISMO criterio que el
+# transcriptoma (>=70 % del genoma cubierto), asi que las dos tecnicas son
+# comparables. El filtro propio del proveedor es mas laxo: >=30 % y >=100
+# lecturas.
+det <- pres |> filter(presente_70 == "si")
+
+n_pools <- det |> count(virus, name = "libs") |> arrange(libs)
+det <- det |> mutate(virus = factor(virus, levels = n_pools$virus))
+etq  <- n_pools |> mutate(virus = factor(virus, levels = n_pools$virus))
+
+n_lib <- n_distinct(mu$lib)
+
+pP2 <- ggplot(det, aes(lib, virus, fill = pct_cobertura_max)) +
+  geom_tile(colour = SUPERFICIE, linewidth = 0.5) +
+  geom_point(data = filter(det, frac_replicativo >= 0.5),
+             aes(lib, virus), inherit.aes = FALSE,
+             shape = 21, size = 0.9, stroke = 0.35,
+             colour = SUPERFICIE, fill = SUPERFICIE) +
+  geom_text(data = etq, aes(x = Inf, y = virus, label = paste0(libs, "/", n_lib)),
+            inherit.aes = FALSE, hjust = -0.25, size = 2.5, colour = TINTA_2) +
+  scale_fill_gradientn(colours = AZUL_SEQ, limits = c(70, 100),
+                       name = "genome covered") +
+  scale_x_discrete(limits = orden) +
+  coord_cartesian(clip = "off") +
+  labs(title = "Viruses detected by the small RNA, on the provider's own reference set",
+       subtitle = paste0("Present: ≥ 70 % of the genome covered — the same criterion ",
+                         "as the transcriptome.\nA dot marks a replicating profile ",
+                         "(≥ half of that virus's references classified 'viral')."),
+       x = NULL, y = NULL,
+       caption = paste0("Independent of the vOTU catalogue: the provider maps against a ",
+                        "generic mosquito viral reference set. Two references are flagged ",
+                        "by the provider as artefacts (≈50 % coverage in every library).")) +
+  theme(panel.grid = element_blank(),
+        axis.text.y = element_text(size = 6.5),
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1, size = 6),
+        legend.position = "top", legend.key.height = unit(3, "mm"),
+        plot.margin = margin(5, 24, 5, 5))
+guardar_prov(pP2, "P2_proveedor_taxonomia",
+             alto = max(120, 5.2 * nrow(n_pools) + 55))
+pP2
+```
+
+```{r tabla-prov-familias}
+# Familia y orden salen del ensamblaje, no del mapeo por referencia, asi que
+# hay que cruzar por nombre y puede no casar todo. El conteo de abajo dice
+# cuanto caso: si es bajo, los dos vocabularios no coinciden y la tabla se
+# queda como esta, sin familia.
+fam <- esp |>
+  distinct(viral_species, family, order) |>
+  filter(!is.na(family), family != "NA")
+
+tax <- n_pools |>
+  left_join(fam, by = c("virus" = "viral_species")) |>
+  arrange(desc(libs))
+
+cat(sum(!is.na(tax$family)), "of", nrow(tax),
+    "virus names matched a family from the assembly tables.\n\n")
+
+tax |>
+  transmute(Virus = virus, Family = coalesce(family, "—"),
+            Order = coalesce(order, "—"),
+            `Libraries` = paste0(libs, "/", n_lib)) |>
+  kable()
+```
+
+## P3 · De novo discovery: contigs with no database hit
+
+```{r g-prov-descubrimiento, fig.height = 5}
+ETIQ_ML <- c(viral = "Replicating profile", eve = "EVE profile")
+sinh <- sinh |>
+  mutate(clase = factor(ETIQ_ML[clase_ml], levels = ETIQ_ML))
+COL_ML <- setNames(c(PAL[["azul"]], PAL[["naranja"]]), ETIQ_ML)
+
+pDa <- ggplot(sinh, aes(lib, fill = clase)) +
+  geom_bar(width = 0.78, colour = SUPERFICIE, linewidth = 0.2) +
+  scale_fill_manual(values = COL_ML, drop = FALSE) +
+  scale_y_continuous(expand = expansion(c(0, 0.05))) +
+  eje_lib +
+  labs(subtitle = "A · Contigs with no hit, by library",
+       x = NULL, y = "contigs", fill = NULL) +
+  theme(legend.position = "top") +
+  guides(fill = guide_legend(nrow = 1, override.aes = list(colour = NA)))
+
+pDb <- ggplot(sinh, aes(long_contig, fill = clase)) +
+  geom_histogram(bins = 40, colour = SUPERFICIE, linewidth = 0.15) +
+  scale_fill_manual(values = COL_ML, drop = FALSE) +
+  scale_x_log10(labels = label_number(big.mark = ",")) +
+  scale_y_continuous(expand = expansion(c(0, 0.05))) +
+  labs(subtitle = "B · Their lengths",
+       x = "contig length (nt, log scale)", y = "contigs", fill = NULL) +
+  theme(legend.position = "none")
+
+pP3 <- (pDa / pDb) +
+  plot_annotation(
+    title = paste0(nrow(sinh), " assembled contigs with no similarity in any database"),
+    subtitle = paste0("Classified by the provider's model from their small RNA ",
+                      "profile alone, with no reference.\nThese are the de novo ",
+                      "discovery candidates."),
+    caption = paste0("A hit means BLASTN or DIAMOND against the provider's databases. ",
+                     "No hit is not evidence of novelty on its own: short contigs from ",
+                     "divergent or poorly sampled lineages look the same as artefacts."))
+guardar_prov(pP3, "P3_proveedor_descubrimiento", alto = 150)
+pP3
+```
+
+```{r tabla-prov-descubrimiento}
+sinh |>
+  group_by(clase) |>
+  summarise(Contigs = n(),
+            `Median length` = round(median(long_contig)),
+            `Longest` = max(long_contig),
+            `≥ 500 nt` = sum(long_contig >= 500),
+            `≥ 1 kb` = sum(long_contig >= 1000),
+            .groups = "drop") |>
+  rename(Profile = clase) |>
+  kable()
+```

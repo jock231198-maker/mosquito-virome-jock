@@ -1,0 +1,188 @@
+sample	lib	pareada	viral_species	genus	family	order	n_contigs	assembled_bases_nt	largest_contig_size	viral_contigs	viral_bases_nt	eve_contigs	eve_bases_nt	bn_contigs	bn_bases_nt	bx_contigs	bx_bases_nt
+M1_S1	M1	si	Verdadero virus	NA	Partitiviridae	Durnavirales	2	782	524	1	524	1	258	2	782	0	0
+M1_S1	M1	si	Aedes aegypti anphevirus	Anphevirus	Xinmoviridae	Mononegavirales	3	748	294	1	250	2	498	0	0	3	748
+M1_S1	M1	si	Merhavirus formosus	Merhavirus	Rhabdoviridae	Mononegavirales	1	280	280	1	280	0	0	0	0	1	280
+M1_S1	M1	si	Aedes aegypti To flavivirus-like	NA	Flaviviridae	Amarillovirales	1	217	217	1	217	0	0	1	217	0	0
+M1_S1	M1	si	Pitica errantivirus	Errantivirus	Metaviridae	Ortervirales	1	214	214	0	0	1	214	0	0	1	214
+M1_S1	M1	si	Gylbovirus aagae	Gylbovirus	Xinmoviridae	Mononegavirales	1	213	213	0	0	1	213	0	0	1	213
+M1_S1	M1	si	Guadeloupe mosquito quaranja-like virus 1	Quaranjavirus	Orthomyxoviridae	Articulavirales	1	212	212	0	0	1	212	0	0	1	212
+M1_S1	M1	si	Bafoussam mosquito rhabdovirus	NA	Rhabdoviridae	Mononegavirales	1	206	206	0	0	1	206	0	0	1	206
+M2_S2	M2	si	Aedes aegypti To flavivirus-like	NA	Flaviviridae	Amarillovirales	1	272	272	1	272	0	0	1	272	0	0
+M2_S2	M2	si	Aedes aegypti anphevirus	Anphevirus	Xinmoviridae	Mononegavirales	1	234	234	1	234	0	0	0	0	1	234
+M2_S2	M2	si	Merhavirus formosus	Merhavirus	Rhabdoviridae	Mononegavirales	1	227	227	0	0	1	227	0	0	1	227
+M2_S2	M2	si	Chaq-like virus	NA	Partitiviridae	Durnavirales	1	206	206	1	206	0	0	1	206	0	0
+M2_S2	M2	si	Aedes aegypti To virus 2	NA	NA	NA	1	200	200	0	0	1	200	1	200	0	0
+M7_S15	M7	si	Aedes aegypti To flavivirus-like	NA	Flaviviridae	Amarillovirales	2	931	483	2	931	0	0	2	931	0	0
+M7_S15	M7	si	Verdadero virus	NA	Partitiviridae	Durnavirales	3	887	324	3	887	0	0	3	887	0	0
+M7_S15	M7	si	Aedes aegypti To virus 2	NA	NA	NA	2	558	295	0	0	2	558	2	558	0	0
+M7_S15	M7	si	Aedes aegypti To virus 1	NA	NA	NA	1	250	250	0	0	1	250	1	250	0	0
+M7_S15	M7	si	Aedes aegypti anphevirus	Anphevirus	Xinmoviridae	Mononegavirales	1	212	212	0	0	1	212	0	0	1	212
+M7_S15	M7	si	Chaq-like virus	NA	Partitiviridae	Durnavirales	1	204	204	1	204	0	0	1	204	0	0
+M9_S16	M9	si	Aedes aegypti To flavivirus-like	NA	Flaviviridae	Amarillovirales	2	483	282	1	282	1	201	2	483	0	0
+M9_S16	M9	si	Xishuangbanna aedes flavivirus	NA	Flaviviridae	Amarillovirales	1	254	254	0	0	1	254	0	0	1	254
+M9_S16	M9	si	Aedes binegev-like virus 2	NA	NA	NA	1	233	233	0	0	1	233	0	0	1	233
+M9_S16	M9	si	Aedes aegypti anphevirus	Anphevirus	Xinmoviridae	Mononegavirales	1	231	231	0	0	1	231	0	0	1	231
+M9_S16	M9	si	Aedes aegypti To virus 2	NA	NA	NA	1	228	228	1	228	0	0	1	228	0	0
+M9_S16	M9	si	Merhavirus formosus	Merhavirus	Rhabdoviridae	Mononegavirales	1	217	217	0	0	1	217	0	0	1	217
+M11_S3	M11	si	Aedes binegev-like virus 1	NA	NA	NA	16	4660	534	8	2552	8	2108	16	4660	0	0
+M11_S3	M11	si	Insevirus jyusani	Insevirus	Inseviridae	Ghabrivirales	7	2210	577	7	2210	0	0	7	2210	0	0
+M11_S3	M11	si	Verdadero virus	NA	Partitiviridae	Durnavirales	3	1258	713	2	545	1	713	3	1258	0	0
+M11_S3	M11	si	Chaq-like virus	NA	Partitiviridae	Durnavirales	4	1093	315	2	498	2	595	4	1093	0	0
+M11_S3	M11	si	Merhavirus formosus	Merhavirus	Rhabdoviridae	Mononegavirales	3	749	269	0	0	3	749	0	0	3	749
+M11_S3	M11	si	Aedes aegypti anphevirus	Anphevirus	Xinmoviridae	Mononegavirales	1	357	357	0	0	1	357	0	0	1	357
+M11_S3	M11	si	Lactea totivirus	Totivirus	Orthototiviridae	Ghabrivirales	1	282	282	1	282	0	0	1	282	0	0
+M11_S3	M11	si	Aedes aegypti To virus 2	NA	NA	NA	1	263	263	0	0	1	263	1	263	0	0
+M11_S3	M11	si	Aedes binegev-like virus 2	NA	NA	NA	1	251	251	1	251	0	0	0	0	1	251
+M11_S3	M11	si	Renna virus	NA	NA	NA	1	246	246	1	246	0	0	1	246	0	0
+M11_S3	M11	si	Aedes aegypti To virus 1	NA	NA	NA	1	225	225	0	0	1	225	1	225	0	0
+M20_S25	M20	si	Verdadero virus	NA	Partitiviridae	Durnavirales	8	4816	1131	6	3201	2	1615	8	4816	0	0
+M20_S25	M20	si	Chaq-like virus	NA	Partitiviridae	Durnavirales	5	1516	450	5	1516	0	0	5	1516	0	0
+M20_S25	M20	si	Guadeloupe mosquito virus	NA	NA	NA	1	299	299	1	299	0	0	1	299	0	0
+M20_S25	M20	si	Aedes aegypti To virus 2	NA	NA	NA	1	298	298	1	298	0	0	1	298	0	0
+M20_S25	M20	si	Aedes aegypti anphevirus	Anphevirus	Xinmoviridae	Mononegavirales	1	213	213	0	0	1	213	0	0	1	213
+M21_S29	M21	si	Guadeloupe mosquito virus	NA	NA	NA	10	2554	347	9	2335	1	219	10	2554	0	0
+M21_S29	M21	si	Gylbovirus aagae	Gylbovirus	Xinmoviridae	Mononegavirales	5	1450	494	2	508	3	942	5	1450	0	0
+M21_S29	M21	si	Renna virus	NA	NA	NA	4	1177	382	4	1177	0	0	4	1177	0	0
+M21_S29	M21	si	Aedes aegypti To virus 2	NA	NA	NA	3	1062	423	2	742	1	320	3	1062	0	0
+M21_S29	M21	si	Verdadero virus	NA	Partitiviridae	Durnavirales	3	885	367	2	518	1	367	3	885	0	0
+M21_S29	M21	si	Aedes aegypti anphevirus	Anphevirus	Xinmoviridae	Mononegavirales	1	534	534	0	0	1	534	0	0	1	534
+M21_S29	M21	si	Chaq-like virus	NA	Partitiviridae	Durnavirales	1	389	389	0	0	1	389	1	389	0	0
+M21_S29	M21	si	Aedes aegypti To flavivirus-like	NA	Flaviviridae	Amarillovirales	1	289	289	1	289	0	0	1	289	0	0
+M21_S29	M21	si	Insevirus jyusani	Insevirus	Inseviridae	Ghabrivirales	1	261	261	1	261	0	0	0	0	1	261
+M21_S29	M21	si	Gurupi chuvirus-like 1	NA	Chuviridae	Jingchuvirales	1	212	212	1	212	0	0	1	212	0	0
+M22_S30	M22	si	Verdadero virus	NA	Partitiviridae	Durnavirales	6	3614	1592	6	3614	0	0	6	3614	0	0
+M22_S30	M22	si	Insevirus jyusani	Insevirus	Inseviridae	Ghabrivirales	8	2697	1047	4	1725	4	972	7	2431	1	266
+M22_S30	M22	si	Chaq-like virus	NA	Partitiviridae	Durnavirales	3	1738	752	3	1738	0	0	3	1738	0	0
+M22_S30	M22	si	Aedes aegypti anphevirus	Anphevirus	Xinmoviridae	Mononegavirales	3	1167	444	1	336	2	831	0	0	3	1167
+M22_S30	M22	si	Netjeret virus	NA	NA	NA	2	420	210	0	0	2	420	0	0	2	420
+M22_S30	M22	si	Aedes aegypti To flavivirus-like	NA	Flaviviridae	Amarillovirales	1	291	291	0	0	1	291	1	291	0	0
+M22_S30	M22	si	Lactea totivirus	Totivirus	Orthototiviridae	Ghabrivirales	1	262	262	0	0	1	262	1	262	0	0
+M22_S30	M22	si	Aedes aegypti To virus 2	NA	NA	NA	1	252	252	0	0	1	252	1	252	0	0
+M22_S30	M22	si	Aedes binegev-like virus 2	NA	NA	NA	1	212	212	0	0	1	212	0	0	1	212
+M22_S30	M22	si	Gurupi chuvirus-like 1	NA	Chuviridae	Jingchuvirales	1	209	209	1	209	0	0	1	209	0	0
+M22_S30	M22	si	Aedes aegypti To virus 1	NA	NA	NA	1	206	206	0	0	1	206	1	206	0	0
+M35_S31	M35	si	Renna virus	NA	NA	NA	2	464	250	1	214	1	250	2	464	0	0
+M35_S31	M35	si	Aedes aegypti To virus 2	NA	NA	NA	1	307	307	1	307	0	0	1	307	0	0
+M35_S31	M35	si	Merhavirus formosus	Merhavirus	Rhabdoviridae	Mononegavirales	1	305	305	1	305	0	0	0	0	1	305
+M35_S31	M35	si	Gylbovirus aagae	Gylbovirus	Xinmoviridae	Mononegavirales	1	304	304	0	0	1	304	0	0	1	304
+M35_S31	M35	si	Aedes aegypti anphevirus	Anphevirus	Xinmoviridae	Mononegavirales	1	257	257	0	0	1	257	0	0	1	257
+M35_S31	M35	si	Bafoussam mosquito rhabdovirus	NA	Rhabdoviridae	Mononegavirales	1	247	247	0	0	1	247	0	0	1	247
+M35_S31	M35	si	Guadeloupe mosquito virus	NA	NA	NA	1	221	221	1	221	0	0	1	221	0	0
+M36_S17	M36	si	Aedes aegypti anphevirus	Anphevirus	Xinmoviridae	Mononegavirales	3	1041	447	1	280	2	761	0	0	3	1041
+M36_S17	M36	si	Insevirus jyusani	Insevirus	Inseviridae	Ghabrivirales	2	786	453	1	453	1	333	1	453	1	333
+M36_S17	M36	si	Aedes aegypti To virus 2	NA	NA	NA	2	709	383	0	0	2	709	2	709	0	0
+M36_S17	M36	si	Merhavirus formosus	Merhavirus	Rhabdoviridae	Mononegavirales	2	668	341	0	0	2	668	0	0	2	668
+M36_S17	M36	si	Aedes aegypti To virus 1	NA	NA	NA	2	439	232	1	232	1	207	1	232	1	207
+M36_S17	M36	si	Lactea totivirus	Totivirus	Orthototiviridae	Ghabrivirales	1	312	312	0	0	1	312	1	312	0	0
+M36_S17	M36	si	Orbis virgavirus	NA	Virgaviridae	Martellivirales	1	300	300	0	0	1	300	0	0	1	300
+M36_S17	M36	si	Hattula totivirus 1	Totivirus	Orthototiviridae	Ghabrivirales	1	255	255	0	0	1	255	0	0	1	255
+M36_S17	M36	si	Gurupi chuvirus-like 1	NA	Chuviridae	Jingchuvirales	1	246	246	0	0	1	246	1	246	0	0
+M36_S17	M36	si	Bafoussam mosquito rhabdovirus	NA	Rhabdoviridae	Mononegavirales	1	244	244	0	0	1	244	0	0	1	244
+M36_S17	M36	si	Longgang virus	NA	NA	Mononegavirales	1	234	234	0	0	1	234	0	0	1	234
+M41_extra	M41	no	Verdadero virus	NA	Partitiviridae	Durnavirales	6	3686	1538	3	1242	3	2444	6	3686	0	0
+M41_extra	M41	no	Chaq-like virus	NA	Partitiviridae	Durnavirales	2	1675	865	2	1675	0	0	2	1675	0	0
+M41_extra	M41	no	Guadeloupe mosquito virus	NA	NA	NA	4	1159	354	4	1159	0	0	4	1159	0	0
+M41_extra	M41	no	Insevirus jyusani	Insevirus	Inseviridae	Ghabrivirales	3	1076	531	3	1076	0	0	3	1076	0	0
+M41_extra	M41	no	Renna virus	NA	NA	NA	1	486	486	1	486	0	0	1	486	0	0
+M41_extra	M41	no	Aedes aegypti anphevirus	Anphevirus	Xinmoviridae	Mononegavirales	2	449	233	1	216	1	233	0	0	2	449
+M41_extra	M41	no	Merhavirus formosus	Merhavirus	Rhabdoviridae	Mononegavirales	1	208	208	1	208	0	0	0	0	1	208
+M45_extra	M45	no	Verdadero virus	NA	Partitiviridae	Durnavirales	10	7889	1540	5	5710	5	2179	10	7889	0	0
+M45_extra	M45	no	Chaq-like virus	NA	Partitiviridae	Durnavirales	6	3094	904	5	2777	1	317	6	3094	0	0
+M45_extra	M45	no	Aedes aegypti To flavivirus-like	NA	Flaviviridae	Amarillovirales	1	518	518	0	0	1	518	1	518	0	0
+M45_extra	M45	no	Insevirus jyusani	Insevirus	Inseviridae	Ghabrivirales	1	200	200	1	200	0	0	1	200	0	0
+M55_S6	M55	si	Aedes aegypti anphevirus	Anphevirus	Xinmoviridae	Mononegavirales	3	902	318	1	294	2	608	0	0	3	902
+M55_S6	M55	si	Merhavirus formosus	Merhavirus	Rhabdoviridae	Mononegavirales	1	301	301	1	301	0	0	0	0	1	301
+M55_S6	M55	si	Lactea totivirus	Totivirus	Orthototiviridae	Ghabrivirales	1	258	258	0	0	1	258	1	258	0	0
+M55_S6	M55	si	Aedes rhabdo-like virus	NA	Rhabdoviridae	Mononegavirales	1	247	247	0	0	1	247	0	0	1	247
+M55_S6	M55	si	Bafoussam mosquito rhabdovirus	NA	Rhabdoviridae	Mononegavirales	1	211	211	0	0	1	211	0	0	1	211
+M55_S6	M55	si	Longgang virus	NA	NA	Mononegavirales	1	203	203	0	0	1	203	0	0	1	203
+M56_S7	M56	si	Verdadero virus	NA	Partitiviridae	Durnavirales	6	3278	1043	6	3278	0	0	6	3278	0	0
+M56_S7	M56	si	Chaq-like virus	NA	Partitiviridae	Durnavirales	5	2533	948	4	2058	1	475	5	2533	0	0
+M56_S7	M56	si	Aedes aegypti To virus 1	NA	NA	NA	1	343	343	1	343	0	0	1	343	0	0
+M56_S7	M56	si	Aedes aegypti To virus 2	NA	NA	NA	1	320	320	1	320	0	0	1	320	0	0
+M56_S7	M56	si	Gurupi chuvirus-like 1	NA	Chuviridae	Jingchuvirales	1	254	254	0	0	1	254	1	254	0	0
+M57_S8	M57	si	Verdadero virus	NA	Partitiviridae	Durnavirales	7	3042	787	6	2836	1	206	7	3042	0	0
+M57_S8	M57	si	Chaq-like virus	NA	Partitiviridae	Durnavirales	1	262	262	1	262	0	0	1	262	0	0
+M57_S8	M57	si	Merhavirus formosus	Merhavirus	Rhabdoviridae	Mononegavirales	1	256	256	1	256	0	0	0	0	1	256
+M57_S8	M57	si	Aedes aegypti To flavivirus-like	NA	Flaviviridae	Amarillovirales	1	239	239	1	239	0	0	1	239	0	0
+M58_S9	M58	si	Verdadero virus	NA	Partitiviridae	Durnavirales	8	2133	391	4	1103	4	1030	8	2133	0	0
+M58_S9	M58	si	Aedes aegypti anphevirus	Anphevirus	Xinmoviridae	Mononegavirales	4	1165	380	0	0	4	1165	0	0	4	1165
+M58_S9	M58	si	Aedes aegypti To virus 2	NA	NA	NA	2	490	276	0	0	2	490	2	490	0	0
+M58_S9	M58	si	Merhavirus formosus	Merhavirus	Rhabdoviridae	Mononegavirales	1	380	380	0	0	1	380	0	0	1	380
+M58_S9	M58	si	Lactea totivirus	Totivirus	Orthototiviridae	Ghabrivirales	1	330	330	1	330	0	0	1	330	0	0
+M58_S9	M58	si	Guadeloupe mosquito quaranja-like virus 1	Quaranjavirus	Orthomyxoviridae	Articulavirales	1	237	237	1	237	0	0	0	0	1	237
+M58_S9	M58	si	Chaq-like virus	NA	Partitiviridae	Durnavirales	1	226	226	1	226	0	0	1	226	0	0
+M59_S10	M59	si	Verdadero virus	NA	Partitiviridae	Durnavirales	5	1454	382	4	1072	1	382	5	1454	0	0
+M59_S10	M59	si	Aedes aegypti anphevirus	Anphevirus	Xinmoviridae	Mononegavirales	2	512	260	0	0	2	512	0	0	2	512
+M59_S10	M59	si	Merhavirus formosus	Merhavirus	Rhabdoviridae	Mononegavirales	2	494	248	0	0	2	494	1	246	1	248
+M59_S10	M59	si	Aedes aegypti To flavivirus-like	NA	Flaviviridae	Amarillovirales	1	402	402	1	402	0	0	1	402	0	0
+M59_S10	M59	si	Chaq-like virus	NA	Partitiviridae	Durnavirales	1	215	215	1	215	0	0	1	215	0	0
+M60_S11	M60	si	Merhavirus formosus	Merhavirus	Rhabdoviridae	Mononegavirales	2	529	297	0	0	2	529	0	0	2	529
+M60_S11	M60	si	Aedes aegypti anphevirus	Anphevirus	Xinmoviridae	Mononegavirales	1	236	236	0	0	1	236	1	236	0	0
+M60_S11	M60	si	Seadornavirus liaoningense	Seadornavirus	Sedoreoviridae	Reovirales	1	231	231	1	231	0	0	1	231	0	0
+M61_extra	M61	no	Aedes aegypti To virus 2	NA	NA	NA	2	703	396	0	0	2	703	2	703	0	0
+M61_extra	M61	no	Cell fusing agent virus	Orthoflavivirus	Flaviviridae	Amarillovirales	2	627	346	0	0	2	627	2	627	0	0
+M61_extra	M61	no	Verdadero virus	NA	Partitiviridae	Durnavirales	2	526	325	0	0	2	526	2	526	0	0
+M61_extra	M61	no	Aedes aegypti anphevirus	Anphevirus	Xinmoviridae	Mononegavirales	2	478	270	1	208	1	270	0	0	2	478
+M61_extra	M61	no	Aedes aegypti To flavivirus-like	NA	Flaviviridae	Amarillovirales	1	270	270	1	270	0	0	1	270	0	0
+M61_extra	M61	no	Merhavirus formosus	Merhavirus	Rhabdoviridae	Mononegavirales	1	230	230	0	0	1	230	0	0	1	230
+M62_S18	M62	si	Aedes aegypti To virus 2	NA	NA	NA	6	1546	370	1	274	5	1272	5	1330	1	216
+M62_S18	M62	si	Merhavirus formosus	Merhavirus	Rhabdoviridae	Mononegavirales	5	1210	281	1	226	4	984	0	0	5	1210
+M62_S18	M62	si	Aedes aegypti To flavivirus-like	NA	Flaviviridae	Amarillovirales	3	1172	710	2	911	1	261	3	1172	0	0
+M62_S18	M62	si	Aedes aegypti anphevirus	Anphevirus	Xinmoviridae	Mononegavirales	3	1044	536	1	246	2	798	0	0	3	1044
+M62_S18	M62	si	Longgang virus	NA	NA	Mononegavirales	2	631	329	0	0	2	631	0	0	2	631
+M62_S18	M62	si	Gurupi chuvirus-like 1	NA	Chuviridae	Jingchuvirales	1	340	340	0	0	1	340	1	340	0	0
+M62_S18	M62	si	Pitica errantivirus	Errantivirus	Metaviridae	Ortervirales	1	322	322	0	0	1	322	0	0	1	322
+M62_S18	M62	si	Guadeloupe mosquito quaranja-like virus 1	Quaranjavirus	Orthomyxoviridae	Articulavirales	1	262	262	1	262	0	0	0	0	1	262
+M62_S18	M62	si	Lactea totivirus	Totivirus	Orthototiviridae	Ghabrivirales	1	244	244	0	0	1	244	1	244	0	0
+M62_S18	M62	si	Aedes binegev-like virus 2	NA	NA	NA	1	243	243	1	243	0	0	0	0	1	243
+M62_S18	M62	si	Wuhan fly virus 5	NA	NA	NA	1	235	235	0	0	1	235	0	0	1	235
+M62_S18	M62	si	Xishuangbanna aedes flavivirus	NA	Flaviviridae	Amarillovirales	1	231	231	0	0	1	231	0	0	1	231
+M62_S18	M62	si	Aedes aegypti To virus 1	NA	NA	NA	1	215	215	1	215	0	0	1	215	0	0
+M71_S19	M71	si	Verdadero virus	NA	Partitiviridae	Durnavirales	11	4165	789	9	3566	2	599	11	4165	0	0
+M71_S19	M71	si	Chaq-like virus	NA	Partitiviridae	Durnavirales	3	1085	509	2	793	1	292	3	1085	0	0
+M71_S19	M71	si	Merhavirus formosus	Merhavirus	Rhabdoviridae	Mononegavirales	3	786	303	1	303	2	483	0	0	3	786
+M71_S19	M71	si	Aedes aegypti To virus 2	NA	NA	NA	2	696	367	0	0	2	696	2	696	0	0
+M71_S19	M71	si	Aedes aegypti To flavivirus-like	NA	Flaviviridae	Amarillovirales	2	528	299	2	528	0	0	2	528	0	0
+M71_S19	M71	si	Arthas virus	NA	NA	NA	1	287	287	1	287	0	0	1	287	0	0
+M71_S19	M71	si	Flaviviridae sp.	NA	Flaviviridae	Amarillovirales	1	253	253	1	253	0	0	1	253	0	0
+M72_S20	M72	si	Verdadero virus	NA	Partitiviridae	Durnavirales	17	6598	750	17	6598	0	0	17	6598	0	0
+M72_S20	M72	si	Chaq-like virus	NA	Partitiviridae	Durnavirales	5	2180	626	3	1310	2	870	5	2180	0	0
+M72_S20	M72	si	Aedes aegypti anphevirus	Anphevirus	Xinmoviridae	Mononegavirales	4	1300	496	1	496	3	804	0	0	4	1300
+M72_S20	M72	si	Cell fusing agent virus	Orthoflavivirus	Flaviviridae	Amarillovirales	4	1147	388	0	0	4	1147	4	1147	0	0
+M72_S20	M72	si	Merhavirus formosus	Merhavirus	Rhabdoviridae	Mononegavirales	3	911	413	0	0	3	911	1	413	2	498
+M72_S20	M72	si	Gylbovirus aagae	Gylbovirus	Xinmoviridae	Mononegavirales	2	722	461	1	261	1	461	2	722	0	0
+M72_S20	M72	si	Aedes aegypti To flavivirus-like	NA	Flaviviridae	Amarillovirales	1	410	410	0	0	1	410	1	410	0	0
+M72_S20	M72	si	Pitica errantivirus	Errantivirus	Metaviridae	Ortervirales	1	251	251	0	0	1	251	0	0	1	251
+M72_S20	M72	si	Renna virus	NA	NA	NA	1	247	247	1	247	0	0	1	247	0	0
+M72_S20	M72	si	Chalana errantivirus	Errantivirus	Metaviridae	Ortervirales	1	239	239	0	0	1	239	0	0	1	239
+M72_S20	M72	si	Aedes aegypti To virus 2	NA	NA	NA	1	234	234	1	234	0	0	1	234	0	0
+M72_S20	M72	si	Aedes aegypti To virus 1	NA	NA	NA	1	224	224	0	0	1	224	1	224	0	0
+M72_S20	M72	si	Guadeloupe mosquito virus	NA	NA	NA	1	221	221	0	0	1	221	1	221	0	0
+M72_S20	M72	si	Aedes rhabdo-like virus	NA	Rhabdoviridae	Mononegavirales	1	212	212	1	212	0	0	1	212	0	0
+M72_S20	M72	si	Bafoussam mosquito rhabdovirus	NA	Rhabdoviridae	Mononegavirales	1	208	208	0	0	1	208	0	0	1	208
+M74_S21	M74	si	Merhavirus formosus	Merhavirus	Rhabdoviridae	Mononegavirales	4	1112	331	2	611	2	501	2	622	2	490
+M74_S21	M74	si	Aedes aegypti To flavivirus-like	NA	Flaviviridae	Amarillovirales	3	1003	532	0	0	3	1003	3	1003	0	0
+M74_S21	M74	si	Aedes aegypti To virus 1	NA	NA	NA	1	503	503	0	0	1	503	1	503	0	0
+M74_S21	M74	si	Guadeloupe mosquito virus	NA	NA	NA	2	500	298	0	0	2	500	2	500	0	0
+M74_S21	M74	si	Lentivirus humimdef1	Lentivirus	Retroviridae	Ortervirales	1	253	253	0	0	1	253	1	253	0	0
+M74_S21	M74	si	Aedes aegypti To virus 2	NA	NA	NA	1	247	247	0	0	1	247	1	247	0	0
+M74_S21	M74	si	Bafoussam mosquito rhabdovirus	NA	Rhabdoviridae	Mononegavirales	1	220	220	1	220	0	0	0	0	1	220
+M74_S21	M74	si	Aedes aegypti anphevirus	Anphevirus	Xinmoviridae	Mononegavirales	1	205	205	0	0	1	205	0	0	1	205
+M78_extra	M78	no	Verdadero virus	NA	Partitiviridae	Durnavirales	11	5622	1775	7	4009	4	1613	11	5622	0	0
+M78_extra	M78	no	Guadeloupe mosquito virus	NA	NA	NA	5	1374	357	4	1122	1	252	5	1374	0	0
+M78_extra	M78	no	Chaq-like virus	NA	Partitiviridae	Durnavirales	5	1344	369	4	975	1	369	5	1344	0	0
+M78_extra	M78	no	Merhavirus formosus	Merhavirus	Rhabdoviridae	Mononegavirales	3	873	413	0	0	3	873	1	413	2	460
+M78_extra	M78	no	Aedes aegypti To flavivirus-like	NA	Flaviviridae	Amarillovirales	2	867	467	0	0	2	867	2	867	0	0
+M78_extra	M78	no	Aedes aegypti To virus 2	NA	NA	NA	3	731	290	2	518	1	213	3	731	0	0
+M78_extra	M78	no	Lactea totivirus	Totivirus	Orthototiviridae	Ghabrivirales	1	641	641	0	0	1	641	1	641	0	0
+M78_extra	M78	no	Flaviviridae sp.	NA	Flaviviridae	Amarillovirales	1	482	482	1	482	0	0	1	482	0	0
+M78_extra	M78	no	Bafoussam mosquito rhabdovirus	NA	Rhabdoviridae	Mononegavirales	2	431	226	0	0	2	431	0	0	2	431
+M78_extra	M78	no	Aedes aegypti To virus 1	NA	NA	NA	2	422	220	0	0	2	422	0	0	2	422
+M78_extra	M78	no	Aedes aegypti anphevirus	Anphevirus	Xinmoviridae	Mononegavirales	1	274	274	0	0	1	274	0	0	1	274
+M79_S28	M79	si	Guadeloupe mosquito virus	NA	NA	NA	6	1929	452	4	1181	2	748	6	1929	0	0
+M79_S28	M79	si	Aedes aegypti To flavivirus-like	NA	Flaviviridae	Amarillovirales	4	1389	422	1	422	3	967	4	1389	0	0
+M79_S28	M79	si	Lactea totivirus	Totivirus	Orthototiviridae	Ghabrivirales	1	534	534	0	0	1	534	1	534	0	0
+M79_S28	M79	si	Aedes rhabdo-like virus	NA	Rhabdoviridae	Mononegavirales	1	301	301	1	301	0	0	0	0	1	301
+M79_S28	M79	si	Renna virus	NA	NA	NA	1	232	232	1	232	0	0	1	232	0	0
+M79_S28	M79	si	Aedes aegypti To virus 2	NA	NA	NA	1	211	211	1	211	0	0	1	211	0	0

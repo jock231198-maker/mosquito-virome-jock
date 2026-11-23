@@ -1,0 +1,26 @@
+Datos de ARN pequeno extraidos de reportes smallRNA-Metavir
+Generado: 2026-10-19   Script: srna_extraer.py
+Origen: /Users/JK/Desktop/small_rna_results/aae/html
+Librerias (26): M1, M2, M7, M9, M11, M20, M21, M22, M35, M36, M41, M45, M48, M55, M56, M57, M58, M59, M60, M61, M62, M71, M72, M74, M78, M79
+Excluidas: M16, M40, M50
+Emparejamiento: por prefijo contra html/samples_merida.txt
+  sample = ID del transcriptoma (M1_S1); librerias sin pareja -> <lib>_extra
+
+Parametros del pipeline (seccion 1 de los reportes): sin filtro de hospedero, filtro bacteriano,
+referencia viral generica de mosquito, filtro de referencias: cobertura >=30 % y >=100 lecturas.
+
+Clases ML: viral = perfil de virus replicativo; eve = perfil de elemento viral endogeno.
+artefacto = si: referencias con ~50 % de cobertura en todas las librerias (MT338561.1, PZ132310.1).
+presente_70: cobertura maxima del virus >= 70 % (mismo criterio que el transcriptoma).
+frac_replicativo: fraccion de referencias de ese virus etiquetadas 'viral' en esa libreria.
+
+Tablas:
+  srna_muestras.tsv              1 fila por libreria
+  srna_ensamblaje.tsv            libreria x rama de ensamblaje
+  srna_contigs_clases.tsv        libreria x grupo de contigs (similitud / ml)
+  srna_especies.tsv              libreria x especie viral (ensamblaje)
+  srna_contigs_virales.tsv       contigs con hit viral (BLASTN / DIAMOND)
+  srna_contigs_sin_hit.tsv       contigs sin similitud
+  srna_referencias.tsv           libreria x referencia viral (todas las que tienen >=1 lectura)
+  srna_presencia_virus.tsv       matriz virus x sample (cobertura maxima, %)
+  srna_presencia_virus_largo.tsv lo mismo en formato largo

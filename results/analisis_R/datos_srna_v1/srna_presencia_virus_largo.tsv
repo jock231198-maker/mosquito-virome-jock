@@ -1,0 +1,1145 @@
+sample	lib	pareada	virus	pct_cobertura_max	presente_70	n_refs_filtradas	frac_replicativo
+M1_S1	M1	si	Aedes aegypti To flavivirus-like	95.3	si	1	0
+M2_S2	M2	si	Aedes aegypti To flavivirus-like	94.9	si	1	1
+M7_S15	M7	si	Aedes aegypti To flavivirus-like	98.9	si	1	1
+M9_S16	M9	si	Aedes aegypti To flavivirus-like	98.9	si	1	1
+M11_S3	M11	si	Aedes aegypti To flavivirus-like	98.9	si	1	1
+M20_S25	M20	si	Aedes aegypti To flavivirus-like	98.5	si	1	0
+M21_S29	M21	si	Aedes aegypti To flavivirus-like	99.0	si	1	1
+M22_S30	M22	si	Aedes aegypti To flavivirus-like	98.2	si	1	1
+M35_S31	M35	si	Aedes aegypti To flavivirus-like	98.9	si	1	0
+M36_S17	M36	si	Aedes aegypti To flavivirus-like	99.0	si	1	0
+M41_extra	M41	no	Aedes aegypti To flavivirus-like	98.7	si	1	1
+M45_extra	M45	no	Aedes aegypti To flavivirus-like	96.4	si	1	1
+M48_S5	M48	si	Aedes aegypti To flavivirus-like	99.3	si	1	1
+M55_S6	M55	si	Aedes aegypti To flavivirus-like	98.9	si	1	1
+M56_S7	M56	si	Aedes aegypti To flavivirus-like	97.7	si	1	1
+M57_S8	M57	si	Aedes aegypti To flavivirus-like	98.7	si	1	1
+M58_S9	M58	si	Aedes aegypti To flavivirus-like	98.7	si	1	1
+M59_S10	M59	si	Aedes aegypti To flavivirus-like	99.0	si	1	1
+M60_S11	M60	si	Aedes aegypti To flavivirus-like	98.4	si	1	0
+M61_extra	M61	no	Aedes aegypti To flavivirus-like	98.8	si	1	1
+M62_S18	M62	si	Aedes aegypti To flavivirus-like	98.9	si	1	0
+M71_S19	M71	si	Aedes aegypti To flavivirus-like	98.0	si	1	0
+M72_S20	M72	si	Aedes aegypti To flavivirus-like	98.5	si	1	0
+M74_S21	M74	si	Aedes aegypti To flavivirus-like	97.7	si	1	1
+M78_extra	M78	no	Aedes aegypti To flavivirus-like	99.3	si	1	0
+M79_S28	M79	si	Aedes aegypti To flavivirus-like	97.9	si	1	0
+M1_S1	M1	si	Aedes rhabdo-like virus	82.2	si	1	0
+M2_S2	M2	si	Aedes rhabdo-like virus	82.1	si	1	0
+M7_S15	M7	si	Aedes rhabdo-like virus	92.3	si	1	1
+M9_S16	M9	si	Aedes rhabdo-like virus	80.6	si	1	0
+M11_S3	M11	si	Aedes rhabdo-like virus	89.4	si	1	0
+M20_S25	M20	si	Aedes rhabdo-like virus	81.1	si	1	1
+M21_S29	M21	si	Aedes rhabdo-like virus	91.1	si	1	0
+M22_S30	M22	si	Aedes rhabdo-like virus	85.3	si	1	1
+M35_S31	M35	si	Aedes rhabdo-like virus	87.9	si	1	0
+M36_S17	M36	si	Aedes rhabdo-like virus	90.0	si	1	0
+M41_extra	M41	no	Aedes rhabdo-like virus	89.8	si	1	1
+M45_extra	M45	no	Aedes rhabdo-like virus	85.3	si	1	0
+M48_S5	M48	si	Aedes rhabdo-like virus	83.3	si	1	0
+M55_S6	M55	si	Aedes rhabdo-like virus	95.6	si	1	0
+M56_S7	M56	si	Aedes rhabdo-like virus	87.2	si	1	0
+M57_S8	M57	si	Aedes rhabdo-like virus	80.1	si	1	0
+M58_S9	M58	si	Aedes rhabdo-like virus	91.1	si	1	0
+M59_S10	M59	si	Aedes rhabdo-like virus	89.5	si	1	0
+M60_S11	M60	si	Aedes rhabdo-like virus	90.8	si	1	0
+M61_extra	M61	no	Aedes rhabdo-like virus	79.5	si	1	0
+M62_S18	M62	si	Aedes rhabdo-like virus	95.8	si	1	0
+M71_S19	M71	si	Aedes rhabdo-like virus	86.6	si	1	0
+M72_S20	M72	si	Aedes rhabdo-like virus	91.8	si	1	0
+M74_S21	M74	si	Aedes rhabdo-like virus	87.2	si	1	0
+M78_extra	M78	no	Aedes rhabdo-like virus	89.2	si	1	0
+M79_S28	M79	si	Aedes rhabdo-like virus	83.6	si	1	0
+M1_S1	M1	si	Australian Anopheles totivirus	88.9	si	2	0
+M2_S2	M2	si	Australian Anopheles totivirus	92.1	si	2	1
+M7_S15	M7	si	Australian Anopheles totivirus	92.6	si	2	0
+M9_S16	M9	si	Australian Anopheles totivirus	92.9	si	2	0
+M11_S3	M11	si	Australian Anopheles totivirus	93.2	si	2	0
+M20_S25	M20	si	Australian Anopheles totivirus	89.3	si	2	0
+M21_S29	M21	si	Australian Anopheles totivirus	97.8	si	2	0.500
+M22_S30	M22	si	Australian Anopheles totivirus	94.3	si	2	0.500
+M35_S31	M35	si	Australian Anopheles totivirus	97.8	si	2	0
+M36_S17	M36	si	Australian Anopheles totivirus	95.2	si	2	0
+M41_extra	M41	no	Australian Anopheles totivirus	91.9	si	2	0.500
+M45_extra	M45	no	Australian Anopheles totivirus	84.5	si	2	0
+M48_S5	M48	si	Australian Anopheles totivirus	90.9	si	2	0.500
+M55_S6	M55	si	Australian Anopheles totivirus	94.2	si	2	0
+M56_S7	M56	si	Australian Anopheles totivirus	93.9	si	2	0.500
+M57_S8	M57	si	Australian Anopheles totivirus	86.0	si	2	1
+M58_S9	M58	si	Australian Anopheles totivirus	95.9	si	2	0
+M59_S10	M59	si	Australian Anopheles totivirus	91.1	si	2	0
+M60_S11	M60	si	Australian Anopheles totivirus	90.3	si	2	0
+M61_extra	M61	no	Australian Anopheles totivirus	92.1	si	2	1
+M62_S18	M62	si	Australian Anopheles totivirus	95.7	si	2	0
+M71_S19	M71	si	Australian Anopheles totivirus	92.1	si	2	0
+M72_S20	M72	si	Australian Anopheles totivirus	95.2	si	2	0
+M74_S21	M74	si	Australian Anopheles totivirus	92.7	si	2	0.500
+M78_extra	M78	no	Australian Anopheles totivirus	96.2	si	2	0.500
+M79_S28	M79	si	Australian Anopheles totivirus	92.9	si	2	0
+M1_S1	M1	si	Errantivirus sp.	88.0	si	4	0.500
+M2_S2	M2	si	Errantivirus sp.	89.9	si	3	0.333
+M7_S15	M7	si	Errantivirus sp.	92.4	si	3	0
+M9_S16	M9	si	Errantivirus sp.	81.6	si	2	0
+M11_S3	M11	si	Errantivirus sp.	90.3	si	4	0.250
+M20_S25	M20	si	Errantivirus sp.	83.9	si	3	0.333
+M21_S29	M21	si	Errantivirus sp.	87.3	si	3	0
+M22_S30	M22	si	Errantivirus sp.	84.0	si	3	1
+M35_S31	M35	si	Errantivirus sp.	90.2	si	3	0.333
+M36_S17	M36	si	Errantivirus sp.	95.4	si	3	0.333
+M41_extra	M41	no	Errantivirus sp.	87.3	si	3	0.667
+M45_extra	M45	no	Errantivirus sp.	78.3	si	3	0.667
+M48_S5	M48	si	Errantivirus sp.	89.4	si	2	0
+M55_S6	M55	si	Errantivirus sp.	89.8	si	3	0.333
+M56_S7	M56	si	Errantivirus sp.	87.8	si	3	0
+M57_S8	M57	si	Errantivirus sp.	72.7	si	1	0
+M58_S9	M58	si	Errantivirus sp.	90.8	si	3	0
+M59_S10	M59	si	Errantivirus sp.	88.7	si	3	0.333
+M60_S11	M60	si	Errantivirus sp.	88.6	si	3	0
+M61_extra	M61	no	Errantivirus sp.	89.7	si	3	0.333
+M62_S18	M62	si	Errantivirus sp.	86.9	si	3	0.333
+M71_S19	M71	si	Errantivirus sp.	80.0	si	2	0
+M72_S20	M72	si	Errantivirus sp.	89.1	si	3	0.667
+M74_S21	M74	si	Errantivirus sp.	83.0	si	3	0.667
+M78_extra	M78	no	Errantivirus sp.	89.0	si	3	0.333
+M79_S28	M79	si	Errantivirus sp.	81.4	si	1	0
+M1_S1	M1	si	Gylbovirus aagae	98.8	si	14	0.071
+M2_S2	M2	si	Gylbovirus aagae	96.5	si	14	0.357
+M7_S15	M7	si	Gylbovirus aagae	96.5	si	14	0.143
+M9_S16	M9	si	Gylbovirus aagae	91.9	si	12	0.333
+M11_S3	M11	si	Gylbovirus aagae	98.6	si	14	0.429
+M20_S25	M20	si	Gylbovirus aagae	96.7	si	14	0.143
+M21_S29	M21	si	Gylbovirus aagae	97.9	si	17	0.353
+M22_S30	M22	si	Gylbovirus aagae	97.8	si	14	0.357
+M35_S31	M35	si	Gylbovirus aagae	96.5	si	13	0.154
+M36_S17	M36	si	Gylbovirus aagae	99.0	si	13	0.154
+M41_extra	M41	no	Gylbovirus aagae	97.4	si	14	0.286
+M45_extra	M45	no	Gylbovirus aagae	94.9	si	14	0.143
+M48_S5	M48	si	Gylbovirus aagae	94.7	si	14	0.286
+M55_S6	M55	si	Gylbovirus aagae	95.6	si	14	0.143
+M56_S7	M56	si	Gylbovirus aagae	94.6	si	13	0.154
+M57_S8	M57	si	Gylbovirus aagae	94.3	si	11	0.273
+M58_S9	M58	si	Gylbovirus aagae	95.7	si	13	0.231
+M59_S10	M59	si	Gylbovirus aagae	92.6	si	13	0.385
+M60_S11	M60	si	Gylbovirus aagae	95.2	si	14	0.143
+M61_extra	M61	no	Gylbovirus aagae	98.5	si	14	0.357
+M62_S18	M62	si	Gylbovirus aagae	99.2	si	14	0.286
+M71_S19	M71	si	Gylbovirus aagae	94.1	si	13	0.308
+M72_S20	M72	si	Gylbovirus aagae	97.5	si	15	0.133
+M74_S21	M74	si	Gylbovirus aagae	95.7	si	14	0.071
+M78_extra	M78	no	Gylbovirus aagae	94.9	si	14	0.214
+M79_S28	M79	si	Gylbovirus aagae	92.5	si	12	0.333
+M1_S1	M1	si	Insevirus jyu	90.0	si	4	0.250
+M2_S2	M2	si	Insevirus jyu	93.2	si	4	0.250
+M7_S15	M7	si	Insevirus jyu	93.5	si	4	0.250
+M9_S16	M9	si	Insevirus jyu	89.1	si	4	0.250
+M11_S3	M11	si	Insevirus jyu	91.3	si	4	0
+M20_S25	M20	si	Insevirus jyu	89.4	si	4	0
+M21_S29	M21	si	Insevirus jyu	95.5	si	4	0
+M22_S30	M22	si	Insevirus jyu	95.4	si	4	0.500
+M35_S31	M35	si	Insevirus jyu	95.1	si	4	0
+M36_S17	M36	si	Insevirus jyu	91.0	si	4	0
+M41_extra	M41	no	Insevirus jyu	91.7	si	4	0
+M45_extra	M45	no	Insevirus jyu	83.1	si	4	0.250
+M48_S5	M48	si	Insevirus jyu	89.6	si	4	0
+M55_S6	M55	si	Insevirus jyu	93.0	si	4	0.250
+M56_S7	M56	si	Insevirus jyu	88.9	si	4	0
+M57_S8	M57	si	Insevirus jyu	91.7	si	4	0
+M58_S9	M58	si	Insevirus jyu	95.5	si	4	0
+M59_S10	M59	si	Insevirus jyu	95.8	si	4	0
+M60_S11	M60	si	Insevirus jyu	90.6	si	4	0
+M61_extra	M61	no	Insevirus jyu	89.1	si	4	0.500
+M62_S18	M62	si	Insevirus jyu	91.4	si	4	0
+M71_S19	M71	si	Insevirus jyu	91.7	si	4	0.250
+M72_S20	M72	si	Insevirus jyu	95.4	si	4	0
+M74_S21	M74	si	Insevirus jyu	94.1	si	4	0.250
+M78_extra	M78	no	Insevirus jyu	92.2	si	4	0
+M79_S28	M79	si	Insevirus jyu	94.7	si	4	0
+M1_S1	M1	si	Menghai flavivirus	97.3	si	4	0.500
+M2_S2	M2	si	Menghai flavivirus	94.5	si	3	0.333
+M7_S15	M7	si	Menghai flavivirus	96.6	si	3	1
+M9_S16	M9	si	Menghai flavivirus	96.8	si	4	0.500
+M11_S3	M11	si	Menghai flavivirus	99.2	si	4	0.750
+M20_S25	M20	si	Menghai flavivirus	96.1	si	3	1
+M21_S29	M21	si	Menghai flavivirus	99.7	si	4	0.250
+M22_S30	M22	si	Menghai flavivirus	99.8	si	4	0.750
+M35_S31	M35	si	Menghai flavivirus	97.8	si	4	0.250
+M36_S17	M36	si	Menghai flavivirus	98.3	si	4	0.250
+M41_extra	M41	no	Menghai flavivirus	100	si	4	0.500
+M45_extra	M45	no	Menghai flavivirus	95.7	si	3	0.667
+M48_S5	M48	si	Menghai flavivirus	96.0	si	4	0.500
+M55_S6	M55	si	Menghai flavivirus	98.9	si	4	0.750
+M56_S7	M56	si	Menghai flavivirus	98.2	si	4	0.250
+M57_S8	M57	si	Menghai flavivirus	96.5	si	3	0.667
+M58_S9	M58	si	Menghai flavivirus	98.4	si	4	0.500
+M59_S10	M59	si	Menghai flavivirus	99.2	si	4	0.500
+M60_S11	M60	si	Menghai flavivirus	96.9	si	4	0.750
+M61_extra	M61	no	Menghai flavivirus	98.1	si	3	1
+M62_S18	M62	si	Menghai flavivirus	99.8	si	4	0.250
+M71_S19	M71	si	Menghai flavivirus	98.3	si	3	0
+M72_S20	M72	si	Menghai flavivirus	99.0	si	5	0
+M74_S21	M74	si	Menghai flavivirus	97.7	si	3	0.333
+M78_extra	M78	no	Menghai flavivirus	98.3	si	3	0
+M79_S28	M79	si	Menghai flavivirus	97.3	si	3	0
+M1_S1	M1	si	Flaviviridae sp.	80.6	si	2	0.500
+M2_S2	M2	si	Flaviviridae sp.	71.2	si	2	0
+M7_S15	M7	si	Flaviviridae sp.	82.1	si	2	1
+M9_S16	M9	si	Flaviviridae sp.	82.1	si	2	0
+M11_S3	M11	si	Flaviviridae sp.	82.8	si	3	0
+M20_S25	M20	si	Flaviviridae sp.	77.5	si	2	1
+M21_S29	M21	si	Flaviviridae sp.	81.7	si	3	0.333
+M22_S30	M22	si	Flaviviridae sp.	78.3	si	2	1
+M35_S31	M35	si	Flaviviridae sp.	79.3	si	2	0
+M36_S17	M36	si	Flaviviridae sp.	83.1	si	3	0
+M41_extra	M41	no	Flaviviridae sp.	81.5	si	3	0.667
+M45_extra	M45	no	Flaviviridae sp.	72.6	si	2	0
+M48_S5	M48	si	Flaviviridae sp.	71.5	si	2	0.500
+M55_S6	M55	si	Flaviviridae sp.	77.9	si	2	0
+M56_S7	M56	si	Flaviviridae sp.	81.8	si	2	0
+M57_S8	M57	si	Flaviviridae sp.	76.7	si	2	0
+M58_S9	M58	si	Flaviviridae sp.	78.2	si	2	0
+M59_S10	M59	si	Flaviviridae sp.	85.3	si	2	0
+M60_S11	M60	si	Flaviviridae sp.	81.8	si	3	0.333
+M61_extra	M61	no	Flaviviridae sp.	76.6	si	2	0
+M62_S18	M62	si	Flaviviridae sp.	84.8	si	3	0.333
+M71_S19	M71	si	Flaviviridae sp.	80.9	si	2	0.500
+M72_S20	M72	si	Flaviviridae sp.	83.3	si	3	0
+M74_S21	M74	si	Flaviviridae sp.	83.1	si	2	0.500
+M78_extra	M78	no	Flaviviridae sp.	81.1	si	2	0.500
+M79_S28	M79	si	Flaviviridae sp.	68.6	no	2	0
+M1_S1	M1	si	Xishuangbanna aedes flavivirus	77.0	si	2	0
+M2_S2	M2	si	Xishuangbanna aedes flavivirus	73.3	si	1	0
+M7_S15	M7	si	Xishuangbanna aedes flavivirus	76.0	si	1	0
+M9_S16	M9	si	Xishuangbanna aedes flavivirus	75.4	si	0	NA
+M11_S3	M11	si	Xishuangbanna aedes flavivirus	82.9	si	1	0
+M20_S25	M20	si	Xishuangbanna aedes flavivirus	88.5	si	1	0
+M21_S29	M21	si	Xishuangbanna aedes flavivirus	91.0	si	2	0.500
+M22_S30	M22	si	Xishuangbanna aedes flavivirus	83.0	si	1	1
+M35_S31	M35	si	Xishuangbanna aedes flavivirus	85.1	si	1	0
+M36_S17	M36	si	Xishuangbanna aedes flavivirus	94.4	si	2	0
+M41_extra	M41	no	Xishuangbanna aedes flavivirus	80.6	si	1	0
+M45_extra	M45	no	Xishuangbanna aedes flavivirus	66.7	no	1	0
+M48_S5	M48	si	Xishuangbanna aedes flavivirus	71.6	si	0	NA
+M55_S6	M55	si	Xishuangbanna aedes flavivirus	90.9	si	2	0
+M56_S7	M56	si	Xishuangbanna aedes flavivirus	90.1	si	2	0
+M57_S8	M57	si	Xishuangbanna aedes flavivirus	85.1	si	1	0
+M58_S9	M58	si	Xishuangbanna aedes flavivirus	89.7	si	1	1
+M59_S10	M59	si	Xishuangbanna aedes flavivirus	87.8	si	2	0.500
+M60_S11	M60	si	Xishuangbanna aedes flavivirus	76.9	si	2	0
+M61_extra	M61	no	Xishuangbanna aedes flavivirus	81.9	si	1	0
+M62_S18	M62	si	Xishuangbanna aedes flavivirus	90.1	si	1	0
+M71_S19	M71	si	Xishuangbanna aedes flavivirus	74.0	si	1	0
+M72_S20	M72	si	Xishuangbanna aedes flavivirus	94.6	si	2	0
+M74_S21	M74	si	Xishuangbanna aedes flavivirus	73.5	si	1	1
+M78_extra	M78	no	Xishuangbanna aedes flavivirus	78.5	si	2	0
+M79_S28	M79	si	Xishuangbanna aedes flavivirus	78.8	si	1	0
+M1_S1	M1	si	Aedes aegypti To virus 2	82.3	si	1	0
+M2_S2	M2	si	Aedes aegypti To virus 2	75.4	si	1	0
+M7_S15	M7	si	Aedes aegypti To virus 2	78.0	si	1	0
+M9_S16	M9	si	Aedes aegypti To virus 2	71.2	si	1	0
+M11_S3	M11	si	Aedes aegypti To virus 2	80.2	si	1	0
+M20_S25	M20	si	Aedes aegypti To virus 2	74.1	si	1	0
+M21_S29	M21	si	Aedes aegypti To virus 2	78.5	si	1	0
+M22_S30	M22	si	Aedes aegypti To virus 2	81.4	si	1	0
+M35_S31	M35	si	Aedes aegypti To virus 2	82.4	si	1	0
+M36_S17	M36	si	Aedes aegypti To virus 2	83.8	si	1	0
+M41_extra	M41	no	Aedes aegypti To virus 2	78.0	si	1	0
+M45_extra	M45	no	Aedes aegypti To virus 2	72.5	si	1	0
+M48_S5	M48	si	Aedes aegypti To virus 2	76.8	si	1	0
+M55_S6	M55	si	Aedes aegypti To virus 2	81.4	si	1	0
+M56_S7	M56	si	Aedes aegypti To virus 2	82.4	si	1	0
+M57_S8	M57	si	Aedes aegypti To virus 2	66.5	no	1	0
+M58_S9	M58	si	Aedes aegypti To virus 2	79.6	si	1	0
+M59_S10	M59	si	Aedes aegypti To virus 2	79.2	si	1	0
+M60_S11	M60	si	Aedes aegypti To virus 2	74.6	si	1	0
+M61_extra	M61	no	Aedes aegypti To virus 2	80.2	si	1	0
+M62_S18	M62	si	Aedes aegypti To virus 2	84.1	si	1	0
+M71_S19	M71	si	Aedes aegypti To virus 2	71.7	si	1	0
+M72_S20	M72	si	Aedes aegypti To virus 2	81.1	si	1	0
+M74_S21	M74	si	Aedes aegypti To virus 2	72.5	si	1	0
+M78_extra	M78	no	Aedes aegypti To virus 2	77.2	si	1	0
+M79_S28	M79	si	Aedes aegypti To virus 2	68.4	no	1	0
+M1_S1	M1	si	Verdadero virus	98.8	si	5	0.400
+M2_S2	M2	si	Verdadero virus	99.9	si	5	1
+M7_S15	M7	si	Verdadero virus	100	si	5	1
+M9_S16	M9	si	Verdadero virus	93.7	si	4	0.500
+M11_S3	M11	si	Verdadero virus	100	si	5	1
+M20_S25	M20	si	Verdadero virus	100	si	5	1
+M21_S29	M21	si	Verdadero virus	100	si	5	0.800
+M22_S30	M22	si	Verdadero virus	100	si	5	1
+M35_S31	M35	si	Verdadero virus	98.4	si	5	0.800
+M36_S17	M36	si	Verdadero virus	61.9	no	1	1
+M41_extra	M41	no	Verdadero virus	100	si	5	0.800
+M45_extra	M45	no	Verdadero virus	100	si	5	1
+M48_S5	M48	si	Verdadero virus	16.6	no	0	NA
+M55_S6	M55	si	Verdadero virus	99.5	si	5	1
+M56_S7	M56	si	Verdadero virus	100	si	5	1
+M57_S8	M57	si	Verdadero virus	100	si	5	1
+M58_S9	M58	si	Verdadero virus	100	si	5	1
+M59_S10	M59	si	Verdadero virus	100	si	5	1
+M60_S11	M60	si	Verdadero virus	20.4	no	0	NA
+M61_extra	M61	no	Verdadero virus	99.9	si	5	0.800
+M62_S18	M62	si	Verdadero virus	99.1	si	5	0.600
+M71_S19	M71	si	Verdadero virus	100	si	5	1
+M72_S20	M72	si	Verdadero virus	100	si	5	1
+M74_S21	M74	si	Verdadero virus	4.3	no	0	NA
+M78_extra	M78	no	Verdadero virus	100	si	5	0.600
+M79_S28	M79	si	Verdadero virus	10.0	no	0	NA
+M1_S1	M1	si	Chaq-like virus	16.8	no	0	NA
+M2_S2	M2	si	Chaq-like virus	99.1	si	2	0.500
+M7_S15	M7	si	Chaq-like virus	96.9	si	2	0
+M9_S16	M9	si	Chaq-like virus	94.2	si	2	1
+M11_S3	M11	si	Chaq-like virus	98.6	si	2	1
+M20_S25	M20	si	Chaq-like virus	100	si	2	0.500
+M21_S29	M21	si	Chaq-like virus	99.0	si	2	1
+M22_S30	M22	si	Chaq-like virus	100	si	2	1
+M35_S31	M35	si	Chaq-like virus	78.5	si	2	0
+M36_S17	M36	si	Chaq-like virus	67.3	no	2	0.500
+M41_extra	M41	no	Chaq-like virus	100	si	2	0.500
+M45_extra	M45	no	Chaq-like virus	100	si	2	0.500
+M48_S5	M48	si	Chaq-like virus	6.7	no	0	NA
+M55_S6	M55	si	Chaq-like virus	26.0	no	0	NA
+M56_S7	M56	si	Chaq-like virus	100	si	2	1
+M57_S8	M57	si	Chaq-like virus	99.3	si	2	0.500
+M58_S9	M58	si	Chaq-like virus	98.8	si	2	1
+M59_S10	M59	si	Chaq-like virus	99.2	si	2	0.500
+M60_S11	M60	si	Chaq-like virus	11.7	no	0	NA
+M61_extra	M61	no	Chaq-like virus	99.7	si	2	0.500
+M62_S18	M62	si	Chaq-like virus	95.8	si	2	0.500
+M71_S19	M71	si	Chaq-like virus	99.9	si	2	0.500
+M72_S20	M72	si	Chaq-like virus	100	si	2	0.500
+M74_S21	M74	si	Chaq-like virus	5.2	no	0	NA
+M78_extra	M78	no	Chaq-like virus	98.3	si	2	0.500
+M79_S28	M79	si	Chaq-like virus	8.2	no	0	NA
+M1_S1	M1	si	Aedes aegypti To virus 1	81.2	si	1	0
+M2_S2	M2	si	Aedes aegypti To virus 1	72.3	si	1	0
+M7_S15	M7	si	Aedes aegypti To virus 1	65.4	no	1	1
+M9_S16	M9	si	Aedes aegypti To virus 1	59.5	no	1	0
+M11_S3	M11	si	Aedes aegypti To virus 1	78.8	si	1	0
+M20_S25	M20	si	Aedes aegypti To virus 1	60.4	no	1	1
+M21_S29	M21	si	Aedes aegypti To virus 1	70.1	si	1	0
+M22_S30	M22	si	Aedes aegypti To virus 1	79.3	si	1	1
+M35_S31	M35	si	Aedes aegypti To virus 1	73.0	si	1	0
+M36_S17	M36	si	Aedes aegypti To virus 1	83.3	si	1	0
+M41_extra	M41	no	Aedes aegypti To virus 1	77.2	si	1	0
+M45_extra	M45	no	Aedes aegypti To virus 1	63.8	no	1	0
+M48_S5	M48	si	Aedes aegypti To virus 1	66.6	no	1	1
+M55_S6	M55	si	Aedes aegypti To virus 1	71.2	si	1	0
+M56_S7	M56	si	Aedes aegypti To virus 1	70.9	si	1	1
+M57_S8	M57	si	Aedes aegypti To virus 1	60.9	no	1	0
+M58_S9	M58	si	Aedes aegypti To virus 1	73.8	si	1	1
+M59_S10	M59	si	Aedes aegypti To virus 1	75.1	si	1	0
+M60_S11	M60	si	Aedes aegypti To virus 1	71.1	si	1	0
+M61_extra	M61	no	Aedes aegypti To virus 1	73.9	si	1	1
+M62_S18	M62	si	Aedes aegypti To virus 1	84.1	si	1	0
+M71_S19	M71	si	Aedes aegypti To virus 1	68.5	no	1	0
+M72_S20	M72	si	Aedes aegypti To virus 1	78.1	si	1	0
+M74_S21	M74	si	Aedes aegypti To virus 1	71.2	si	1	0
+M78_extra	M78	no	Aedes aegypti To virus 1	77.7	si	1	1
+M79_S28	M79	si	Aedes aegypti To virus 1	65.4	no	1	0
+M1_S1	M1	si	Guadeloupe mosquito virus	3.5	no	0	NA
+M2_S2	M2	si	Guadeloupe mosquito virus	80.4	si	34	0.441
+M7_S15	M7	si	Guadeloupe mosquito virus	2.2	no	0	NA
+M9_S16	M9	si	Guadeloupe mosquito virus	4.3	no	0	NA
+M11_S3	M11	si	Guadeloupe mosquito virus	98.5	si	35	1
+M20_S25	M20	si	Guadeloupe mosquito virus	94.6	si	35	1
+M21_S29	M21	si	Guadeloupe mosquito virus	98.8	si	35	1
+M22_S30	M22	si	Guadeloupe mosquito virus	9.9	no	0	NA
+M35_S31	M35	si	Guadeloupe mosquito virus	97.5	si	35	1
+M36_S17	M36	si	Guadeloupe mosquito virus	6.4	no	0	NA
+M41_extra	M41	no	Guadeloupe mosquito virus	98.9	si	35	1
+M45_extra	M45	no	Guadeloupe mosquito virus	77.7	si	34	0.118
+M48_S5	M48	si	Guadeloupe mosquito virus	3.5	no	0	NA
+M55_S6	M55	si	Guadeloupe mosquito virus	3.7	no	0	NA
+M56_S7	M56	si	Guadeloupe mosquito virus	9.8	no	0	NA
+M57_S8	M57	si	Guadeloupe mosquito virus	3.9	no	0	NA
+M58_S9	M58	si	Guadeloupe mosquito virus	4.0	no	0	NA
+M59_S10	M59	si	Guadeloupe mosquito virus	2.5	no	0	NA
+M60_S11	M60	si	Guadeloupe mosquito virus	4.5	no	0	NA
+M61_extra	M61	no	Guadeloupe mosquito virus	89.4	si	35	0.800
+M62_S18	M62	si	Guadeloupe mosquito virus	3.9	no	0	NA
+M71_S19	M71	si	Guadeloupe mosquito virus	97.1	si	35	0.971
+M72_S20	M72	si	Guadeloupe mosquito virus	98.2	si	35	0.971
+M74_S21	M74	si	Guadeloupe mosquito virus	97.9	si	35	0.943
+M78_extra	M78	no	Guadeloupe mosquito virus	97.4	si	35	0.971
+M79_S28	M79	si	Guadeloupe mosquito virus	98.6	si	35	0.971
+M1_S1	M1	si	Gurupi chuvirus-like 1	80.2	si	1	0
+M2_S2	M2	si	Gurupi chuvirus-like 1	59.8	no	1	0
+M7_S15	M7	si	Gurupi chuvirus-like 1	67.7	no	1	0
+M9_S16	M9	si	Gurupi chuvirus-like 1	57.2	no	1	0
+M11_S3	M11	si	Gurupi chuvirus-like 1	73.2	si	1	0
+M20_S25	M20	si	Gurupi chuvirus-like 1	65.9	no	1	0
+M21_S29	M21	si	Gurupi chuvirus-like 1	62.4	no	1	0
+M22_S30	M22	si	Gurupi chuvirus-like 1	73.1	si	1	1
+M35_S31	M35	si	Gurupi chuvirus-like 1	84.2	si	1	0
+M36_S17	M36	si	Gurupi chuvirus-like 1	82.0	si	1	0
+M41_extra	M41	no	Gurupi chuvirus-like 1	64.8	no	1	0
+M45_extra	M45	no	Gurupi chuvirus-like 1	52.4	no	1	0
+M48_S5	M48	si	Gurupi chuvirus-like 1	58.7	no	1	0
+M55_S6	M55	si	Gurupi chuvirus-like 1	70.4	si	1	0
+M56_S7	M56	si	Gurupi chuvirus-like 1	77.3	si	1	0
+M57_S8	M57	si	Gurupi chuvirus-like 1	56.7	no	1	0
+M58_S9	M58	si	Gurupi chuvirus-like 1	85.5	si	1	0
+M59_S10	M59	si	Gurupi chuvirus-like 1	74.7	si	1	0
+M60_S11	M60	si	Gurupi chuvirus-like 1	68.6	no	1	0
+M61_extra	M61	no	Gurupi chuvirus-like 1	63.2	no	1	0
+M62_S18	M62	si	Gurupi chuvirus-like 1	71.3	si	1	0
+M71_S19	M71	si	Gurupi chuvirus-like 1	69.7	no	1	0
+M72_S20	M72	si	Gurupi chuvirus-like 1	72.9	si	1	0
+M74_S21	M74	si	Gurupi chuvirus-like 1	67.0	no	1	0
+M78_extra	M78	no	Gurupi chuvirus-like 1	69.7	no	1	0
+M79_S28	M79	si	Gurupi chuvirus-like 1	64.8	no	1	0
+M1_S1	M1	si	Hubei mosquito virus	2.5	no	0	NA
+M2_S2	M2	si	Hubei mosquito virus	64.7	no	5	0.400
+M7_S15	M7	si	Hubei mosquito virus	1.2	no	0	NA
+M9_S16	M9	si	Hubei mosquito virus	2.4	no	0	NA
+M11_S3	M11	si	Hubei mosquito virus	83.8	si	8	1
+M20_S25	M20	si	Hubei mosquito virus	81.5	si	8	0.750
+M21_S29	M21	si	Hubei mosquito virus	87.8	si	11	1
+M22_S30	M22	si	Hubei mosquito virus	7.5	no	0	NA
+M35_S31	M35	si	Hubei mosquito virus	85.4	si	10	0.900
+M36_S17	M36	si	Hubei mosquito virus	4.0	no	0	NA
+M41_extra	M41	no	Hubei mosquito virus	88.2	si	11	1
+M45_extra	M45	no	Hubei mosquito virus	59.6	no	5	0.400
+M48_S5	M48	si	Hubei mosquito virus	2.5	no	0	NA
+M55_S6	M55	si	Hubei mosquito virus	3.2	no	0	NA
+M56_S7	M56	si	Hubei mosquito virus	8.3	no	0	NA
+M57_S8	M57	si	Hubei mosquito virus	1.2	no	0	NA
+M58_S9	M58	si	Hubei mosquito virus	3.8	no	0	NA
+M59_S10	M59	si	Hubei mosquito virus	2.0	no	0	NA
+M60_S11	M60	si	Hubei mosquito virus	1.3	no	0	NA
+M61_extra	M61	no	Hubei mosquito virus	70.5	si	6	0.333
+M62_S18	M62	si	Hubei mosquito virus	2.5	no	0	NA
+M71_S19	M71	si	Hubei mosquito virus	82.6	si	9	0.778
+M72_S20	M72	si	Hubei mosquito virus	86.8	si	11	0.818
+M74_S21	M74	si	Hubei mosquito virus	86.0	si	10	0.800
+M78_extra	M78	no	Hubei mosquito virus	82.3	si	11	1
+M79_S28	M79	si	Hubei mosquito virus	87.8	si	11	0.727
+M1_S1	M1	si	Aedes aegypti anphevirus	69.2	no	1	0
+M2_S2	M2	si	Aedes aegypti anphevirus	65.8	no	1	0
+M7_S15	M7	si	Aedes aegypti anphevirus	69.4	no	1	0
+M9_S16	M9	si	Aedes aegypti anphevirus	74.1	si	1	0
+M11_S3	M11	si	Aedes aegypti anphevirus	73.6	si	1	0
+M20_S25	M20	si	Aedes aegypti anphevirus	57.8	no	1	0
+M21_S29	M21	si	Aedes aegypti anphevirus	81.2	si	1	0
+M22_S30	M22	si	Aedes aegypti anphevirus	71.0	si	1	0
+M35_S31	M35	si	Aedes aegypti anphevirus	77.2	si	1	0
+M36_S17	M36	si	Aedes aegypti anphevirus	74.5	si	1	0
+M41_extra	M41	no	Aedes aegypti anphevirus	62.1	no	1	0
+M45_extra	M45	no	Aedes aegypti anphevirus	62.9	no	1	0
+M48_S5	M48	si	Aedes aegypti anphevirus	67.8	no	1	0
+M55_S6	M55	si	Aedes aegypti anphevirus	73.2	si	1	0
+M56_S7	M56	si	Aedes aegypti anphevirus	66.5	no	1	0
+M57_S8	M57	si	Aedes aegypti anphevirus	60.5	no	1	1
+M58_S9	M58	si	Aedes aegypti anphevirus	65.4	no	1	0
+M59_S10	M59	si	Aedes aegypti anphevirus	70.8	si	1	0
+M60_S11	M60	si	Aedes aegypti anphevirus	67.2	no	1	0
+M61_extra	M61	no	Aedes aegypti anphevirus	64.3	no	1	0
+M62_S18	M62	si	Aedes aegypti anphevirus	67.0	no	1	0
+M71_S19	M71	si	Aedes aegypti anphevirus	58.5	no	1	0
+M72_S20	M72	si	Aedes aegypti anphevirus	78.8	si	1	0
+M74_S21	M74	si	Aedes aegypti anphevirus	64.1	no	1	0
+M78_extra	M78	no	Aedes aegypti anphevirus	67.8	no	1	0
+M79_S28	M79	si	Aedes aegypti anphevirus	59.8	no	1	0
+M1_S1	M1	si	Aedes aegypti totivirus	1.3	no	0	NA
+M2_S2	M2	si	Aedes aegypti totivirus	1.5	no	0	NA
+M7_S15	M7	si	Aedes aegypti totivirus	1.6	no	0	NA
+M9_S16	M9	si	Aedes aegypti totivirus	3.2	no	0	NA
+M11_S3	M11	si	Aedes aegypti totivirus	84.2	si	11	1
+M20_S25	M20	si	Aedes aegypti totivirus	2.1	no	0	NA
+M21_S29	M21	si	Aedes aegypti totivirus	3.6	no	0	NA
+M22_S30	M22	si	Aedes aegypti totivirus	83.3	si	11	0.909
+M35_S31	M35	si	Aedes aegypti totivirus	74.5	si	9	0
+M36_S17	M36	si	Aedes aegypti totivirus	81.2	si	11	0.636
+M41_extra	M41	no	Aedes aegypti totivirus	82.6	si	11	0.909
+M45_extra	M45	no	Aedes aegypti totivirus	80.0	si	11	0.727
+M48_S5	M48	si	Aedes aegypti totivirus	1.7	no	0	NA
+M55_S6	M55	si	Aedes aegypti totivirus	1.6	no	0	NA
+M56_S7	M56	si	Aedes aegypti totivirus	1.6	no	0	NA
+M57_S8	M57	si	Aedes aegypti totivirus	1.1	no	0	NA
+M58_S9	M58	si	Aedes aegypti totivirus	1.5	no	0	NA
+M59_S10	M59	si	Aedes aegypti totivirus	1.1	no	0	NA
+M60_S11	M60	si	Aedes aegypti totivirus	0.8	no	0	NA
+M61_extra	M61	no	Aedes aegypti totivirus	1.1	no	0	NA
+M62_S18	M62	si	Aedes aegypti totivirus	1.5	no	0	NA
+M71_S19	M71	si	Aedes aegypti totivirus	1.1	no	0	NA
+M72_S20	M72	si	Aedes aegypti totivirus	1.2	no	0	NA
+M74_S21	M74	si	Aedes aegypti totivirus	2.5	no	0	NA
+M78_extra	M78	no	Aedes aegypti totivirus	0.6	no	0	NA
+M79_S28	M79	si	Aedes aegypti totivirus	1.0	no	0	NA
+M1_S1	M1	si	Aedes anphevirus	64.4	no	5	0.600
+M2_S2	M2	si	Aedes anphevirus	71.0	si	5	0.800
+M7_S15	M7	si	Aedes anphevirus	46.1	no	2	0
+M9_S16	M9	si	Aedes anphevirus	0.4	no	0	NA
+M11_S3	M11	si	Aedes anphevirus	40.3	no	1	0
+M20_S25	M20	si	Aedes anphevirus	39.7	no	1	1
+M21_S29	M21	si	Aedes anphevirus	85.1	si	6	0.833
+M22_S30	M22	si	Aedes anphevirus	62.9	no	5	0
+M35_S31	M35	si	Aedes anphevirus	0.9	no	0	NA
+M36_S17	M36	si	Aedes anphevirus	0.8	no	0	NA
+M41_extra	M41	no	Aedes anphevirus	70.1	si	5	1
+M45_extra	M45	no	Aedes anphevirus	57.6	no	4	0.750
+M48_S5	M48	si	Aedes anphevirus	52.7	no	2	0
+M55_S6	M55	si	Aedes anphevirus	59.5	no	5	0.600
+M56_S7	M56	si	Aedes anphevirus	0.6	no	0	NA
+M57_S8	M57	si	Aedes anphevirus	0.3	no	0	NA
+M58_S9	M58	si	Aedes anphevirus	1.0	no	0	NA
+M59_S10	M59	si	Aedes anphevirus	1.2	no	0	NA
+M60_S11	M60	si	Aedes anphevirus	74.8	si	5	0.400
+M61_extra	M61	no	Aedes anphevirus	71.2	si	5	0.800
+M62_S18	M62	si	Aedes anphevirus	37.8	no	1	1
+M71_S19	M71	si	Aedes anphevirus	0.5	no	0	NA
+M72_S20	M72	si	Aedes anphevirus	83.7	si	6	0.833
+M74_S21	M74	si	Aedes anphevirus	36.8	no	1	1
+M78_extra	M78	no	Aedes anphevirus	54.2	no	2	0.500
+M79_S28	M79	si	Aedes anphevirus	0.7	no	0	NA
+M1_S1	M1	si	Aedes aegypti totivirus 2	1.1	no	0	NA
+M2_S2	M2	si	Aedes aegypti totivirus 2	0.8	no	0	NA
+M7_S15	M7	si	Aedes aegypti totivirus 2	1.7	no	0	NA
+M9_S16	M9	si	Aedes aegypti totivirus 2	2.1	no	0	NA
+M11_S3	M11	si	Aedes aegypti totivirus 2	85.5	si	1	1
+M20_S25	M20	si	Aedes aegypti totivirus 2	0.7	no	0	NA
+M21_S29	M21	si	Aedes aegypti totivirus 2	1.1	no	0	NA
+M22_S30	M22	si	Aedes aegypti totivirus 2	80.5	si	1	1
+M35_S31	M35	si	Aedes aegypti totivirus 2	43.5	no	1	0
+M36_S17	M36	si	Aedes aegypti totivirus 2	74.5	si	1	0
+M41_extra	M41	no	Aedes aegypti totivirus 2	85.2	si	1	1
+M45_extra	M45	no	Aedes aegypti totivirus 2	86.7	si	1	1
+M48_S5	M48	si	Aedes aegypti totivirus 2	1.4	no	0	NA
+M55_S6	M55	si	Aedes aegypti totivirus 2	1.6	no	0	NA
+M56_S7	M56	si	Aedes aegypti totivirus 2	1.7	no	0	NA
+M57_S8	M57	si	Aedes aegypti totivirus 2	1.7	no	0	NA
+M58_S9	M58	si	Aedes aegypti totivirus 2	1.8	no	0	NA
+M59_S10	M59	si	Aedes aegypti totivirus 2	1.5	no	0	NA
+M60_S11	M60	si	Aedes aegypti totivirus 2	1.1	no	0	NA
+M61_extra	M61	no	Aedes aegypti totivirus 2	1.1	no	0	NA
+M62_S18	M62	si	Aedes aegypti totivirus 2	1.5	no	0	NA
+M71_S19	M71	si	Aedes aegypti totivirus 2	1.0	no	0	NA
+M72_S20	M72	si	Aedes aegypti totivirus 2	0.8	no	0	NA
+M74_S21	M74	si	Aedes aegypti totivirus 2	2.7	no	0	NA
+M78_extra	M78	no	Aedes aegypti totivirus 2	1.1	no	0	NA
+M79_S28	M79	si	Aedes aegypti totivirus 2	0.6	no	0	NA
+M1_S1	M1	si	Aedes albopictus toti-like virus	1.1	no	0	NA
+M2_S2	M2	si	Aedes albopictus toti-like virus	1.0	no	0	NA
+M7_S15	M7	si	Aedes albopictus toti-like virus	0.9	no	0	NA
+M9_S16	M9	si	Aedes albopictus toti-like virus	2.8	no	0	NA
+M11_S3	M11	si	Aedes albopictus toti-like virus	84.9	si	1	1
+M20_S25	M20	si	Aedes albopictus toti-like virus	0.8	no	0	NA
+M21_S29	M21	si	Aedes albopictus toti-like virus	1.0	no	0	NA
+M22_S30	M22	si	Aedes albopictus toti-like virus	79.2	si	1	1
+M35_S31	M35	si	Aedes albopictus toti-like virus	43.9	no	1	1
+M36_S17	M36	si	Aedes albopictus toti-like virus	75.3	si	1	0
+M41_extra	M41	no	Aedes albopictus toti-like virus	85.3	si	1	0
+M45_extra	M45	no	Aedes albopictus toti-like virus	87.1	si	1	1
+M48_S5	M48	si	Aedes albopictus toti-like virus	2.1	no	0	NA
+M55_S6	M55	si	Aedes albopictus toti-like virus	1.8	no	0	NA
+M56_S7	M56	si	Aedes albopictus toti-like virus	2.0	no	0	NA
+M57_S8	M57	si	Aedes albopictus toti-like virus	1.4	no	0	NA
+M58_S9	M58	si	Aedes albopictus toti-like virus	1.5	no	0	NA
+M59_S10	M59	si	Aedes albopictus toti-like virus	1.6	no	0	NA
+M60_S11	M60	si	Aedes albopictus toti-like virus	1.4	no	0	NA
+M61_extra	M61	no	Aedes albopictus toti-like virus	0.6	no	0	NA
+M62_S18	M62	si	Aedes albopictus toti-like virus	1.1	no	0	NA
+M71_S19	M71	si	Aedes albopictus toti-like virus	1.4	no	0	NA
+M72_S20	M72	si	Aedes albopictus toti-like virus	0.6	no	0	NA
+M74_S21	M74	si	Aedes albopictus toti-like virus	2.3	no	0	NA
+M78_extra	M78	no	Aedes albopictus toti-like virus	1.0	no	0	NA
+M79_S28	M79	si	Aedes albopictus toti-like virus	0.4	no	0	NA
+M1_S1	M1	si	Lactea totivirus	14.2	no	0	NA
+M2_S2	M2	si	Lactea totivirus	11.9	no	0	NA
+M7_S15	M7	si	Lactea totivirus	14.4	no	0	NA
+M9_S16	M9	si	Lactea totivirus	13.1	no	0	NA
+M11_S3	M11	si	Lactea totivirus	87.3	si	1	1
+M20_S25	M20	si	Lactea totivirus	12.1	no	0	NA
+M21_S29	M21	si	Lactea totivirus	13.0	no	0	NA
+M22_S30	M22	si	Lactea totivirus	80.4	si	1	0
+M35_S31	M35	si	Lactea totivirus	50.1	no	1	0
+M36_S17	M36	si	Lactea totivirus	78.9	si	1	1
+M41_extra	M41	no	Lactea totivirus	87.2	si	1	1
+M45_extra	M45	no	Lactea totivirus	87.1	si	1	1
+M48_S5	M48	si	Lactea totivirus	12.7	no	0	NA
+M55_S6	M55	si	Lactea totivirus	12.9	no	0	NA
+M56_S7	M56	si	Lactea totivirus	16.0	no	0	NA
+M57_S8	M57	si	Lactea totivirus	13.6	no	0	NA
+M58_S9	M58	si	Lactea totivirus	13.1	no	0	NA
+M59_S10	M59	si	Lactea totivirus	13.7	no	0	NA
+M60_S11	M60	si	Lactea totivirus	11.2	no	0	NA
+M61_extra	M61	no	Lactea totivirus	13.9	no	0	NA
+M62_S18	M62	si	Lactea totivirus	12.6	no	0	NA
+M71_S19	M71	si	Lactea totivirus	12.4	no	0	NA
+M72_S20	M72	si	Lactea totivirus	12.3	no	0	NA
+M74_S21	M74	si	Lactea totivirus	15.4	no	0	NA
+M78_extra	M78	no	Lactea totivirus	13.4	no	0	NA
+M79_S28	M79	si	Lactea totivirus	12.6	no	0	NA
+M1_S1	M1	si	Aedes aegypti totivirus GH115	1.6	no	0	NA
+M2_S2	M2	si	Aedes aegypti totivirus GH115	1.4	no	0	NA
+M7_S15	M7	si	Aedes aegypti totivirus GH115	0.7	no	0	NA
+M9_S16	M9	si	Aedes aegypti totivirus GH115	1.6	no	0	NA
+M11_S3	M11	si	Aedes aegypti totivirus GH115	78.7	si	1	1
+M20_S25	M20	si	Aedes aegypti totivirus GH115	0.7	no	0	NA
+M21_S29	M21	si	Aedes aegypti totivirus GH115	1.7	no	0	NA
+M22_S30	M22	si	Aedes aegypti totivirus GH115	72.7	si	1	1
+M35_S31	M35	si	Aedes aegypti totivirus GH115	36.1	no	1	0
+M36_S17	M36	si	Aedes aegypti totivirus GH115	66.0	no	1	0
+M41_extra	M41	no	Aedes aegypti totivirus GH115	78.1	si	1	1
+M45_extra	M45	no	Aedes aegypti totivirus GH115	78.1	si	1	1
+M48_S5	M48	si	Aedes aegypti totivirus GH115	2.0	no	0	NA
+M55_S6	M55	si	Aedes aegypti totivirus GH115	1.2	no	0	NA
+M56_S7	M56	si	Aedes aegypti totivirus GH115	1.1	no	0	NA
+M57_S8	M57	si	Aedes aegypti totivirus GH115	0.8	no	0	NA
+M58_S9	M58	si	Aedes aegypti totivirus GH115	1.6	no	0	NA
+M59_S10	M59	si	Aedes aegypti totivirus GH115	1.6	no	0	NA
+M60_S11	M60	si	Aedes aegypti totivirus GH115	0.9	no	0	NA
+M61_extra	M61	no	Aedes aegypti totivirus GH115	1.1	no	0	NA
+M62_S18	M62	si	Aedes aegypti totivirus GH115	1.6	no	0	NA
+M71_S19	M71	si	Aedes aegypti totivirus GH115	1.5	no	0	NA
+M72_S20	M72	si	Aedes aegypti totivirus GH115	0.9	no	0	NA
+M74_S21	M74	si	Aedes aegypti totivirus GH115	1.6	no	0	NA
+M78_extra	M78	no	Aedes aegypti totivirus GH115	0.9	no	0	NA
+M79_S28	M79	si	Aedes aegypti totivirus GH115	0.7	no	0	NA
+M1_S1	M1	si	Gurupi chuvirus-like 2	77.0	si	0	NA
+M2_S2	M2	si	Gurupi chuvirus-like 2	33.6	no	0	NA
+M7_S15	M7	si	Gurupi chuvirus-like 2	37.0	no	0	NA
+M9_S16	M9	si	Gurupi chuvirus-like 2	33.4	no	0	NA
+M11_S3	M11	si	Gurupi chuvirus-like 2	67.5	no	0	NA
+M20_S25	M20	si	Gurupi chuvirus-like 2	52.1	no	0	NA
+M21_S29	M21	si	Gurupi chuvirus-like 2	47.8	no	0	NA
+M22_S30	M22	si	Gurupi chuvirus-like 2	61.2	no	0	NA
+M35_S31	M35	si	Gurupi chuvirus-like 2	75.6	si	0	NA
+M36_S17	M36	si	Gurupi chuvirus-like 2	79.1	si	0	NA
+M41_extra	M41	no	Gurupi chuvirus-like 2	54.4	no	0	NA
+M45_extra	M45	no	Gurupi chuvirus-like 2	27.5	no	0	NA
+M48_S5	M48	si	Gurupi chuvirus-like 2	39.3	no	0	NA
+M55_S6	M55	si	Gurupi chuvirus-like 2	52.1	no	0	NA
+M56_S7	M56	si	Gurupi chuvirus-like 2	69.8	no	1	0
+M57_S8	M57	si	Gurupi chuvirus-like 2	21.2	no	0	NA
+M58_S9	M58	si	Gurupi chuvirus-like 2	82.1	si	0	NA
+M59_S10	M59	si	Gurupi chuvirus-like 2	58.8	no	0	NA
+M60_S11	M60	si	Gurupi chuvirus-like 2	60.3	no	0	NA
+M61_extra	M61	no	Gurupi chuvirus-like 2	53.9	no	0	NA
+M62_S18	M62	si	Gurupi chuvirus-like 2	54.4	no	0	NA
+M71_S19	M71	si	Gurupi chuvirus-like 2	63.3	no	0	NA
+M72_S20	M72	si	Gurupi chuvirus-like 2	59.5	no	0	NA
+M74_S21	M74	si	Gurupi chuvirus-like 2	46.2	no	0	NA
+M78_extra	M78	no	Gurupi chuvirus-like 2	47.2	no	0	NA
+M79_S28	M79	si	Gurupi chuvirus-like 2	47.4	no	0	NA
+M1_S1	M1	si	Cell fusing agent virus	24.4	no	0	NA
+M2_S2	M2	si	Cell fusing agent virus	22.4	no	0	NA
+M7_S15	M7	si	Cell fusing agent virus	27.7	no	0	NA
+M9_S16	M9	si	Cell fusing agent virus	27.7	no	0	NA
+M11_S3	M11	si	Cell fusing agent virus	27.7	no	0	NA
+M20_S25	M20	si	Cell fusing agent virus	29.2	no	0	NA
+M21_S29	M21	si	Cell fusing agent virus	27.7	no	0	NA
+M22_S30	M22	si	Cell fusing agent virus	27.3	no	0	NA
+M35_S31	M35	si	Cell fusing agent virus	27.7	no	0	NA
+M36_S17	M36	si	Cell fusing agent virus	27.2	no	0	NA
+M41_extra	M41	no	Cell fusing agent virus	75.8	si	11	0.364
+M45_extra	M45	no	Cell fusing agent virus	26.4	no	0	NA
+M48_S5	M48	si	Cell fusing agent virus	27.5	no	0	NA
+M55_S6	M55	si	Cell fusing agent virus	31.4	no	1	0
+M56_S7	M56	si	Cell fusing agent virus	26.8	no	0	NA
+M57_S8	M57	si	Cell fusing agent virus	25.7	no	0	NA
+M58_S9	M58	si	Cell fusing agent virus	27.5	no	0	NA
+M59_S10	M59	si	Cell fusing agent virus	27.5	no	0	NA
+M60_S11	M60	si	Cell fusing agent virus	26.6	no	0	NA
+M61_extra	M61	no	Cell fusing agent virus	85.5	si	13	0
+M62_S18	M62	si	Cell fusing agent virus	27.7	no	0	NA
+M71_S19	M71	si	Cell fusing agent virus	27.7	no	0	NA
+M72_S20	M72	si	Cell fusing agent virus	87.6	si	13	0.692
+M74_S21	M74	si	Cell fusing agent virus	26.2	no	0	NA
+M78_extra	M78	no	Cell fusing agent virus	31.4	no	1	0
+M79_S28	M79	si	Cell fusing agent virus	27.2	no	0	NA
+M1_S1	M1	si	Kwale mosquito virus	4.1	no	0	NA
+M2_S2	M2	si	Kwale mosquito virus	43.1	no	3	0
+M7_S15	M7	si	Kwale mosquito virus	3.4	no	0	NA
+M9_S16	M9	si	Kwale mosquito virus	5.4	no	0	NA
+M11_S3	M11	si	Kwale mosquito virus	66.5	no	3	1
+M20_S25	M20	si	Kwale mosquito virus	66.6	no	3	1
+M21_S29	M21	si	Kwale mosquito virus	73.5	si	4	1
+M22_S30	M22	si	Kwale mosquito virus	5.6	no	0	NA
+M35_S31	M35	si	Kwale mosquito virus	67.2	no	4	1
+M36_S17	M36	si	Kwale mosquito virus	4.7	no	0	NA
+M41_extra	M41	no	Kwale mosquito virus	71.7	si	4	0.750
+M45_extra	M45	no	Kwale mosquito virus	39.9	no	3	0
+M48_S5	M48	si	Kwale mosquito virus	3.4	no	0	NA
+M55_S6	M55	si	Kwale mosquito virus	3.4	no	0	NA
+M56_S7	M56	si	Kwale mosquito virus	7.3	no	0	NA
+M57_S8	M57	si	Kwale mosquito virus	4.1	no	0	NA
+M58_S9	M58	si	Kwale mosquito virus	4.2	no	0	NA
+M59_S10	M59	si	Kwale mosquito virus	3.4	no	0	NA
+M60_S11	M60	si	Kwale mosquito virus	3.4	no	0	NA
+M61_extra	M61	no	Kwale mosquito virus	51.0	no	3	0
+M62_S18	M62	si	Kwale mosquito virus	4.2	no	0	NA
+M71_S19	M71	si	Kwale mosquito virus	68.5	no	4	0.500
+M72_S20	M72	si	Kwale mosquito virus	67.9	no	4	1
+M74_S21	M74	si	Kwale mosquito virus	66.0	no	4	1
+M78_extra	M78	no	Kwale mosquito virus	65.7	no	3	1
+M79_S28	M79	si	Kwale mosquito virus	74.3	si	4	0.500
+M1_S1	M1	si	Spiciviridae sp.	59.9	no	0	NA
+M2_S2	M2	si	Spiciviridae sp.	50.8	no	0	NA
+M7_S15	M7	si	Spiciviridae sp.	52.4	no	0	NA
+M9_S16	M9	si	Spiciviridae sp.	23.6	no	0	NA
+M11_S3	M11	si	Spiciviridae sp.	68.6	no	0	NA
+M20_S25	M20	si	Spiciviridae sp.	49.2	no	0	NA
+M21_S29	M21	si	Spiciviridae sp.	41.2	no	0	NA
+M22_S30	M22	si	Spiciviridae sp.	56.7	no	0	NA
+M35_S31	M35	si	Spiciviridae sp.	58.0	no	0	NA
+M36_S17	M36	si	Spiciviridae sp.	61.4	no	0	NA
+M41_extra	M41	no	Spiciviridae sp.	63.0	no	0	NA
+M45_extra	M45	no	Spiciviridae sp.	42.6	no	0	NA
+M48_S5	M48	si	Spiciviridae sp.	66.1	no	0	NA
+M55_S6	M55	si	Spiciviridae sp.	67.6	no	1	0
+M56_S7	M56	si	Spiciviridae sp.	74.5	si	1	0
+M57_S8	M57	si	Spiciviridae sp.	48.2	no	0	NA
+M58_S9	M58	si	Spiciviridae sp.	78.9	si	1	0
+M59_S10	M59	si	Spiciviridae sp.	61.6	no	0	NA
+M60_S11	M60	si	Spiciviridae sp.	61.4	no	0	NA
+M61_extra	M61	no	Spiciviridae sp.	50.4	no	0	NA
+M62_S18	M62	si	Spiciviridae sp.	63.8	no	0	NA
+M71_S19	M71	si	Spiciviridae sp.	56.3	no	0	NA
+M72_S20	M72	si	Spiciviridae sp.	72.3	si	0	NA
+M74_S21	M74	si	Spiciviridae sp.	57.7	no	0	NA
+M78_extra	M78	no	Spiciviridae sp.	58.0	no	0	NA
+M79_S28	M79	si	Spiciviridae sp.	47.9	no	0	NA
+M1_S1	M1	si	Aedes binegev-like virus 1	3.7	no	0	NA
+M2_S2	M2	si	Aedes binegev-like virus 1	3.7	no	0	NA
+M7_S15	M7	si	Aedes binegev-like virus 1	2.2	no	0	NA
+M9_S16	M9	si	Aedes binegev-like virus 1	4.9	no	0	NA
+M11_S3	M11	si	Aedes binegev-like virus 1	98.8	si	2	1
+M20_S25	M20	si	Aedes binegev-like virus 1	4.3	no	0	NA
+M21_S29	M21	si	Aedes binegev-like virus 1	6.0	no	0	NA
+M22_S30	M22	si	Aedes binegev-like virus 1	3.0	no	0	NA
+M35_S31	M35	si	Aedes binegev-like virus 1	3.5	no	0	NA
+M36_S17	M36	si	Aedes binegev-like virus 1	3.3	no	0	NA
+M41_extra	M41	no	Aedes binegev-like virus 1	98.2	si	2	0.500
+M45_extra	M45	no	Aedes binegev-like virus 1	3.0	no	0	NA
+M48_S5	M48	si	Aedes binegev-like virus 1	3.8	no	0	NA
+M55_S6	M55	si	Aedes binegev-like virus 1	3.7	no	0	NA
+M56_S7	M56	si	Aedes binegev-like virus 1	4.8	no	0	NA
+M57_S8	M57	si	Aedes binegev-like virus 1	3.2	no	0	NA
+M58_S9	M58	si	Aedes binegev-like virus 1	3.4	no	0	NA
+M59_S10	M59	si	Aedes binegev-like virus 1	4.6	no	0	NA
+M60_S11	M60	si	Aedes binegev-like virus 1	2.4	no	0	NA
+M61_extra	M61	no	Aedes binegev-like virus 1	3.1	no	0	NA
+M62_S18	M62	si	Aedes binegev-like virus 1	3.5	no	0	NA
+M71_S19	M71	si	Aedes binegev-like virus 1	3.2	no	0	NA
+M72_S20	M72	si	Aedes binegev-like virus 1	4.3	no	0	NA
+M74_S21	M74	si	Aedes binegev-like virus 1	4.2	no	0	NA
+M78_extra	M78	no	Aedes binegev-like virus 1	3.3	no	0	NA
+M79_S28	M79	si	Aedes binegev-like virus 1	3.0	no	0	NA
+M1_S1	M1	si	Netjeret virus	1.1	no	0	NA
+M2_S2	M2	si	Netjeret virus	0	no	0	NA
+M7_S15	M7	si	Netjeret virus	0	no	0	NA
+M9_S16	M9	si	Netjeret virus	0	no	0	NA
+M11_S3	M11	si	Netjeret virus	2.8	no	0	NA
+M20_S25	M20	si	Netjeret virus	23.3	no	0	NA
+M21_S29	M21	si	Netjeret virus	82.3	si	2	0.500
+M22_S30	M22	si	Netjeret virus	0	no	0	NA
+M35_S31	M35	si	Netjeret virus	1.1	no	0	NA
+M36_S17	M36	si	Netjeret virus	2.0	no	0	NA
+M41_extra	M41	no	Netjeret virus	1.8	no	0	NA
+M45_extra	M45	no	Netjeret virus	1.4	no	0	NA
+M48_S5	M48	si	Netjeret virus	1.6	no	0	NA
+M55_S6	M55	si	Netjeret virus	1.8	no	0	NA
+M56_S7	M56	si	Netjeret virus	1.4	no	0	NA
+M57_S8	M57	si	Netjeret virus	0	no	0	NA
+M58_S9	M58	si	Netjeret virus	1.2	no	0	NA
+M59_S10	M59	si	Netjeret virus	0	no	0	NA
+M60_S11	M60	si	Netjeret virus	1.4	no	0	NA
+M61_extra	M61	no	Netjeret virus	0	no	0	NA
+M62_S18	M62	si	Netjeret virus	0	no	0	NA
+M71_S19	M71	si	Netjeret virus	1.6	no	0	NA
+M72_S20	M72	si	Netjeret virus	1.1	no	0	NA
+M74_S21	M74	si	Netjeret virus	0	no	0	NA
+M78_extra	M78	no	Netjeret virus	2.8	no	0	NA
+M79_S28	M79	si	Netjeret virus	0	no	0	NA
+M1_S1	M1	si	Phasivirus phasiense	72.4	si	0	NA
+M2_S2	M2	si	Phasivirus phasiense	41.1	no	0	NA
+M7_S15	M7	si	Phasivirus phasiense	39.3	no	0	NA
+M9_S16	M9	si	Phasivirus phasiense	34.4	no	0	NA
+M11_S3	M11	si	Phasivirus phasiense	53.1	no	0	NA
+M20_S25	M20	si	Phasivirus phasiense	50.2	no	0	NA
+M21_S29	M21	si	Phasivirus phasiense	54.4	no	0	NA
+M22_S30	M22	si	Phasivirus phasiense	47.6	no	0	NA
+M35_S31	M35	si	Phasivirus phasiense	68.3	no	0	NA
+M36_S17	M36	si	Phasivirus phasiense	54.8	no	0	NA
+M41_extra	M41	no	Phasivirus phasiense	65	no	0	NA
+M45_extra	M45	no	Phasivirus phasiense	51.7	no	0	NA
+M48_S5	M48	si	Phasivirus phasiense	51.5	no	0	NA
+M55_S6	M55	si	Phasivirus phasiense	34.4	no	0	NA
+M56_S7	M56	si	Phasivirus phasiense	54.3	no	0	NA
+M57_S8	M57	si	Phasivirus phasiense	30.9	no	0	NA
+M58_S9	M58	si	Phasivirus phasiense	56.5	no	0	NA
+M59_S10	M59	si	Phasivirus phasiense	47.0	no	0	NA
+M60_S11	M60	si	Phasivirus phasiense	58.5	no	0	NA
+M61_extra	M61	no	Phasivirus phasiense	56.3	no	0	NA
+M62_S18	M62	si	Phasivirus phasiense	67.2	no	0	NA
+M71_S19	M71	si	Phasivirus phasiense	52.6	no	0	NA
+M72_S20	M72	si	Phasivirus phasiense	51.9	no	0	NA
+M74_S21	M74	si	Phasivirus phasiense	65	no	0	NA
+M78_extra	M78	no	Phasivirus phasiense	59.8	no	0	NA
+M79_S28	M79	si	Phasivirus phasiense	40.6	no	0	NA
+M1_S1	M1	si	Wenzhou sobemo-like virus	0.8	no	0	NA
+M2_S2	M2	si	Wenzhou sobemo-like virus	28.9	no	0	NA
+M7_S15	M7	si	Wenzhou sobemo-like virus	0	no	0	NA
+M9_S16	M9	si	Wenzhou sobemo-like virus	2.2	no	0	NA
+M11_S3	M11	si	Wenzhou sobemo-like virus	59.3	no	8	0.750
+M20_S25	M20	si	Wenzhou sobemo-like virus	62.0	no	8	0.250
+M21_S29	M21	si	Wenzhou sobemo-like virus	71.0	si	8	1
+M22_S30	M22	si	Wenzhou sobemo-like virus	0.8	no	0	NA
+M35_S31	M35	si	Wenzhou sobemo-like virus	61.6	no	8	1
+M36_S17	M36	si	Wenzhou sobemo-like virus	1.5	no	0	NA
+M41_extra	M41	no	Wenzhou sobemo-like virus	68.7	no	8	1
+M45_extra	M45	no	Wenzhou sobemo-like virus	32.0	no	1	0
+M48_S5	M48	si	Wenzhou sobemo-like virus	1.6	no	0	NA
+M55_S6	M55	si	Wenzhou sobemo-like virus	0.7	no	0	NA
+M56_S7	M56	si	Wenzhou sobemo-like virus	1.3	no	0	NA
+M57_S8	M57	si	Wenzhou sobemo-like virus	0.8	no	0	NA
+M58_S9	M58	si	Wenzhou sobemo-like virus	2.1	no	0	NA
+M59_S10	M59	si	Wenzhou sobemo-like virus	0.8	no	0	NA
+M60_S11	M60	si	Wenzhou sobemo-like virus	0	no	0	NA
+M61_extra	M61	no	Wenzhou sobemo-like virus	47.4	no	7	0
+M62_S18	M62	si	Wenzhou sobemo-like virus	0.6	no	0	NA
+M71_S19	M71	si	Wenzhou sobemo-like virus	59.2	no	8	0.625
+M72_S20	M72	si	Wenzhou sobemo-like virus	64.0	no	8	1
+M74_S21	M74	si	Wenzhou sobemo-like virus	62.5	no	8	0.875
+M78_extra	M78	no	Wenzhou sobemo-like virus	65.6	no	8	1
+M79_S28	M79	si	Wenzhou sobemo-like virus	66.5	no	8	0.875
+M1_S1	M1	si	Aedes aegypti toti-like virus	0.3	no	0	NA
+M2_S2	M2	si	Aedes aegypti toti-like virus	0	no	0	NA
+M7_S15	M7	si	Aedes aegypti toti-like virus	0	no	0	NA
+M9_S16	M9	si	Aedes aegypti toti-like virus	0.4	no	0	NA
+M11_S3	M11	si	Aedes aegypti toti-like virus	51.4	no	1	1
+M20_S25	M20	si	Aedes aegypti toti-like virus	3.5	no	0	NA
+M21_S29	M21	si	Aedes aegypti toti-like virus	10.2	no	0	NA
+M22_S30	M22	si	Aedes aegypti toti-like virus	61.6	no	1	1
+M35_S31	M35	si	Aedes aegypti toti-like virus	24.5	no	0	NA
+M36_S17	M36	si	Aedes aegypti toti-like virus	58.2	no	1	1
+M41_extra	M41	no	Aedes aegypti toti-like virus	0	no	0	NA
+M45_extra	M45	no	Aedes aegypti toti-like virus	31.4	no	1	0
+M48_S5	M48	si	Aedes aegypti toti-like virus	0	no	0	NA
+M55_S6	M55	si	Aedes aegypti toti-like virus	0.5	no	0	NA
+M56_S7	M56	si	Aedes aegypti toti-like virus	0.3	no	0	NA
+M57_S8	M57	si	Aedes aegypti toti-like virus	0	no	0	NA
+M58_S9	M58	si	Aedes aegypti toti-like virus	0.6	no	0	NA
+M59_S10	M59	si	Aedes aegypti toti-like virus	0	no	0	NA
+M60_S11	M60	si	Aedes aegypti toti-like virus	0	no	0	NA
+M61_extra	M61	no	Aedes aegypti toti-like virus	0	no	0	NA
+M62_S18	M62	si	Aedes aegypti toti-like virus	0.5	no	0	NA
+M71_S19	M71	si	Aedes aegypti toti-like virus	0	no	0	NA
+M72_S20	M72	si	Aedes aegypti toti-like virus	0	no	0	NA
+M74_S21	M74	si	Aedes aegypti toti-like virus	0.3	no	0	NA
+M78_extra	M78	no	Aedes aegypti toti-like virus	2.6	no	0	NA
+M79_S28	M79	si	Aedes aegypti toti-like virus	0	no	0	NA
+M1_S1	M1	si	Aedes flavivirus	0.4	no	0	NA
+M2_S2	M2	si	Aedes flavivirus	0	no	0	NA
+M7_S15	M7	si	Aedes flavivirus	0.2	no	0	NA
+M9_S16	M9	si	Aedes flavivirus	0.2	no	0	NA
+M11_S3	M11	si	Aedes flavivirus	0	no	0	NA
+M20_S25	M20	si	Aedes flavivirus	9.6	no	0	NA
+M21_S29	M21	si	Aedes flavivirus	27.5	no	0	NA
+M22_S30	M22	si	Aedes flavivirus	0.4	no	0	NA
+M35_S31	M35	si	Aedes flavivirus	0.2	no	0	NA
+M36_S17	M36	si	Aedes flavivirus	10.3	no	0	NA
+M41_extra	M41	no	Aedes flavivirus	0.8	no	0	NA
+M45_extra	M45	no	Aedes flavivirus	0.4	no	0	NA
+M48_S5	M48	si	Aedes flavivirus	0.2	no	0	NA
+M55_S6	M55	si	Aedes flavivirus	2.7	no	0	NA
+M56_S7	M56	si	Aedes flavivirus	0.2	no	0	NA
+M57_S8	M57	si	Aedes flavivirus	0.2	no	0	NA
+M58_S9	M58	si	Aedes flavivirus	4.3	no	0	NA
+M59_S10	M59	si	Aedes flavivirus	0	no	0	NA
+M60_S11	M60	si	Aedes flavivirus	0.2	no	0	NA
+M61_extra	M61	no	Aedes flavivirus	4.1	no	0	NA
+M62_S18	M62	si	Aedes flavivirus	1.5	no	0	NA
+M71_S19	M71	si	Aedes flavivirus	0.4	no	0	NA
+M72_S20	M72	si	Aedes flavivirus	3.7	no	0	NA
+M74_S21	M74	si	Aedes flavivirus	0	no	0	NA
+M78_extra	M78	no	Aedes flavivirus	39.7	no	0	NA
+M79_S28	M79	si	Aedes flavivirus	0.2	no	0	NA
+M1_S1	M1	si	Arthas virus	0	no	0	NA
+M2_S2	M2	si	Arthas virus	0.8	no	0	NA
+M7_S15	M7	si	Arthas virus	46.6	no	1	0
+M9_S16	M9	si	Arthas virus	0.4	no	0	NA
+M11_S3	M11	si	Arthas virus	0	no	0	NA
+M20_S25	M20	si	Arthas virus	0	no	0	NA
+M21_S29	M21	si	Arthas virus	0.4	no	0	NA
+M22_S30	M22	si	Arthas virus	0	no	0	NA
+M35_S31	M35	si	Arthas virus	0	no	0	NA
+M36_S17	M36	si	Arthas virus	0.4	no	0	NA
+M41_extra	M41	no	Arthas virus	0.4	no	0	NA
+M45_extra	M45	no	Arthas virus	0.4	no	0	NA
+M48_S5	M48	si	Arthas virus	0	no	0	NA
+M55_S6	M55	si	Arthas virus	0	no	0	NA
+M56_S7	M56	si	Arthas virus	7.7	no	0	NA
+M57_S8	M57	si	Arthas virus	0	no	0	NA
+M58_S9	M58	si	Arthas virus	0	no	0	NA
+M59_S10	M59	si	Arthas virus	0.4	no	0	NA
+M60_S11	M60	si	Arthas virus	0.5	no	0	NA
+M61_extra	M61	no	Arthas virus	0	no	0	NA
+M62_S18	M62	si	Arthas virus	0	no	0	NA
+M71_S19	M71	si	Arthas virus	68.2	no	1	0
+M72_S20	M72	si	Arthas virus	0.4	no	0	NA
+M74_S21	M74	si	Arthas virus	0	no	0	NA
+M78_extra	M78	no	Arthas virus	0.4	no	0	NA
+M79_S28	M79	si	Arthas virus	0.5	no	0	NA
+M1_S1	M1	si	Avian leukosis virus	0	no	0	NA
+M2_S2	M2	si	Avian leukosis virus	0	no	0	NA
+M7_S15	M7	si	Avian leukosis virus	0	no	0	NA
+M9_S16	M9	si	Avian leukosis virus	0	no	0	NA
+M11_S3	M11	si	Avian leukosis virus	19.7	no	0	NA
+M20_S25	M20	si	Avian leukosis virus	0	no	0	NA
+M21_S29	M21	si	Avian leukosis virus	0	no	0	NA
+M22_S30	M22	si	Avian leukosis virus	0	no	0	NA
+M35_S31	M35	si	Avian leukosis virus	0	no	0	NA
+M36_S17	M36	si	Avian leukosis virus	0	no	0	NA
+M41_extra	M41	no	Avian leukosis virus	5.0	no	0	NA
+M45_extra	M45	no	Avian leukosis virus	0	no	0	NA
+M48_S5	M48	si	Avian leukosis virus	0	no	0	NA
+M55_S6	M55	si	Avian leukosis virus	0	no	0	NA
+M56_S7	M56	si	Avian leukosis virus	0	no	0	NA
+M57_S8	M57	si	Avian leukosis virus	0	no	0	NA
+M58_S9	M58	si	Avian leukosis virus	0	no	0	NA
+M59_S10	M59	si	Avian leukosis virus	0	no	0	NA
+M60_S11	M60	si	Avian leukosis virus	0	no	0	NA
+M61_extra	M61	no	Avian leukosis virus	0	no	0	NA
+M62_S18	M62	si	Avian leukosis virus	0	no	0	NA
+M71_S19	M71	si	Avian leukosis virus	0	no	0	NA
+M72_S20	M72	si	Avian leukosis virus	0	no	0	NA
+M74_S21	M74	si	Avian leukosis virus	4.4	no	0	NA
+M78_extra	M78	no	Avian leukosis virus	37.6	no	0	NA
+M79_S28	M79	si	Avian leukosis virus	0	no	0	NA
+M1_S1	M1	si	Culex narnavirus 1	0.9	no	0	NA
+M2_S2	M2	si	Culex narnavirus 1	0.9	no	0	NA
+M7_S15	M7	si	Culex narnavirus 1	0.9	no	0	NA
+M9_S16	M9	si	Culex narnavirus 1	0.9	no	0	NA
+M11_S3	M11	si	Culex narnavirus 1	1.5	no	0	NA
+M20_S25	M20	si	Culex narnavirus 1	0.9	no	0	NA
+M21_S29	M21	si	Culex narnavirus 1	0.9	no	0	NA
+M22_S30	M22	si	Culex narnavirus 1	0.9	no	0	NA
+M35_S31	M35	si	Culex narnavirus 1	0.9	no	0	NA
+M36_S17	M36	si	Culex narnavirus 1	1.0	no	0	NA
+M41_extra	M41	no	Culex narnavirus 1	0.9	no	0	NA
+M45_extra	M45	no	Culex narnavirus 1	0.9	no	0	NA
+M48_S5	M48	si	Culex narnavirus 1	0.9	no	0	NA
+M55_S6	M55	si	Culex narnavirus 1	0.9	no	0	NA
+M56_S7	M56	si	Culex narnavirus 1	0.9	no	0	NA
+M57_S8	M57	si	Culex narnavirus 1	0.9	no	0	NA
+M58_S9	M58	si	Culex narnavirus 1	1.6	no	0	NA
+M59_S10	M59	si	Culex narnavirus 1	3.4	no	0	NA
+M60_S11	M60	si	Culex narnavirus 1	30.2	no	0	NA
+M61_extra	M61	no	Culex narnavirus 1	1.5	no	0	NA
+M62_S18	M62	si	Culex narnavirus 1	1.3	no	0	NA
+M71_S19	M71	si	Culex narnavirus 1	0.9	no	0	NA
+M72_S20	M72	si	Culex narnavirus 1	1.0	no	0	NA
+M74_S21	M74	si	Culex narnavirus 1	0.9	no	0	NA
+M78_extra	M78	no	Culex narnavirus 1	15.6	no	0	NA
+M79_S28	M79	si	Culex narnavirus 1	1.5	no	0	NA
+M1_S1	M1	si	DsRNA virus environmental sample	2.5	no	0	NA
+M2_S2	M2	si	DsRNA virus environmental sample	0.7	no	0	NA
+M7_S15	M7	si	DsRNA virus environmental sample	0	no	0	NA
+M9_S16	M9	si	DsRNA virus environmental sample	0	no	0	NA
+M11_S3	M11	si	DsRNA virus environmental sample	30.2	no	1	0
+M20_S25	M20	si	DsRNA virus environmental sample	2.2	no	0	NA
+M21_S29	M21	si	DsRNA virus environmental sample	6.2	no	0	NA
+M22_S30	M22	si	DsRNA virus environmental sample	44.5	no	1	1
+M35_S31	M35	si	DsRNA virus environmental sample	15.0	no	0	NA
+M36_S17	M36	si	DsRNA virus environmental sample	35.0	no	1	0
+M41_extra	M41	no	DsRNA virus environmental sample	0.3	no	0	NA
+M45_extra	M45	no	DsRNA virus environmental sample	20.3	no	0	NA
+M48_S5	M48	si	DsRNA virus environmental sample	0.6	no	0	NA
+M55_S6	M55	si	DsRNA virus environmental sample	0.6	no	0	NA
+M56_S7	M56	si	DsRNA virus environmental sample	0.4	no	0	NA
+M57_S8	M57	si	DsRNA virus environmental sample	0.5	no	0	NA
+M58_S9	M58	si	DsRNA virus environmental sample	0.3	no	0	NA
+M59_S10	M59	si	DsRNA virus environmental sample	0.3	no	0	NA
+M60_S11	M60	si	DsRNA virus environmental sample	0.3	no	0	NA
+M61_extra	M61	no	DsRNA virus environmental sample	0.3	no	0	NA
+M62_S18	M62	si	DsRNA virus environmental sample	0.7	no	0	NA
+M71_S19	M71	si	DsRNA virus environmental sample	2.4	no	0	NA
+M72_S20	M72	si	DsRNA virus environmental sample	0.6	no	0	NA
+M74_S21	M74	si	DsRNA virus environmental sample	0	no	0	NA
+M78_extra	M78	no	DsRNA virus environmental sample	1.1	no	0	NA
+M79_S28	M79	si	DsRNA virus environmental sample	0.7	no	0	NA
+M1_S1	M1	si	Flaviviridae	10.7	no	0	NA
+M2_S2	M2	si	Flaviviridae	10.9	no	0	NA
+M7_S15	M7	si	Flaviviridae	12.1	no	0	NA
+M9_S16	M9	si	Flaviviridae	12.8	no	0	NA
+M11_S3	M11	si	Flaviviridae	13.5	no	0	NA
+M20_S25	M20	si	Flaviviridae	26.0	no	0	NA
+M21_S29	M21	si	Flaviviridae	44.3	no	0	NA
+M22_S30	M22	si	Flaviviridae	11.6	no	0	NA
+M35_S31	M35	si	Flaviviridae	20.3	no	0	NA
+M36_S17	M36	si	Flaviviridae	18.1	no	0	NA
+M41_extra	M41	no	Flaviviridae	5.7	no	0	NA
+M45_extra	M45	no	Flaviviridae	10.9	no	0	NA
+M48_S5	M48	si	Flaviviridae	10.7	no	0	NA
+M55_S6	M55	si	Flaviviridae	20.3	no	0	NA
+M56_S7	M56	si	Flaviviridae	11.6	no	0	NA
+M57_S8	M57	si	Flaviviridae	10.3	no	0	NA
+M58_S9	M58	si	Flaviviridae	13.5	no	0	NA
+M59_S10	M59	si	Flaviviridae	8.5	no	0	NA
+M60_S11	M60	si	Flaviviridae	13.0	no	0	NA
+M61_extra	M61	no	Flaviviridae	13.3	no	0	NA
+M62_S18	M62	si	Flaviviridae	13.2	no	0	NA
+M71_S19	M71	si	Flaviviridae	6.6	no	0	NA
+M72_S20	M72	si	Flaviviridae	13.5	no	0	NA
+M74_S21	M74	si	Flaviviridae	11.6	no	0	NA
+M78_extra	M78	no	Flaviviridae	56.0	no	0	NA
+M79_S28	M79	si	Flaviviridae	13.5	no	0	NA
+M1_S1	M1	si	Guato virus	0.7	no	0	NA
+M2_S2	M2	si	Guato virus	1.0	no	0	NA
+M7_S15	M7	si	Guato virus	0	no	0	NA
+M9_S16	M9	si	Guato virus	0	no	0	NA
+M11_S3	M11	si	Guato virus	0.8	no	0	NA
+M20_S25	M20	si	Guato virus	26.9	no	0	NA
+M21_S29	M21	si	Guato virus	32.5	no	2	0
+M22_S30	M22	si	Guato virus	0.9	no	0	NA
+M35_S31	M35	si	Guato virus	24.3	no	0	NA
+M36_S17	M36	si	Guato virus	13.7	no	0	NA
+M41_extra	M41	no	Guato virus	0	no	0	NA
+M45_extra	M45	no	Guato virus	1.6	no	0	NA
+M48_S5	M48	si	Guato virus	0.8	no	0	NA
+M55_S6	M55	si	Guato virus	14.1	no	0	NA
+M56_S7	M56	si	Guato virus	1.7	no	0	NA
+M57_S8	M57	si	Guato virus	1.9	no	0	NA
+M58_S9	M58	si	Guato virus	0.8	no	0	NA
+M59_S10	M59	si	Guato virus	2.5	no	0	NA
+M60_S11	M60	si	Guato virus	0.8	no	0	NA
+M61_extra	M61	no	Guato virus	0	no	0	NA
+M62_S18	M62	si	Guato virus	1.7	no	0	NA
+M71_S19	M71	si	Guato virus	0	no	0	NA
+M72_S20	M72	si	Guato virus	0	no	0	NA
+M74_S21	M74	si	Guato virus	0.8	no	0	NA
+M78_extra	M78	no	Guato virus	24.1	no	0	NA
+M79_S28	M79	si	Guato virus	1.5	no	0	NA
+M1_S1	M1	si	Kaiowa virus	0	no	0	NA
+M2_S2	M2	si	Kaiowa virus	0	no	0	NA
+M7_S15	M7	si	Kaiowa virus	0	no	0	NA
+M9_S16	M9	si	Kaiowa virus	0	no	0	NA
+M11_S3	M11	si	Kaiowa virus	0	no	0	NA
+M20_S25	M20	si	Kaiowa virus	8.4	no	0	NA
+M21_S29	M21	si	Kaiowa virus	35.7	no	0	NA
+M22_S30	M22	si	Kaiowa virus	0	no	0	NA
+M35_S31	M35	si	Kaiowa virus	15.7	no	0	NA
+M36_S17	M36	si	Kaiowa virus	10.9	no	0	NA
+M41_extra	M41	no	Kaiowa virus	0	no	0	NA
+M45_extra	M45	no	Kaiowa virus	0	no	0	NA
+M48_S5	M48	si	Kaiowa virus	0	no	0	NA
+M55_S6	M55	si	Kaiowa virus	11.7	no	0	NA
+M56_S7	M56	si	Kaiowa virus	0	no	0	NA
+M57_S8	M57	si	Kaiowa virus	0	no	0	NA
+M58_S9	M58	si	Kaiowa virus	0	no	0	NA
+M59_S10	M59	si	Kaiowa virus	0	no	0	NA
+M60_S11	M60	si	Kaiowa virus	0	no	0	NA
+M61_extra	M61	no	Kaiowa virus	0	no	0	NA
+M62_S18	M62	si	Kaiowa virus	0	no	0	NA
+M71_S19	M71	si	Kaiowa virus	0	no	0	NA
+M72_S20	M72	si	Kaiowa virus	0	no	0	NA
+M74_S21	M74	si	Kaiowa virus	0	no	0	NA
+M78_extra	M78	no	Kaiowa virus	14.8	no	0	NA
+M79_S28	M79	si	Kaiowa virus	0	no	0	NA
+M1_S1	M1	si	Metavirus cladosporii	28.5	no	0	NA
+M2_S2	M2	si	Metavirus cladosporii	20.6	no	0	NA
+M7_S15	M7	si	Metavirus cladosporii	28.5	no	0	NA
+M9_S16	M9	si	Metavirus cladosporii	37.2	no	0	NA
+M11_S3	M11	si	Metavirus cladosporii	36.7	no	0	NA
+M20_S25	M20	si	Metavirus cladosporii	9.3	no	0	NA
+M21_S29	M21	si	Metavirus cladosporii	39.7	no	0	NA
+M22_S30	M22	si	Metavirus cladosporii	60.9	no	0	NA
+M35_S31	M35	si	Metavirus cladosporii	26.7	no	0	NA
+M36_S17	M36	si	Metavirus cladosporii	24.4	no	0	NA
+M41_extra	M41	no	Metavirus cladosporii	21.4	no	0	NA
+M45_extra	M45	no	Metavirus cladosporii	8.9	no	0	NA
+M48_S5	M48	si	Metavirus cladosporii	23.6	no	0	NA
+M55_S6	M55	si	Metavirus cladosporii	31.8	no	0	NA
+M56_S7	M56	si	Metavirus cladosporii	45.4	no	0	NA
+M57_S8	M57	si	Metavirus cladosporii	21.4	no	0	NA
+M58_S9	M58	si	Metavirus cladosporii	32.9	no	0	NA
+M59_S10	M59	si	Metavirus cladosporii	45.6	no	0	NA
+M60_S11	M60	si	Metavirus cladosporii	14.4	no	0	NA
+M61_extra	M61	no	Metavirus cladosporii	27.2	no	0	NA
+M62_S18	M62	si	Metavirus cladosporii	35.0	no	0	NA
+M71_S19	M71	si	Metavirus cladosporii	30.1	no	0	NA
+M72_S20	M72	si	Metavirus cladosporii	8.3	no	0	NA
+M74_S21	M74	si	Metavirus cladosporii	42.9	no	0	NA
+M78_extra	M78	no	Metavirus cladosporii	28.7	no	0	NA
+M79_S28	M79	si	Metavirus cladosporii	32.3	no	0	NA
+M1_S1	M1	si	Orbis virgavirus	2.9	no	0	NA
+M2_S2	M2	si	Orbis virgavirus	0	no	0	NA
+M7_S15	M7	si	Orbis virgavirus	0	no	0	NA
+M9_S16	M9	si	Orbis virgavirus	3.4	no	0	NA
+M11_S3	M11	si	Orbis virgavirus	64.8	no	4	0
+M20_S25	M20	si	Orbis virgavirus	2.5	no	0	NA
+M21_S29	M21	si	Orbis virgavirus	2.1	no	0	NA
+M22_S30	M22	si	Orbis virgavirus	0	no	0	NA
+M35_S31	M35	si	Orbis virgavirus	1.1	no	0	NA
+M36_S17	M36	si	Orbis virgavirus	0	no	0	NA
+M41_extra	M41	no	Orbis virgavirus	63.1	no	3	0.667
+M45_extra	M45	no	Orbis virgavirus	0	no	0	NA
+M48_S5	M48	si	Orbis virgavirus	0	no	0	NA
+M55_S6	M55	si	Orbis virgavirus	0	no	0	NA
+M56_S7	M56	si	Orbis virgavirus	2.9	no	0	NA
+M57_S8	M57	si	Orbis virgavirus	3.2	no	0	NA
+M58_S9	M58	si	Orbis virgavirus	2.5	no	0	NA
+M59_S10	M59	si	Orbis virgavirus	0	no	0	NA
+M60_S11	M60	si	Orbis virgavirus	0	no	0	NA
+M61_extra	M61	no	Orbis virgavirus	0	no	0	NA
+M62_S18	M62	si	Orbis virgavirus	2.9	no	0	NA
+M71_S19	M71	si	Orbis virgavirus	2.2	no	0	NA
+M72_S20	M72	si	Orbis virgavirus	3.2	no	0	NA
+M74_S21	M74	si	Orbis virgavirus	1.0	no	0	NA
+M78_extra	M78	no	Orbis virgavirus	0	no	0	NA
+M79_S28	M79	si	Orbis virgavirus	0	no	0	NA
+M1_S1	M1	si	Pedras partitivirus	7.5	no	0	NA
+M2_S2	M2	si	Pedras partitivirus	6.4	no	0	NA
+M7_S15	M7	si	Pedras partitivirus	8.7	no	0	NA
+M9_S16	M9	si	Pedras partitivirus	3.4	no	0	NA
+M11_S3	M11	si	Pedras partitivirus	7.4	no	0	NA
+M20_S25	M20	si	Pedras partitivirus	29.2	no	0	NA
+M21_S29	M21	si	Pedras partitivirus	59.8	no	1	0
+M22_S30	M22	si	Pedras partitivirus	9.8	no	0	NA
+M35_S31	M35	si	Pedras partitivirus	24.3	no	0	NA
+M36_S17	M36	si	Pedras partitivirus	29.0	no	0	NA
+M41_extra	M41	no	Pedras partitivirus	9.1	no	0	NA
+M45_extra	M45	no	Pedras partitivirus	7.2	no	0	NA
+M48_S5	M48	si	Pedras partitivirus	7.8	no	0	NA
+M55_S6	M55	si	Pedras partitivirus	24.5	no	0	NA
+M56_S7	M56	si	Pedras partitivirus	7.9	no	0	NA
+M57_S8	M57	si	Pedras partitivirus	6.7	no	0	NA
+M58_S9	M58	si	Pedras partitivirus	10.9	no	0	NA
+M59_S10	M59	si	Pedras partitivirus	8.9	no	0	NA
+M60_S11	M60	si	Pedras partitivirus	7.0	no	0	NA
+M61_extra	M61	no	Pedras partitivirus	9.2	no	0	NA
+M62_S18	M62	si	Pedras partitivirus	7.2	no	0	NA
+M71_S19	M71	si	Pedras partitivirus	9.0	no	0	NA
+M72_S20	M72	si	Pedras partitivirus	9.1	no	0	NA
+M74_S21	M74	si	Pedras partitivirus	4.3	no	0	NA
+M78_extra	M78	no	Pedras partitivirus	45.4	no	0	NA
+M79_S28	M79	si	Pedras partitivirus	5.5	no	0	NA
+M1_S1	M1	si	Proxidires virus	17.2	no	0	NA
+M2_S2	M2	si	Proxidires virus	18.6	no	0	NA
+M7_S15	M7	si	Proxidires virus	18.1	no	0	NA
+M9_S16	M9	si	Proxidires virus	15.4	no	0	NA
+M11_S3	M11	si	Proxidires virus	28.7	no	0	NA
+M20_S25	M20	si	Proxidires virus	20.9	no	0	NA
+M21_S29	M21	si	Proxidires virus	31.3	no	0	NA
+M22_S30	M22	si	Proxidires virus	20.7	no	0	NA
+M35_S31	M35	si	Proxidires virus	24.6	no	0	NA
+M36_S17	M36	si	Proxidires virus	24.0	no	0	NA
+M41_extra	M41	no	Proxidires virus	26.3	no	0	NA
+M45_extra	M45	no	Proxidires virus	13.1	no	0	NA
+M48_S5	M48	si	Proxidires virus	14.4	no	0	NA
+M55_S6	M55	si	Proxidires virus	26.3	no	0	NA
+M56_S7	M56	si	Proxidires virus	18.9	no	0	NA
+M57_S8	M57	si	Proxidires virus	19.1	no	0	NA
+M58_S9	M58	si	Proxidires virus	23.5	no	0	NA
+M59_S10	M59	si	Proxidires virus	22.1	no	0	NA
+M60_S11	M60	si	Proxidires virus	15.2	no	0	NA
+M61_extra	M61	no	Proxidires virus	18.0	no	0	NA
+M62_S18	M62	si	Proxidires virus	22.6	no	0	NA
+M71_S19	M71	si	Proxidires virus	13.4	no	0	NA
+M72_S20	M72	si	Proxidires virus	22.7	no	0	NA
+M74_S21	M74	si	Proxidires virus	19.8	no	0	NA
+M78_extra	M78	no	Proxidires virus	25.9	no	0	NA
+M79_S28	M79	si	Proxidires virus	11.0	no	0	NA
