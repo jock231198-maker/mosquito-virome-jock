@@ -23,7 +23,7 @@ DATOS <- params$datos
 source("R/tema.R")
 suppressPackageStartupMessages({
   library(readr); library(dplyr); library(tidyr); library(ggplot2)
-  library(scales); library(forcats); library(patchwork); library(knitr)
+  library(scales); library(forcats); library(patchwork); library(knitr); library(stringr)
 })
 
 guardar_prov <- function(p, nombre, alto, ancho = 200) {
@@ -162,10 +162,12 @@ pP2 <- ggplot(det, aes(lib, virus, fill = pct_cobertura_max)) +
        subtitle = paste0("Present: ≥ 70 % of the genome covered — the same criterion ",
                          "as the transcriptome.\nA dot marks a replicating profile ",
                          "(≥ half of that virus's references classified 'viral')."),
-       x = NULL, y = NULL,
-       caption = paste0("Independent of the vOTU catalogue: the provider maps against a ",
-                        "generic mosquito viral reference set. Two references are flagged ",
-                        "by the provider as artefacts (≈50 % coverage in every library).")) +
+              x = NULL, y = NULL,
+       caption = str_wrap(paste0(
+         "Independent of the vOTU catalogue: the provider maps against a ",
+         "generic mosquito viral reference set. Two references are flagged ",
+         "by the provider as artefacts (≈50 % coverage in every library)."),
+         width = 120)) +
   theme(panel.grid = element_blank(),
         axis.text.y = element_text(size = 6.5),
         axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1, size = 6),
@@ -232,9 +234,11 @@ pP3 <- (pDa / pDb) +
     subtitle = paste0("Classified by the provider's model from their small RNA ",
                       "profile alone, with no reference.\nThese are the de novo ",
                       "discovery candidates."),
-    caption = paste0("A hit means BLASTN or DIAMOND against the provider's databases. ",
-                     "No hit is not evidence of novelty on its own: short contigs from ",
-                     "divergent or poorly sampled lineages look the same as artefacts."))
+    caption = str_wrap(paste0(
+      "A hit means BLASTN or DIAMOND against the provider's databases. ",
+      "No hit is not evidence of novelty on its own: short contigs from ",
+      "divergent or poorly sampled lineages look the same as artefacts."),
+      width = 120))
 guardar_prov(pP3, "P3_proveedor_descubrimiento", alto = 150)
 pP3
 ```

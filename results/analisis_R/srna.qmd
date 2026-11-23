@@ -54,14 +54,19 @@ comp <- len |>
   mutate(frac = n / sum(n)) |>
   ungroup()
 
-# Orden de las librerias: por fraccion de piRNA. Asi la heterogeneidad se lee
-# como un gradiente en los cuatro paneles en vez de como ruido alfabetico.
-orden <- comp |>
-  filter(tramo == TRAMOS[3]) |>
-  arrange(frac) |>
-  pull(muestra)
+# Orden y color: fraccion de piRNA DENTRO de la ventana 18-35, que es la que
+# usa el clasificador del nivel B (frac_pi = lecturas piRNA / lecturas mapeadas,
+# y solo se mapean las de 18-35). Calcularla sobre TODAS las lecturas hunde a
+# las librerias con muchos fragmentos cortos -- del 2 % al 26 % segun la
+# libreria -- y deja de ser la variable que confunde al criterio.
+# El panel B sigue mostrando la composicion sobre todas las lecturas, que es
+# informativa por si misma.
+frac_pi <- comp |>
+  filter(tramo %in% TRAMOS[2:3]) |>
+  group_by(muestra) |>
+  summarise(frac_pi = n[tramo == TRAMOS[3]] / sum(n), .groups = "drop")
 
-frac_pi <- comp |> filter(tramo == TRAMOS[3]) |> select(muestra, frac_pi = frac)
+orden <- frac_pi |> arrange(frac_pi) |> pull(muestra)
 
 comp <- comp |> mutate(muestra = factor(muestra, levels = orden))
 len  <- len  |> left_join(frac_pi, by = "muestra") |>
@@ -174,3 +179,4 @@ comp |>
                 ~ paste0(round(100 * .x, 1), " %"))) |>
   knitr::kable()
 ```
+
