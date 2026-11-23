@@ -95,7 +95,7 @@ pB <- ggplot(comp, aes(lib, frac, fill = tramo)) +
   scale_fill_manual(values = setNames(c(PAL[["azul"]], PAL[["naranja"]], GRIS), TR)) +
   scale_y_continuous(labels = label_percent(), expand = expansion(c(0, 0.02))) +
   eje_lib +
-  labs(subtitle = "B · Size composition, as measured by the provider",
+  labs(subtitle = "B · Size composition",
        x = NULL, y = "of the 18–35 nt reads", fill = NULL) +
   theme(legend.position = "top") +
   guides(fill = guide_legend(nrow = 1, override.aes = list(colour = NA)))
