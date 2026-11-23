@@ -237,7 +237,7 @@ def main():
                sum(w2 for L, w2 in v.len_anti.items() if pi_min <= L <= pi_max)
         r21 = v.len_sent.get(21, 0) + v.len_anti.get(21, 0)
         otros_si = [v.len_sent.get(L, 0) + v.len_anti.get(L, 0)
-                    for L in range(si_min, si_max + 1) if L != 21]
+                    for L in range(si_min, pi_max + 1) if L != 21]
         pico21 = r21 > 0 and r21 >= (max(otros_si) if otros_si else 0)
         si_sent = sum(w2 for L, w2 in v.len_sent.items() if si_min <= L <= si_max)
         cub = sum(v.cub) if v.lon else 0
