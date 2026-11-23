@@ -1,0 +1,7 @@
+# datos_srna_b_v1 - nivel B de ARN pequeno, lote MERIDA_SRNA
+# congelado: 2026-11-23T15:52:27+00:00
+archivo	lineas	md5
+lenhist_todas.tsv	859	2269b7fcb07214a1e42512d751637646
+nivelB_consenso.tsv	5901	bbd73b604b795c11418c0faaea2c8236
+nivelB_objetivos_anotados.tsv	356	21ff79a41f2a9c420ff5989cbf69eb78
+particion_todas.tsv	183	f1bd4a70cc6f0b179473c608666af0ab

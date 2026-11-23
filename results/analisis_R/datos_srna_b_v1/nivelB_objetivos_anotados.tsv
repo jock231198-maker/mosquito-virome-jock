@@ -1,0 +1,356 @@
+votu	motivo	clase_final	nombre_virus	longitud	frac_en_genoma	n_muestras_mapeo	muestra_cob	cobertura	cv_profundidad	prof_media	prediccion_largo
+EVE_CFAV_AaegL5_chr1_469224864_469225891	CONTROL	EVE_genoma_conocido	EVE de CFAV en AaegL5	1028	1.000						EVE
+M72_S20__rna__NODE_3_length_5398_cov_130.323799_g1_i1	CFAV	identificado	Cell fusing agent virus	5398	0.057	2	M72_S20	1.000	0.566	137.6	replica
+M72_S20__rnaviral__NODE_2_length_10680_cov_163.588374	CFAV	identificado	Cell fusing agent virus	10680	0.000	2	M72_S20	1.000	0.512	277.9	replica
+M1_S1__megahit__k119_10559	EVE_candidato	EVE_candidato		647	0.000	4	M1_S1	1.000	2.044	4051.1	indeterminado
+M1_S1__megahit__k119_3963	EVE_candidato	EVE_candidato		670	0.083	19	M59_S10	1.000	2.619	1372.8	indeterminado
+M1_S1__megahit__k119_6909	EVE_candidato	EVE_candidato		951	0.389	22	M1_S1	0.950	1.158	284.8	indeterminado
+M1_S1__rna__NODE_1239_length_740_cov_11234.905933_g1078_i0	EVE_candidato	EVE_candidato		740	0.308	12	M1_S1	1.000	1.658	1859.6	indeterminado
+M1_S1__rna__NODE_2493_length_576_cov_11.144213_g2294_i0	EVE_candidato	EVE_candidato		576	0.300	4	M1_S1	1.000	1.719	535.4	indeterminado
+M1_S1__rnaviral__NODE_1101_length_793_cov_2.370968	EVE_candidato	EVE_candidato		793	0.357	21	M1_S1	1.000	0.952	530.2	indeterminado
+M1_S1__rnaviral__NODE_234_length_1251_cov_8.242928	EVE_candidato	EVE_candidato		1251	0.125	3	M1_S1	0.962	1.074	20.6	indeterminado
+M1_S1__rnaviral__NODE_836_length_870_cov_4.021924	EVE_candidato	EVE_candidato		870	0.000	3	M1_S1	1.000	0.776	15.5	replica
+M1_S1__trinity__TRINITY_DN1052_c0_g1_i1	EVE_candidato	EVE_candidato		966	0.278	14	M1_S1	1.000	0.749	36.8	replica
+M1_S1__trinity__TRINITY_DN25_c0_g2_i1	EVE_candidato	EVE_candidato		608	0.182	4	M1_S1	0.923	1.301	84.7	indeterminado
+M1_S1__trinity__TRINITY_DN6895_c0_g2_i3	EVE_candidato	EVE_candidato		822	0.467	20	M1_S1	1.000	2.546	1547.3	indeterminado
+M20_S25__megahit__k119_2736	EVE_candidato	EVE_candidato		678	0.333	14	M20_S25	1.000	2.171	16183.0	indeterminado
+M20_S25__megahit__k119_2779	EVE_candidato	EVE_candidato		560	0.100	1	M20_S25	1.000	1.928	4584.5	indeterminado
+M20_S25__megahit__k119_3389	EVE_candidato	EVE_candidato		746	0.385	17	M20_S25	1.000	2.141	452.8	indeterminado
+M20_S25__megahit__k119_4772	EVE_candidato	EVE_candidato		543	0.111	4	M20_S25	1.000	2.002	153.2	indeterminado
+M20_S25__rna__NODE_1169_length_561_cov_1500.708984_g987_i0	EVE_candidato	EVE_candidato		561	0.300	22	M35_S31	0.917	1.837	2398.1	indeterminado
+M20_S25__rna__NODE_417_length_882_cov_6.624250_g129_i1	EVE_candidato	EVE_candidato		882	0.000	4	M1_S1	1.000	1.603	203.9	indeterminado
+M20_S25__rna__NODE_594_length_753_cov_163.363636_g6_i60	EVE_candidato	EVE_candidato		753	0.000	3	M20_S25	1.000	1.786	22.8	indeterminado
+M20_S25__rnaviral__NODE_1060_length_638_cov_1.869270	EVE_candidato	EVE_candidato		638	0.091	2	M20_S25	1.000	0.406	5.3	replica
+M20_S25__rnaviral__NODE_871_length_679_cov_1.838095	EVE_candidato	EVE_candidato		679	0.083	2	M20_S25	1.000	0.862	3.1	indeterminado
+M20_S25__trinity__TRINITY_DN2088_c0_g1_i1	EVE_candidato	EVE_candidato		609	0.000	1	M20_S25	0.923	0.526	5.5	replica
+M20_S25__trinity__TRINITY_DN2088_c0_g1_i2	EVE_candidato	EVE_candidato		775	0.000	2	M20_S25	0.938	0.737	6.8	replica
+M20_S25__trinity__TRINITY_DN346_c0_g1_i3	EVE_candidato	EVE_candidato		3465	0.029	3	M20_S25	1.000	0.898	37.9	indeterminado
+M20_S25__trinity__TRINITY_DN842_c0_g1_i1	EVE_candidato	EVE_candidato		809	0.133	11	M35_S31	1.000	1.424	45.2	indeterminado
+M21_S29__rnaviral__NODE_600_length_631_cov_1.950172	EVE_candidato	EVE_candidato		631	0.182	0	M21_S29	0.769	0.907	1.8	indeterminado
+M21_S29__rnaviral__NODE_937_length_545_cov_6.443548	EVE_candidato	EVE_candidato		545	0.000	3	M21_S29	1.000	0.468	14.2	replica
+M21_S29__trinity__TRINITY_DN2088_c0_g1_i1	EVE_candidato	EVE_candidato		688	0.167	1	M21_S29	0.786	0.762	2.5	replica
+M21_S29__trinity__TRINITY_DN3661_c0_g1_i1	EVE_candidato	EVE_candidato		548	0.222	3	M20_S25	1.000	0.711	40.1	replica
+M21_S29__trinity__TRINITY_DN83_c0_g1_i1	EVE_candidato	EVE_candidato		4361	0.035	3	M35_S31	1.000	1.909	29.3	indeterminado
+M22_S30__megahit__k119_846	EVE_candidato	EVE_candidato		1845	0.200	21	M1_S1	1.000	3.533	4760.7	indeterminado
+M2_S2__megahit__k119_4875	EVE_candidato	EVE_candidato		502	0.444	21	M1_S1	0.909	1.775	5723.3	indeterminado
+M2_S2__trinity__TRINITY_DN869_c0_g1_i1	EVE_candidato	EVE_candidato		1050	0.050	8	M1_S1	1.000	0.892	11.2	indeterminado
+M35_S31__rna__NODE_49_length_1418_cov_5.411980_g30_i0	EVE_candidato	EVE_candidato		1418	0.000	1	M35_S31	1.000	0.362	10.7	replica
+M35_S31__rna__NODE_6_length_3400_cov_10.052223_g3_i0	EVE_candidato	EVE_candidato		3400	0.015	3	M21_S29	1.000	0.754	60.3	replica
+M35_S31__rnaviral__NODE_229_length_802_cov_2.083665	EVE_candidato	EVE_candidato		802	0.000	1	M35_S31	1.000	0.531	4.6	replica
+M35_S31__rnaviral__NODE_545_length_634_cov_4.820513	EVE_candidato	EVE_candidato		634	0.364	2	M1_S1	1.000	1.155	14.1	indeterminado
+M35_S31__trinity__TRINITY_DN4191_c0_g1_i2	EVE_candidato	EVE_candidato		518	0.000	3	M21_S29	1.000	0.804	18.6	indeterminado
+M55_S6__megahit__k119_2078	EVE_candidato	EVE_candidato		537	0.111	5	M2_S2	1.000	1.560	22.0	indeterminado
+M55_S6__megahit__k119_2380	EVE_candidato	EVE_candidato		575	0.400	22	M1_S1	1.000	1.859	4034.5	indeterminado
+M55_S6__megahit__k119_3070	EVE_candidato	EVE_candidato		574	0.400	19	M72_S20	1.000	2.054	7224.4	indeterminado
+M55_S6__megahit__k119_4150	EVE_candidato	EVE_candidato		547	0.444	22	M1_S1	1.000	1.275	1841.4	indeterminado
+M55_S6__megahit__k119_4495	EVE_candidato	EVE_candidato		538	0.333	17	M79_S28	1.000	2.276	174.4	indeterminado
+M55_S6__rna__NODE_289_length_922_cov_719.018328_g1_i13	EVE_candidato	EVE_candidato		922	0.294	5	M20_S25	1.000	1.369	2544.1	indeterminado
+M55_S6__rnaviral__NODE_1187_length_621_cov_11.545455	EVE_candidato	EVE_candidato		621	0.455	16	M1_S1	1.000	0.599	42.4	replica
+M55_S6__rnaviral__NODE_2119_length_520_cov_1.590234	EVE_candidato	EVE_candidato		520	0.111	2	M55_S6	1.000	0.511	4.8	replica
+M56_S7__rna__NODE_897_length_542_cov_2.219067_g829_i0	EVE_candidato	EVE_candidato		542	0.333	5	M1_S1	1.000	1.077	17.4	indeterminado
+M56_S7__rnaviral__NODE_1272_length_522_cov_1.701903	EVE_candidato	EVE_candidato		522	0.333	20	M1_S1	1.000	0.721	49.2	replica
+M57_S8__megahit__k119_4848	EVE_candidato	EVE_candidato		910	0.471	18	M57_S8	1.000	1.454	1059.3	indeterminado
+M57_S8__megahit__k119_5235	EVE_candidato	EVE_candidato		4012	0.013	6	M57_S8	0.963	0.726	3.8	replica
+M57_S8__rnaviral__NODE_2_length_4110_cov_6.035952	EVE_candidato	EVE_candidato		4110	0.012	9	M57_S8	0.964	0.643	5.0	replica
+M57_S8__trinity__TRINITY_DN2790_c0_g1_i2	EVE_candidato	EVE_candidato		567	0.100	5	M57_S8	1.000	0.501	3.4	replica
+M57_S8__trinity__TRINITY_DN886_c0_g1_i3	EVE_candidato	EVE_candidato		2175	0.048	8	M57_S8	0.977	0.664	4.7	replica
+M59_S10__trinity__TRINITY_DN2668_c0_g1_i1	EVE_candidato	EVE_candidato		514	0.444	11	M1_S1	0.909	1.552	35.4	indeterminado
+M60_S11__trinity__TRINITY_DN539_c0_g1_i2	EVE_candidato	EVE_candidato		517	0.444	20	M1_S1	1.000	1.450	425.7	indeterminado
+M62_S18__megahit__k119_84	EVE_candidato	EVE_candidato		506	0.444	22	M62_S18	1.000	1.153	53.1	indeterminado
+M62_S18__rna__NODE_277_length_556_cov_1.856016_g254_i0	EVE_candidato	EVE_candidato		556	0.300	9	M35_S31	1.000	1.547	17.4	indeterminado
+M71_S19__megahit__k119_1765	EVE_candidato	EVE_candidato		687	0.417	22	M7_S15	1.000	2.371	2183.7	indeterminado
+M71_S19__megahit__k119_658	EVE_candidato	EVE_candidato		509	0.111	22	M1_S1	1.000	1.593	5369.2	indeterminado
+M72_S20__rna__NODE_396_length_579_cov_2.654717_g343_i0	EVE_candidato	EVE_candidato		579	0.300	6	M72_S20	1.000	1.047	4.3	indeterminado
+M72_S20__rnaviral__NODE_732_length_513_cov_5.325431	EVE_candidato	EVE_candidato		513	0.000	19	M1_S1	1.000	0.580	23.2	replica
+M74_S21__rnaviral__NODE_388_length_526_cov_1.914046	EVE_candidato	EVE_candidato		526	0.333	13	M1_S1	1.000	0.780	37.2	replica
+M9_S16__rnaviral__NODE_1107_length_562_cov_2.196881	EVE_candidato	EVE_candidato		562	0.400	16	M57_S8	1.000	1.216	55.7	indeterminado
+M9_S16__rnaviral__NODE_804_length_624_cov_4.704348	EVE_candidato	EVE_candidato		624	0.273	6	M9_S16	1.000	1.499	87.1	indeterminado
+M9_S16__rnaviral__NODE_939_length_593_cov_2.174632	EVE_candidato	EVE_candidato		593	0.000	5	M1_S1	1.000	0.715	4.5	replica
+M11_S3__rnaviral__NODE_129_length_618_cov_1.291740	EVE_genoma	EVE_genoma		618	0.636	22	M1_S1	1.000	0.943	123.3	EVE
+M11_S3__rnaviral__NODE_184_length_549_cov_11.208000	EVE_genoma	EVE_genoma		549	0.556	21	M1_S1	1.000	0.721	323.0	indeterminado
+M11_S3__rnaviral__NODE_204_length_533_cov_1.357438	EVE_genoma	EVE_genoma		533	0.778	21	M21_S29	1.000	0.961	32.7	EVE
+M1_S1__rna__NODE_146_length_1553_cov_5880.915559_g98_i0	EVE_genoma	EVE_genoma		1553	0.733	12	M1_S1	0.969	2.870	976.2	EVE
+M1_S1__rna__NODE_198_length_1384_cov_8783.005993_g98_i1	EVE_genoma	EVE_genoma		1384	0.615	13	M1_S1	1.000	2.792	3477.7	EVE
+M1_S1__rna__NODE_559_length_973_cov_79.016234_g450_i0	EVE_genoma	EVE_genoma		973	0.611	20	M1_S1	1.000	0.552	346.1	indeterminado
+M1_S1__rnaviral__NODE_1059_length_799_cov_7.192000	EVE_genoma	EVE_genoma		799	0.643	17	M1_S1	1.000	0.463	15.5	indeterminado
+M1_S1__rnaviral__NODE_1270_length_757_cov_16.662429	EVE_genoma	EVE_genoma		757	0.571	21	M1_S1	1.000	0.621	148.5	indeterminado
+M1_S1__rnaviral__NODE_1424_length_730_cov_16.889868	EVE_genoma	EVE_genoma		730	0.692	16	M1_S1	1.000	0.461	54.7	indeterminado
+M1_S1__rnaviral__NODE_1444_length_726_cov_18.174298	EVE_genoma	EVE_genoma		726	0.769	20	M1_S1	1.000	0.331	105.4	indeterminado
+M1_S1__rnaviral__NODE_145_length_1393_cov_55.355655	EVE_genoma	EVE_genoma		1393	0.731	20	M1_S1	1.000	0.724	853.1	indeterminado
+M1_S1__rnaviral__NODE_1901_length_669_cov_5.975806	EVE_genoma	EVE_genoma		669	0.667	11	M1_S1	1.000	0.605	29.7	indeterminado
+M1_S1__rnaviral__NODE_2002_length_658_cov_7.778325	EVE_genoma	EVE_genoma		658	0.667	13	M1_S1	1.000	0.591	16.8	indeterminado
+M1_S1__rnaviral__NODE_2541_length_605_cov_11.539568	EVE_genoma	EVE_genoma		605	0.727	7	M1_S1	1.000	0.490	20.0	indeterminado
+M1_S1__rnaviral__NODE_2677_length_594_cov_5.104587	EVE_genoma	EVE_genoma		594	0.800	13	M1_S1	1.000	0.602	29.9	indeterminado
+M1_S1__rnaviral__NODE_3066_length_565_cov_3.860465	EVE_genoma	EVE_genoma		565	0.600	6	M1_S1	1.000	0.480	9.9	indeterminado
+M1_S1__rnaviral__NODE_3139_length_560_cov_19.864971	EVE_genoma	EVE_genoma		560	0.800	20	M1_S1	1.000	0.455	120.8	indeterminado
+M1_S1__rnaviral__NODE_399_length_1068_cov_8.105986	EVE_genoma	EVE_genoma		1068	0.550	11	M1_S1	1.000	0.549	36.1	indeterminado
+M1_S1__rnaviral__NODE_4095_length_509_cov_3.178261	EVE_genoma	EVE_genoma		509	0.667	15	M1_S1	1.000	0.526	23.2	indeterminado
+M1_S1__rnaviral__NODE_427_length_1052_cov_15.416750	EVE_genoma	EVE_genoma		1052	0.500	20	M1_S1	1.000	1.096	822.2	EVE
+M1_S1__rnaviral__NODE_451_length_1037_cov_8.608300	EVE_genoma	EVE_genoma		1037	0.737	19	M1_S1	1.000	0.516	61.4	indeterminado
+M1_S1__rnaviral__NODE_838_length_869_cov_10.740244	EVE_genoma	EVE_genoma		869	0.688	13	M1_S1	1.000	0.472	61.4	indeterminado
+M1_S1__rnaviral__NODE_879_length_852_cov_6.234122	EVE_genoma	EVE_genoma		852	0.562	15	M1_S1	1.000	0.570	24.3	indeterminado
+M1_S1__trinity__TRINITY_DN1050_c0_g1_i2	EVE_genoma	EVE_genoma		517	0.556	20	M2_S2	1.000	0.860	12.7	EVE
+M1_S1__trinity__TRINITY_DN1079_c0_g1_i1	EVE_genoma	EVE_genoma		764	0.714	20	M1_S1	1.000	0.675	63.9	indeterminado
+M1_S1__trinity__TRINITY_DN1540_c0_g1_i20	EVE_genoma	EVE_genoma		1540	0.828	22	M57_S8	1.000	0.927	231.5	EVE
+M1_S1__trinity__TRINITY_DN1540_c0_g1_i38	EVE_genoma	EVE_genoma		1512	0.724	21	M1_S1	0.968	0.823	176.4	EVE
+M1_S1__trinity__TRINITY_DN1540_c1_g1_i13	EVE_genoma	EVE_genoma		1149	0.667	5	M21_S29	0.913	1.392	8.3	EVE
+M1_S1__trinity__TRINITY_DN1540_c1_g1_i33	EVE_genoma	EVE_genoma		982	0.778	18	M1_S1	1.000	0.790	28.8	indeterminado
+M1_S1__trinity__TRINITY_DN1540_c1_g1_i34	EVE_genoma	EVE_genoma		654	0.583	14	M58_S9	0.929	1.171	25.8	EVE
+M1_S1__trinity__TRINITY_DN1540_c1_g1_i38	EVE_genoma	EVE_genoma		1099	0.750	8	M58_S9	1.000	1.170	18.0	EVE
+M1_S1__trinity__TRINITY_DN1540_c1_g1_i51	EVE_genoma	EVE_genoma		854	0.688	13	M1_S1	0.944	1.065	21.7	EVE
+M1_S1__trinity__TRINITY_DN2629_c0_g1_i4	EVE_genoma	EVE_genoma		875	0.562	10	M1_S1	1.000	0.775	41.9	indeterminado
+M1_S1__trinity__TRINITY_DN2629_c0_g1_i7	EVE_genoma	EVE_genoma		888	0.562	7	M1_S1	1.000	0.780	31.3	indeterminado
+M1_S1__trinity__TRINITY_DN2963_c0_g1_i1	EVE_genoma	EVE_genoma		508	0.778	10	M1_S1	1.000	1.250	25.6	EVE
+M1_S1__trinity__TRINITY_DN3150_c0_g1_i2	EVE_genoma	EVE_genoma		815	0.667	15	M1_S1	1.000	0.497	52.7	indeterminado
+M1_S1__trinity__TRINITY_DN36264_c0_g1_i1	EVE_genoma	EVE_genoma		811	0.600	18	M1_S1	0.941	0.578	145.1	indeterminado
+M1_S1__trinity__TRINITY_DN41_c1_g1_i1	EVE_genoma	EVE_genoma		506	0.556	21	M57_S8	0.909	1.100	135.5	EVE
+M1_S1__trinity__TRINITY_DN41_c1_g1_i2	EVE_genoma	EVE_genoma		599	0.600	21	M1_S1	1.000	0.778	329.2	indeterminado
+M1_S1__trinity__TRINITY_DN4296_c0_g1_i9	EVE_genoma	EVE_genoma		555	0.600	22	M1_S1	1.000	1.326	1070.4	EVE
+M1_S1__trinity__TRINITY_DN5879_c0_g1_i3	EVE_genoma	EVE_genoma		1164	0.545	13	M1_S1	1.000	0.601	17.8	indeterminado
+M1_S1__trinity__TRINITY_DN788_c0_g1_i1	EVE_genoma	EVE_genoma		777	0.500	18	M1_S1	1.000	0.606	34.2	indeterminado
+M1_S1__trinity__TRINITY_DN9106_c0_g1_i1	EVE_genoma	EVE_genoma		673	0.500	8	M1_S1	1.000	0.601	10.8	indeterminado
+M1_S1__trinity__TRINITY_DN91_c0_g1_i1	EVE_genoma	EVE_genoma		543	0.778	21	M1_S1	1.000	0.765	231.1	indeterminado
+M20_S25__megahit__k119_2416	EVE_genoma	EVE_genoma		1098	0.550	21	M1_S1	1.000	2.384	162.0	EVE
+M20_S25__megahit__k119_3688	EVE_genoma	EVE_genoma		502	0.556	22	M1_S1	1.000	1.002	1792.4	EVE
+M20_S25__rna__NODE_852_length_637_cov_2781.571429_g682_i0	EVE_genoma	EVE_genoma		637	0.727	21	M59_S10	1.000	1.340	9855.8	EVE
+M20_S25__rnaviral__NODE_201_length_1118_cov_20.289991	EVE_genoma	EVE_genoma		1118	0.619	21	M57_S8	1.000	0.593	64.9	indeterminado
+M20_S25__trinity__TRINITY_DN140_c0_g1_i4	EVE_genoma	EVE_genoma		617	0.545	20	M9_S16	1.000	0.758	143.4	indeterminado
+M22_S30__megahit__k119_316	EVE_genoma	EVE_genoma		560	0.600	22	M56_S7	1.000	0.797	1758.9	indeterminado
+M22_S30__megahit__k119_622	EVE_genoma	EVE_genoma		533	0.778	22	M1_S1	1.000	1.646	2309.8	EVE
+M22_S30__rna__NODE_112_length_1011_cov_4.738046_g93_i0	EVE_genoma	EVE_genoma		1011	0.947	22	M9_S16	1.000	1.085	688.5	EVE
+M22_S30__rna__NODE_195_length_687_cov_1.940439_g167_i0	EVE_genoma	EVE_genoma		687	0.500	8	M22_S30	1.000	0.667	3.7	indeterminado
+M22_S30__rna__NODE_317_length_547_cov_3.473896_g288_i0	EVE_genoma	EVE_genoma		547	0.778	21	M22_S30	1.000	0.817	57.9	EVE
+M22_S30__rnaviral__NODE_197_length_654_cov_6.019835	EVE_genoma	EVE_genoma		654	0.750	22	M1_S1	1.000	0.457	428.7	indeterminado
+M22_S30__rnaviral__NODE_461_length_505_cov_1.164474	EVE_genoma	EVE_genoma		505	0.556	19	M1_S1	1.000	0.673	18.1	indeterminado
+M22_S30__trinity__TRINITY_DN473_c0_g1_i6	EVE_genoma	EVE_genoma		928	0.824	21	M22_S30	1.000	0.645	8.4	indeterminado
+M2_S2__megahit__k119_741	EVE_genoma	EVE_genoma		560	0.900	21	M1_S1	1.000	0.659	1409.7	indeterminado
+M2_S2__rna__NODE_1510_length_560_cov_12.000000_g1415_i0	EVE_genoma	EVE_genoma		560	0.700	21	M1_S1	1.000	0.495	151.7	indeterminado
+M2_S2__rnaviral__NODE_1086_length_638_cov_16.210526	EVE_genoma	EVE_genoma		638	0.727	21	M58_S9	1.000	0.750	71.6	indeterminado
+M2_S2__rnaviral__NODE_1222_length_618_cov_5.432337	EVE_genoma	EVE_genoma		618	0.636	20	M1_S1	1.000	0.544	54.6	indeterminado
+M2_S2__rnaviral__NODE_167_length_1075_cov_2.885965	EVE_genoma	EVE_genoma		1075	0.550	10	M1_S1	1.000	0.889	16.8	EVE
+M2_S2__rnaviral__NODE_2264_length_511_cov_4.829004	EVE_genoma	EVE_genoma		511	0.556	5	M1_S1	1.000	0.637	13.8	indeterminado
+M2_S2__rnaviral__NODE_284_length_933_cov_5.242081	EVE_genoma	EVE_genoma		933	0.882	22	M1_S1	1.000	0.846	688.1	EVE
+M2_S2__rnaviral__NODE_286_length_932_cov_2.408834	EVE_genoma	EVE_genoma		932	0.647	19	M1_S1	1.000	0.710	49.2	indeterminado
+M2_S2__rnaviral__NODE_362_length_880_cov_6.450060	EVE_genoma	EVE_genoma		880	0.562	21	M1_S1	1.000	0.440	47.8	indeterminado
+M2_S2__rnaviral__NODE_593_length_767_cov_21.316156	EVE_genoma	EVE_genoma		767	0.571	21	M1_S1	1.000	0.600	136.3	indeterminado
+M2_S2__rnaviral__NODE_737_length_714_cov_8.857143	EVE_genoma	EVE_genoma		714	0.615	14	M1_S1	1.000	0.571	101.6	indeterminado
+M2_S2__trinity__TRINITY_DN13935_c0_g1_i1	EVE_genoma	EVE_genoma		725	0.615	13	M1_S1	1.000	0.679	31.0	indeterminado
+M35_S31__megahit__k119_1490	EVE_genoma	EVE_genoma		643	0.545	18	M1_S1	1.000	1.165	71.0	EVE
+M35_S31__megahit__k119_2246	EVE_genoma	EVE_genoma		520	0.667	22	M35_S31	1.000	0.763	521.7	indeterminado
+M35_S31__rnaviral__NODE_1243_length_501_cov_2.219027	EVE_genoma	EVE_genoma		501	0.667	12	M35_S31	1.000	0.706	4.8	indeterminado
+M35_S31__rnaviral__NODE_335_length_712_cov_3.093514	EVE_genoma	EVE_genoma		712	0.538	10	M1_S1	1.000	0.639	14.3	indeterminado
+M35_S31__rnaviral__NODE_431_length_676_cov_21.207337	EVE_genoma	EVE_genoma		676	0.583	20	M1_S1	1.000	0.905	391.2	EVE
+M35_S31__rnaviral__NODE_758_length_583_cov_2.258427	EVE_genoma	EVE_genoma		583	0.600	7	M1_S1	1.000	0.722	16.4	indeterminado
+M35_S31__rnaviral__NODE_827_length_568_cov_5.867052	EVE_genoma	EVE_genoma		568	0.500	15	M1_S1	1.000	1.234	88.0	EVE
+M35_S31__rnaviral__NODE_992_length_537_cov_3.487705	EVE_genoma	EVE_genoma		537	0.667	19	M35_S31	1.000	1.191	70.8	EVE
+M35_S31__trinity__TRINITY_DN399_c0_g2_i1	EVE_genoma	EVE_genoma		501	0.556	20	M57_S8	1.000	0.651	28.9	indeterminado
+M35_S31__trinity__TRINITY_DN53_c0_g1_i1	EVE_genoma	EVE_genoma		1081	0.950	21	M9_S16	1.000	0.660	35.9	indeterminado
+M55_S6__megahit__k119_5184	EVE_genoma	EVE_genoma		643	0.727	21	M57_S8	1.000	0.788	150.9	indeterminado
+M55_S6__megahit__k119_5766	EVE_genoma	EVE_genoma		503	0.556	22	M7_S15	1.000	1.781	10319.8	EVE
+M55_S6__megahit__k119_6077	EVE_genoma	EVE_genoma		657	0.667	22	M1_S1	1.000	1.961	6041.5	EVE
+M55_S6__rna__NODE_1007_length_614_cov_420.456637_g924_i0	EVE_genoma	EVE_genoma		614	0.727	22	M1_S1	1.000	1.970	13200.9	EVE
+M55_S6__rna__NODE_1072_length_604_cov_1453.176577_g986_i0	EVE_genoma	EVE_genoma		604	0.909	20	M1_S1	1.000	1.024	3660.8	EVE
+M55_S6__rna__NODE_386_length_856_cov_3.722429_g109_i1	EVE_genoma	EVE_genoma		856	0.562	10	M55_S6	1.000	1.532	57.3	EVE
+M55_S6__rna__NODE_520_length_774_cov_478.846897_g452_i0	EVE_genoma	EVE_genoma		774	0.643	22	M1_S1	1.000	2.145	6618.7	EVE
+M55_S6__rnaviral__NODE_1000_length_652_cov_4.787728	EVE_genoma	EVE_genoma		652	0.667	15	M1_S1	1.000	0.703	47.5	indeterminado
+M55_S6__rnaviral__NODE_1048_length_644_cov_2.324370	EVE_genoma	EVE_genoma		644	0.727	21	M1_S1	1.000	0.673	63.6	indeterminado
+M55_S6__rnaviral__NODE_1129_length_630_cov_5.994836	EVE_genoma	EVE_genoma		630	0.727	19	M1_S1	1.000	0.370	123.9	indeterminado
+M55_S6__rnaviral__NODE_1503_length_580_cov_12.041431	EVE_genoma	EVE_genoma		580	0.600	21	M1_S1	1.000	0.672	146.1	indeterminado
+M55_S6__rnaviral__NODE_207_length_1005_cov_8.013598	EVE_genoma	EVE_genoma		1005	0.579	15	M55_S6	1.000	0.993	22.8	EVE
+M55_S6__rnaviral__NODE_2190_length_514_cov_9.582796	EVE_genoma	EVE_genoma		514	0.667	10	M1_S1	1.000	0.689	39.2	indeterminado
+M55_S6__rnaviral__NODE_442_length_830_cov_1.920615	EVE_genoma	EVE_genoma		830	0.667	12	M57_S8	1.000	1.241	85.9	EVE
+M55_S6__rnaviral__NODE_494_length_807_cov_5.263852	EVE_genoma	EVE_genoma		807	0.667	19	M1_S1	1.000	0.527	49.4	indeterminado
+M55_S6__rnaviral__NODE_609_length_761_cov_6.282303	EVE_genoma	EVE_genoma		761	0.786	20	M1_S1	1.000	0.522	68.7	indeterminado
+M55_S6__rnaviral__NODE_647_length_747_cov_7.148997	EVE_genoma	EVE_genoma		747	0.615	15	M2_S2	1.000	0.747	18.3	indeterminado
+M55_S6__rnaviral__NODE_667_length_739_cov_7.314493	EVE_genoma	EVE_genoma		739	0.538	21	M57_S8	1.000	0.708	33.7	indeterminado
+M55_S6__rnaviral__NODE_743_length_715_cov_5.460961	EVE_genoma	EVE_genoma		715	0.692	14	M2_S2	1.000	0.854	16.6	EVE
+M55_S6__trinity__TRINITY_DN128_c0_g1_i1	EVE_genoma	EVE_genoma		783	0.643	9	M1_S1	1.000	2.086	669.5	EVE
+M55_S6__trinity__TRINITY_DN1784_c1_g1_i4	EVE_genoma	EVE_genoma		503	0.667	9	M56_S7	1.000	0.881	10.1	EVE
+M55_S6__trinity__TRINITY_DN25897_c0_g1_i1	EVE_genoma	EVE_genoma		559	0.600	21	M1_S1	1.000	1.095	118.8	EVE
+M55_S6__trinity__TRINITY_DN738_c1_g1_i19	EVE_genoma	EVE_genoma		535	0.778	21	M1_S1	1.000	0.771	60.4	indeterminado
+M55_S6__trinity__TRINITY_DN974_c2_g1_i65	EVE_genoma	EVE_genoma		851	0.812	21	M55_S6	1.000	1.147	125.9	EVE
+M55_S6__trinity__TRINITY_DN974_c2_g1_i66	EVE_genoma	EVE_genoma		864	0.812	21	M55_S6	1.000	1.191	104.8	EVE
+M56_S7__megahit__k119_2006	EVE_genoma	EVE_genoma		598	0.700	20	M56_S7	1.000	0.818	111.5	EVE
+M56_S7__megahit__k119_3036	EVE_genoma	EVE_genoma		657	0.500	21	M58_S9	1.000	0.797	84.4	indeterminado
+M56_S7__megahit__k119_3269	EVE_genoma	EVE_genoma		861	0.562	20	M1_S1	1.000	0.705	38.9	indeterminado
+M56_S7__rna__NODE_218_length_891_cov_1.950119_g171_i0	EVE_genoma	EVE_genoma		891	0.562	21	M9_S16	1.000	0.900	494.7	EVE
+M56_S7__rna__NODE_838_length_556_cov_17.731755_g770_i0	EVE_genoma	EVE_genoma		556	0.500	19	M57_S8	1.000	1.384	992.3	EVE
+M56_S7__rnaviral__NODE_1029_length_555_cov_39.867589	EVE_genoma	EVE_genoma		555	0.600	21	M1_S1	1.000	0.508	667.7	indeterminado
+M56_S7__rnaviral__NODE_529_length_674_cov_2.768000	EVE_genoma	EVE_genoma		674	0.667	17	M1_S1	1.000	0.442	58.7	indeterminado
+M56_S7__trinity__TRINITY_DN3318_c0_g1_i20	EVE_genoma	EVE_genoma		1006	0.684	21	M56_S7	1.000	1.100	100.0	EVE
+M56_S7__trinity__TRINITY_DN8500_c0_g1_i1	EVE_genoma	EVE_genoma		528	0.556	22	M1_S1	1.000	0.598	40.6	indeterminado
+M57_S8__megahit__k119_3036	EVE_genoma	EVE_genoma		538	0.556	22	M1_S1	1.000	2.132	738.6	EVE
+M57_S8__megahit__k119_4748	EVE_genoma	EVE_genoma		612	0.636	21	M57_S8	1.000	0.620	47.1	indeterminado
+M57_S8__rna__NODE_1205_length_560_cov_5.696673_g1085_i0	EVE_genoma	EVE_genoma		560	0.700	16	M1_S1	1.000	1.059	33.8	EVE
+M57_S8__rna__NODE_29_length_1933_cov_841.249469_g14_i0	EVE_genoma	EVE_genoma		1933	0.595	21	M60_S11	0.974	2.011	10214.1	EVE
+M57_S8__rnaviral__NODE_1229_length_572_cov_3.275335	EVE_genoma	EVE_genoma		572	0.500	20	M1_S1	1.000	0.574	57.0	indeterminado
+M57_S8__rnaviral__NODE_1315_length_563_cov_1.988327	EVE_genoma	EVE_genoma		563	0.700	12	M1_S1	1.000	0.447	26.2	indeterminado
+M57_S8__rnaviral__NODE_1516_length_539_cov_2.708163	EVE_genoma	EVE_genoma		539	0.667	19	M57_S8	1.000	0.593	17.3	indeterminado
+M57_S8__rnaviral__NODE_1596_length_531_cov_3.352697	EVE_genoma	EVE_genoma		531	0.556	21	M57_S8	1.000	0.586	22.9	indeterminado
+M57_S8__rnaviral__NODE_1664_length_524_cov_4.370526	EVE_genoma	EVE_genoma		524	0.667	20	M1_S1	1.000	0.797	28.0	indeterminado
+M57_S8__rnaviral__NODE_1818_length_509_cov_3.778261	EVE_genoma	EVE_genoma		509	0.556	13	M1_S1	1.000	0.530	26.0	indeterminado
+M57_S8__rnaviral__NODE_551_length_717_cov_3.811377	EVE_genoma	EVE_genoma		717	0.615	16	M1_S1	1.000	0.442	17.7	indeterminado
+M57_S8__trinity__TRINITY_DN233_c0_g1_i1	EVE_genoma	EVE_genoma		788	0.714	21	M1_S1	0.938	0.772	66.5	indeterminado
+M57_S8__trinity__TRINITY_DN233_c0_g1_i5	EVE_genoma	EVE_genoma		840	0.533	12	M57_S8	1.000	1.093	25.4	EVE
+M57_S8__trinity__TRINITY_DN3163_c0_g2_i3	EVE_genoma	EVE_genoma		535	0.556	21	M1_S1	1.000	0.737	293.5	indeterminado
+M57_S8__trinity__TRINITY_DN352_c0_g1_i2	EVE_genoma	EVE_genoma		596	0.600	19	M1_S1	1.000	0.783	79.4	indeterminado
+M57_S8__trinity__TRINITY_DN531_c0_g1_i1	EVE_genoma	EVE_genoma		1043	0.579	21	M57_S8	1.000	0.455	84.8	indeterminado
+M58_S9__rna__NODE_313_length_835_cov_111.307888_g271_i0	EVE_genoma	EVE_genoma		835	0.800	20	M1_S1	1.000	0.629	1414.4	indeterminado
+M58_S9__rna__NODE_907_length_593_cov_19.588235_g854_i0	EVE_genoma	EVE_genoma		593	0.800	21	M1_S1	1.000	0.601	50.8	indeterminado
+M58_S9__rnaviral__NODE_275_length_853_cov_3.139303	EVE_genoma	EVE_genoma		853	0.688	14	M2_S2	1.000	0.698	9.7	indeterminado
+M58_S9__rnaviral__NODE_608_length_691_cov_10.093458	EVE_genoma	EVE_genoma		691	0.583	19	M1_S1	1.000	0.807	68.7	EVE
+M58_S9__rnaviral__NODE_865_length_631_cov_11.328179	EVE_genoma	EVE_genoma		631	0.636	21	M9_S16	1.000	0.671	111.8	indeterminado
+M58_S9__rnaviral__NODE_944_length_613_cov_1.845745	EVE_genoma	EVE_genoma		613	0.545	19	M58_S9	1.000	0.732	20.8	indeterminado
+M58_S9__rnaviral__NODE_990_length_606_cov_3.389587	EVE_genoma	EVE_genoma		606	0.636	12	M1_S1	1.000	0.419	14.6	indeterminado
+M58_S9__trinity__TRINITY_DN12423_c0_g1_i1	EVE_genoma	EVE_genoma		713	0.692	21	M1_S1	1.000	0.613	88.5	indeterminado
+M58_S9__trinity__TRINITY_DN407_c0_g1_i2	EVE_genoma	EVE_genoma		508	0.556	21	M1_S1	1.000	0.586	75.2	indeterminado
+M60_S11__rnaviral__NODE_106_length_675_cov_2.488818	EVE_genoma	EVE_genoma		675	0.667	22	M1_S1	1.000	0.898	105.9	EVE
+M71_S19__megahit__k119_1549	EVE_genoma	EVE_genoma		501	0.667	19	M71_S19	1.000	1.916	602.3	EVE
+M71_S19__rna__NODE_427_length_655_cov_657.478548_g389_i0	EVE_genoma	EVE_genoma		655	0.667	21	M71_S19	1.000	2.069	2794.5	EVE
+M71_S19__rna__NODE_664_length_569_cov_19910.942308_g617_i0	EVE_genoma	EVE_genoma		569	0.500	13	M71_S19	1.000	1.881	3686.4	EVE
+M71_S19__rnaviral__NODE_422_length_691_cov_1.772586	EVE_genoma	EVE_genoma		691	0.583	20	M1_S1	1.000	1.164	212.7	EVE
+M71_S19__rnaviral__NODE_848_length_560_cov_4.219178	EVE_genoma	EVE_genoma		560	0.500	21	M1_S1	1.000	0.517	40.4	indeterminado
+M71_S19__trinity__TRINITY_DN583_c0_g1_i1	EVE_genoma	EVE_genoma		569	0.800	16	M9_S16	1.000	0.901	23.8	EVE
+M72_S20__rna__NODE_216_length_707_cov_15.583587_g166_i0	EVE_genoma	EVE_genoma		707	0.692	21	M1_S1	1.000	0.970	376.2	EVE
+M72_S20__rna__NODE_523_length_528_cov_13.104384_g469_i0	EVE_genoma	EVE_genoma		528	0.556	7	M72_S20	1.000	1.352	340.7	EVE
+M74_S21__rna__NODE_206_length_613_cov_9.381206_g175_i0	EVE_genoma	EVE_genoma		613	0.636	21	M1_S1	1.000	0.997	200.9	EVE
+M74_S21__rnaviral__NODE_165_length_673_cov_4.142628	EVE_genoma	EVE_genoma		673	0.917	21	M1_S1	1.000	0.606	738.5	indeterminado
+M79_S28__rnaviral__NODE_83_length_678_cov_14.254372	EVE_genoma	EVE_genoma		678	0.833	21	M1_S1	1.000	0.922	831.4	EVE
+M9_S16__megahit__k119_2647	EVE_genoma	EVE_genoma		562	0.600	17	M9_S16	1.000	0.782	21.7	indeterminado
+M9_S16__rnaviral__NODE_1143_length_556_cov_1.556213	EVE_genoma	EVE_genoma		556	0.600	16	M1_S1	1.000	0.611	15.6	indeterminado
+M9_S16__rnaviral__NODE_119_length_1065_cov_61.376969	EVE_genoma	EVE_genoma		1065	0.750	22	M9_S16	1.000	0.877	438.7	EVE
+M9_S16__rnaviral__NODE_177_length_951_cov_4.742794	EVE_genoma	EVE_genoma		951	0.500	19	M9_S16	1.000	0.600	15.4	indeterminado
+M9_S16__rnaviral__NODE_246_length_869_cov_2.443902	EVE_genoma	EVE_genoma		869	0.625	17	M1_S1	1.000	0.913	35.4	EVE
+M9_S16__trinity__TRINITY_DN175_c0_g1_i3	EVE_genoma	EVE_genoma		507	0.556	14	M9_S16	0.909	1.102	110.6	EVE
+M9_S16__trinity__TRINITY_DN2841_c0_g2_i2	EVE_genoma	EVE_genoma		535	0.556	10	M9_S16	1.000	0.923	18.1	EVE
+M1_S1__megahit__k119_10680	HTV	EVE_genoma		590	0.500	21	M1_S1	1.000	1.664	573.9	EVE
+M48_S5__rna__NODE_103_length_668_cov_1.452342_g68_i0	HTV	EVE_genoma		668	0.583	22	M57_S8	1.000	1.273	270.8	EVE
+M58_S9__megahit__k119_1431	HTV	EVE_candidato		558	0.100	10	M58_S9	1.000	0.841	5.4	indeterminado
+M59_S10__rna__NODE_241_length_511_cov_2.733766_g233_i0	HTV	EVE_genoma		511	0.778	22	M57_S8	1.000	1.096	401.0	EVE
+M60_S11__trinity__TRINITY_DN844_c0_g1_i5	HTV	EVE_genoma		657	0.833	22	M1_S1	1.000	0.855	1141.0	EVE
+M1_S1__megahit__k119_9737	PCLV	EVE_genoma		771	0.714	21	M1_S1	1.000	1.905	2616.4	EVE
+M56_S7__rnaviral__NODE_289_length_788_cov_3.131258	PCLV	identificado	Phasivirus phasiense	788	0.000	1	M56_S7	1.000	0.545	6.0	replica
+M56_S7__rnaviral__NODE_31_length_1512_cov_5.947368	PCLV	identificado	Phasivirus phasiense	1512	0.000	1	M56_S7	1.000	0.544	12.0	replica
+M56_S7__rnaviral__NODE_4_length_2335_cov_7.678915	PCLV	identificado	Phasivirus phasiense	2335	0.000	1	M56_S7	1.000	0.432	15.5	replica
+M56_S7__rnaviral__NODE_520_length_677_cov_3.578025	PCLV	identificado	Phasivirus phasiense	677	0.000	1	M56_S7	1.000	0.397	6.4	replica
+M56_S7__rnaviral__NODE_52_length_1305_cov_2.610669	PCLV	identificado	Phasivirus phasiense	1305	0.000	1	M56_S7	1.000	0.444	5.2	replica
+M56_S7__rnaviral__NODE_759_length_604_cov_3.209009	PCLV	identificado	Phasivirus phasiense	604	0.000	1	M56_S7	1.000	0.742	6.1	replica
+M56_S7__rnaviral__NODE_94_length_1134_cov_5.321659	PCLV	identificado	Phasivirus phasiense	1134	0.000	1	M56_S7	1.000	0.500	10.4	replica
+M11_S3__rnaviral__NODE_96_length_678_cov_2.519873	especie_nueva	identificado	Palmetto toti-like virus	678	0.000	3	M35_S31	1.000	0.436	3.7	replica
+M20_S25__rnaviral__NODE_998_length_650_cov_2.713810	especie_nueva	identificado	High Island virus	650	0.000	1	M20_S25	1.000	0.467	5.3	replica
+M22_S30__rnaviral__NODE_134_length_738_cov_2.301887	especie_nueva	identificado	Palmetto toti-like virus	738	0.000	4	M35_S31	1.000	0.556	10.2	replica
+M2_S2__rnaviral__NODE_1484_length_582_cov_2.058161	especie_nueva	divergente	afín a Grenada mosquito rhabdovirus 1	582	0.000	6	M2_S2	1.000	0.446	3.1	replica
+M35_S31__rna__NODE_690_length_539_cov_2.448980_g639_i0	especie_nueva	identificado	Palmetto toti-like virus	539	0.000	4	M35_S31	1.000	0.541	4.5	replica
+M35_S31__rnaviral__NODE_134_length_975_cov_7.289417	especie_nueva	identificado	Palmetto toti-like virus	975	0.000	4	M35_S31	1.000	0.548	14.2	replica
+M35_S31__rnaviral__NODE_432_length_676_cov_3.440191	especie_nueva	identificado	Palmetto toti-like virus	676	0.000	3	M35_S31	1.000	0.756	4.1	replica
+M35_S31__rnaviral__NODE_772_length_580_cov_3.517891	especie_nueva	identificado	Palmetto toti-like virus	580	0.000	2	M35_S31	1.000	0.439	7.1	replica
+M35_S31__rnaviral__NODE_967_length_541_cov_4.107724	especie_nueva	identificado	Palmetto toti-like virus	541	0.000	3	M35_S31	1.000	0.582	8.2	replica
+M59_S10__rnaviral__NODE_323_length_529_cov_1.570833	especie_nueva	identificado	Sinu virus	529	0.000	1	M59_S10	1.000	0.540	3.1	replica
+M60_S11__rna__NODE_217_length_511_cov_1.731602_g192_i0	especie_nueva	identificado	Grenada mosquito rhabdovirus 1	511	0.000	1	M60_S11	1.000	0.344	3.0	replica
+M1_S1__megahit__k119_11164	pariente_especie_nueva	pariente	afín a Mos8Chu0 chuvirus	1694	0.000	4	M1_S1	0.941	0.788	5.4	replica
+M1_S1__rnaviral__NODE_1680_length_693_cov_2.718944	pariente_especie_nueva	pariente	afín a Gurupi chuvirus-like 1	693	0.000	4	M1_S1	1.000	0.428	5.4	replica
+M1_S1__rnaviral__NODE_3036_length_567_cov_2.357143	pariente_especie_nueva	pariente	afín a Australian Anopheles totivirus	567	0.000	5	M1_S1	1.000	0.736	4.9	replica
+M1_S1__rnaviral__NODE_3688_length_530_cov_2.176715	pariente_especie_nueva	pariente	afín a Mos8Chu0 chuvirus	530	0.111	8	M1_S1	1.000	0.619	5.2	replica
+M1_S1__trinity__TRINITY_DN4358_c0_g2_i1	pariente_especie_nueva	pariente	afín a Mos8Chu0 chuvirus	779	0.000	1	M1_S1	0.875	0.796	2.3	replica
+M20_S25__rnaviral__NODE_22_length_2414_cov_9.127273	pariente_especie_nueva	pariente	afín a Usinis virus	2414	0.000	2	M20_S25	1.000	0.450	19.8	replica
+M2_S2__rna__NODE_77_length_1516_cov_5.882072_g50_i0	pariente_especie_nueva	pariente	afín a Liao ning virus	1516	0.069	14	M1_S1	1.000	0.618	14.8	replica
+M2_S2__rnaviral__NODE_164_length_1083_cov_2.441006	pariente_especie_nueva	pariente	afín a Aedes anphevirus	1083	0.000	9	M1_S1	1.000	0.392	7.5	replica
+M56_S7__rna__NODE_98_length_1255_cov_3.878109_g63_i0	pariente_especie_nueva	pariente	afín a Mos8Chu0 chuvirus	1255	0.000	11	M56_S7	1.000	0.574	5.5	replica
+M58_S9__rnaviral__NODE_460_length_747_cov_1.581662	pariente_especie_nueva	pariente	afín a Mos8Chu0 chuvirus	747	0.000	4	M1_S1	1.000	0.634	3.5	replica
+M58_S9__rnaviral__NODE_54_length_1330_cov_3.264637	pariente_especie_nueva	pariente	afín a Bafoussam mosquito rhabdovirus	1330	0.160	12	M1_S1	1.000	3.099	198.4	indeterminado
+M60_S11__rnaviral__NODE_113_length_649_cov_2.348333	pariente_especie_nueva	pariente	afín a Tartas insect-associated virus	649	0.000	1	M60_S11	1.000	0.630	4.6	replica
+M62_S18__rnaviral__NODE_412_length_546_cov_2.808853	pariente_especie_nueva	pariente	afín a Escherichia phage 2H10	546	0.000	1	M62_S18	1.000	0.479	5.1	replica
+M1_S1__megahit__k119_10201	revisar_evidencia_debil	evidencia_debil		1469	0.000	20					
+M1_S1__rnaviral__NODE_2297_length_629_cov_3.386207	revisar_evidencia_debil	evidencia_debil		629	0.000	1					
+M1_S1__rnaviral__NODE_3130_length_561_cov_2.759766	revisar_evidencia_debil	evidencia_debil		561	0.000	3					
+M1_S1__rnaviral__NODE_3884_length_520_cov_1.329087	revisar_evidencia_debil	evidencia_debil		520	0.333	6					
+M20_S25__rnaviral__NODE_1451_length_575_cov_1.062738	revisar_evidencia_debil	evidencia_debil		575	0.100	2					
+M21_S29__megahit__k119_1227	revisar_evidencia_debil	evidencia_debil		1323	0.000	20					
+M22_S30__trinity__TRINITY_DN1050_c1_g1_i5	revisar_evidencia_debil	evidencia_debil		612	0.364	22					
+M35_S31__rna__NODE_589_length_570_cov_1.347409_g539_i0	revisar_evidencia_debil	evidencia_debil		570	0.200	10					
+M35_S31__rnaviral__NODE_609_length_617_cov_2.107394	revisar_evidencia_debil	evidencia_debil		617	0.364	8					
+M48_S5__megahit__k119_37	revisar_evidencia_debil	evidencia_debil		4683	0.000	5					
+M56_S7__rna__NODE_610_length_622_cov_2.233857_g543_i0	revisar_evidencia_debil	evidencia_debil		622	0.091	13					
+M57_S8__rna__NODE_1356_length_538_cov_49.891616_g1234_i0	revisar_evidencia_debil	evidencia_debil		538	0.222	22					
+M57_S8__rna__NODE_1486_length_521_cov_2.521186_g1363_i0	revisar_evidencia_debil	evidencia_debil		521	0.000	16					
+M57_S8__rnaviral__NODE_1352_length_559_cov_0.933333	revisar_evidencia_debil	evidencia_debil		559	0.000	4					
+M57_S8__rnaviral__NODE_1494_length_542_cov_3.432049	revisar_evidencia_debil	evidencia_debil		542	0.111	9					
+M57_S8__rnaviral__NODE_803_length_648_cov_1.383973	revisar_evidencia_debil	evidencia_debil		648	0.000	2					
+M62_S18__rnaviral__NODE_208_length_649_cov_0.991667	revisar_evidencia_debil	evidencia_debil		649	0.182	17					
+M62_S18__trinity__TRINITY_DN987_c0_g1_i2	revisar_evidencia_debil	evidencia_debil		519	0.333	11					
+M71_S19__rnaviral__NODE_521_length_650_cov_2.915141	revisar_evidencia_debil	evidencia_debil		650	0.417	22					
+M9_S16__rna__NODE_1165_length_542_cov_4.458418_g1033_i0	revisar_evidencia_debil	evidencia_debil		542	0.444	20					
+M9_S16__rnaviral__NODE_1331_length_528_cov_1.701461	revisar_evidencia_debil	evidencia_debil		528	0.333	6					
+M1_S1__rnaviral__NODE_1365_length_740_cov_2.865412	virus_like	divergente	afín a Pedras lispivirus	740	0.231	13	M1_S1	1.000	0.889	17.4	indeterminado
+M1_S1__trinity__TRINITY_DN2440_c0_g1_i8	virus_like	divergente	afín a Aedes aegypti anphevirus	554	0.000	7	M1_S1	1.000	1.049	11.1	indeterminado
+M20_S25__megahit__k119_5051	virus_like	pariente_debil	afín a Culex mosquito virus 1	2161	0.071	3	M20_S25	1.000	1.160	1929.2	indeterminado
+M20_S25__rna__NODE_27_length_2456_cov_722.085999_g21_i0	virus_like	pariente_debil	afín a Culex-associated Tombus-like virus	2456	0.000	3	M20_S25	1.000	0.445	1601.5	replica
+M20_S25__rnaviral__NODE_1677_length_546_cov_7.830986	virus_like	divergente	afín a Usinis virus	546	0.000	2	M20_S25	1.000	0.570	14.9	replica
+M20_S25__rnaviral__NODE_43_length_1829_cov_32.983146	virus_like	divergente	afín a Usinis virus	1829	0.000	2	M20_S25	1.000	0.497	67.5	replica
+M20_S25__rnaviral__NODE_499_length_818_cov_11.422627	virus_like	divergente	afín a Usinis virus	818	0.000	2	M20_S25	1.000	0.503	23.5	replica
+M20_S25__rnaviral__NODE_78_length_1500_cov_8.134390	virus_like	divergente	afín a Usinis virus	1500	0.000	1	M20_S25	1.000	0.351	16.5	replica
+M20_S25__trinity__TRINITY_DN36_c0_g1_i3	virus_like	pariente_debil	afín a Culex mosquito virus 1	747	0.000	1	M20_S25	1.000	0.771	376.2	replica
+M21_S29__rnaviral__NODE_1118_length_515_cov_1.414163	virus_like	viral_solo_nr	afín a Hattula totivirus 3	515	0.000	8	M58_S9	1.000	0.887	6.1	indeterminado
+M21_S29__rnaviral__NODE_1136_length_511_cov_2.575758	virus_like	divergente	afín a Atrato Retro-like virus	511	0.000	6	M1_S1	1.000	0.801	4.3	indeterminado
+M2_S2__rnaviral__NODE_2321_length_508_cov_1.586057	virus_like	divergente	afín a Aedes aegypti To virus 2	508	0.111	2	M1_S1	1.000	0.641	4.2	replica
+M2_S2__rnaviral__NODE_514_length_801_cov_2.696809	virus_like	pariente_debil	afín a Australian Anopheles totivirus	801	0.000	7	M2_S2	0.941	0.662	5.4	replica
+M35_S31__rna__NODE_288_length_713_cov_517.225904_g242_i0	virus_like	pariente_debil	afín a Enontekio iflavirus	713	0.231	9	M35_S31	1.000	1.778	6418.5	indeterminado
+M35_S31__rnaviral__NODE_1242_length_501_cov_2.420354	virus_like	pariente_debil	afín a Enontekio merhavirus	501	0.000	1	M35_S31	1.000	0.678	4.0	replica
+M35_S31__rnaviral__NODE_216_length_821_cov_2.567358	virus_like	pariente_debil	afín a Merida virus	821	0.000	1	M35_S31	1.000	0.456	5.1	replica
+M35_S31__rnaviral__NODE_257_length_772_cov_2.615491	virus_like	pariente_debil	afín a Mopeia rhabdovirus	772	0.000	1	M35_S31	1.000	0.403	5.1	replica
+M35_S31__rnaviral__NODE_728_length_590_cov_1.990758	virus_like	divergente	afín a Curionopolis stangrhavirus 2	590	0.000	4	M35_S31	1.000	0.403	3.9	replica
+M48_S5__rnaviral__NODE_14_length_1806_cov_6.763233	virus_like	pariente_debil	afín a ssRNA phage SRR7473382_2	1806	0.000	1	M48_S5	1.000	0.457	13.5	replica
+M48_S5__rnaviral__NODE_17_length_1733_cov_8.393705	virus_like	divergente	afín a Andhaxevirus faecihabitans	1733	0.000	1	M48_S5	1.000	0.477	16.9	replica
+M55_S6__megahit__k119_2345	virus_like	divergente	afín a Leksozero Aedes Stangrhavirus	924	0.353	10	M55_S6	0.947	1.257	32.8	indeterminado
+M55_S6__megahit__k119_5455	virus_like	pariente_debil	afín a Kamiti River virus	2390	0.000	10	M55_S6	1.000	0.592	4.2	replica
+M55_S6__trinity__TRINITY_DN10724_c0_g1_i1	virus_like	divergente	afín a Leksozero Aedes Stangrhavirus	568	0.200	4	M72_S20	1.000	0.574	2.6	replica
+M57_S8__rnaviral__NODE_386_length_786_cov_2.924016	virus_like	divergente	afín a Formosus virus	786	0.000	9	M57_S8	1.000	0.583	6.2	replica
+M60_S11__rna__NODE_210_length_520_cov_1.970276_g185_i0	virus_like	divergente	afín a Tartas insect-associated virus	520	0.000	1	M60_S11	1.000	0.441	3.5	replica
+M72_S20__rnaviral__NODE_22_length_1441_cov_3.018678	virus_like	pariente_debil	afín a Bafoussam mosquito rhabdovirus	1441	0.296	12	M1_S1	1.000	2.970	299.8	indeterminado
+M72_S20__rnaviral__NODE_248_length_694_cov_1.590698	virus_like	divergente	afín a Atrato Rhabdo-like virus 2	694	0.000	12	M2_S2	1.000	0.737	3.7	replica
+M74_S21__rnaviral__NODE_214_length_622_cov_1.212914	virus_like	divergente	afín a Ohlsdorf virus	622	0.273	6	M57_S8	0.923	1.752	18.6	indeterminado
+M74_S21__rnaviral__NODE_444_length_505_cov_2.028509	virus_like	divergente	afín a Hattula totivirus 3	505	0.111	18	M1_S1	1.000	0.429	19.7	replica
+M9_S16__rnaviral__NODE_1099_length_563_cov_1.653696	virus_like	divergente	afín a Downy mildew lesion associated ormycovirus 6	563	0.000	1	M9_S16	1.000	0.509	2.9	replica
+M9_S16__rnaviral__NODE_433_length_752_cov_3.118065	virus_like	divergente	afín a Downy mildew lesion associated ormycovirus 6	752	0.000	1	M9_S16	1.000	0.842	5.7	indeterminado
+M9_S16__rnaviral__NODE_51_length_1365_cov_5.166413	virus_like	divergente	afín a Hattula totivirus 3	1365	0.038	16	M1_S1	1.000	0.454	17.7	replica
+M9_S16__trinity__TRINITY_DN2227_c0_g1_i1	virus_like	pariente_debil	afín a Parramatta River virus	511	0.222	15	M1_S1	1.000	0.385	15.0	replica
+M9_S16__trinity__TRINITY_DN6164_c0_g1_i1	virus_like	divergente	afín a Atrato Retro-like virus	657	0.083	9	M9_S16	1.000	0.656	10.6	replica
+M11_S3__megahit__k119_37	virus_nombrado	identificado	Aedes binegev-like virus 1	4338	0.000	2	M11_S3	1.000	1.478	29.3	indeterminado
+M11_S3__megahit__k119_579	virus_nombrado	identificado	Verdadero virus	1901	0.108	19	M48_S5	1.000	2.109	2323.0	indeterminado
+M11_S3__rna__NODE_12_length_1937_cov_27.903602_g8_i0	virus_nombrado	identificado	Aedes aegypti totivirus	1937	0.000	5	M11_S3	1.000	0.685	60.7	replica
+M11_S3__rnaviral__NODE_20_length_1457_cov_3.428977	virus_nombrado	identificado	Aedes binegev-like virus 1	1457	0.000	2	M11_S3	1.000	0.553	7.0	replica
+M11_S3__rnaviral__NODE_24_length_1395_cov_4.930906	virus_nombrado	identificado	Aedes binegev-like virus 1	1395	0.000	2	M11_S3	1.000	0.693	10.2	replica
+M11_S3__rnaviral__NODE_38_length_979_cov_6.222581	virus_nombrado	identificado	Aedes binegev-like virus 1	979	0.000	2	M11_S3	1.000	0.295	12.7	replica
+M11_S3__rnaviral__NODE_68_length_760_cov_5.787623	virus_nombrado	identificado	Aedes binegev-like virus 1	760	0.000	1	M11_S3	1.000	0.434	11.1	replica
+M11_S3__rnaviral__NODE_90_length_688_cov_4.805947	virus_nombrado	identificado	Aedes binegev-like virus 1	688	0.000	2	M11_S3	1.000	0.496	9.7	replica
+M11_S3__trinity__TRINITY_DN1146_c0_g1_i1	virus_nombrado	identificado	Aedes binegev-like virus 1	927	0.000	1	M11_S3	1.000	0.594	8.7	replica
+M1_S1__megahit__k119_12197	virus_nombrado	identificado	Aedes anphevirus	13015	0.000	13	M1_S1	1.000	0.354	80.6	replica
+M1_S1__metaviral__NODE_1_length_13043_cov_63.244177_cutoff_5_type_linearrepeat	virus_nombrado	identificado	Aedes anphevirus	13043	0.000	13	M1_S1	1.000	0.387	79.3	replica
+M1_S1__trinity__TRINITY_DN6_c0_g1_i10	virus_nombrado	identificado	Aedes anphevirus	15488	0.000	13	M1_S1	1.000	0.359	77.4	replica
+M20_S25__megahit__k119_1515	virus_nombrado	identificado	Chaq-like virus	2003	0.077	19	M48_S5	1.000	3.210	6292.8	indeterminado
+M20_S25__megahit__k119_181	virus_nombrado	identificado	Guadeloupe mosquito virus	1827	0.029	14	M48_S5	1.000	2.498	7201.9	indeterminado
+M20_S25__megahit__k119_2619	virus_nombrado	identificado	Verdadero virus	1879	0.028	19	M1_S1	1.000	3.550	6786.6	indeterminado
+M20_S25__megahit__k119_3000	virus_nombrado	identificado	Guadeloupe mosquito virus	3448	0.015	15	M20_S25	1.000	1.702	7252.7	indeterminado
+M20_S25__megahit__k119_3691	virus_nombrado	identificado	Verdadero virus	1721	0.061	19	M1_S1	1.000	3.451	11300.5	indeterminado
+M21_S29__megahit__k119_1744	virus_nombrado	identificado	Verdadero virus	1801	0.114	19	M48_S5	1.000	1.478	1529.5	indeterminado
+M21_S29__megahit__k119_2559	virus_nombrado	identificado	Aedes anphevirus	13129	0.004	13	M1_S1	1.000	6.486	244.8	indeterminado
+M21_S29__rna__NODE_88_length_1667_cov_3.070457_g41_i0	virus_nombrado	identificado	San Gabriel mononegavirus	1667	0.000	1	M21_S29	0.971	0.610	3.3	replica
+M21_S29__rnaviral__NODE_17_length_2143_cov_2.286533	virus_nombrado	identificado	San Gabriel mononegavirus	2143	0.000	1	M21_S29	0.977	0.516	3.5	replica
+M21_S29__rnaviral__NODE_183_length_926_cov_3.059293	virus_nombrado	identificado	San Gabriel mononegavirus	926	0.000	1	M21_S29	1.000	0.521	2.8	replica
+M21_S29__rnaviral__NODE_251_length_854_cov_2.418634	virus_nombrado	identificado	San Gabriel mononegavirus	854	0.000	1	M21_S29	1.000	0.576	4.5	replica
+M21_S29__rnaviral__NODE_25_length_1859_cov_39.380110	virus_nombrado	identificado	Netjeret virus	1859	0.000	2	M21_S29	1.000	0.808	80.3	indeterminado
+M21_S29__rnaviral__NODE_30_length_1778_cov_10.506651	virus_nombrado	identificado	Netjeret virus	1778	0.000	2	M21_S29	1.000	0.594	21.5	replica
+M21_S29__rnaviral__NODE_748_length_589_cov_1.644444	virus_nombrado	identificado	San Gabriel mononegavirus	589	0.000	1	M21_S29	1.000	0.489	3.0	replica
+M21_S29__rnaviral__NODE_851_length_564_cov_1.957282	virus_nombrado	identificado	San Gabriel mononegavirus	564	0.000	1	M21_S29	1.000	0.564	3.8	replica
+M21_S29__rnaviral__NODE_972_length_539_cov_2.804082	virus_nombrado	identificado	San Gabriel mononegavirus	539	0.000	1	M21_S29	1.000	0.443	5.3	replica
+M21_S29__rnaviral__NODE_9_length_2713_cov_3.207207	virus_nombrado	identificado	San Gabriel mononegavirus	2713	0.000	1	M21_S29	1.000	0.415	6.6	replica
+M22_S30__megahit__k119_1075	virus_nombrado	identificado	Verdadero virus	1742	0.030	19	M57_S8	1.000	3.163	11209.0	indeterminado
+M22_S30__megahit__k119_487	virus_nombrado	identificado	Chaq-like virus	1537	0.034	19	M7_S15	1.000	3.477	5689.3	indeterminado
+M22_S30__rnaviral__NODE_22_length_1410_cov_6.501837	virus_nombrado	identificado	Aedes aegypti totivirus	1410	0.000	5	M22_S30	1.000	0.688	12.8	replica
+M48_S5__megahit__k119_286	virus_nombrado	identificado	Guadeloupe mosquito virus	1710	0.000	14	M48_S5	1.000	0.484	2976.6	replica
+M48_S5__rnaviral__NODE_3_length_4797_cov_5.618576	virus_nombrado	identificado	Aedes aegypti totivirus	4797	0.000	5	M48_S5	1.000	0.604	13.6	replica
+M48_S5__rnaviral__NODE_7_length_2344_cov_5.389978	virus_nombrado	identificado	Aedes binegev-like virus 1	2344	0.000	2	M48_S5	1.000	0.902	7.0	indeterminado
+M71_S19__megahit__k119_3499	virus_nombrado	identificado	Arthas virus	2246	0.000	2	M71_S19	1.000	0.544	100.5	replica
+M74_S21__megahit__k119_20	virus_nombrado	identificado	Guadeloupe mosquito virus	1740	0.000	13	M48_S5	1.000	0.830	1119.2	indeterminado
+M79_S28__megahit__k119_208	virus_nombrado	identificado	Guadeloupe mosquito virus	2906	0.070	15	M21_S29	1.000	1.864	4036.8	indeterminado
+M79_S28__megahit__k119_600	virus_nombrado	identificado	Guadeloupe mosquito virus	717	0.000	13	M48_S5	1.000	0.595	1386.7	replica
