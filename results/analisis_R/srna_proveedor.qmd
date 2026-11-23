@@ -108,10 +108,22 @@ ctg <- mu |>
   pivot_longer(-lib, names_to = "clase", values_to = "n") |>
   mutate(clase = factor(clase, levels = CT))
 
+# El numero sobre la barra es el conteo de contigs con hit viral. En la pila
+# es una franja de pocos pixeles y no hay forma de leerlo. El total sale de
+# `ctg` y no de `mu` para que la etiqueta quede exactamente en lo alto de lo
+# que se dibuja, aunque alguna columna del proveedor venga vacia.
+tot_ctg <- ctg |>
+  group_by(lib) |>
+  summarise(total = sum(n, na.rm = TRUE), .groups = "drop") |>
+  left_join(select(mu, lib, virales = contigs_virales), by = "lib")
+
 pC <- ggplot(ctg, aes(lib, n, fill = clase)) +
   geom_col(width = 0.78, colour = SUPERFICIE, linewidth = 0.2) +
+  geom_text(data = tot_ctg, aes(lib, total, label = virales),
+            inherit.aes = FALSE, vjust = -0.7, size = 2.1,
+            colour = PAL[["azul"]], fontface = "bold") +
   scale_fill_manual(values = setNames(c(PAL[["azul"]], PAL[["violeta"]], GRIS), CT)) +
-  scale_y_continuous(expand = expansion(c(0, 0.05))) +
+  scale_y_continuous(expand = expansion(c(0, 0.12))) +
   eje_lib +
   labs(subtitle = "C · Assembled contigs (≥ 200 nt)",
        x = NULL, y = "contigs", fill = NULL) +
