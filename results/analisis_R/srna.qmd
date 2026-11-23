@@ -180,3 +180,147 @@ comp |>
   knitr::kable()
 ```
 
+## What the small RNA says about each virus
+
+```{r prep-nivelB}
+cons <- read_tsv(file.path(DATOS, "nivelB_consenso.tsv"), show_col_types = FALSE)
+obj  <- read_tsv(file.path(DATOS, "nivelB_objetivos_anotados.tsv"), show_col_types = FALSE)
+
+# La puerta: solo los objetivos interpretables. El consenso cubre las 5,899 +
+# el control, y de esas solo 106 son es_virus -- el resto son huesped, oscura,
+# rRNA y celular_otro, que satisfacen el perfil de EVE trivialmente (piRNA de
+# una hebra y presentes en AaegL5). Sin esta restriccion la figura la dominan
+# loci del mosquito.
+cons <- cons |> semi_join(select(obj, votu), by = "votu")
+
+CLASES <- c("replica", "virus_mas_piRNA", "EVE_NIRVS",
+            "ambiguo", "bajo_umbral", "rrna")
+ETIQ_B <- c(replica = "Replicating", virus_mas_piRNA = "Virus + piRNA",
+            EVE_NIRVS = "EVE / NIRVS", ambiguo = "Unresolved",
+            bajo_umbral = "Below threshold", rrna = "rRNA")
+COL_B  <- c(replica = PAL[["azul"]], virus_mas_piRNA = PAL[["aqua"]],
+            `EVE_NIRVS` = PAL[["naranja"]], ambiguo = PAL[["violeta"]],
+            bajo_umbral = GRIS, rrna = TINTA_2)
+names(COL_B) <- ETIQ_B[names(COL_B)]
+```
+
+```{r g-srna-virus, fig.height = 9}
+# Una fila por especie: de las vOTUs que comparten nombre_virus, la de mas RPM.
+# Es el mismo criterio de representante que usa C4 en cobertura.qmd.
+rep_v <- cons |>
+  filter(!is.na(nombre_virus), nombre_virus != "") |>
+  group_by(nombre_virus) |>
+  slice_max(rpm_max, n = 1, with_ties = FALSE) |>
+  ungroup()
+
+larga <- rep_v |>
+  select(nombre_virus, rpm_max, all_of(CLASES)) |>
+  pivot_longer(all_of(CLASES), names_to = "clase", values_to = "n") |>
+  mutate(clase = factor(ETIQ_B[clase], levels = ETIQ_B))
+
+# Orden: primero las que tienen evidencia de replicacion, luego por RPM.
+orden_v <- rep_v |>
+  mutate(evid = replica + virus_mas_piRNA) |>
+  arrange(evid, rpm_max) |>
+  pull(nombre_virus)
+
+larga  <- larga  |> mutate(nombre_virus = factor(nombre_virus, levels = orden_v))
+etiq_v <- rep_v  |> mutate(nombre_virus = factor(nombre_virus, levels = orden_v))
+
+n_lib <- max(rep_v$muestras, na.rm = TRUE)
+
+pS2 <- ggplot(larga, aes(n, nombre_virus, fill = clase)) +
+  geom_col(width = 0.72, colour = SUPERFICIE, linewidth = 0.2) +
+  geom_text(data = etiq_v, aes(x = Inf, y = nombre_virus,
+                               label = format(round(rpm_max), big.mark = ",")),
+            inherit.aes = FALSE, hjust = -0.15, size = 2.5, colour = TINTA_2) +
+  scale_fill_manual(values = COL_B, drop = FALSE) +
+  scale_x_continuous(expand = expansion(c(0, 0.16))) +
+  coord_cartesian(clip = "off") +
+  labs(title = "Small RNA profile of each virus, across all libraries",
+       subtitle = paste0("One row per viral species; of the vOTUs sharing a name, ",
+                         "the one with most RPM. ", n_lib, " libraries.\n",
+                         "Right: maximum RPM of that vOTU in any library."),
+       x = paste0("libraries (of ", n_lib, ")"), y = NULL, fill = NULL,
+       caption = paste0("Replicating: 21 nt peak, siRNA from both strands, and ",
+                        "below half the reads in AaegL5. EVE/NIRVS: one strand, no ",
+                        "21 nt peak, and at least half the reads in AaegL5.")) +
+  theme(panel.grid.major.y = element_blank(),
+        axis.text.y = element_text(size = 6.5),
+        legend.position = "top",
+        plot.margin = margin(5, 28, 5, 5)) +
+  guides(fill = guide_legend(nrow = 1, override.aes = list(colour = NA)))
+guardar_srna(pS2, "S2_virus_srna", alto = max(120, 5.6 * nrow(rep_v) + 45))
+pS2
+```
+
+## Agreement between the two techniques
+
+```{r g-srna-acuerdo, fig.height = 4.5}
+# El motivo viene de la lista preinscrita de objetivos: lo que el ARN LARGO
+# dijo de cada vOTU. La clase viene del ARN PEQUENO. Son medidas de cosas
+# distintas -- cobertura del transcriptoma frente a perfil de tamano y hebra --
+# asi que el acuerdo no es circular.
+ETIQ_M <- c(CFAV = "CFAV", PCLV = "PCLV", HTV = "HTV",
+            virus_nombrado = "Named virus", virus_like = "Relative (-like)",
+            especie_nueva = "New species", pariente_especie_nueva = "Putative new species",
+            revisar_evidencia_debil = "Weak evidence",
+            EVE_genoma = "EVE in genome", EVE_candidato = "Candidate EVE",
+            CONTROL = "Positive control")
+# Orden: lo que el ARN largo llamo virus arriba, lo que llamo EVE abajo.
+ORDEN_M <- rev(c("CONTROL", "EVE_genoma", "EVE_candidato", "revisar_evidencia_debil",
+                 "pariente_especie_nueva", "especie_nueva", "virus_like",
+                 "virus_nombrado", "HTV", "PCLV", "CFAV"))
+
+ac <- cons |>
+  inner_join(select(obj, votu, motivo), by = "votu") |>
+  filter(motivo %in% ORDEN_M) |>
+  mutate(motivo = factor(ETIQ_M[motivo], levels = ETIQ_M[ORDEN_M]),
+         clase  = consenso,
+         clase  = if_else(clase == "MIXTO_replica_y_EVE", "replica", clase),
+         clase  = if_else(clase == "no_interpretable_rrna", "rrna", clase),
+         clase  = factor(ETIQ_B[clase], levels = ETIQ_B))
+
+n_mot <- ac |> count(motivo, name = "n")
+
+pS3 <- ggplot(ac, aes(y = motivo, fill = clase)) +
+  geom_bar(position = "fill", width = 0.72, colour = SUPERFICIE, linewidth = 0.2) +
+  geom_text(data = n_mot, aes(x = 1, y = motivo, label = n),
+            inherit.aes = FALSE, hjust = -0.3, size = 2.7, colour = TINTA_2) +
+  scale_fill_manual(values = COL_B, drop = FALSE) +
+  scale_x_continuous(labels = label_percent(), expand = expansion(c(0, 0.08))) +
+  coord_cartesian(clip = "off") +
+  labs(title = "The two techniques agree",
+       subtitle = paste0("Rows: what the long RNA called each vOTU. Colour: what the ",
+                         "small RNA profile says.\nMIXTO counted as replicating. ",
+                         "Right: vOTUs in each group."),
+       x = NULL, y = NULL, fill = NULL) +
+  theme(panel.grid.major.y = element_blank(),
+        legend.position = "top",
+        plot.margin = margin(5, 20, 5, 5)) +
+  guides(fill = guide_legend(nrow = 1, override.aes = list(colour = NA)))
+guardar_srna(pS3, "S3_acuerdo", alto = 110)
+pS3
+```
+
+```{r tabla-acuerdo}
+# La cifra que va en el texto: replicacion en lo que el largo llamo virus
+# frente a lo que llamo EVE, entre las vOTUs que superan el umbral.
+VIRUS_M <- ETIQ_M[c("CFAV","PCLV","HTV","virus_nombrado","virus_like",
+                    "especie_nueva","pariente_especie_nueva")]
+EVE_M   <- ETIQ_M[c("EVE_genoma","EVE_candidato")]
+
+ac |>
+  mutate(grupo = case_when(motivo %in% VIRUS_M ~ "Called virus by long RNA",
+                           motivo %in% EVE_M   ~ "Called EVE by long RNA",
+                           TRUE ~ NA_character_)) |>
+  filter(!is.na(grupo)) |>
+  group_by(grupo) |>
+  summarise(`vOTUs` = n(),
+            `Above threshold` = sum(clase != ETIQ_B[["bajo_umbral"]]),
+            `Replicating` = sum(clase %in% ETIQ_B[c("replica","virus_mas_piRNA")]),
+            .groups = "drop") |>
+  mutate(`% of those above threshold` =
+           paste0(round(100 * Replicating / `Above threshold`, 1), " %")) |>
+  knitr::kable()
+```
