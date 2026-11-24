@@ -1,9 +1,11 @@
 #!/usr/bin/env Rscript
 # =============================================================================
-# Mapa de sitios de colecta (MERIDA) + esfuerzo de colecta por especie y sexo
+# Mapa de sitios de colecta de las muestras del estudio (MERIDA):
+#   Ae. aegypti (RNA total + ARN pequeño, y extras solo ARN pequeño)
+#   Cx. quinquefasciatus (solo ARN pequeño)
 #
 # Uso:
-#   Rscript mapa_colecta.R Colecta_Aedes_MiguelGarcia.xlsx [salida_prefijo]
+#   Rscript mapa_colecta.R Colecta_Aedes_MiguelGarcia.xlsx [prefijo_salida]
 #
 # Entradas (misma carpeta que este script):
 #   localidades.tsv            coordenadas por localidad (columna `verificado`)
@@ -12,12 +14,15 @@
 #   (las dos capas se generan con prep_geo.R)
 #
 # Salidas:
-#   <prefijo>.pdf / <prefijo>.png   figura (A: mapa, B: individuos por sitio)
-#   <prefijo>_colecta_limpia.tsv    tabla limpia muestra → localidad (para
-#                                   cruzar después con el viroma)
+#   <prefijo>.pdf / <prefijo>.png   figura (A: mapa, B: pools por sitio)
+#   <prefijo>_muestras_estudio.tsv  muestra → localidad, coordenadas y tipo de
+#                                   dato (para cruzar después con el viroma)
 #
 # Paquetes: sf, ggplot2, dplyr, tidyr, readxl, readr, stringr, ggrepel,
 #           ggspatial, patchwork. Opcional: rosm (teselas de fondo).
+# Instalar una vez (en R):
+#   install.packages(c("sf", "ggplot2", "dplyr", "tidyr", "readxl", "readr",
+#                      "stringr", "ggrepel", "ggspatial", "patchwork"))
 # =============================================================================
 
 suppressPackageStartupMessages({
@@ -28,25 +33,32 @@ suppressPackageStartupMessages({
 sf_use_s2(FALSE)
 
 # ---- Parámetros -------------------------------------------------------------
-# Especies a incluir (cambia aquí; p. ej. solo Ae. aegypti + Cx. quinquefasciatus)
-ESPECIES <- c("Aedes aegypti", "Culex quinquefasciatus",
-              "Aedes albopictus", "Aedes taeniorhynchus")
+# Muestras del estudio (pools secuenciados). Edita aquí si cambia el conjunto.
+AAE_TOTAL <- c("M1", "M2", "M7", "M9", "M11", "M20", "M21", "M22", "M35", "M36",
+               "M48", "M55", "M56", "M57", "M58", "M59", "M60", "M62", "M71",
+               "M72", "M74", "M79")                 # RNA total + ARN pequeño
+AAE_SRNA  <- c("M41", "M45", "M61", "M78")           # solo ARN pequeño (extras)
+CQU_SRNA  <- c("M16", "M32.1", "M32.2", "M43", "M65", "M69", "M77")  # solo ARN pequeño
+# Pools con algunos individuos de otro sitio (comentarios de la tabla); se
+# asignan al sitio mayoritario, que es el de su propia fila.
+POOLS_MIXTOS <- c("M16", "M43", "M62", "M65", "M74")
 # Fondo de teselas (CARTO light vía OSM). Requiere internet y el paquete rosm.
 USAR_TESELAS <- FALSE
 CRS_UTM <- 32616   # WGS 84 / UTM zona 16N
 
-# Paleta categórica en orden fijo (validada: CVD y visión normal PASS)
-COL_ESP <- c("Aedes aegypti"          = "#2a78d6",
-             "Culex quinquefasciatus" = "#eb6834",
-             "Aedes albopictus"       = "#1baf7a",
-             "Aedes taeniorhynchus"   = "#eda100")
+# Colores por grupo (azul = Ae. aegypti en dos tonos; naranja = Cx. quinquefasciatus)
+GRUPOS  <- c("aae_total", "aae_srna", "cqu_srna")
+COL_GRP <- c(aae_total = "#2a78d6", aae_srna = "#86b6ef", cqu_srna = "#eb6834")
+LAB_GRP <- list(aae_total = quote(italic("Ae. aegypti") ~ "(RNA-seq + small RNA)"),
+                aae_srna  = quote(italic("Ae. aegypti") ~ "(small RNA only)"),
+                cqu_srna  = quote(italic("Cx. quinquefasciatus") ~ "(small RNA only)"))
 TXT1 <- "#1f1f1d"; TXT2 <- "#5f5e5a"; GRIS <- "#b9b8b2"
 
 # ---- Argumentos --------------------------------------------------------------
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) < 1) stop("Uso: Rscript mapa_colecta.R <tabla.xlsx> [prefijo]")
 xlsx    <- args[1]
-prefijo <- if (length(args) >= 2) args[2] else "fig_mapa_colecta"
+prefijo <- if (length(args) >= 2) args[2] else "fig_mapa_estudio"
 
 aqui <- tryCatch(dirname(normalizePath(sub("--file=", "",
           grep("--file=", commandArgs(FALSE), value = TRUE)))),
@@ -100,31 +112,33 @@ if (length(falta)) stop("Localidades sin coordenadas en localidades.tsv: ",
                         paste(falta, collapse = ", "))
 col <- left_join(col, loc, by = c("lugar" = "lugar_tabla"))
 
-write_tsv(select(col, id, id_unico, fecha, localidad, lat, lon, metodo,
-                 especie, sexo, n, rnaseq, comentario),
-          paste0(prefijo, "_colecta_limpia.tsv"), na = "")
+# ---- 3. Muestras del estudio --------------------------------------------------
+estudio <- bind_rows(
+  tibble(id = AAE_TOTAL, especie = "Aedes aegypti",          grupo = "aae_total"),
+  tibble(id = AAE_SRNA,  especie = "Aedes aegypti",          grupo = "aae_srna"),
+  tibble(id = CQU_SRNA,  especie = "Culex quinquefasciatus", grupo = "cqu_srna")
+) %>%
+  mutate(id_origen = sub("\\.\\d+$", "", id))   # M32.1 / M32.2 salen de M32
 
-# ---- 3. Resumen para la figura -----------------------------------------------
-esp <- filter(col, especie %in% ESPECIES)
+# Se casa por ID de origen Y especie (la tabla repite M9 y M10 con otra especie)
+mues <- estudio %>%
+  left_join(select(col, id, especie, localidad, lat, lon, verificado, fecha, metodo),
+            by = c("id_origen" = "id", "especie"))
+if (any(is.na(mues$localidad)) || anyDuplicated(mues$id))
+  stop("No se pudo asignar localidad única a: ",
+       paste(mues$id[is.na(mues$localidad) | duplicated(mues$id)], collapse = ", "))
+mues <- mutate(mues, pool_mixto = id %in% POOLS_MIXTOS)
 
-por_sitio <- esp %>%
+write_tsv(select(mues, id, especie, grupo, localidad, lat, lon, verificado,
+                 fecha, metodo, pool_mixto),
+          paste0(prefijo, "_muestras_estudio.tsv"), na = "")
+
+por_sitio <- mues %>%
   group_by(localidad, lat, lon, verificado) %>%
-  summarise(n = sum(n, na.rm = TRUE), .groups = "drop")
-
-por_esp_sexo <- esp %>%
-  mutate(sexo = recode(sexo, hembra = "Females", macho = "Males")) %>%
-  group_by(localidad, especie, sexo) %>%
-  summarise(n = sum(n, na.rm = TRUE), .groups = "drop") %>%
-  complete(localidad, especie, sexo, fill = list(n = 0))
-
-orden_loc <- por_sitio %>% arrange(n) %>% pull(localidad)
-esp_presentes <- ESPECIES[ESPECIES %in% esp$especie]
-lab_esp <- setNames(
-  lapply(esp_presentes, function(s) {
-    p <- strsplit(s, " ")[[1]]
-    abbr <- c(Aedes = "Ae.", Culex = "Cx.")[p[1]]
-    bquote(italic(.(paste(abbr, p[2]))))
-  }), esp_presentes)
+  summarise(n = n(), .groups = "drop")
+por_grupo <- mues %>% count(localidad, grupo) %>%
+  complete(localidad, grupo = GRUPOS, fill = list(n = 0))
+orden_loc <- por_sitio %>% arrange(n, localidad) %>% pull(localidad)
 
 # ---- 4. Panel A: mapa --------------------------------------------------------
 muni <- st_read(ruta("geo/municipios_zona.gpkg"), quiet = TRUE) %>% st_transform(CRS_UTM)
@@ -150,8 +164,8 @@ pA <- pA +
              shape = 21, fill = TXT1, colour = "white", stroke = 0.8) +
   geom_point(data = filter(xy, verificado != "si"), aes(X, Y, size = n),
              shape = 21, fill = "white", colour = TXT1, stroke = 1) +
-  scale_size_area(max_size = 9, name = "Individuals",
-                  breaks = c(25, 100, 250), limits = c(0, max(xy$n)),
+  scale_size_area(max_size = 9, name = "Pools",
+                  breaks = c(1, 4, 8), limits = c(0, max(xy$n)),
                   guide = guide_legend(override.aes = list(fill = TXT1,
                                                            colour = "white"))) +
   geom_text_repel(data = xy, aes(X, Y, label = localidad), size = 3.1,
@@ -190,23 +204,22 @@ pA <- pA + inset_element(inset, left = 0.01, bottom = 0.52, right = 0.30,
                          top = 0.89, align_to = "panel",
                          ignore_tag = TRUE)
 
-# ---- 5. Panel B: individuos por sitio, especie y sexo ------------------------
-tot_sexo <- por_esp_sexo %>% group_by(localidad, sexo) %>%
-  summarise(n = sum(n), .groups = "drop")
+# ---- 5. Panel B: pools por sitio y tipo de dato --------------------------------
+tot <- count(mues, localidad)
 
-pB <- ggplot(por_esp_sexo,
+pB <- ggplot(por_grupo,
              aes(n, factor(localidad, levels = orden_loc),
-                 fill = factor(especie, levels = rev(esp_presentes)))) +
+                 fill = factor(grupo, levels = rev(GRUPOS)))) +
   geom_col(width = 0.7, colour = "white", linewidth = 0.4) +
-  geom_text(data = tot_sexo, inherit.aes = FALSE,
+  geom_text(data = tot, inherit.aes = FALSE,
             aes(n, factor(localidad, levels = orden_loc), label = n),
-            hjust = -0.25, size = 2.7, colour = TXT2) +
-  facet_wrap(~sexo, nrow = 1) +
+            hjust = -0.4, size = 2.9, colour = TXT2) +
   coord_cartesian(clip = "off") +
-  scale_fill_manual(values = COL_ESP, breaks = esp_presentes,
-                    labels = lab_esp, name = NULL) +
-  scale_x_continuous(expand = expansion(mult = c(0, 0.18))) +
-  labs(x = "Individuals collected", y = NULL) +
+  scale_fill_manual(values = COL_GRP, breaks = GRUPOS, labels = LAB_GRP,
+                    name = NULL) +
+  scale_x_continuous(breaks = seq(0, 20, 2),
+                     expand = expansion(mult = c(0, 0.08))) +
+  labs(x = "Pools sequenced", y = NULL) +
   theme_minimal(base_size = 9) +
   theme(panel.grid.major.y = element_blank(),
         panel.grid.minor = element_blank(),
@@ -214,16 +227,18 @@ pB <- ggplot(por_esp_sexo,
         axis.text = element_text(colour = TXT2),
         axis.text.y = element_text(colour = TXT1, size = 8.5),
         axis.title.x = element_text(colour = TXT2, size = 8),
-        strip.text = element_text(colour = TXT1, face = "bold", hjust = 0),
-        legend.position = "bottom",
+        legend.position = "bottom", legend.direction = "vertical",
         legend.text = element_text(colour = TXT2, size = 8),
-        legend.key.size = unit(0.35, "cm")) +
-  guides(fill = guide_legend(nrow = 2, byrow = TRUE))
+        legend.key.size = unit(0.35, "cm"))
 
 # ---- 6. Componer y guardar ---------------------------------------------------
-fechas <- range(col$fecha, na.rm = TRUE)
-pie <- sprintf("Field collections %s – %s. Point size: individuals of the species shown. Shaded: Mérida municipality (INEGI 2023).",
-               format(fechas[1], "%d %b %Y"), format(fechas[2], "%d %b %Y"))
+fechas <- range(mues$fecha, na.rm = TRUE)
+pie <- sprintf(paste0("Pools sequenced in this study (n = %d), collected %s – %s. ",
+                      "Point size: pools per site. Shaded: Mérida municipality (INEGI 2023).\n",
+                      "Pools %s include a few individuals from another site and are ",
+                      "assigned to their majority site."),
+               nrow(mues), format(fechas[1], "%d %b %Y"), format(fechas[2], "%d %b %Y"),
+               paste(POOLS_MIXTOS, collapse = ", "))
 if (hay_sin_verificar)
   pie <- paste(pie, "Hollow points: approximate coordinates (to be verified).")
 
@@ -243,9 +258,10 @@ ggsave(paste0(prefijo, ".png"), fig, width = 25, height = 12.5, units = "cm",
 # ---- 7. Avisos ----------------------------------------------------------------
 message(sprintf("Filas de campo usadas: %d (se omitieron %d filas sin localidad: pools/submuestras)",
                 nrow(col), n_sin_lugar))
-message("Especies incluidas: ", paste(esp_presentes, collapse = ", "))
+print(count(mues, localidad, grupo) %>% pivot_wider(names_from = grupo,
+      values_from = n, values_fill = 0))
 if (hay_sin_verificar)
   message("OJO - coordenadas sin verificar: ",
           paste(pts$localidad[pts$verificado != "si"], collapse = ", "),
           "  → edita lat/lon y pon verificado=si en localidades.tsv")
-message("Escrito: ", prefijo, ".pdf/.png y ", prefijo, "_colecta_limpia.tsv")
+message("Escrito: ", prefijo, ".pdf/.png y ", prefijo, "_muestras_estudio.tsv")

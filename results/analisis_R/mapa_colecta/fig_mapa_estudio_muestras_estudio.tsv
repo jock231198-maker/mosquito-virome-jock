@@ -1,0 +1,34 @@
+id	especie	grupo	localidad	lat	lon	verificado	fecha	metodo	pool_mixto
+M1	Aedes aegypti	aae_total	Dzityá	21.05019	-89.67794	si	2024-09-04	ASPIRADO	FALSE
+M2	Aedes aegypti	aae_total	Dzityá	21.05019	-89.67794	si	2024-09-04	ASPIRADO	FALSE
+M7	Aedes aegypti	aae_total	Dzityá	21.05019	-89.67794	si	2024-09-04	ASPIRADO	FALSE
+M9	Aedes aegypti	aae_total	Komchén	21.10352	-89.66174	si	2024-09-04	ASPIRADO	FALSE
+M11	Aedes aegypti	aae_total	Dzityá	21.05019	-89.67794	si	2024-09-04	ASPIRADO	FALSE
+M20	Aedes aegypti	aae_total	Xcanatún	21.0776	-89.6307	si	2024-09-05	BG	FALSE
+M21	Aedes aegypti	aae_total	Xcanatún	21.0776	-89.6307	si	2024-09-05	BG	FALSE
+M22	Aedes aegypti	aae_total	Xcanatún	21.0776	-89.6307	si	2024-09-05	BG	FALSE
+M35	Aedes aegypti	aae_total	Komchén	21.10352	-89.66174	si	2024-09-05	BG	FALSE
+M36	Aedes aegypti	aae_total	Komchén	21.10352	-89.66174	si	2024-09-05	BG	FALSE
+M48	Aedes aegypti	aae_total	Komchén	21.10352	-89.66174	si	2024-09-05	ASPIRADO	FALSE
+M55	Aedes aegypti	aae_total	Komchén	21.10352	-89.66174	si	2024-09-05	ASPIRADO	FALSE
+M56	Aedes aegypti	aae_total	Komchén	21.10352	-89.66174	si	2024-09-05	ASPIRADO	FALSE
+M57	Aedes aegypti	aae_total	Komchén	21.10352	-89.66174	si	2024-09-05	ASPIRADO	FALSE
+M58	Aedes aegypti	aae_total	Komchén	21.10352	-89.66174	si	2024-09-05	ASPIRADO	FALSE
+M59	Aedes aegypti	aae_total	Komchén	21.10352	-89.66174	si	2024-09-05	ASPIRADO	FALSE
+M60	Aedes aegypti	aae_total	Komchén	21.10352	-89.66174	si	2024-09-05	ASPIRADO	FALSE
+M62	Aedes aegypti	aae_total	Xcom (Miguel Hidalgo)	21	-89.655	no	2024-09-10	ASPIRADO	TRUE
+M71	Aedes aegypti	aae_total	García Ginerés	20.9838	-89.6331	no	2024-10-17	ASPIRADO	FALSE
+M72	Aedes aegypti	aae_total	García Ginerés	20.9838	-89.6331	no	2024-10-17	ASPIRADO	FALSE
+M74	Aedes aegypti	aae_total	Centro (Mérida)	20.967	-89.62318	si	2024-10-17	ASPIRADO	TRUE
+M79	Aedes aegypti	aae_total	Hunucmá	21.01528	-89.87444	si	2024-09-18	ASPIRADO	FALSE
+M41	Aedes aegypti	aae_srna	Santa Gertrudis Copó	21.035	-89.64	no	2024-09-05	ASPIRADO	FALSE
+M45	Aedes aegypti	aae_srna	Santa Gertrudis Copó	21.035	-89.64	no	2024-09-05	ASPIRADO	FALSE
+M61	Aedes aegypti	aae_srna	Xcom (Miguel Hidalgo)	21	-89.655	no	2024-09-10	ASPIRADO	FALSE
+M78	Aedes aegypti	aae_srna	Hunucmá	21.01528	-89.87444	si	2024-09-18	ASPIRADO	FALSE
+M16	Culex quinquefasciatus	cqu_srna	Dzityá	21.05019	-89.67794	si	2024-09-04	ASPIRADO	TRUE
+M32.1	Culex quinquefasciatus	cqu_srna	Xcanatún	21.0776	-89.6307	si	2024-09-05	ASPIRADO	FALSE
+M32.2	Culex quinquefasciatus	cqu_srna	Xcanatún	21.0776	-89.6307	si	2024-09-05	ASPIRADO	FALSE
+M43	Culex quinquefasciatus	cqu_srna	Santa Gertrudis Copó	21.035	-89.64	no	2024-09-05	ASPIRADO	TRUE
+M65	Culex quinquefasciatus	cqu_srna	Xcom (Miguel Hidalgo)	21	-89.655	no	2024-09-10	ASPIRADO	TRUE
+M69	Culex quinquefasciatus	cqu_srna	Xcom (Miguel Hidalgo)	21	-89.655	no	2024-09-10	ASPIRADO	FALSE
+M77	Culex quinquefasciatus	cqu_srna	Centro (Mérida)	20.967	-89.62318	si	2024-10-17	ASPIRADO	FALSE
