@@ -23,7 +23,7 @@ DATOS <- params$datos
 source("R/tema.R")
 suppressPackageStartupMessages({
   library(readr); library(dplyr); library(tidyr); library(ggplot2)
-  library(scales); library(forcats); library(patchwork)
+  library(scales); library(forcats); library(patchwork); library(stringr)
 })
 
 # Salvado propio: estas figuras viven en su propia carpeta y no dependen de
@@ -204,53 +204,114 @@ COL_B  <- c(replica = PAL[["azul"]], virus_mas_piRNA = PAL[["aqua"]],
 names(COL_B) <- ETIQ_B[names(COL_B)]
 ```
 
-```{r g-srna-virus, fig.height = 9}
-# Una fila por especie: de las vOTUs que comparten nombre_virus, la de mas RPM.
-# Es el mismo criterio de representante que usa C4 en cobertura.qmd.
-rep_v <- cons |>
-  filter(!is.na(nombre_virus), nombre_virus != "") |>
-  group_by(nombre_virus) |>
+```{r g-srna-virus, fig.height = 11}
+# Una fila por vOTU, agrupadas por especie.
+#
+# Antes habia una fila por especie y el representante se elegia con
+# slice_max(rpm_max). Eso se queda SIEMPRE con el EVE cuando la especie tiene
+# las dos formas, porque un EVE es 10-100x mas profundo que el virus (§5.4b).
+# En 3 de las 46 especies el veredicto cambiaba por eso -- Guadeloupe mosquito
+# virus (4 de 6 vOTUs replican), Verdadero virus (2 de 5) y Aedes anphevirus
+# (3 de 4) -- y las tres son de las mas prevalentes de la figura. Un virus que
+# replica y que ademas tiene copias endogenas es el caso normal de un ISV en
+# infeccion persistente, y solo se lee si las vOTUs de la especie estan juntas.
+nom <- cons |> filter(!is.na(nombre_virus), nombre_virus != "")
+
+# Convencion de nombres de las figuras: "X-like", no "afin a X".
+a_like <- function(x) ifelse(grepl("^af.n a ", x),
+                             paste0(sub("^af.n a ", "", x), "-like"), x)
+nom <- nom |> mutate(nombre_virus = a_like(nombre_virus))
+
+# Copias redundantes del catalogo. cd-hit al 95 % de identidad y 85 % de
+# cobertura deja separadas vOTUs que son el mismo contig ensamblado por dos
+# programas: el anphevirus de M1_S1 esta tres veces (13,015 / 13,043 / 15,488
+# bp, y 13,015/15,488 = 0.84, justo por debajo del 0.85). Se reconocen por
+# tener el vector de clases identico dentro de la misma especie.
+nom <- nom |>
+  group_by(nombre_virus, muestras, replica, virus_mas_piRNA, EVE_NIRVS,
+           ambiguo, bajo_umbral, rrna) |>
+  mutate(copias = n()) |>
   slice_max(rpm_max, n = 1, with_ties = FALSE) |>
   ungroup()
 
-larga <- rep_v |>
-  select(nombre_virus, rpm_max, all_of(CLASES)) |>
+# Solo las vOTUs que el ARN pequeno pudo leer en alguna libreria: por debajo de
+# 10 rpm el perfil de tamano y hebra no dice nada, y mantenerlas multiplicaria
+# las filas sin anadir informacion. Cuantas quedan fuera va en el pie.
+vistas  <- nom |> filter(bajo_umbral < muestras, rrna < muestras)
+fuera_v <- nrow(nom) - nrow(vistas)
+fuera_e <- n_distinct(nom$nombre_virus) - n_distinct(vistas$nombre_virus)
+stopifnot(nrow(vistas) > 0)
+
+# Etiqueta de fila: el pool y el ensamblador que produjeron ese contig.
+etiqueta <- function(v, copias) {
+  p <- strsplit(v, "__", fixed = TRUE)
+  base <- vapply(p, function(x)
+    paste0(sub("_S[0-9]+$", "", x[1]), " · ", x[2]), character(1))
+  ifelse(copias > 1, paste0(base, "  ×", copias), base)
+}
+vistas <- vistas |> mutate(fila = etiqueta(votu, copias))
+
+# Orden. Las especies con alguna vOTU replicativa van primero y, dentro de
+# ellas, por RPM descendente: con facet_grid el primer nivel es el panel de
+# arriba, asi que el resultado queda donde se empieza a leer. Dentro de cada
+# especie el eje discreto va al reves, de modo que el mayor RPM tambien queda
+# arriba y los dos ordenes coinciden.
+esp <- vistas |>
+  group_by(nombre_virus) |>
+  summarise(rep_esp = any(consenso %in% c("replica", "MIXTO_replica_y_EVE")),
+            rpm_esp = max(rpm_max), .groups = "drop") |>
+  arrange(desc(rep_esp), desc(rpm_esp))
+
+vistas <- vistas |>
+  mutate(nombre_virus = factor(nombre_virus, levels = esp$nombre_virus)) |>
+  arrange(nombre_virus, rpm_max) |>
+  mutate(votu = factor(votu, levels = votu))
+
+larga <- vistas |>
+  select(nombre_virus, votu, rpm_max, all_of(CLASES)) |>
   pivot_longer(all_of(CLASES), names_to = "clase", values_to = "n") |>
   mutate(clase = factor(ETIQ_B[clase], levels = ETIQ_B))
 
-# Orden: primero las que tienen evidencia de replicacion, luego por RPM.
-orden_v <- rep_v |>
-  mutate(evid = replica + virus_mas_piRNA) |>
-  arrange(evid, rpm_max) |>
-  pull(nombre_virus)
+n_lib  <- max(vistas$muestras, na.rm = TRUE)
+etiq_r <- setNames(as.character(vistas$fila), as.character(vistas$votu))
 
-larga  <- larga  |> mutate(nombre_virus = factor(nombre_virus, levels = orden_v))
-etiq_v <- rep_v  |> mutate(nombre_virus = factor(nombre_virus, levels = orden_v))
-
-n_lib <- max(rep_v$muestras, na.rm = TRUE)
-
-pS2 <- ggplot(larga, aes(n, nombre_virus, fill = clase)) +
+pS2 <- ggplot(larga, aes(n, votu, fill = clase)) +
   geom_col(width = 0.72, colour = SUPERFICIE, linewidth = 0.2) +
-  geom_text(data = etiq_v, aes(x = Inf, y = nombre_virus,
-                               label = format(round(rpm_max), big.mark = ",")),
-            inherit.aes = FALSE, hjust = -0.15, size = 2.5, colour = TINTA_2) +
+  geom_text(data = vistas, aes(x = Inf, y = votu,
+                               label = format(round(rpm_max), big.mark = ",",
+                                              trim = TRUE)),
+            inherit.aes = FALSE, hjust = -0.15, size = 2.3, colour = TINTA_2) +
+  facet_grid(nombre_virus ~ ., scales = "free_y", space = "free_y",
+             switch = "y", labeller = label_wrap_gen(26)) +
   scale_fill_manual(values = COL_B, drop = FALSE) +
-  scale_x_continuous(expand = expansion(c(0, 0.16))) +
+  scale_y_discrete(labels = etiq_r) +
+  scale_x_continuous(breaks = c(0, 10, 20, n_lib),
+                     expand = expansion(c(0, 0.18))) +
   coord_cartesian(clip = "off") +
-  labs(title = "Small RNA profile of each virus, across all libraries",
-       subtitle = paste0("One row per viral species; of the vOTUs sharing a name, ",
-                         "the one with most RPM. ", n_lib, " libraries.\n",
-                         "Right: maximum RPM of that vOTU in any library."),
+  labs(title = "Small RNA profile of every viral vOTU, across all libraries",
+       subtitle = paste0("One row per vOTU, grouped by the virus it was named ",
+                         "after. ", n_lib, " libraries.\nRight: that vOTU's ",
+                         "maximum RPM in any single library."),
        x = paste0("libraries (of ", n_lib, ")"), y = NULL, fill = NULL,
-       caption = paste0("Replicating: 21 nt peak, siRNA from both strands, and ",
-                        "below half the reads in AaegL5. EVE/NIRVS: one strand, no ",
-                        "21 nt peak, and at least half the reads in AaegL5.")) +
+       caption = str_wrap(paste0(
+         "Replicating: 21 nt peak, siRNA from both strands, and fewer than half ",
+         "the reads matching AaegL5. EVE/NIRVS: one strand, no 21 nt peak, and at ",
+         "least half the reads matching AaegL5. Redundant catalogue entries -- the ",
+         "same contig assembled by two programs -- are collapsed into one row and ",
+         "marked with the number of copies. ", fuera_v, " vOTUs that stay below ",
+         "10 rpm in every library are not shown, which removes ", fuera_e,
+         " virus names from the figure entirely."), width = 150)) +
   theme(panel.grid.major.y = element_blank(),
-        axis.text.y = element_text(size = 6.5),
+        panel.spacing.y = unit(1.5, "pt"),
+        axis.text.y = element_text(size = 5.8),
+        strip.placement = "outside",
+        strip.background = element_blank(),
+        strip.text.y.left = element_text(angle = 0, hjust = 1, size = 6,
+                                         colour = TINTA_2),
         legend.position = "top",
-        plot.margin = margin(5, 28, 5, 5)) +
+        plot.margin = margin(5, 30, 5, 5)) +
   guides(fill = guide_legend(nrow = 1, override.aes = list(colour = NA)))
-guardar_srna(pS2, "S2_virus_srna", alto = max(120, 5.6 * nrow(rep_v) + 45))
+guardar_srna(pS2, "S2_virus_srna", alto = max(140, 5.2 * nrow(vistas) + 60))
 pS2
 ```
 

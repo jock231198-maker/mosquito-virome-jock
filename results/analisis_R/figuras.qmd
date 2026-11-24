@@ -116,14 +116,15 @@ p2b <- ggplot(contigs, aes(longitud, ens, colour = ens)) +
   geom_boxplot(outlier.size = 0.4, outlier.alpha = 0.4, width = 0.55, linewidth = 0.4, fill = NA) +
   geom_text(data = n_ens, aes(x = Inf, y = ens, label = paste0("n = ", format(n, big.mark = ","))),
             inherit.aes = FALSE, hjust = 1.05, vjust = -0.9, size = 2.6, colour = TINTA_2) +
-  scale_x_log10(labels = label_number(big.mark = ","), breaks = c(1e3, 3e3, 1e4, 3e4)) +
+  scale_x_log10(labels = label_number(big.mark = ","), breaks = c(500, 1e3, 3e3, 1e4, 3e4)) +
   scale_colour_manual(values = col_ens, guide = "none") +
   labs(x = "contig length (bp, log scale)", y = NULL) +
   theme(panel.grid.major.y = element_blank())
 
 p2 <- (p2a / p2b) + plot_layout(heights = c(2.2, 1)) +
   plot_annotation(title = "Contigs in the union, by assembler",
-                  subtitle = paste0(format(nrow(contigs), big.mark = ","), " contigs ≥ 1,000 bp from ",
+                  subtitle = paste0(format(nrow(contigs), big.mark = ","), " contigs ≥ ",
+                                    format(min(contigs$longitud), big.mark = ","), " bp from ",
                                     n_distinct(contigs$ens), " assemblers, dereplicated per sample"))
 guardar(p2, "02_assembly", alto = 170)
 p2
@@ -344,7 +345,7 @@ guardar(p6, "06_prevalence", alto = 230, ancho = 200)
 p6
 ```
 
-```{r g-assembly-vs-mapping, eval = HAY_VOTUS, fig.height = 5}
+```{r g-assembly-vs-mapping, eval = HAY_VOTUS, fig.height = 10}
 asm <- votus |>
   filter(es_virus == "si") |>
   mutate(especie_fig = nombre_virus(pick(everything()))) |>
@@ -365,17 +366,89 @@ p6b <- ggplot(comp_l, aes(pools, especie_fig)) +
   geom_point(aes(colour = via, size = via)) +
   scale_size_manual(values = c("Assembled in the pool" = 2.2, "Detected by read mapping" = 3.8), guide = "none") +
   scale_colour_manual(values = c("Assembled in the pool" = PAL[["naranja"]], "Detected by read mapping" = PAL[["azul"]])) +
-  scale_x_continuous(limits = c(0, N_MUESTRAS), breaks = seq(0, N_MUESTRAS, 5)) +
+  scale_x_continuous(limits = c(0, N_MUESTRAS),
+                     breaks = sort(unique(c(seq(0, N_MUESTRAS, 5), N_MUESTRAS)))) +
   labs(title = "Assembly versus read mapping",
        subtitle = "Pools in which each virus was assembled versus pools in which it is detected by read mapping",
-       x = paste0("pools (of ", N_MUESTRAS, ")"), y = NULL) +
-  theme(panel.grid.major.y = element_blank())
-guardar(p6b, "06b_assembly_vs_mapping", alto = 110)
+       x = paste0("pools (of ", N_MUESTRAS, ")"), y = NULL,
+       caption = paste0(
+         "A virus detected by read mapping in many pools but assembled in only one or two is the signature of an\n",
+         "endogenous element or a cellular hit: every mosquito carries the locus, so every pool recruits reads over\n",
+         "it, but it only assembles where coverage happens to suffice. The screen against AaegL5 catches the same\n",
+         "cases more directly, which is why this is a review signal and not a criterion of its own. The two\n",
+         "axes use different criteria, so a few taxa sit the other way round: assembly counts a pool where any\n",
+         "contig of that species was built, while mapping counts a pool where the representative vOTU reaches\n",
+         "70 % of its length covered, and a partial contig does not.")) +
+  theme(panel.grid.major.y = element_blank(),
+        axis.text.y = element_text(size = 6.5))
+guardar(p6b, "06b_assembly_vs_mapping", alto = 230)
 p6b
 ```
 
+```{r tabla-discordancia, eval = HAY_VOTUS}
+# La cifra que va al texto. RESUMEN_min500.md 5.6 fijo la regla -- mapeo alto
+# con ensamblaje <= 3 casi siempre es un EVE o un acierto celular -- y aqui se
+# cuenta en vez de leerse de la figura. El corte de mapeo >= 4 es deliberado y
+# mas laxo que el 18/22 del 5.6: la pregunta no es cuantos casos extremos hay,
+# sino si el patron es de unos pocos taxones o de una categoria entera.
+disc <- comp |>
+  mutate(
+    grupo = if_else(
+      str_detect(as.character(especie_fig), "-like|-related"),
+      "Relative (-like / -related)", "Named species"),
+    discordante = ensamblaje <= 1 & mapeo >= 4)
+
+disc |>
+  group_by(Group = grupo) |>
+  summarise(Taxa = n(),
+            `Assembled in ≤ 1 pool, mapped in ≥ 4` = sum(discordante),
+            `% of the group` = paste0(round(100 * sum(discordante) / n()), " %"),
+            .groups = "drop") |>
+  knitr::kable()
+```
+
+The most extreme cases, assembled in a single pool:
+
+```{r tabla-discordancia-extremos, eval = HAY_VOTUS}
+disc |>
+  filter(ensamblaje <= 1, mapeo >= 8) |>
+  arrange(desc(mapeo)) |>
+  transmute(Virus = as.character(especie_fig),
+            `Assembled in` = ensamblaje,
+            `Detected in` = mapeo) |>
+  knitr::kable()
+```
+
 ```{r table-rate, eval = HAY_VOTUS}
-prev |>
+# El veredicto del ARN pequeno se une POR vOTU, no por nombre: el ARN largo
+# escribe "Hattula totivirus 3-like (59% aa)" y el pequeno "afin a Hattula
+# totivirus 3", que no casan, y ademas el largo distingue cuatro Hattula donde
+# el pequeno ve una. nombre_virus() trabaja por vOTU, asi que el mapa sale de
+# ahi y la agregacion se hace despues.
+DATOS_B    <- "datos_srna_b_v1"
+HAY_NIVELB <- file.exists(file.path(DATOS_B, "nivelB_consenso.tsv"))
+
+veredicto <- NULL
+if (HAY_NIVELB) {
+  nb <- readr::read_tsv(file.path(DATOS_B, "nivelB_consenso.tsv"),
+                        show_col_types = FALSE)
+  veredicto <- votus |>
+    filter(es_virus == "si") |>
+    mutate(especie_fig = nombre_virus(pick(everything()))) |>
+    select(votu, especie_fig) |>
+    inner_join(select(nb, votu, consenso), by = "votu") |>
+    group_by(especie_fig) |>
+    summarise(replica = sum(consenso %in% c("replica", "MIXTO_replica_y_EVE")),
+              eve     = sum(consenso == "EVE_NIRVS"),
+              .groups = "drop") |>
+    mutate(`Small RNA` = case_when(
+      replica > 0 & eve > 0 ~ "Replicating + EVE",
+      replica > 0           ~ "Replicating",
+      eve > 0               ~ "EVE only",
+      TRUE                  ~ "No evidence"))
+}
+
+tasas <- prev |>
   filter(grupo == GRUPOS_VIRUS[["artropodo"]]) |>
   arrange(desc(pools)) |>
   rowwise() |>
@@ -388,9 +461,37 @@ prev |>
             `MIR (‰)` = round(mir, 1),
             `MLE (‰)` = if_else(pools_pos == N_MUESTRAS, NA_real_, round(mle, 1)),
             `95% CI` = if_else(pools_pos == N_MUESTRAS, "all pools positive",
-                                paste0(round(mle_inf, 1), "–", round(mle_sup, 1)))) |>
-  kable(caption = paste0("Individual infection rate per 1,000 females (pools of ", K_POOL,
-                         "). MLE after Chiang and Reeves with a transformed Clopper-Pearson CI; not estimable when all pools are positive."))
+                                paste0(round(mle_inf, 1), "–", round(mle_sup, 1))))
+
+if (!is.null(veredicto)) {
+  tasas <- tasas |>
+    left_join(select(veredicto, Species = especie_fig, `Small RNA`, replica),
+              by = "Species") |>
+    mutate(`Small RNA` = coalesce(`Small RNA`, "Not tested"))
+}
+
+tasas |>
+  select(-any_of("replica")) |>
+  kable(caption = paste0(
+    "Individual infection rate per 1,000 females (pools of ", K_POOL,
+    "). MLE after Chiang and Reeves with a transformed Clopper-Pearson CI; not estimable when all ",
+    "pools are positive. The last column is what the small RNA says about that species' vOTUs. A rate ",
+    "computed over an endogenous element is not an infection rate: every mosquito carries the locus, ",
+    "so the pool is positive whether or not anything is infected."))
+```
+
+```{r table-rate-replica, eval = HAY_VOTUS}
+if (!is.null(veredicto)) {
+  tasas |>
+    filter(replica > 0) |>
+    select(-replica) |>
+    kable(caption = paste0(
+      "The same rates, restricted to the species with small RNA evidence of replication in at least one ",
+      "library. These are the figures to quote as infection rates; everything left out of this table is a ",
+      "detection, not a demonstrated infection."))
+} else {
+  cat("Level B data not found in `", DATOS_B, "`: the restricted table is not built.\n", sep = "")
+}
 ```
 
 # 7. Viral richness per pool
@@ -416,7 +517,10 @@ p7 <- ggplot(riq, aes(muestra, especies, fill = colecta)) +
   scale_x_discrete(labels = etiqueta_muestra) +
   scale_y_continuous(breaks = pretty_breaks(), expand = expansion(c(0, 0.05))) +
   labs(title = "Arthropod virus species detected per pool",
-       subtitle = "Colour: collection date (2024). Phages excluded", x = NULL, y = "species") +
+       subtitle = "Colour: collection date (2024). Phages excluded", x = NULL, y = "species",
+       caption = paste0(
+         "Richness is not rarefied. The pools range from 10 to 75 million raw read pairs and differ in their\n",
+         "non-host fraction, so part of the spread between pools is sequencing effort rather than biology.")) +
   theme(panel.grid.major.x = element_blank(),
         axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1, size = 7))
 guardar(p7, "07_richness", alto = 95)
@@ -492,7 +596,7 @@ p8 <- ggplot(kr, aes(frac, etiqueta, fill = taxon)) +
          round(100 * max(excluido$frac_fuera)), "% of the classified reads per pool. Right: reads left in each pool",
          if (length(pocos)) paste0("; not shown, fewer than ", format(MIN_LECTURAS, big.mark = ","), " reads left: ",
                                    paste(etiqueta_muestra(pocos), collapse = ", ")) else "", "."),
-         width = 125)) +
+         width = 105)) +
   theme(panel.grid.major.y = element_blank()) +
   guides(fill = guide_legend(nrow = 3))
 guardar(p8, "08_kraken2", alto = 140)

@@ -1,0 +1,384 @@
+---
+title: "MERIDA — small RNA libraries (level B)"
+author: "Jose Carlos Marin Montesino"
+lang: en
+date: today
+params:
+  datos: "datos_srna_b_v1"
+format:
+  html:
+    embed-resources: true
+    toc: true
+    toc-depth: 2
+    fig-width: 7.2
+    fig-height: 4.5
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r setup}
+DATOS <- params$datos
+source("R/tema.R")
+suppressPackageStartupMessages({
+  library(readr); library(dplyr); library(tidyr); library(ggplot2)
+  library(scales); library(forcats); library(patchwork); library(stringr)
+})
+
+# Salvado propio: estas figuras viven en su propia carpeta y no dependen de
+# guardar()/guardar_cob(), que estan atados a los datos del RNA largo.
+guardar_srna <- function(p, nombre, alto, ancho = 200) {
+  dir.create("figuras_srna", showWarnings = FALSE)
+  for (ext in c("png", "pdf"))
+    ggsave(file.path("figuras_srna", paste0(nombre, ".", ext)), p,
+           width = ancho, height = alto, units = "mm", dpi = 300)
+}
+
+len <- read_tsv(file.path(DATOS, "lenhist_todas.tsv"), show_col_types = FALSE)
+par <- read_tsv(file.path(DATOS, "particion_todas.tsv"), show_col_types = FALSE) |>
+  pivot_wider(names_from = metrica, values_from = valor)
+
+stopifnot(n_distinct(len$muestra) == nrow(par))
+
+# Tramos. El 18-35 es la ventana que analiza el nivel B; dentro, 18-23 es
+# siRNA y 24-35 piRNA.
+TRAMOS <- c("< 18 nt", "18–23 nt (siRNA)", "24–35 nt (piRNA)", "> 35 nt")
+comp <- len |>
+  mutate(tramo = factor(case_when(longitud_nt <  18 ~ TRAMOS[1],
+                                  longitud_nt <= 23 ~ TRAMOS[2],
+                                  longitud_nt <= 35 ~ TRAMOS[3],
+                                  TRUE              ~ TRAMOS[4]), levels = TRAMOS)) |>
+  group_by(muestra, tramo) |>
+  summarise(n = sum(lecturas), .groups = "drop_last") |>
+  mutate(frac = n / sum(n)) |>
+  ungroup()
+
+# Orden y color: fraccion de piRNA DENTRO de la ventana 18-35, que es la que
+# usa el clasificador del nivel B (frac_pi = lecturas piRNA / lecturas mapeadas,
+# y solo se mapean las de 18-35). Calcularla sobre TODAS las lecturas hunde a
+# las librerias con muchos fragmentos cortos -- del 2 % al 26 % segun la
+# libreria -- y deja de ser la variable que confunde al criterio.
+# El panel B sigue mostrando la composicion sobre todas las lecturas, que es
+# informativa por si misma.
+frac_pi <- comp |>
+  filter(tramo %in% TRAMOS[2:3]) |>
+  group_by(muestra) |>
+  summarise(frac_pi = n[tramo == TRAMOS[3]] / sum(n), .groups = "drop")
+
+orden <- frac_pi |> arrange(frac_pi) |> pull(muestra)
+
+comp <- comp |> mutate(muestra = factor(muestra, levels = orden))
+len  <- len  |> left_join(frac_pi, by = "muestra") |>
+  mutate(muestra = factor(muestra, levels = orden))
+par  <- par  |> rename(muestra = libreria) |>
+  mutate(muestra = factor(muestra, levels = orden))
+
+col_tramo <- setNames(c(GRIS, PAL[["azul"]], PAL[["naranja"]], TINTA_2), TRAMOS)
+
+eje_lib <- list(
+  scale_x_discrete(limits = orden),
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1, size = 6),
+        panel.grid.major.x = element_blank())
+)
+```
+
+## Library profiles
+
+```{r g-srna-librerias, fig.height = 7}
+# --- A. perfil de longitudes, normalizado a fraccion de cada libreria
+tot  <- len |> group_by(muestra) |> summarise(n = sum(lecturas), .groups = "drop")
+lenf <- len |> left_join(tot, by = "muestra") |> mutate(f = lecturas / n)
+
+pA <- ggplot(lenf, aes(longitud_nt, f, group = muestra, colour = frac_pi)) +
+  annotate("rect", xmin = 17.5, xmax = 23.5, ymin = -Inf, ymax = Inf,
+           fill = PAL[["azul"]], alpha = 0.07) +
+  annotate("rect", xmin = 23.5, xmax = 35.5, ymin = -Inf, ymax = Inf,
+           fill = PAL[["naranja"]], alpha = 0.07) +
+  geom_line(linewidth = 0.4, alpha = 0.8) +
+  scale_colour_gradient(low = PAL[["azul"]], high = PAL[["naranja"]],
+                        labels = label_percent(accuracy = 1),
+                        name = "24–35 nt") +
+  scale_y_continuous(labels = label_percent(accuracy = 1),
+                     expand = expansion(c(0, 0.05))) +
+  scale_x_continuous(breaks = seq(10, 45, 5)) +
+  labs(subtitle = "A · Length profile, one line per library",
+       x = "read length (nt)", y = "of the library's reads") +
+  theme(legend.position = "right",
+        legend.key.width = unit(3, "mm"), legend.key.height = unit(12, "mm"))
+
+# --- B. composicion por tramos
+pB <- ggplot(comp, aes(muestra, frac, fill = tramo)) +
+  geom_col(width = 0.78, colour = SUPERFICIE, linewidth = 0.2) +
+  scale_fill_manual(values = col_tramo) +
+  scale_y_continuous(labels = label_percent(), expand = expansion(c(0, 0.02))) +
+  eje_lib +
+  labs(subtitle = "B · Composition by size class",
+       x = NULL, y = "of all reads", fill = NULL) +
+  theme(legend.position = "top") +
+  guides(fill = guide_legend(nrow = 1, override.aes = list(colour = NA)))
+
+# --- C. rRNA retirado, sobre las lecturas de 18-35
+pC <- ggplot(par, aes(muestra, rrna / lecturas_18_35)) +
+  geom_col(width = 0.78, fill = GRIS) +
+  scale_y_continuous(labels = label_percent(accuracy = 1),
+                     expand = expansion(c(0, 0.05))) +
+  eje_lib +
+  labs(subtitle = "C · rRNA removed, of the 18–35 nt reads",
+       x = NULL, y = NULL)
+
+# --- D. lecturas que mapean al catalogo, separando las que tambien caen en
+# AaegL5. Es la contraparte en LECTURAS de que el catalogo es ~87 % huesped,
+# medida por una via distinta de la clasificacion de vOTUs.
+DEST <- c("Also maps to AaegL5", "Catalogue only")
+hit <- par |>
+  transmute(muestra,
+            `Also maps to AaegL5` = viral_en_genoma / denominador_rpm,
+            `Catalogue only` = (con_hit_viral - viral_en_genoma) / denominador_rpm) |>
+  pivot_longer(-muestra, names_to = "destino", values_to = "frac") |>
+  mutate(destino = factor(destino, levels = DEST))
+
+pD <- ggplot(hit, aes(muestra, frac, fill = destino)) +
+  geom_col(width = 0.78, colour = SUPERFICIE, linewidth = 0.2) +
+  scale_fill_manual(values = setNames(c(PAL[["aqua"]], PAL[["azul"]]), DEST)) +
+  scale_y_continuous(labels = label_percent(accuracy = 1),
+                     expand = expansion(c(0, 0.05))) +
+  eje_lib +
+  labs(subtitle = "D · Reads mapping to the vOTU catalogue",
+       x = NULL, y = "of the RPM denominator", fill = NULL) +
+  theme(legend.position = "top") +
+  guides(fill = guide_legend(nrow = 1, override.aes = list(colour = NA)))
+
+ps <- (pA / pB / pC / pD) +
+  plot_annotation(
+    title = paste0("Small RNA libraries (", nrow(par), ")"),
+    subtitle = paste0("Libraries ordered by their piRNA fraction. ",
+                      "The RPM denominator is the 18–35 nt reads after removing rRNA."),
+    caption = paste0("A: all reads, before the 18–35 nt filter. ",
+                     "D: reads with a hit in the vOTU catalogue, split by whether ",
+                     "they also map to the AaegL5 reference genome."))
+guardar_srna(ps, "S1_librerias", alto = 240)
+ps
+```
+
+## Summary table
+
+```{r tabla-srna}
+comp |>
+  select(muestra, tramo, frac) |>
+  pivot_wider(names_from = tramo, values_from = frac) |>
+  left_join(transmute(par, muestra,
+                      `rRNA` = rrna / lecturas_18_35,
+                      `To catalogue` = con_hit_viral / denominador_rpm,
+                      `Of those, in AaegL5` = viral_en_genoma / con_hit_viral),
+            by = "muestra") |>
+  left_join(transmute(par, muestra, `Reads (M)` = round(lecturas_todas / 1e6, 1)),
+            by = "muestra") |>
+  arrange(muestra) |>
+  mutate(across(where(is.numeric) & !matches("Reads"),
+                ~ paste0(round(100 * .x, 1), " %"))) |>
+  knitr::kable()
+```
+
+## What the small RNA says about each virus
+
+```{r prep-nivelB}
+cons <- read_tsv(file.path(DATOS, "nivelB_consenso.tsv"), show_col_types = FALSE)
+obj  <- read_tsv(file.path(DATOS, "nivelB_objetivos_anotados.tsv"), show_col_types = FALSE)
+
+# La puerta: solo los objetivos interpretables. El consenso cubre las 5,899 +
+# el control, y de esas solo 106 son es_virus -- el resto son huesped, oscura,
+# rRNA y celular_otro, que satisfacen el perfil de EVE trivialmente (piRNA de
+# una hebra y presentes en AaegL5). Sin esta restriccion la figura la dominan
+# loci del mosquito.
+cons <- cons |> semi_join(select(obj, votu), by = "votu")
+
+CLASES <- c("replica", "virus_mas_piRNA", "EVE_NIRVS",
+            "ambiguo", "bajo_umbral", "rrna")
+ETIQ_B <- c(replica = "Replicating", virus_mas_piRNA = "Virus + piRNA",
+            EVE_NIRVS = "EVE / NIRVS", ambiguo = "Unresolved",
+            bajo_umbral = "Below threshold", rrna = "rRNA")
+COL_B  <- c(replica = PAL[["azul"]], virus_mas_piRNA = PAL[["aqua"]],
+            `EVE_NIRVS` = PAL[["naranja"]], ambiguo = PAL[["violeta"]],
+            bajo_umbral = GRIS, rrna = TINTA_2)
+names(COL_B) <- ETIQ_B[names(COL_B)]
+```
+
+```{r g-srna-virus, fig.height = 11}
+# Una fila por vOTU, agrupadas por especie.
+#
+# Antes habia una fila por especie y el representante se elegia con
+# slice_max(rpm_max). Eso se queda SIEMPRE con el EVE cuando la especie tiene
+# las dos formas, porque un EVE es 10-100x mas profundo que el virus (§5.4b).
+# En 3 de las 46 especies el veredicto cambiaba por eso -- Guadeloupe mosquito
+# virus (4 de 6 vOTUs replican), Verdadero virus (2 de 5) y Aedes anphevirus
+# (3 de 4) -- y las tres son de las mas prevalentes de la figura. Un virus que
+# replica y que ademas tiene copias endogenas es el caso normal de un ISV en
+# infeccion persistente, y solo se lee si las vOTUs de la especie estan juntas.
+nom <- cons |> filter(!is.na(nombre_virus), nombre_virus != "")
+
+# Convencion de nombres de las figuras: "X-like", no "afin a X".
+a_like <- function(x) ifelse(grepl("^af.n a ", x),
+                             paste0(sub("^af.n a ", "", x), "-like"), x)
+nom <- nom |> mutate(nombre_virus = a_like(nombre_virus))
+
+# Copias redundantes del catalogo. cd-hit al 95 % de identidad y 85 % de
+# cobertura deja separadas vOTUs que son el mismo contig ensamblado por dos
+# programas: el anphevirus de M1_S1 esta tres veces (13,015 / 13,043 / 15,488
+# bp, y 13,015/15,488 = 0.84, justo por debajo del 0.85). Se reconocen por
+# tener el vector de clases identico dentro de la misma especie.
+nom <- nom |>
+  group_by(nombre_virus, muestras, replica, virus_mas_piRNA, EVE_NIRVS,
+           ambiguo, bajo_umbral, rrna) |>
+  mutate(copias = n()) |>
+  slice_max(rpm_max, n = 1, with_ties = FALSE) |>
+  ungroup()
+
+# Solo las vOTUs que el ARN pequeno pudo leer en alguna libreria: por debajo de
+# 10 rpm el perfil de tamano y hebra no dice nada, y mantenerlas multiplicaria
+# las filas sin anadir informacion. Cuantas quedan fuera va en el pie.
+vistas  <- nom |> filter(bajo_umbral < muestras, rrna < muestras)
+fuera_v <- nrow(nom) - nrow(vistas)
+fuera_e <- n_distinct(nom$nombre_virus) - n_distinct(vistas$nombre_virus)
+stopifnot(nrow(vistas) > 0)
+
+# Etiqueta de fila: el pool y el ensamblador que produjeron ese contig.
+etiqueta <- function(v, copias) {
+  p <- strsplit(v, "__", fixed = TRUE)
+  base <- vapply(p, function(x)
+    paste0(sub("_S[0-9]+$", "", x[1]), " · ", x[2]), character(1))
+  ifelse(copias > 1, paste0(base, "  ×", copias), base)
+}
+vistas <- vistas |> mutate(fila = etiqueta(votu, copias))
+
+# Orden. Especies: primero las que no tienen ninguna vOTU replicativa, luego
+# por RPM, de modo que las que replican quedan arriba. Dentro de cada especie,
+# por RPM.
+esp <- vistas |>
+  group_by(nombre_virus) |>
+  summarise(rep_esp = any(consenso %in% c("replica", "MIXTO_replica_y_EVE")),
+            rpm_esp = max(rpm_max), .groups = "drop") |>
+  arrange(rep_esp, rpm_esp)
+
+vistas <- vistas |>
+  mutate(nombre_virus = factor(nombre_virus, levels = esp$nombre_virus)) |>
+  arrange(nombre_virus, rpm_max) |>
+  mutate(votu = factor(votu, levels = votu))
+
+larga <- vistas |>
+  select(nombre_virus, votu, rpm_max, all_of(CLASES)) |>
+  pivot_longer(all_of(CLASES), names_to = "clase", values_to = "n") |>
+  mutate(clase = factor(ETIQ_B[clase], levels = ETIQ_B))
+
+n_lib  <- max(vistas$muestras, na.rm = TRUE)
+etiq_r <- setNames(as.character(vistas$fila), as.character(vistas$votu))
+
+pS2 <- ggplot(larga, aes(n, votu, fill = clase)) +
+  geom_col(width = 0.72, colour = SUPERFICIE, linewidth = 0.2) +
+  geom_text(data = vistas, aes(x = Inf, y = votu,
+                               label = format(round(rpm_max), big.mark = ",",
+                                              trim = TRUE)),
+            inherit.aes = FALSE, hjust = -0.15, size = 2.3, colour = TINTA_2) +
+  facet_grid(nombre_virus ~ ., scales = "free_y", space = "free_y",
+             switch = "y", labeller = label_wrap_gen(26)) +
+  scale_fill_manual(values = COL_B, drop = FALSE) +
+  scale_y_discrete(labels = etiq_r) +
+  scale_x_continuous(expand = expansion(c(0, 0.18))) +
+  coord_cartesian(clip = "off") +
+  labs(title = "Small RNA profile of every viral vOTU, across all libraries",
+       subtitle = paste0("One row per vOTU, grouped by the virus it was named ",
+                         "after. ", n_lib, " libraries.\nRight: that vOTU's ",
+                         "maximum RPM in any single library."),
+       x = paste0("libraries (of ", n_lib, ")"), y = NULL, fill = NULL,
+       caption = str_wrap(paste0(
+         "Replicating: 21 nt peak, siRNA from both strands, and fewer than half ",
+         "the reads matching AaegL5. EVE/NIRVS: one strand, no 21 nt peak, and at ",
+         "least half the reads matching AaegL5. Redundant catalogue entries -- the ",
+         "same contig assembled by two programs -- are collapsed into one row and ",
+         "marked with the number of copies. ", fuera_v, " vOTUs that stay below ",
+         "10 rpm in every library are not shown, which removes ", fuera_e,
+         " virus names from the figure entirely."), width = 150)) +
+  theme(panel.grid.major.y = element_blank(),
+        panel.spacing.y = unit(1.5, "pt"),
+        axis.text.y = element_text(size = 5.8),
+        strip.placement = "outside",
+        strip.background = element_blank(),
+        strip.text.y.left = element_text(angle = 0, hjust = 1, size = 6,
+                                         colour = TINTA_2),
+        legend.position = "top",
+        plot.margin = margin(5, 30, 5, 5)) +
+  guides(fill = guide_legend(nrow = 1, override.aes = list(colour = NA)))
+guardar_srna(pS2, "S2_virus_srna", alto = max(140, 5.2 * nrow(vistas) + 60))
+pS2
+```
+
+## Agreement between the two techniques
+
+```{r g-srna-acuerdo, fig.height = 4.5}
+# El motivo viene de la lista preinscrita de objetivos: lo que el ARN LARGO
+# dijo de cada vOTU. La clase viene del ARN PEQUENO. Son medidas de cosas
+# distintas -- cobertura del transcriptoma frente a perfil de tamano y hebra --
+# asi que el acuerdo no es circular.
+ETIQ_M <- c(CFAV = "CFAV", PCLV = "PCLV", HTV = "HTV",
+            virus_nombrado = "Named virus", virus_like = "Relative (-like)",
+            especie_nueva = "New species", pariente_especie_nueva = "Putative new species",
+            revisar_evidencia_debil = "Weak evidence",
+            EVE_genoma = "EVE in genome", EVE_candidato = "Candidate EVE",
+            CONTROL = "Positive control")
+# Orden: lo que el ARN largo llamo virus arriba, lo que llamo EVE abajo.
+ORDEN_M <- rev(c("CONTROL", "EVE_genoma", "EVE_candidato", "revisar_evidencia_debil",
+                 "pariente_especie_nueva", "especie_nueva", "virus_like",
+                 "virus_nombrado", "HTV", "PCLV", "CFAV"))
+
+ac <- cons |>
+  inner_join(select(obj, votu, motivo), by = "votu") |>
+  filter(motivo %in% ORDEN_M) |>
+  mutate(motivo = factor(ETIQ_M[motivo], levels = ETIQ_M[ORDEN_M]),
+         clase  = consenso,
+         clase  = if_else(clase == "MIXTO_replica_y_EVE", "replica", clase),
+         clase  = if_else(clase == "no_interpretable_rrna", "rrna", clase),
+         clase  = factor(ETIQ_B[clase], levels = ETIQ_B))
+
+n_mot <- ac |> count(motivo, name = "n")
+
+pS3 <- ggplot(ac, aes(y = motivo, fill = clase)) +
+  geom_bar(position = "fill", width = 0.72, colour = SUPERFICIE, linewidth = 0.2) +
+  geom_text(data = n_mot, aes(x = 1, y = motivo, label = n),
+            inherit.aes = FALSE, hjust = -0.3, size = 2.7, colour = TINTA_2) +
+  scale_fill_manual(values = COL_B, drop = FALSE) +
+  scale_x_continuous(labels = label_percent(), expand = expansion(c(0, 0.08))) +
+  coord_cartesian(clip = "off") +
+  labs(title = "The two techniques agree",
+       subtitle = paste0("Rows: what the long RNA called each vOTU. Colour: what the ",
+                         "small RNA profile says.\nMIXTO counted as replicating. ",
+                         "Right: vOTUs in each group."),
+       x = NULL, y = NULL, fill = NULL) +
+  theme(panel.grid.major.y = element_blank(),
+        legend.position = "top",
+        plot.margin = margin(5, 20, 5, 5)) +
+  guides(fill = guide_legend(nrow = 1, override.aes = list(colour = NA)))
+guardar_srna(pS3, "S3_acuerdo", alto = 110)
+pS3
+```
+
+```{r tabla-acuerdo}
+# La cifra que va en el texto: replicacion en lo que el largo llamo virus
+# frente a lo que llamo EVE, entre las vOTUs que superan el umbral.
+VIRUS_M <- ETIQ_M[c("CFAV","PCLV","HTV","virus_nombrado","virus_like",
+                    "especie_nueva","pariente_especie_nueva")]
+EVE_M   <- ETIQ_M[c("EVE_genoma","EVE_candidato")]
+
+ac |>
+  mutate(grupo = case_when(motivo %in% VIRUS_M ~ "Called virus by long RNA",
+                           motivo %in% EVE_M   ~ "Called EVE by long RNA",
+                           TRUE ~ NA_character_)) |>
+  filter(!is.na(grupo)) |>
+  group_by(grupo) |>
+  summarise(`vOTUs` = n(),
+            `Above threshold` = sum(clase != ETIQ_B[["bajo_umbral"]]),
+            `Replicating` = sum(clase %in% ETIQ_B[c("replica","virus_mas_piRNA")]),
+            .groups = "drop") |>
+  mutate(`% of those above threshold` =
+           paste0(round(100 * Replicating / `Above threshold`, 1), " %")) |>
+  knitr::kable()
+```
