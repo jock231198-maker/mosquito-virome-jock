@@ -1,0 +1,171 @@
+---
+title: "MERIDA — small RNA libraries, panel by panel (v1)"
+author: "Jose Carlos Marin Montesino"
+lang: en
+date: today
+params:
+  datos: "datos_srna_v1"
+format:
+  html:
+    embed-resources: true
+    toc: true
+    toc-depth: 2
+    fig-width: 7.2
+    fig-height: 3.6
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r setup-v1}
+# Variante de srna_proveedor.qmd: los tres paneles de P1 como figuras sueltas,
+# cada una con su titulo y su pie, para poder meterlas por separado en una
+# presentacion. No comparte codigo con srna_proveedor.qmd a proposito: ese
+# fichero sigue produciendo P1 compuesta y los dos pueden convivir.
+DATOS <- params$datos
+source("R/tema.R")
+suppressPackageStartupMessages({
+  library(readr); library(dplyr); library(tidyr); library(ggplot2)
+  library(scales); library(forcats); library(stringr)
+})
+
+guardar_v1 <- function(p, nombre, alto = 95, ancho = 200) {
+  dir.create("figuras_srna", showWarnings = FALSE)
+  for (ext in c("png", "pdf"))
+    ggsave(file.path("figuras_srna", paste0(nombre, ".", ext)), p,
+           width = ancho, height = alto, units = "mm", dpi = 300)
+}
+
+mu <- read_tsv(file.path(DATOS, "srna_muestras.tsv"), show_col_types = FALSE)
+
+# Mismo orden que las figuras compuestas: por la fraccion de piRNA que mide
+# smallRNA-Metavir en su ventana de 24-30 nt, de menos a mas.
+orden <- mu |> arrange(pct_pirna_24_30) |> pull(lib)
+mu    <- mu |> mutate(lib = factor(lib, levels = orden))
+n_lib <- n_distinct(mu$lib)
+
+eje_lib <- list(
+  scale_x_discrete(limits = orden),
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1, size = 6),
+        panel.grid.major.x = element_blank())
+)
+
+sub_orden <- "Libraries ordered by their piRNA fraction (24–30 nt), lowest first."
+```
+
+Libraries: `r n_lib`. Source: smallRNA-Metavir reports, frozen in `` `r DATOS` ``.
+
+## P1a · Reads
+
+```{r g-v1-lecturas}
+lec <- mu |>
+  transmute(lib, Raw = reads_crudas, `18–35 nt` = reads_18_35) |>
+  pivot_longer(-lib, names_to = "etapa", values_to = "n") |>
+  mutate(etapa = factor(etapa, levels = c("Raw", "18–35 nt")))
+
+pct18 <- mu |>
+  transmute(lib, crudas = reads_crudas,
+            pct = 100 * reads_18_35 / reads_crudas)
+
+p1a <- ggplot(lec, aes(lib, n / 1e6, fill = etapa)) +
+  geom_col(position = "identity", width = 0.78,
+           colour = SUPERFICIE, linewidth = 0.2) +
+  geom_text(data = pct18, aes(lib, crudas / 1e6, label = paste0(round(pct), "%")),
+            inherit.aes = FALSE, vjust = -0.6, size = 2.1, colour = TINTA_2) +
+  scale_fill_manual(values = c(Raw = GRIS, `18–35 nt` = PAL[["azul"]])) +
+  scale_y_continuous(expand = expansion(c(0, 0.12))) +
+  eje_lib +
+  labs(title = "Small RNA reads per library",
+       subtitle = paste0("Grey is the raw count; blue is what survives the 18–35 nt ",
+                         "window, which is what the analysis uses.\n", sub_orden),
+       x = NULL, y = "million reads", fill = NULL,
+       caption = str_wrap(paste0(
+         "The percentage above each bar is the share of raw reads falling in ",
+         "18–35 nt. smallRNA-Metavir applies no host filter and no rRNA removal, ",
+         "so the blue fraction is not a viral fraction: it is every small RNA of ",
+         "that size, host included."), width = 120)) +
+  theme(legend.position = "top") +
+  guides(fill = guide_legend(nrow = 1, override.aes = list(colour = NA)))
+guardar_v1(p1a, "P1a_lecturas")
+p1a
+```
+
+## P1b · Size composition
+
+```{r g-v1-tamanos}
+TR <- c("20–23 nt (siRNA)", "24–30 nt (piRNA)", "other")
+comp <- mu |>
+  transmute(lib,
+            `20–23 nt (siRNA)` = pct_sirna_20_23 / 100,
+            `24–30 nt (piRNA)` = pct_pirna_24_30 / 100,
+            other = 1 - (pct_sirna_20_23 + pct_pirna_24_30) / 100) |>
+  pivot_longer(-lib, names_to = "tramo", values_to = "frac") |>
+  mutate(tramo = factor(tramo, levels = TR))
+
+p1b <- ggplot(comp, aes(lib, frac, fill = tramo)) +
+  geom_col(width = 0.78, colour = SUPERFICIE, linewidth = 0.2) +
+  scale_fill_manual(values = setNames(c(PAL[["azul"]], PAL[["naranja"]], GRIS), TR)) +
+  scale_y_continuous(labels = label_percent(), expand = expansion(c(0, 0.02))) +
+  eje_lib +
+  labs(title = "Size composition of the 18–35 nt reads",
+       subtitle = sub_orden,
+       x = NULL, y = "of the 18–35 nt reads", fill = NULL) +
+  theme(legend.position = "top") +
+  guides(fill = guide_legend(nrow = 1, override.aes = list(colour = NA)))
+guardar_v1(p1b, "P1b_tamanos")
+p1b
+```
+
+## P1c · Assembled contigs
+
+```{r g-v1-contigs}
+CT  <- c("Viral (hit)", "No hit", "Non-viral")
+ctg <- mu |>
+  transmute(lib, `Viral (hit)` = contigs_virales, `No hit` = contigs_sin_hit,
+            `Non-viral` = contigs_no_virales) |>
+  pivot_longer(-lib, names_to = "clase", values_to = "n") |>
+  mutate(clase = factor(clase, levels = CT))
+
+tot_ctg <- ctg |>
+  group_by(lib) |>
+  summarise(total = sum(n, na.rm = TRUE), .groups = "drop") |>
+  left_join(select(mu, lib, virales = contigs_virales), by = "lib")
+
+p1c <- ggplot(ctg, aes(lib, n, fill = clase)) +
+  geom_col(width = 0.78, colour = SUPERFICIE, linewidth = 0.2) +
+  geom_text(data = tot_ctg, aes(lib, total, label = virales),
+            inherit.aes = FALSE, vjust = -0.7, size = 2.1,
+            colour = PAL[["azul"]], fontface = "bold") +
+  scale_fill_manual(values = setNames(c(PAL[["azul"]], PAL[["violeta"]], GRIS), CT)) +
+  scale_y_continuous(expand = expansion(c(0, 0.12))) +
+  eje_lib +
+  labs(title = "Contigs assembled from the small RNA (≥ 200 nt)",
+       subtitle = paste0("The number above each bar is the count of contigs with a ",
+                         "viral hit; in the stack it is a few pixels.\n", sub_orden),
+       x = NULL, y = "contigs", fill = NULL,
+       caption = str_wrap(paste0(
+         "Contigs are the CAP3 merge of three size ranges. 'Viral' means a BLASTN ",
+         "or DIAMOND hit against the smallRNA-Metavir databases. Most contigs are ",
+         "non-viral because the pipeline applies no host filter, so the host's own ",
+         "small RNAs assemble too."), width = 120)) +
+  theme(legend.position = "top") +
+  guides(fill = guide_legend(nrow = 1, override.aes = list(colour = NA)))
+guardar_v1(p1c, "P1c_contigs")
+p1c
+```
+
+```{r tabla-v1}
+mu |>
+  transmute(Library = lib,
+            `Raw (M)` = round(reads_crudas / 1e6, 1),
+            `18–35 nt (M)` = round(reads_18_35 / 1e6, 1),
+            `% in window` = paste0(round(100 * reads_18_35 / reads_crudas), " %"),
+            `siRNA 20–23` = paste0(round(pct_sirna_20_23, 1), " %"),
+            `piRNA 24–30` = paste0(round(pct_pirna_24_30, 1), " %"),
+            Other = paste0(round(100 - pct_sirna_20_23 - pct_pirna_24_30, 1), " %"),
+            Contigs = contigs_virales + contigs_sin_hit + contigs_no_virales,
+            Viral = contigs_virales) |>
+  arrange(Library) |>
+  knitr::kable()
+```

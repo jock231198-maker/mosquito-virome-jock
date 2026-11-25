@@ -22,7 +22,8 @@
 #           ggspatial, patchwork. Opcional: rosm (teselas de fondo).
 # Instalar una vez (en R):
 #   install.packages(c("sf", "ggplot2", "dplyr", "tidyr", "readxl", "readr",
-#                      "stringr", "ggrepel", "ggspatial", "patchwork"))
+#                      "stringr", "ggrepel", "ggspatial", "patchwork", "ragg"))
+#   (en conda: r-ragg)
 # =============================================================================
 
 suppressPackageStartupMessages({
@@ -170,7 +171,7 @@ pA <- pA +
                                                            colour = "white"))) +
   geom_text_repel(data = xy, aes(X, Y, label = localidad), size = 3.1,
                   colour = TXT1, seed = 7, box.padding = 0.8, force = 6, max.iter = 20000,
-                  point.size = sqrt(xy$n) * 0.9, point.padding = 0.3, min.segment.length = 0.2,
+                  point.size = 9 * sqrt(xy$n / max(xy$n)), point.padding = 0.4, min.segment.length = 0.2,
                   segment.colour = TXT2, segment.size = 0.3) +
   annotation_scale(location = "bl", width_hint = 0.25, style = "ticks",
                    line_col = TXT2, text_col = TXT2, text_cex = 0.7) +
@@ -178,6 +179,7 @@ pA <- pA +
                          width = unit(0.7, "cm"),
                          style = north_arrow_orienteering(text_size = 7,
                                    fill = c("white", TXT2), line_col = TXT2)) +
+  scale_x_continuous(breaks = seq(-89.90, -89.60, by = 0.05)) +
   coord_sf(crs = CRS_UTM, datum = 4326,
            xlim = bb[c("xmin", "xmax")], ylim = bb[c("ymin", "ymax")],
            expand = FALSE) +
@@ -233,7 +235,7 @@ pB <- ggplot(por_grupo,
 
 # ---- 6. Componer y guardar ---------------------------------------------------
 fechas <- range(mues$fecha, na.rm = TRUE)
-pie <- sprintf(paste0("Pools sequenced in this study (n = %d), collected %s – %s. ",
+pie <- sprintf(paste0("Pools sequenced in this study (n = %d), collected %s to %s. ",
                       "Point size: pools per site. Shaded: Mérida municipality (INEGI 2023).\n",
                       "Pools %s include a few individuals from another site and are ",
                       "assigned to their majority site."),
@@ -251,9 +253,11 @@ fig <- (tag(pA, "A") | tag(pB, "B")) + plot_layout(widths = c(1.35, 1)) +
                                   size = 7.5, hjust = 0)))
 
 ggsave(paste0(prefijo, ".pdf"), fig, width = 25, height = 12.5, units = "cm",
-       device = if (capabilities("cairo")) cairo_pdf else "pdf")
+       device = "pdf")
+# PNG con ragg si está instalado: mismas fuentes y cursivas en Mac y Linux/WSL
 ggsave(paste0(prefijo, ".png"), fig, width = 25, height = 12.5, units = "cm",
-       dpi = 300, bg = "white")
+       dpi = 300, bg = "white",
+       device = if (requireNamespace("ragg", quietly = TRUE)) ragg::agg_png else "png")
 
 # ---- 7. Avisos ----------------------------------------------------------------
 message(sprintf("Filas de campo usadas: %d (se omitieron %d filas sin localidad: pools/submuestras)",

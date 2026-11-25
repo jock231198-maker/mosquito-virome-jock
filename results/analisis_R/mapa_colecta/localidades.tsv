@@ -2,8 +2,8 @@ lugar_tabla	localidad	lat	lon	verificado	fuente
 DZITYÁ	Dzityá	21.05019	-89.67794	si	Plus code de la iglesia de Dzityá (76HG382C+3R, GCatholic)
 KOMCHEM	Komchén	21.10352	-89.66174	si	municipiodata.com (Censo 2020, INEGI)
 XCANATÚN	Xcanatún	21.07760	-89.63070	si	GeoNames vía bamwor.com
-SANTA GERTRUDIS COPÓ	Santa Gertrudis Copó	21.03500	-89.64000	no	APROXIMADA: confirmar en Google Maps
-XCOM	Xcom (Miguel Hidalgo)	21.00000	-89.65500	no	APROXIMADA: confirmar calle 47 x 42, Col. Miguel Hidalgo, CP 97229
-GARCIA GINERES	García Ginerés	20.98380	-89.63310	no	APROXIMADA: confirmar en Google Maps
+SANTA GERTRUDIS COPÓ	Santa Gertrudis Copó	21.039391	-89.594157	si	Google Maps (centro de la colonia)
+XCOM	Xcom (Miguel Hidalgo)	20.990326	-89.654698	si	Google Maps (centro de la colonia)
+GARCIA GINERES	García Ginerés	20.982920	-89.631343	si	Google Maps (centro de la colonia)
 CENTRO	Centro (Mérida)	20.96700	-89.62318	si	geodatos.net (Mérida, WGS84)
 HUNUCMA	Hunucmá	21.01528	-89.87444	si	Wikipedia (cabecera municipal)
