@@ -576,7 +576,7 @@ p7
 
 # 8. Non-viral composition (Kraken2 + Bracken, non-host reads)
 
-```{r g-kraken, fig.height = 5.5}
+```{r g-kraken, fig.height = 6.2}
 br_todo <- leer_bracken()
 # PlusPF no tiene genomas de insecto: el rRNA de mosquito que queda tras quitar el
 # huesped se asigna a Homo sapiens y a Plasmodium. Los virus se analizan con las
@@ -642,12 +642,64 @@ p8 <- ggplot(kr, aes(frac, etiqueta, fill = taxon)) +
          "to the closest reference). They made up ", round(100 * min(excluido$frac_fuera)), "–",
          round(100 * max(excluido$frac_fuera)), "% of the classified reads per pool. Right: reads left in each pool",
          if (length(pocos)) paste0("; not shown, fewer than ", format(MIN_LECTURAS, big.mark = ","), " reads left: ",
-                                   paste(etiqueta_muestra(pocos), collapse = ", ")) else "", "."),
+                                   paste(etiqueta_muestra(pocos), collapse = ", ")) else "", ". ",
+         "The libraries were not rRNA-depleted, so these assignments rest largely on ribosomal sequence, which is ",
+         "conserved across taxa: the strongest bacterial signal here (Wolbachia, 16 % of non-host reads in one pool) ",
+         "was verified at contig level and proved to be conserved 23S rRNA, not that organism. Read this panel as the ",
+         "relative composition of ribosomal signal; a specific taxon needs contig-level verification before it is ",
+         "claimed."),
          width = 105)) +
   theme(panel.grid.major.y = element_blank()) +
   guides(fill = guide_legend(nrow = 3))
-guardar(p8, "08_kraken2", alto = 140)
+guardar(p8, "08_kraken2", alto = 158)
 p8
+```
+
+```{r g-kraken-heat, fig.height = 10.2}
+# Mapa de calor de los 50 taxones mas abundantes. Va a suplementario junto con
+# la figura 08. Se construye sobre `br` -- el mismo objeto renormalizado del
+# chunk anterior -- y reutiliza levels(kr$etiqueta), asi que el orden de pools
+# es identico al de la barra apilada y las dos se leen una contra otra.
+TOP_HEAT <- 50
+
+top_heat <- br |>
+  group_by(name) |>
+  summarise(media = sum(fraction_total_reads) / N_MUESTRAS, .groups = "drop") |>
+  slice_max(media, n = TOP_HEAT) |>
+  arrange(desc(media))
+
+heat <- br |>
+  filter(name %in% top_heat$name) |>
+  select(muestra, name, frac = fraction_total_reads) |>
+  complete(muestra, name, fill = list(frac = 0)) |>
+  mutate(frac = if_else(frac <= 0, NA_real_, frac),
+         etiqueta = factor(etiqueta_muestra(muestra), levels = levels(kr$etiqueta)),
+         taxon = factor(name, levels = rev(top_heat$name)))
+
+p8b <- ggplot(heat, aes(etiqueta, taxon, fill = frac)) +
+  geom_tile(colour = SUPERFICIE, linewidth = 0.3) +
+  scale_fill_viridis_c(trans = "log10", direction = -1,
+                       labels = label_percent(accuracy = 0.1),
+                       na.value = "#EDEDE8",
+                       name = "fraction of\nclassified\nreads") +
+  labs(title = paste0("Kraken2/Bracken: the ", TOP_HEAT, " most abundant taxa per pool"),
+       subtitle = "Same filtering, re-normalisation and pool order as the stacked-bar figure; log colour scale",
+       x = NULL, y = NULL,
+       caption = str_wrap(paste0(
+         "Grey cells: taxon not reported in that pool. Bacterial and eukaryotic taxa only; Homo sapiens, ",
+         "Plasmodium and viral taxa were removed before re-normalising, as in the stacked-bar figure. The same ",
+         "caveat applies, and is why both panels are supplementary: the libraries were not rRNA-depleted, so these ",
+         "assignments rest largely on conserved ribosomal sequence. Contig-level verification of the strongest ",
+         "bacterial signal (Wolbachia) showed it to be conserved 23S rRNA and not that organism. The taxa at the ",
+         "top of this panel are, in large part, those whose ribosomal sequence is best represented in the reference ",
+         "database. No individual taxon here should be claimed without contig-level verification."),
+         width = 150)) +
+  theme(axis.text.y = element_text(size = 5.5, face = "italic"),
+        axis.text.x = element_text(size = 6.5, angle = 90, hjust = 1, vjust = 0.5),
+        panel.grid = element_blank(),
+        legend.key.height = grid::unit(14, "mm"))
+guardar(p8b, "08b_kraken2_heatmap", alto = 260)
+p8b
 ```
 
 # Data used
