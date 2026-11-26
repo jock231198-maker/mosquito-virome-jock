@@ -12,3 +12,6 @@
 *:Zone.Identifier
 __pycache__/
 *:Zone.Identifier
+*.bak
+*.bak[0-9]
+results/analisis_R/*.html
