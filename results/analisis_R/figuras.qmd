@@ -482,13 +482,56 @@ tasas |>
 
 ```{r table-rate-replica, eval = HAY_VOTUS}
 if (!is.null(veredicto)) {
+  # El reparto sale del dato y no escrito a mano, para que no se quede viejo.
+  n_rep <- sum(grepl("Replicating", tasas$`Small RNA`))
+  n_eve <- sum(tasas$`Small RNA` == "EVE only")
+  n_sin <- sum(tasas$`Small RNA` == "No evidence")
+  n_mix <- sum(tasas$`Small RNA` == "Replicating + EVE")
+  # Recuento de pools sobre las vOTUs REPLICATIVAS y no sobre la especie
+  # entera. Los 19/22 de Verdadero incluyen pools donde solo estaba la copia
+  # endogena, y la especie no los separa. Se cuenta sobre `cob`, que conserva
+  # la vOTU y pct_cubierto; `pres` no vale porque presencia_especies() ya
+  # agrega por especie. Mismo umbral de 70 % que esa funcion.
+  rep_votus <- votus |>
+    filter(es_virus == "si") |>
+    mutate(especie_fig = nombre_virus(pick(everything()))) |>
+    select(votu, especie_fig) |>
+    inner_join(select(nb, votu, consenso), by = "votu") |>
+    filter(consenso %in% c("replica", "MIXTO_replica_y_EVE")) |>
+    select(votu, especie_fig)
+
+  prev_rep <- cob |>
+    inner_join(rep_votus, by = "votu") |>
+    filter(pct_cubierto >= 70) |>
+    distinct(especie_fig, muestra) |>
+    count(especie_fig, name = "pools_rep")
+
   tasas |>
     filter(replica > 0) |>
-    select(-replica) |>
+    select(Species, `Positive pools`, `Small RNA`) |>
+    left_join(rename(prev_rep, Species = especie_fig), by = "Species") |>
+    mutate(pools_rep = coalesce(pools_rep, 0L)) |>
+    rowwise() |>
+    mutate(t = list(tasa_infeccion(pools_rep, N_MUESTRAS, K_POOL))) |>
+    ungroup() |>
+    unnest(t) |>
+    transmute(Species,
+              `Pools (species)` = `Positive pools`,
+              `Pools (replicating vOTUs)` = paste0(pools_pos, "/", N_MUESTRAS),
+              `MIR (‰)` = round(mir, 1),
+              `MLE (‰)` = round(mle, 1),
+              `95% CI` = paste0(round(mle_inf, 1), "–", round(mle_sup, 1)),
+              `Small RNA`) |>
     kable(caption = paste0(
-      "The same rates, restricted to the species with small RNA evidence of replication in at least one ",
-      "library. These are the figures to quote as infection rates; everything left out of this table is a ",
-      "detection, not a demonstrated infection."))
+      "The ", n_rep, " species with small RNA evidence of replication, with the rate recomputed over their ",
+      "replicating vOTUs alone. The first pool column is the species-level count that feeds the table ",
+      "above; the second counts only the pools where a vOTU the small RNA calls replicating reaches 70 % ",
+      "coverage, the same threshold. The gap between the two columns is the endogenous contribution, which ",
+      "a species-level count cannot separate, and the rates here are computed from the second. The ",
+      nrow(tasas) - n_rep, " species left out are not one group but two, and they carry different weight: ",
+      "in ", n_eve, " the small RNA actively reports an endogenous profile, while ", n_sin, " stay below ",
+      "10 rpm in every library, so it cannot judge them at all. Only the first is evidence against ",
+      "infection; the second is absence of data."))
 } else {
   cat("Level B data not found in `", DATOS_B, "`: the restricted table is not built.\n", sep = "")
 }
