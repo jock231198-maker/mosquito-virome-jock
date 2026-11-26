@@ -1,0 +1,104 @@
+votu	grupo	fusion	longitud	comp	Entidad
+M11_S3__rnaviral__NODE_20_length_1457_cov_3.428977	G018	Aedes binegev-like virus 1	1457	1	Aedes binegev-like virus 1
+M11_S3__rnaviral__NODE_24_length_1395_cov_4.930906	G019	Aedes binegev-like virus 1	1395	1	Aedes binegev-like virus 1
+M11_S3__rnaviral__NODE_38_length_979_cov_6.222581	G020	Aedes binegev-like virus 1	979	1	Aedes binegev-like virus 1
+M11_S3__rnaviral__NODE_68_length_760_cov_5.787623	G021	Aedes binegev-like virus 1	760	1	Aedes binegev-like virus 1
+M11_S3__rnaviral__NODE_90_length_688_cov_4.805947	G022	Aedes binegev-like virus 1	688	1	Aedes binegev-like virus 1
+M11_S3__rnaviral__NODE_96_length_678_cov_2.519873	G010	Palmetto toti-like virus	678	6	Palmetto toti-like virus
+M11_S3__rna__NODE_12_length_1937_cov_27.903602_g8_i0	G017	Aedes aegypti totivirus	1937	7	Aedes aegypti totivirus
+M11_S3__megahit__k119_37	G011	Aedes binegev-like virus 1	4338	1	Aedes binegev-like virus 1
+M11_S3__megahit__k119_579	G001	Verdadero virus	1901	9	Verdadero virus
+M11_S3__trinity__TRINITY_DN1146_c0_g1_i1	G023	Aedes binegev-like virus 1	927	1	Aedes binegev-like virus 1
+M1_S1__metaviral__NODE_1_length_13043_cov_63.244177_cutoff_5_type_linearrepeat	G002	Aedes anphevirus	13043	11	Aedes anphevirus
+M1_S1__megahit__k119_12197	G002	Aedes anphevirus	13015	11	Aedes anphevirus
+M1_S1__trinity__TRINITY_DN6_c0_g1_i10	G002	Aedes anphevirus	15488	11	Aedes anphevirus
+M20_S25__megahit__k119_181	G005	Guadeloupe mosquito virus	1827	14	Guadeloupe mosquito virus
+M20_S25__megahit__k119_1515	G009	Verdadero virus	2003	9	Verdadero virus
+M20_S25__megahit__k119_3000	G007	Guadeloupe mosquito virus	3448	14	Guadeloupe mosquito virus
+M20_S25__megahit__k119_3691	G001	Verdadero virus	1721	9	Verdadero virus
+M20_S25__megahit__k119_2619	G029	Verdadero virus	1879	9	Verdadero virus
+M21_S29__megahit__k119_1744	G001	Verdadero virus	1801	9	Verdadero virus
+M21_S29__megahit__k119_2559	G002	Aedes anphevirus	13129	11	Aedes anphevirus
+M22_S30__rnaviral__NODE_22_length_1410_cov_6.501837	G045	Aedes aegypti totivirus	1410	7	Aedes aegypti totivirus
+M22_S30__rnaviral__NODE_134_length_738_cov_2.301887	G044	Palmetto toti-like virus	738	6	Palmetto toti-like virus
+M22_S30__megahit__k119_1075	G001	Verdadero virus	1742	9	Verdadero virus
+M22_S30__megahit__k119_487	G009	Verdadero virus	1537	9	Verdadero virus
+M35_S31__rnaviral__NODE_134_length_975_cov_7.289417	G053	Palmetto toti-like virus	975	6	Palmetto toti-like virus
+M35_S31__rnaviral__NODE_432_length_676_cov_3.440191	G010	Palmetto toti-like virus	676	6	Palmetto toti-like virus
+M35_S31__rnaviral__NODE_772_length_580_cov_3.517891	G057	Palmetto toti-like virus	580	6	Palmetto toti-like virus
+M35_S31__rnaviral__NODE_967_length_541_cov_4.107724	G058	Palmetto toti-like virus	541	6	Palmetto toti-like virus
+M35_S31__rna__NODE_690_length_539_cov_2.448980_g639_i0	G051	Palmetto toti-like virus	539	6	Palmetto toti-like virus
+M48_S5__rnaviral__NODE_3_length_4797_cov_5.618576	G061	Aedes aegypti totivirus	4797	7	Aedes aegypti totivirus
+M48_S5__rnaviral__NODE_7_length_2344_cov_5.389978	G011	Aedes binegev-like virus 1	2344	1	Aedes binegev-like virus 1
+M48_S5__megahit__k119_286	G005	Guadeloupe mosquito virus	1710	14	Guadeloupe mosquito virus
+M55_S6__megahit__k119_2345	G012	Leksozero Aedes Stangrhavirus-like (44% aa)	924	33	Leksozero Aedes Stangrhavirus-like (44% aa)
+M74_S21__rnaviral__NODE_444_length_505_cov_2.028509	G077	Hattula totivirus 3-like (59% aa)	505	34	Hattula totivirus 3-like (59% aa)
+M74_S21__megahit__k119_20	G005	Guadeloupe mosquito virus	1740	14	Guadeloupe mosquito virus
+M79_S28__megahit__k119_208	G007	Guadeloupe mosquito virus	2906	14	Guadeloupe mosquito virus
+M79_S28__megahit__k119_600	G007	Guadeloupe mosquito virus	717	14	Guadeloupe mosquito virus
+M9_S16__rnaviral__NODE_51_length_1365_cov_5.166413	G015	Hattula totivirus 3-like (45% aa)	1365	38	Hattula totivirus 3-like (45% aa)
+M9_S16__trinity__TRINITY_DN2227_c0_g1_i1	G080	Parramatta River-like virus (76% aa)	511	39	Parramatta River-like virus (76% aa)
+M1_S1__rnaviral__NODE_1365_length_740_cov_2.865412	G024	Pedras lispivirus-like (36% aa)	740	40	Pedras lispivirus-like (36% aa)
+M1_S1__rnaviral__NODE_1680_length_693_cov_2.718944	G025	Gurupi chuvirus-like 1-related (81% aa)	693	41	Gurupi chuvirus-like 1-related (81% aa)
+M1_S1__rnaviral__NODE_3036_length_567_cov_2.357143	G026	Australian Anopheles totivirus-like (72% aa)	567	42	Australian Anopheles totivirus-like (72% aa)
+M1_S1__rnaviral__NODE_3688_length_530_cov_2.176715	G027	Mos8Chu0 chuvirus-like (82% aa)	530	43	Mos8Chu0 chuvirus-like (82% aa)
+M1_S1__megahit__k119_11164	G003	Mos8Chu0 chuvirus-like (84% aa)	1694	43	Mos8Chu0 chuvirus-like (82% aa)
+M1_S1__trinity__TRINITY_DN2440_c0_g1_i8	G028	Aedes aegypti anphevirus-like (55% aa)	554	45	Aedes aegypti anphevirus-like (55% aa)
+M1_S1__trinity__TRINITY_DN4358_c0_g2_i1	G003	Mos8Chu0 chuvirus-like (82% aa)	779	43	Mos8Chu0 chuvirus-like (82% aa)
+M21_S29__rnaviral__NODE_1118_length_515_cov_1.414163	G015	Hattula totivirus 3-like (53% aa)	515	38	Hattula totivirus 3-like (45% aa)
+M21_S29__rnaviral__NODE_1136_length_511_cov_2.575758	G016	Atrato Retro-like virus-related (66% aa)	511	48	Atrato Retro-like virus-related (66% aa)
+M2_S2__rnaviral__NODE_164_length_1083_cov_2.441006	G047	Aedes anphevirus-like (68% aa)	1083	49	Aedes anphevirus-like (68% aa)
+M2_S2__rnaviral__NODE_514_length_801_cov_2.696809	G049	Australian Anopheles totivirus-like (63% aa)	801	50	Australian Anopheles totivirus-like (63% aa)
+M2_S2__rnaviral__NODE_2321_length_508_cov_1.586057	G048	Aedes aegypti To virus 2-like (43% aa)	508	51	Aedes aegypti To virus 2-like (43% aa)
+M2_S2__rna__NODE_77_length_1516_cov_5.882072_g50_i0	G046	Liao ning-like virus (84% aa)	1516	52	Liao ning-like virus (84% aa)
+M35_S31__rna__NODE_288_length_713_cov_517.225904_g242_i0	G050	Enontekio iflavirus-like	713	53	Enontekio iflavirus-like
+M55_S6__megahit__k119_5455	G062	Kamiti River-like virus (47% aa)	2390	54	Kamiti River-like virus (47% aa)
+M55_S6__trinity__TRINITY_DN10724_c0_g1_i1	G012	Leksozero Aedes Stangrhavirus-like (44% aa)	568	33	Leksozero Aedes Stangrhavirus-like (44% aa)
+M56_S7__rna__NODE_98_length_1255_cov_3.878109_g63_i0	G003	Mos8Chu0 chuvirus-like (60% aa)	1255	43	Mos8Chu0 chuvirus-like (82% aa)
+M57_S8__rnaviral__NODE_386_length_786_cov_2.924016	G070	Formosus-like virus (75% aa)	786	57	Formosus-like virus (75% aa)
+M58_S9__rnaviral__NODE_54_length_1330_cov_3.264637	G006	Bafoussam mosquito rhabdovirus-like (62% aa)	1330	58	Bafoussam mosquito rhabdovirus-like (62% aa)
+M58_S9__rnaviral__NODE_460_length_747_cov_1.581662	G003	Mos8Chu0 chuvirus-like (81% aa)	747	43	Mos8Chu0 chuvirus-like (82% aa)
+M72_S20__rnaviral__NODE_22_length_1441_cov_3.018678	G006	Bafoussam mosquito rhabdovirus-like (62% aa)	1441	58	Bafoussam mosquito rhabdovirus-like (62% aa)
+M72_S20__rnaviral__NODE_248_length_694_cov_1.590698	G014	Atrato Rhabdo-like virus 2-related (38% aa)	694	61	Atrato Rhabdo-like virus 2-related (38% aa)
+M9_S16__trinity__TRINITY_DN6164_c0_g1_i1	G016	Atrato Retro-like virus-related (67% aa)	657	48	Atrato Retro-like virus-related (66% aa)
+M20_S25__rnaviral__NODE_22_length_2414_cov_9.127273	G032	Usinis-like virus (69% aa)	2414	63	Usinis-like virus (69% aa)
+M20_S25__rnaviral__NODE_43_length_1829_cov_32.983146	G033	Usinis-like virus (47% aa)	1829	64	Usinis-like virus (47% aa)
+M20_S25__rnaviral__NODE_78_length_1500_cov_8.134390	G035	Usinis-like virus (32% aa)	1500	65	Usinis-like virus (32% aa)
+M20_S25__rnaviral__NODE_499_length_818_cov_11.422627	G034	Usinis-like virus (32% aa)	818	65	Usinis-like virus (32% aa)
+M20_S25__rnaviral__NODE_998_length_650_cov_2.713810	G036	High Island virus	650	67	High Island virus
+M20_S25__rnaviral__NODE_1677_length_546_cov_7.830986	G031	Usinis-like virus (40% aa)	546	68	Usinis-like virus (40% aa)
+M20_S25__rna__NODE_27_length_2456_cov_722.085999_g21_i0	G030	Culex-associated Tombus-like virus-related (57% aa)	2456	69	Culex-associated Tombus-like virus-related (57% aa)
+M20_S25__megahit__k119_5051	G008	Culex mosquito virus 1-like (45% aa)	2161	70	Culex mosquito virus 1-like (45% aa)
+M20_S25__trinity__TRINITY_DN36_c0_g1_i3	G008	Culex mosquito virus 1-like (46% aa)	747	70	Culex mosquito virus 1-like (45% aa)
+M21_S29__rnaviral__NODE_25_length_1859_cov_39.380110	G038	Netjeret virus	1859	72	Netjeret virus
+M21_S29__rnaviral__NODE_30_length_1778_cov_10.506651	G039	Netjeret virus	1778	72	Netjeret virus
+M21_S29__rnaviral__NODE_9_length_2713_cov_3.207207	G043	San Gabriel mononegavirus	2713	74	San Gabriel mononegavirus
+M21_S29__rnaviral__NODE_17_length_2143_cov_2.286533	G004	San Gabriel mononegavirus	2143	74	San Gabriel mononegavirus
+M21_S29__rnaviral__NODE_183_length_926_cov_3.059293	G004	San Gabriel mononegavirus	926	74	San Gabriel mononegavirus
+M21_S29__rnaviral__NODE_251_length_854_cov_2.418634	G037	San Gabriel mononegavirus	854	74	San Gabriel mononegavirus
+M21_S29__rnaviral__NODE_748_length_589_cov_1.644444	G040	San Gabriel mononegavirus	589	74	San Gabriel mononegavirus
+M21_S29__rnaviral__NODE_851_length_564_cov_1.957282	G041	San Gabriel mononegavirus	564	74	San Gabriel mononegavirus
+M21_S29__rnaviral__NODE_972_length_539_cov_2.804082	G042	San Gabriel mononegavirus	539	74	San Gabriel mononegavirus
+M21_S29__rna__NODE_88_length_1667_cov_3.070457_g41_i0	G004	San Gabriel mononegavirus	1667	74	San Gabriel mononegavirus
+M2_S2__rnaviral__NODE_1484_length_582_cov_2.058161	G014	Grenada mosquito rhabdovirus 1-like (33% aa)	582	61	Atrato Rhabdo-like virus 2-related (38% aa)
+M35_S31__rnaviral__NODE_728_length_590_cov_1.990758	G056	Curionopolis stangrhavirus 2-like (30% aa)	590	83	Curionopolis stangrhavirus 2-like (30% aa)
+M74_S21__rnaviral__NODE_214_length_622_cov_1.212914	G006	Ohlsdorf-like virus (37% aa)	622	58	Bafoussam mosquito rhabdovirus-like (62% aa)
+M35_S31__rnaviral__NODE_216_length_821_cov_2.567358	G054	Merida-like virus (60% aa)	821	85	Merida-like virus (60% aa)
+M35_S31__rnaviral__NODE_257_length_772_cov_2.615491	G055	Mopeia rhabdovirus-like (58% aa)	772	86	Mopeia rhabdovirus-like (58% aa)
+M35_S31__rnaviral__NODE_1242_length_501_cov_2.420354	G052	Enontekio merhavirus-like (48% aa)	501	87	Enontekio merhavirus-like (48% aa)
+M72_S20__rnaviral__NODE_2_length_10680_cov_163.588374	G013	Cell fusing agent virus	10680	88	Cell fusing agent virus
+M72_S20__rna__NODE_3_length_5398_cov_130.323799_g1_i1	G013	Cell fusing agent virus	5398	88	Cell fusing agent virus
+M56_S7__rnaviral__NODE_4_length_2335_cov_7.678915	G065	Phasivirus phasiense	2335	90	Phasivirus phasiense
+M56_S7__rnaviral__NODE_31_length_1512_cov_5.947368	G064	Phasivirus phasiense	1512	90	Phasivirus phasiense
+M56_S7__rnaviral__NODE_52_length_1305_cov_2.610669	G067	Phasivirus phasiense	1305	90	Phasivirus phasiense
+M56_S7__rnaviral__NODE_94_length_1134_cov_5.321659	G069	Phasivirus phasiense	1134	90	Phasivirus phasiense
+M56_S7__rnaviral__NODE_289_length_788_cov_3.131258	G063	Phasivirus phasiense	788	90	Phasivirus phasiense
+M56_S7__rnaviral__NODE_520_length_677_cov_3.578025	G066	Phasivirus phasiense	677	90	Phasivirus phasiense
+M56_S7__rnaviral__NODE_759_length_604_cov_3.209009	G068	Phasivirus phasiense	604	90	Phasivirus phasiense
+M59_S10__rnaviral__NODE_323_length_529_cov_1.570833	G071	Sinu virus	529	97	Sinu virus
+M60_S11__rnaviral__NODE_113_length_649_cov_2.348333	G074	Tartas insect-associated-like virus (70% aa)	649	98	Tartas insect-associated-like virus (70% aa)
+M60_S11__rna__NODE_210_length_520_cov_1.970276_g185_i0	G072	Tartas insect-associated-like virus (33% aa)	520	99	Tartas insect-associated-like virus (33% aa)
+M60_S11__rna__NODE_217_length_511_cov_1.731602_g192_i0	G073	Grenada mosquito rhabdovirus 1	511	100	Grenada mosquito rhabdovirus 1
+M71_S19__megahit__k119_3499	G076	Arthas virus	2246	101	Arthas virus
+M9_S16__rnaviral__NODE_433_length_752_cov_3.118065	G079	Downy mildew lesion associated ormycovirus 6-like (43% aa)	752	102	Downy mildew lesion associated ormycovirus 6-like (43% aa)
+M9_S16__rnaviral__NODE_1099_length_563_cov_1.653696	G078	Downy mildew lesion associated ormycovirus 6-like (33% aa)	563	103	Downy mildew lesion associated ormycovirus 6-like (33% aa)
